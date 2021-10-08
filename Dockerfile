@@ -9,6 +9,7 @@ ENV REACT_APP_BASE_URL=<Your-REACT_APP_BASE_URL-here>
 # Build our React App
 RUN npm install
 RUN npm run build
+# RUN npm cache clean --force
 
 FROM python:3.9
 
