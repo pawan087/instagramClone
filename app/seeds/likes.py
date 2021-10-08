@@ -1,14 +1,19 @@
-from app.models import db, Following
+from app.models import db, Like
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_following():
-    one = Following(
+def seed_likes():
+    first = Like(
         user_id=1,
-        user_follows_id=2
+        image_id=1    
+    )
+    second = Like(
+        user_id=2,
+        image_id=1
     )
 
-    db.session.add(one)
+    db.session.add(first)
+    db.session.add(second)
     db.session.commit()
 
 
@@ -17,6 +22,6 @@ def seed_following():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_following():
-    db.session.execute('TRUNCATE following RESTART IDENTITY CASCADE;')
+def undo_likes():
+    db.session.execute('TRUNCATE likes RESTART IDENTITY CASCADE;')
     db.session.commit()
