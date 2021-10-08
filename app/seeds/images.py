@@ -7,7 +7,7 @@ def seed_images():
         title='Demo Title',
         caption='A WHITE WOMANS INSTAGRAM',
         img_url='https://images.ctfassets.net/j95d1p8hsuun/4aiPgnMp3CrvZ39oQqQnHE/34aed6174b535f280ff21de1d0140d85/Shattered-Obelisk-thumb.jpg',
-        user_id=1    
+        user_id=1
     )
 
     db.session.add(first)
