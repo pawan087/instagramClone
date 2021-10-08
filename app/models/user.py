@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     images = db.relationship("Image", back_populates="user")
+    following = db.relationship('Following')
 
     @property
     def password(self):
