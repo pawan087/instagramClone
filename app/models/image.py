@@ -1,5 +1,6 @@
 from .db import db
 
+
 class Image(db.Model):
 
     __tablename__ = "images"
@@ -12,6 +13,6 @@ class Image(db.Model):
 
     user = db.relationship("User", back_populates="images")
     likes = db.relationship("Like", back_populates="image")
-
+    comments = db.relationship("Comment", back_populates="image")
 
     # something new
