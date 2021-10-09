@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, redirect, request
+from sqlalchemy.orm import joinedload, sessionmaker
 from app.forms.image_form import NewImage
 from flask_login import login_required
-from app.models import db, Image
+from app.models import db, Image, User
 from colors import *
 
 image_routes = Blueprint('images', __name__)
@@ -10,7 +11,8 @@ image_routes = Blueprint('images', __name__)
 @image_routes.route('/')
 def images():
     images = Image.query.all()
-    return {'images': [image.to_dict() for image in images]}
+    print(CGREEN + f"\n ALLIMAGES: {images}\n" + CEND)
+    return {"images": [image.to_dict() for image in images]}
 
 
 @image_routes.route('/<int:id>')

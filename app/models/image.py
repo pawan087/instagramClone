@@ -22,5 +22,14 @@ class Image(db.Model):
             'title': self.title,
             'caption': self.caption,
             'img_url': self.img_url,
-            'user_id': self.user_id,            
+            'user_id': self.user_id,  
+            'user': self.user.to_dict() 
         }
+    
+    # def __repr__(self):
+    #     return f"""
+    #     id: {self.id}, 
+    #     title: {self.title}, 
+    #     caption: {self.caption}, 
+    #     img_url: {self.img_url}, 
+    #     user_id: {self.user_id}"""
