@@ -1,0 +1,19 @@
+.individualImage {
+    width: 580px;
+    height: 100%;
+    margin: 2rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 2.5px;
+    /* max-height: 800px; */
+    min-height: 250px;
+    padding: 1rem;
+}
+
+
+.individualImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
