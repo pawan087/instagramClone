@@ -12,15 +12,17 @@ const Image = () => {
         dispatch(setAllImages())
     }, [dispatch])
 
-    const images = useSelector((state) => state.images.images)
+    const images = useSelector((state) => state.images)
     
     return (
         <div className="imageContainer">
+            
             {images?.map((image) => (
                 <div key={image.id} className="individualImage">
                     <h2>{image.title}</h2>
                     <img src={image.img_url} alt="anImage" />
                     <p>{image.caption}</p>
+                    <p>{image.user.username}</p>
                 </div>
             ))}
         </div>

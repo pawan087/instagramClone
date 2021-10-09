@@ -6,22 +6,34 @@ const setImages = (images) => ({
 })
 
 export const setAllImages = () => async(dispatch) => {
-    console.log("fetching images from database...")
     const response = await fetch("/api/images")
     if(response.ok) {
-        console.log("response successful")
         const data = await response.json()
-        console.log(data)
-        console.log("dispatching to reducer...")
         dispatch(setImages(data))
     } else return "THUNK ERROR: BAD REQUEST"
 }
 
-const initialState = {images: null}
+export const addOneImage = (image) => async(dispatch) => {
+    await fetch("/api/images", 
+        { 
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(image)
+        }
+    )
+    // if(response.ok) {
+    //     const data = await response.json()
+    //     dispatch(setImages(data))
+    // } else return "THUNK ERROR: BAD REQUEST"
+}
+
+const initialState = []
 const imageReducer = (state = initialState, action) => {
+    let newState
     switch(action.type) {
         case SET_IMAGE:
-            return action.payload
+            newState = action.payload.images
+            return newState
         default:
             return state
     }

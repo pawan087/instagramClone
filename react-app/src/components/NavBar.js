@@ -30,6 +30,11 @@ const NavBar = () => {
         <li>
           <LogoutButton />
         </li>
+        <li>
+          <NavLink to='/images/new' exact={true} activeClassName='active'>
+            Post an Image
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );
