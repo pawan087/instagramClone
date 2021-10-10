@@ -6,7 +6,7 @@ const setImages = (images) => ({
 })
 
 export const setAllImages = () => async(dispatch) => {
-    const response = await fetch("/api/images")
+    const response = await fetch("/api/images/")
     if(response.ok) {
         const data = await response.json()
         dispatch(setImages(data))
@@ -14,7 +14,8 @@ export const setAllImages = () => async(dispatch) => {
 }
 
 export const addOneImage = (image) => async(dispatch) => {
-    await fetch("/api/images", 
+    console.log(JSON.stringify(image))
+    await fetch("/api/images/", 
         { 
             method: "POST",
             headers: { "Content-Type": "application/json" },
