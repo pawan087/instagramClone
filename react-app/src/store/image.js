@@ -1,34 +1,50 @@
 const SET_IMAGE = "images/SET_IMAGE"
-const ADD_COMMENT = "comments/ADD_IMAGE"
 
-const setImages = (images) => ({
+const load = (images) => ({
     type: SET_IMAGE,
     payload: images
 })
 
-const addComments = (comments) => ({
-    type: ADD_COMMENT,
-    payload: comments
-})
+/*--------------------------------------------------------
+---------------------COMMENT THUNKS-----------------------
+-------------------------------------------------------- */
 
 export const addComment = (comment) => async (dispatch) => {
-    await fetch("/api/images/comments/",
+    const response = await fetch("/api/images/comments/",
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(comment)
         }
     )
-}
-
-export const setAllImages = () => async (dispatch) => {
-    const response = await fetch("/api/images/")
     if (response.ok) {
         const data = await response.json()
-        dispatch(setImages(data))
-    } else return "READ THUNK ERROR: BAD REQUEST"
+        dispatch(load(data))
+    } else return "ADD COMMENT THUNK FAILED!"
 }
 
+export const deleteOneComment = (id) => async (dispatch) => {
+    console.log('--------------------------------------------------------')
+    console.log('INSIDE THUNK BEFORE FETCH')
+    console.log('THUNK ID ARGUMENT: ' + id)
+    const response = await fetch("/api/images/comments/",
+        {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: id })
+        }
+    )
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(load(data))
+    } else console.log("DELETE THUNK ERROR: BAD REQUEST")
+}
+
+
+/*--------------------------------------------------------
+---------------------IMAGE THUNKS-----------------------
+-------------------------------------------------------- */
 
 export const addOneImage = (image) => async (dispatch) => {
     console.log(JSON.stringify(image))
@@ -41,19 +57,12 @@ export const addOneImage = (image) => async (dispatch) => {
     )
 }
 
-export const deleteOneImage = (id) => async (dispatch) => {
-    console.log(id)
-    const response = await fetch("/api/images/",
-        {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: id })
-        }
-    )
+export const setAllImages = () => async (dispatch) => {
+    const response = await fetch("/api/images/")
     if (response.ok) {
         const data = await response.json()
-        dispatch(setImages(data))
-    } else return "DELETE THUNK ERROR: BAD REQUEST"
+        dispatch(load(data))
+    } else return "READ THUNK ERROR: BAD REQUEST"
 }
 
 export const editOneImage = (editedImage) => async (dispatch) => {
@@ -67,9 +76,24 @@ export const editOneImage = (editedImage) => async (dispatch) => {
     )
     if (response.ok) {
         const data = await response.json()
-        dispatch(setImages(data))
+        dispatch(load(data))
     } else return "EDIT THUNK ERROR: BAD REQUEST"
 }
+
+export const deleteOneImage = (id) => async (dispatch) => {
+    const response = await fetch("/api/images/",
+        {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: id })
+        }
+    )
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(load(data))
+    } else return "DELETE THUNK ERROR: BAD REQUEST"
+}
+
 
 const initialState = []
 const imageReducer = (state = initialState, action) => {

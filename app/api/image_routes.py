@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, redirect, request
 from sqlalchemy import delete
+from sqlalchemy.sql.dml import Delete
 from app.forms import deleteImage, editImage
-from app.forms.comment_form import NewComment
+from app.forms.comment_form import DeleteComment, NewComment
 from app.forms.image_form import NewImage
 from flask_login import login_required
 from app.models import db, Image, Comment
@@ -9,11 +10,14 @@ from colors import *
 
 image_routes = Blueprint('images', __name__)
 
+# --------------------------------------------------------
+# ---------------------IMAGE ROUTES---------------------
+# --------------------------------------------------------
+
 
 @image_routes.route('/')
 def images():
     images = Image.query.all()
-    # print(CGREEN + f"\n ALLIMAGES: {images}\n" + CEND)
     return {"images": [image.to_dict() for image in images]}
 
 
@@ -21,30 +25,6 @@ def images():
 def single_image(id):
     image = Image.query.get(id)
     return {'image': image.to_dict()}
-
-
-@image_routes.route('/comments/', methods=["POST"])
-def add_comment():
-    form = NewComment()
-    data = form.data
-    form['csrf_token'].data = request.cookies['csrf_token']
-
-    # TESTING DATA ->
-    # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
-    # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
-    # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
-
-    if form.validate_on_submit():
-        new_comment = Comment(
-            body=data["body"],
-            image_id=data["image_id"],
-            user_id=data["user_id"]
-        )
-        db.session.add(new_comment)
-        db.session.commit()
-        return data
-    else:
-        return "Bad Data"
 
 
 @image_routes.route('/', methods=["POST"])
@@ -101,6 +81,51 @@ def edit_image():
     image.title = data["title"]
     image.caption = data["caption"]
 
+    db.session.commit()
+
+    images = Image.query.all()
+    return {"images": [image.to_dict() for image in images]}
+
+# --------------------------------------------------------
+# ---------------------COMMENT ROUTES---------------------
+# --------------------------------------------------------
+
+
+@image_routes.route('/comments/', methods=["POST"])
+def add_comment():
+    form = NewComment()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    # TESTING DATA ->
+    # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
+    # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+    # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
+
+    if form.validate_on_submit():
+        new_comment = Comment(
+            body=data["body"],
+            image_id=data["image_id"],
+            user_id=data["user_id"]
+        )
+        db.session.add(new_comment)
+        db.session.commit()
+        images = Image.query.all()
+        return {"images": [image.to_dict() for image in images]}
+    else:
+        return "Bad Data"
+
+
+@image_routes.route('/comments/', methods=["DELETE"])
+def delete_comment():
+    form = DeleteComment()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+
+    comment_to_delete = Comment.query.filter(Comment.id == data["id"]).first()
+    db.session.delete(comment_to_delete)
     db.session.commit()
 
     images = Image.query.all()
