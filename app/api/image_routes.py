@@ -27,9 +27,9 @@ def add_image():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     # TESTING DATA ->
-    print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
-    print(CGREEN + "\n DATA: \n",data,"\n" + CEND)
-    print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
+    # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
+    print(CGREEN + "\n DATA: \n", data,"\n" + CEND)
+    # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
     
     if form.validate_on_submit():
         new_image = Image(
@@ -43,3 +43,27 @@ def add_image():
         return data
     else: 
         return "Bad Data"
+
+# @image_routes.route('/', methods=["PATCH"])
+# def edit_image():
+#     form = NewImage()
+#     data = form.data
+#     form['csrf_token'].data = request.cookies['csrf_token']
+
+#     # TESTING DATA ->
+#     # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
+#     print(CGREEN + "\n DATA: \n", data,"\n" + CEND)
+#     # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
+    
+#     if form.validate_on_submit():
+#         new_image = Image(
+#             title=data["title"], 
+#             caption=data["caption"],
+#             img_url=data["img_url"],
+#             user_id=data["user_id"]
+#         )
+#         db.session.add(new_image)
+#         db.session.commit()
+#         return data
+#     else: 
+#         return "Bad Data"

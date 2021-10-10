@@ -26,10 +26,14 @@ class Image(db.Model):
             'user': self.user.to_dict() 
         }
     
-    # def __repr__(self):
-    #     return f"""
-    #     id: {self.id}, 
-    #     title: {self.title}, 
-    #     caption: {self.caption}, 
-    #     img_url: {self.img_url}, 
-    #     user_id: {self.user_id}"""
+    def __repr__(self, type="something"):
+
+        if(type == "full"):
+            return f"""
+            id: {self.id}, 
+            title: {self.title}, 
+            caption: {self.caption}, 
+            img_url: {self.img_url}, 
+            user_id: {self.user_id}"""
+        else:
+            return f"<Image {self.id}, title: {self.title}>"

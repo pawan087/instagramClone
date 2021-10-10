@@ -13,19 +13,25 @@ const AddImageForm = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const reset = () => {
+        setTitle("")
+        setCaption("")
+        setImageUrl("")
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
        
         const newImage = {
             title,
             caption,
-            imageUrl,
+            img_url: imageUrl,
             user_id: user.id
         }
 
-       dispatch(addOneImage(newImage))
-       history.push("/")
-
+        dispatch(addOneImage(newImage))
+        history.push("/")
+        reset()
     }
 
     return (
