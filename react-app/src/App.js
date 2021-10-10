@@ -10,6 +10,8 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Image from './components/Images';
 import AddImageForm from './components/Images/AddImageForm';
+import EditImageForm from './components/Images/EditImageForm';
+import IndividualImage from './components/Images/IndividualImage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +49,12 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/images/new' exact={true} >
           <AddImageForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/images/:id' exact={true} >
+          <IndividualImage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/images/:id/edit' exact={true} >
+          <EditImageForm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import { addOneImage } from "../../../store/image"
+import {setAllImages} from "../../../store/image"
 
 const AddImageForm = () => {
 
@@ -30,6 +31,7 @@ const AddImageForm = () => {
         }
 
         dispatch(addOneImage(newImage))
+        dispatch(setAllImages())
         history.push("/")
         reset()
     }

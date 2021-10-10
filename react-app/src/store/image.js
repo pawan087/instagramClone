@@ -39,6 +39,21 @@ export const deleteOneImage = (id) => async(dispatch) => {
     } else return "DELETE THUNK ERROR: BAD REQUEST"
 }
 
+export const editOneImage = (editedImage) => async(dispatch) => {
+    console.log(editedImage)
+    const response = await fetch("/api/images/", 
+        { 
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(editedImage)
+        }
+    )
+    if (response.ok){
+        const data = await response.json()
+        dispatch(setImages(data))
+    } else return "EDIT THUNK ERROR: BAD REQUEST"
+}
+
 const initialState = []
 const imageReducer = (state = initialState, action) => {
     let newState

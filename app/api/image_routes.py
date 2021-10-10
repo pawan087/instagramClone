@@ -65,10 +65,17 @@ def delete_image():
 def edit_image():
     form = editImage()
     data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    imageToEdit = Image.query.filter(Image.id == data["id"])
+    print(CGREEN + "\n DATA: \n", data,"\n" + CEND)
 
-    imageToEdit.title = data["title"]
-    imageToEdit.caption = data["caption"]
+    image = Image.query.filter(Image.id == data["image_id"]).first()
+
+    image.title = data["title"]
+    image.caption = data["caption"]
 
     db.session.commit()
+
+    images = Image.query.all()
+    return {"images": [image.to_dict() for image in images]}
+    
