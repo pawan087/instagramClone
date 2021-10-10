@@ -1,4 +1,4 @@
-.individualImage {
+.imageCard {
     width: 580px;
     height: 100%;
     margin: 2rem 1rem;
@@ -11,7 +11,7 @@
 }
 
 
-.individualImage img {
+.imageCard img {
     width: 100%;
     height: 100%;
     object-fit: cover;
