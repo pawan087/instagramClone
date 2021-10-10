@@ -11,7 +11,7 @@ const LogoutButton = () => {
   const user = useSelector((state) => state.session.user)
 
   if(user !== null){
-    return <button onClick={onLogout}>Logout</button>;
+    return <p onClick={onLogout} style={{cursor: "pointer"}}>Logout</p>;
   } else {
     return null
   }
