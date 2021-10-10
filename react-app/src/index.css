@@ -12,9 +12,13 @@
 }
 
 .logo {
-    font-family: 'Instagram';
-    font-size: 28px;
+    font-family: 'Grand Hotel', cursive;
+    font-size: 32px;
     letter-spacing: 1.1px;
+}
+
+.logo:active {
+    color: rgba(0, 0, 0, 0.5);
 }
 
 nav {
