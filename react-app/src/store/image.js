@@ -10,7 +10,7 @@ export const setAllImages = () => async(dispatch) => {
     if(response.ok) {
         const data = await response.json()
         dispatch(setImages(data))
-    } else return "THUNK ERROR: BAD REQUEST"
+    } else return "READ THUNK ERROR: BAD REQUEST"
 }
 
 export const addOneImage = (image) => async(dispatch) => {
@@ -22,10 +22,21 @@ export const addOneImage = (image) => async(dispatch) => {
             body: JSON.stringify(image)
         }
     )
-    // if(response.ok) {
-    //     const data = await response.json()
-    //     dispatch(setImages(data))
-    // } else return "THUNK ERROR: BAD REQUEST"
+}
+
+export const deleteOneImage = (id) => async(dispatch) => {
+    console.log(id)
+    const response = await fetch("/api/images/", 
+        { 
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({id: id})
+        }
+    )
+    if (response.ok){
+        const data = await response.json()
+        dispatch(setImages(data))
+    } else return "DELETE THUNK ERROR: BAD REQUEST"
 }
 
 const initialState = []
