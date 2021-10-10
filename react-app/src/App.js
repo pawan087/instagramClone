@@ -12,13 +12,14 @@ import Image from './components/Images';
 import AddImageForm from './components/Images/AddImageForm';
 import EditImageForm from './components/Images/EditImageForm';
 import IndividualImage from './components/Images/IndividualImage';
+import Results from './components/Results';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -39,7 +40,7 @@ function App() {
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
@@ -55,6 +56,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/images/:id/edit' exact={true} >
           <EditImageForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/results/:tag' exact={true}>
+          <Results />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

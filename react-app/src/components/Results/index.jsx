@@ -1,13 +1,14 @@
+import { useParams } from "react-router"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setAllImages } from "../../store/image"
-import ImageComponent from "./ImageComponent"
-import './images.css'
+import ImageComponent from "../Images/ImageComponent"
 
-const Image = () => {
-
+const Results = () => {
+    const params = useParams()
     const dispatch = useDispatch()
     const images = useSelector((state) => state.images)
+    const tagImages = images.filter((image) => image.hashtags.includes(params.tag))
 
     useEffect(() => {
         dispatch(setAllImages())
@@ -15,11 +16,9 @@ const Image = () => {
 
     return (
         <div className="imageContainer">
-            {images?.map((image) => (
-                <ImageComponent image={image} key={image.id} />
-            ))}
+            {tagImages?.map((image) => <ImageComponent image={image} />)}
         </div>
     )
 }
 
-export default Image
+export default Results
