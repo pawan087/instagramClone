@@ -8,3 +8,11 @@ class NewImage(FlaskForm):
     caption = StringField("Caption")
     img_url = StringField("Image URL", [DataRequired()])
     user_id = IntegerField("User Id", [DataRequired()])
+
+class deleteImage(FlaskForm):
+    id = IntegerField("Id")
+
+class editImage(FlaskForm):
+    title = StringField("Image Title")
+    caption = StringField("Caption")
+    user_id = IntegerField("User Id", [DataRequired()])

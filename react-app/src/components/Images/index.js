@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { setAllImages } from "../../store/image" 
+import { setAllImages, deleteOneImage } from "../../store/image" 
 import './images.css'
 
 
@@ -13,6 +13,7 @@ const Image = () => {
     }, [dispatch])
 
     const images = useSelector((state) => state.images)
+    const user = useSelector((state) => state.session.user)
     
     return (
         <div className="imageContainer">
@@ -23,6 +24,7 @@ const Image = () => {
                     <img src={image.img_url} alt="anImage" />
                     <p>{image.caption}</p>
                     <p>{image.user.username}</p>
+                    {user?.id === image.user_id ? <button onClick={(e) => dispatch(deleteOneImage(image.id))}>DELETE</button> : false}
                 </div>
             ))}
         </div>
