@@ -71,6 +71,7 @@ export const logout = () => async (dispatch) => {
 
 
 export const signUp = (username, email, password) => async (dispatch) => {
+  console.log("BEFORE FETCH INSIDE THUNK, DATA:", username, email, password)
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {
@@ -82,7 +83,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
       password,
     }),
   });
-  
+  console.log("AFTER FETCH INSIDE THUNK, RESPONSE:", response.ok)
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/session';
 
 const LogoutButton = () => {
@@ -8,7 +8,13 @@ const LogoutButton = () => {
     await dispatch(logout());
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  const user = useSelector((state) => state.session.user)
+
+  if(user !== null){
+    return <button onClick={onLogout}>Logout</button>;
+  } else {
+    return null
+  }
 };
 
 export default LogoutButton;
