@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { setAllImages, deleteOneImage } from "../../store/image" 
+import { setAllImages, deleteOneImage } from "../../store/image"
 import './images.css'
 import { useHistory } from "react-router"
 
 
 const Image = () => {
-    
+
     const dispatch = useDispatch()
     const history = useHistory()
     const images = useSelector((state) => state.images)
     const user = useSelector((state) => state.session.user)
-    
+    const comments = useSelector((state) => state.comments)
+
     useEffect(() => {
         dispatch(setAllImages())
     }, [dispatch])
@@ -20,10 +21,10 @@ const Image = () => {
 
     }, [images])
 
-    
+
     return (
         <div className="imageContainer">
-            
+
             {images?.map((image) => (
                 <div key={image.id} className="individualImage">
                     <h2>{image.title}</h2>
