@@ -12,9 +12,10 @@ class Image(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     user = db.relationship("User", back_populates="images")
-    likes = db.relationship("Like", back_populates="image", cascade="all, delete-orphan")
-    comments = db.relationship("Comment", back_populates="image", cascade="all, delete-orphan")
-
+    likes = db.relationship("Like", back_populates="image",
+                            cascade="all, delete-orphan")
+    comments = db.relationship(
+        "Comment", back_populates="image", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -22,10 +23,11 @@ class Image(db.Model):
             'title': self.title,
             'caption': self.caption,
             'img_url': self.img_url,
-            'user_id': self.user_id,  
-            'user': self.user.to_dict() 
+            'user_id': self.user_id,
+            'user': self.user.to_dict(),
+            'comments': self.comments.to_dict()
         }
-    
+
     def __repr__(self, type="something"):
 
         if(type == "full"):

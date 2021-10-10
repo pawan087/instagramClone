@@ -11,6 +11,7 @@ const Image = () => {
     const history = useHistory()
     const images = useSelector((state) => state.images)
     const user = useSelector((state) => state.session.user)
+    const comments = useSelector((state) => state.comments)
 
     useEffect(() => {
         dispatch(setAllImages())
