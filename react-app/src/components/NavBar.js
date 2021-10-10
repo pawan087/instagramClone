@@ -19,7 +19,7 @@ const NavBar = () => {
         {!user?.id && <NavLink to='/sign-up' exact={true} activeClassName='active'>Sign Up</NavLink>}
         {user?.id && <NavLink to='/users' exact={true} activeClassName='active'>Users</NavLink>}
         <LogoutButton />
-        <NavLink to='/images/new' exact={true} activeClassName='active'>Post an Image</NavLink>
+        {user?.id && <NavLink to='/images/new' exact={true} activeClassName='active'>Post an Image</NavLink>}
       </div>
     </nav>
   );

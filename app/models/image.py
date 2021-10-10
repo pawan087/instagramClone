@@ -1,3 +1,4 @@
+from sqlalchemy.orm import backref
 from .db import db
 from colors import *
 
@@ -11,12 +12,11 @@ class Image(db.Model):
     caption = db.Column(db.String(2000), nullable=True)
     img_url = db.Column(db.String(1000), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    hashtags = db.Column(db.ARRAY(db.String(50)), nullable=True)
 
     user = db.relationship("User", back_populates="images")
-    likes = db.relationship("Like", back_populates="image",
-                            cascade="all, delete-orphan")
-    comments = db.relationship(
-        "Comment", back_populates="image", cascade="all, delete-orphan")
+    likes = db.relationship("Like", back_populates="image",cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="image", cascade="all, delete-orphan")
 
     def to_dict(self):
 
@@ -27,7 +27,7 @@ class Image(db.Model):
             'img_url': self.img_url,
             'user_id': self.user_id,
             'user': self.user.to_dict(),
-            'comments': {"comments": [comment.to_dict() for comment in self.comments]}
+            'comments': {"comments": [comment.to_dict() for comment in self.comments]},
         }
 
     def __repr__(self, type="something"):
