@@ -1,4 +1,5 @@
 from .db import db
+from colors import *
 
 
 class Image(db.Model):
@@ -18,6 +19,7 @@ class Image(db.Model):
         "Comment", back_populates="image", cascade="all, delete-orphan")
 
     def to_dict(self):
+
         return {
             'id': self.id,
             'title': self.title,
@@ -25,7 +27,7 @@ class Image(db.Model):
             'img_url': self.img_url,
             'user_id': self.user_id,
             'user': self.user.to_dict(),
-            'comments': self.comments.to_dict()
+            'comments': {"comments": [comment.to_dict() for comment in self.comments]}
         }
 
     def __repr__(self, type="something"):

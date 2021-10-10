@@ -12,7 +12,7 @@ image_routes = Blueprint('images', __name__)
 @image_routes.route('/')
 def images():
     images = Image.query.all()
-    print(CGREEN + f"\n ALLIMAGES: {images}\n" + CEND)
+    # print(CGREEN + f"\n ALLIMAGES: {images}\n" + CEND)
     return {"images": [image.to_dict() for image in images]}
 
 
@@ -30,7 +30,7 @@ def add_image():
 
     # TESTING DATA ->
     # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
-    print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+    # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
     # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
 
     if form.validate_on_submit():
@@ -53,7 +53,7 @@ def delete_image():
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+    # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
 
     image_to_delete = Image.query.filter(Image.id == data["id"]).first()
     db.session.delete(image_to_delete)
@@ -69,7 +69,7 @@ def edit_image():
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+    # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
 
     image = Image.query.filter(Image.id == data["image_id"]).first()
 
