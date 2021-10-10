@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { setAllImages, deleteOneImage, addComment } from "../../store/image"
+import { setAllImages, deleteOneImage, addComment, deleteOneComment } from "../../store/image"
 import './images.css'
 import { useHistory } from "react-router"
 
@@ -57,6 +57,8 @@ const Image = () => {
                             <div>
                                 <p>{comment.body}</p>
                                 <p><em>{comment.user.username}</em></p>
+                                {user?.id === comment?.user_id ? <button onClick={(e) => dispatch(deleteOneComment(comment.id))}>DELETE</button> : false}
+
                             </div>
                         ))}
                     </div>
