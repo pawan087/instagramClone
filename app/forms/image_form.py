@@ -13,6 +13,7 @@ class deleteImage(FlaskForm):
     id = IntegerField("Id")
 
 class editImage(FlaskForm):
+    image_id = IntegerField("Image Id", [DataRequired()])
     title = StringField("Image Title")
     caption = StringField("Caption")
     user_id = IntegerField("User Id", [DataRequired()])

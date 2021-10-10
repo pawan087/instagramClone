@@ -2,18 +2,24 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { setAllImages, deleteOneImage } from "../../store/image" 
 import './images.css'
+import { useHistory } from "react-router"
 
 
 const Image = () => {
     
     const dispatch = useDispatch()
+    const history = useHistory()
+    const images = useSelector((state) => state.images)
+    const user = useSelector((state) => state.session.user)
     
     useEffect(() => {
         dispatch(setAllImages())
     }, [dispatch])
 
-    const images = useSelector((state) => state.images)
-    const user = useSelector((state) => state.session.user)
+    useEffect(() => {
+
+    }, [images])
+
     
     return (
         <div className="imageContainer">
@@ -25,6 +31,8 @@ const Image = () => {
                     <p>{image.caption}</p>
                     <p>{image.user.username}</p>
                     {user?.id === image.user_id ? <button onClick={(e) => dispatch(deleteOneImage(image.id))}>DELETE</button> : false}
+                    {user?.id === image.user_id ? <button onClick={(e) => history.push(`/images/${image.id}/edit`)}>EDIT</button> : false}
+
                 </div>
             ))}
         </div>
