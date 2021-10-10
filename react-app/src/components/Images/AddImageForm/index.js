@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import { addOneImage } from "../../../store/image"
-import {setAllImages} from "../../../store/image"
+import { setAllImages } from "../../../store/image"
 
 const AddImageForm = () => {
 
@@ -22,7 +22,7 @@ const AddImageForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-       
+
         const newImage = {
             title,
             caption,
@@ -41,30 +41,39 @@ const AddImageForm = () => {
         <form onSubmit={handleSubmit}>
             <div>
                 <label>Image Title</label>
-                <input 
-                    type="text" 
-                    placeholder="Image Title" 
-                    value={title} 
+                <input
+                    type="text"
+                    placeholder="Image Title"
+                    value={title}
                     onChange={(e) => setTitle(e.target.value)} />
             </div>
 
             <div>
                 <label>Caption</label>
-                <input 
+                <input
                     type="text"
-                    placeholder="Image Caption" 
-                    value={caption} 
+                    placeholder="Image Caption"
+                    value={caption}
                     onChange={(e) => setCaption(e.target.value)} />
             </div>
 
             <div>
                 <label>Image Url</label>
-                <input 
-                    type="text" 
-                    placeholder="Image Url" 
-                    value={imageUrl} 
+                <input
+                    type="text"
+                    placeholder="Image Url"
+                    value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)} />
             </div>
+
+            {/* <div>
+                <label>Hashtag</label>
+                <input
+                    type="text"
+                    placeholder="Hashtag"
+                    value={imageUrl}
+                    onChange={(e) => setHashtag(e.target.value)} />
+            </div> */}
 
             <button>Submit</button>
         </form>
