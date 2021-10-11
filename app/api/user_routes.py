@@ -29,26 +29,25 @@ def add_follow():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+
         user_to_follow = User.query.get(data['user_to_follow_id'])
         current_user = User.query.get(data['current_user_id'])
+
         print(CGREEN + "\n USER TO FOLLOW: \n", user_to_follow.to_dict(), "\n\n" + CEND)
         print(CGREEN + "\n CURRENT USER: \n", current_user.to_dict(), "\n\n" + CEND)
-        # user_to_follow.followers = [current_user.id]
 
-        if user_to_follow.followers == None:
-            print('should get here 1')
-            user_to_follow.followers = [current_user.id]
-        else:
-            print('shouldnt get here 1')
-            user_to_follow.followers.append(current_user.id)
+        print(CYELLOW + "\n CURRENT USER'S FOLLOWING: \n", current_user.following, "\n\n" + CEND)
+        print(CYELLOW + "\n USER THAT WE ARE TRYING TO FOLLOW: \n", user_to_follow.followers, "\n\n" + CEND)
 
-        if current_user.following == None:
-            print('shouldnt get here 2')
-            current_user.following = [user_to_follow.id]
-        else:
-            print('should get here 2')
-            current_user.following.append(user_to_follow.id)
-            print('current user following', current_user.following)
+        current_user.following.append(user_to_follow.id)
+        user_to_follow.followers.append(current_user.id)
+        
+        print(CYELLOW + "\n CURRENT USER'S FOLLOWING: \n", current_user.following, "\n\n" + CEND)
+        print(CYELLOW + "\n USER THAT WE ARE TRYING TO FOLLOW: \n", user_to_follow.followers, "\n\n" + CEND)
+
+
+ 
+
 
         db.session.commit()
 

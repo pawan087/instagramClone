@@ -16,8 +16,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    followers = db.Column(db.ARRAY(db.Integer))
-    following = db.Column(db.ARRAY(db.Integer))
+    followers = db.Column(db.ARRAY(db.Integer), default=[])
+    following = db.Column(db.ARRAY(db.Integer), default=[])
 
     images = db.relationship("Image", back_populates="user")
     likes = db.relationship("Like", back_populates="user")
