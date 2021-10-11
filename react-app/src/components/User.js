@@ -10,8 +10,9 @@ function User() {
   const dispatch = useDispatch()
 
   const [user, setUser] = useState({});
-
+  const curUser = useSelector((state) => state.session.user)
   const images = useSelector((state) => state.images)
+  const follows = useSelector((state) => state.follows)
   const usersImages = images.filter((image) => image.user_id === +userId)
 
   useEffect(() => {
@@ -29,6 +30,22 @@ function User() {
       setUser(user);
     })();
   }, [userId]);
+
+
+  let alreadyFollowing = false;
+
+  if (follows.followers) {
+    for (let id of follows?.followers) {
+      if (id === curUser?.id) {
+        alreadyFollowing = true
+      }
+    }
+  }
+
+  // follows?.followers.forEach(id => id === curUser?.id ? alreadyFollowing = true : null)
+
+  console.log(alreadyFollowing)
+
 
 
 
