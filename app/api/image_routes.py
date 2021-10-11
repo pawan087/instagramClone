@@ -146,12 +146,6 @@ def add_like():
     form = NewLike()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
-
-    # TESTING DATA ->
-    # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
-    # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
-    # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
-
     if form.validate_on_submit():
         new_like = Like(
             image_id=data["image_id"],
@@ -163,3 +157,16 @@ def add_like():
         return {"likes": [like.to_dict() for like in likes]}
     else:
         return "Bad Data"
+
+@image_routes.route('/likes/', methods=["DELETE"])
+def delete_like():
+    form = DeleteLike()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    like_to_delete = Like.query.filter(Like.id == data["id"]).first()
+    db.session.delete(like_to_delete)
+    db.session.commit()
+
+    likes = Like.query.all()
+    return {"likes": [like.to_dict() for like in likes]}

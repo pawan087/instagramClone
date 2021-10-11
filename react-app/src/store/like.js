@@ -19,6 +19,24 @@ export const addLike = (like) => async (dispatch) => {
     } else return "ADD LIKE THUNK FAILED!"
 }
 
+export const deleteOneLike = (id) => async (dispatch) => {
+    console.log('--------------------------------------------------------')
+    console.log('INSIDE THUNK BEFORE FETCH')
+    console.log('THUNK ID ARGUMENT: ' + id)
+    const response = await fetch("/api/images/likes/",
+        {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: id })
+        }
+    )
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(load(data))
+    } else console.log("DELETE LIKE THUNK ERROR: BAD REQUEST")
+}
+
 export const setAllLikes = () => async (dispatch) => {
     const response = await fetch("/api/images/likes")
     if (response.ok) {
