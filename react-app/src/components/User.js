@@ -44,10 +44,12 @@ function User() {
 
   // follows?.followers.forEach(id => id === curUser?.id ? alreadyFollowing = true : null)
 
-  console.log(alreadyFollowing)
+
 
   const addOrRemoveFollow = (e) => {
     e.preventDefault()
+    console.log('should be marnies id', curUser.id)
+    console.log('should be pawans id', userId)
     if (alreadyFollowing) {
         // dispatch(deleteFollow(x))
         console.log('UNFOLLOW')
@@ -55,7 +57,7 @@ function User() {
         console.log('FOLLOW')
         const newFollow = {
             current_user_id: curUser.id,
-            user_to_follow_id: userId,
+            user_to_follow_id: +userId,
         }
         dispatch(addFollow(newFollow))
     }

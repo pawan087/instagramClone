@@ -6,6 +6,7 @@ const load = (user) => ({
 })
 
 export const addFollow = (follow) => async (dispatch) => {
+    console.log(follow)
     const response = await fetch("/api/users/following/",
         {
             method: "POST",
