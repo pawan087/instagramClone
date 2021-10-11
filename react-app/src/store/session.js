@@ -24,7 +24,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
@@ -40,8 +40,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -70,7 +70,7 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const signUp = (username, email, password) => async (dispatch) => {
+export const signUp = (username, email, password, avatar) => async (dispatch) => {
   console.log("BEFORE FETCH INSIDE THUNK, DATA:", username, email, password)
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
@@ -81,6 +81,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
       username,
       email,
       password,
+      avatar
     }),
   });
   console.log("AFTER FETCH INSIDE THUNK, RESPONSE:", response.ok)
