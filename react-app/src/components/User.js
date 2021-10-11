@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setAllImages } from '../store/image';
 import ImageComponent from './Images/ImageComponent';
-import { addFollow, setFollows } from '../store/follow';
+import { addFollow, setFollows, deleteFollow } from '../store/follow';
 
 function User() {
   const { userId }  = useParams();
@@ -46,20 +46,33 @@ function User() {
 
   console.log(alreadyFollowing)
 
-
+  const addOrRemoveFollow = (e) => {
+    e.preventDefault()
+    if (alreadyFollowing) {
+        // dispatch(deleteFollow(x))
+        console.log('UNFOLLOW')
+    } else {
+        console.log('FOLLOW')
+        const newFollow = {
+            current_user_id: curUser.id,
+            user_to_follow_id: userId,
+        }
+        dispatch(addFollow(newFollow))
+    }
+  }
 
 
   if (!user) {
     return null;
   }
 
-  // <div>
-  //     <form onSubmit={addOrRemoveFollow}>
-  //         {likesByUser?.length ? <button>Dislike</button> : <button>Like</button>}
-  //     </form>
-  // </div>
   return (
     <>
+    <div>
+        <form onSubmit={addOrRemoveFollow}>
+            {!alreadyFollowing ? <button>Follow</button> : <button>Unfollow</button>}
+        </form>
+    </div>
     <div className="imageContainer">
             {usersImages?.map((image) => (
                 <ImageComponent image={image} key={image.id} />
