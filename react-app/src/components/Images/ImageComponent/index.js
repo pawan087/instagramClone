@@ -9,6 +9,7 @@ const ImageComponent = ({ image }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
+    const likes = useSelector((state) => state.likes)
     const [commentBody, setCommentBody] = useState('')
     const [commentImageId, setCommentImageId] = useState(0)
 
@@ -27,6 +28,10 @@ const ImageComponent = ({ image }) => {
         dispatch(addComment(newComment))
         reset()
     }
+
+    let thisPicturesLikes = likes.filter(like => like.image.id === image.id && like.user.id === user.id)
+
+    console.log(thisPicturesLikes)
 
     useEffect(() => {
         dispatch(setAllImages())
@@ -61,6 +66,11 @@ const ImageComponent = ({ image }) => {
 
                     </div>
                 ))}
+            </div>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <button>Like</button>
+                </form>
             </div>
             <div className="createComment">
                 <form onSubmit={handleSubmit}>
