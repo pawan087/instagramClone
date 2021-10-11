@@ -8,7 +8,7 @@ const Results = () => {
     const params = useParams()
     const dispatch = useDispatch()
     const images = useSelector((state) => state.images)
-    const tagImages = images.filter((image) => image.hashtags.includes(params.tag))
+    const tagImages = images.filter((image) => image?.hashtags?.includes(params.tag))
 
     useEffect(() => {
         dispatch(setAllImages())

@@ -13,6 +13,7 @@ import AddImageForm from './components/Images/AddImageForm';
 import EditImageForm from './components/Images/EditImageForm';
 import IndividualImage from './components/Images/IndividualImage';
 import Results from './components/Results';
+import EditCommentForm from './components/Comments/EditCommentForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -59,6 +60,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/results/:tag' exact={true}>
           <Results />
+        </ProtectedRoute>
+        <ProtectedRoute path='/images/:image_id/comments/:comment_id' exact={true}>
+          <EditCommentForm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

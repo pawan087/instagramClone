@@ -8,6 +8,9 @@ class NewComment(FlaskForm):
     image_id = IntegerField("Image Id", [DataRequired()])
     body = StringField("Caption", [DataRequired()])
 
+class EditComment(FlaskForm):
+    id = IntegerField("Id")
+    body = StringField("Caption", [DataRequired()])
 
 class DeleteComment(FlaskForm):
     id = IntegerField("Id")
