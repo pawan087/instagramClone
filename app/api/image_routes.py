@@ -213,3 +213,4 @@ def delete_like():
 
     likes = Like.query.all()
     return {"likes": [like.to_dict() for like in likes]}
+
