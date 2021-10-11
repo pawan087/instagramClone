@@ -3,6 +3,7 @@ from sqlalchemy import delete
 from sqlalchemy.sql.dml import Delete
 from app.forms import deleteImage, editImage
 from app.forms.comment_form import DeleteComment, NewComment
+from app.forms.like_form import DeleteLike, NewLike
 from app.forms.image_form import NewImage
 from flask_login import login_required
 from app.models import db, Image, Comment, Like
@@ -139,3 +140,26 @@ def delete_comment():
 def likes():
     likes = Like.query.all()
     return {"likes": [like.to_dict() for like in likes]}
+
+@image_routes.route('/likes/', methods=["POST"])
+def add_like():
+    form = NewLike()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    # TESTING DATA ->
+    # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
+    # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+    # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
+
+    if form.validate_on_submit():
+        new_like = Like(
+            image_id=data["image_id"],
+            user_id=data["user_id"]
+        )
+        db.session.add(new_like)
+        db.session.commit()
+        likes = Like.query.all()
+        return {"likes": [like.to_dict() for like in likes]}
+    else:
+        return "Bad Data"

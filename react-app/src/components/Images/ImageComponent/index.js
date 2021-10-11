@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { setAllImages, addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
+import { addLike } from '../../../store/like'
 import { NavLink, useHistory } from "react-router-dom"
 import '../images.css'
 
@@ -30,6 +31,22 @@ const ImageComponent = ({ image }) => {
     }
 
     let thisPicturesLikes = likes.filter(like => like.image.id === image.id && like.user.id === user.id)
+
+    const addOrRemoveLike = (e) => {
+        e.preventDefault()
+        if (thisPicturesLikes.length) {
+            console.log('REMOVE LIKE')
+        } else {
+            console.log('ADD LIKE')
+            const newLike = {
+                user_id: user.id,
+                image_id: image.id,
+            }
+            dispatch(addLike(newLike))
+        }
+
+    }
+
 
     console.log(thisPicturesLikes)
 
@@ -68,7 +85,7 @@ const ImageComponent = ({ image }) => {
                 ))}
             </div>
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={addOrRemoveLike}>
                     <button>Like</button>
                 </form>
             </div>

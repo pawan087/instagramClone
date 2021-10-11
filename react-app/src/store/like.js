@@ -5,6 +5,20 @@ const load = (likes) => ({
     payload: likes
 })
 
+export const addLike = (like) => async (dispatch) => {
+    const response = await fetch("/api/images/likes/",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(like)
+        }
+    )
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(load(data))
+    } else return "ADD LIKE THUNK FAILED!"
+}
+
 export const setAllLikes = () => async (dispatch) => {
     const response = await fetch("/api/images/likes")
     if (response.ok) {
