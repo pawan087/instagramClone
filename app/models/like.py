@@ -2,7 +2,7 @@ from .db import db
 
 
 class Like(db.Model):
-    
+
     __tablename__ = "likes"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,4 +12,9 @@ class Like(db.Model):
     user = db.relationship("User", back_populates="likes")
     image = db.relationship("Image", back_populates="likes")
 
+    def to_dict(self):
 
+        return {
+            'user': self.user.to_dict(),
+            'image': self.image.to_dict()
+        }

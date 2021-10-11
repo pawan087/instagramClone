@@ -5,7 +5,7 @@ from app.forms import deleteImage, editImage
 from app.forms.comment_form import DeleteComment, NewComment
 from app.forms.image_form import NewImage
 from flask_login import login_required
-from app.models import db, Image, Comment
+from app.models import db, Image, Comment, Like
 from colors import *
 
 image_routes = Blueprint('images', __name__)
@@ -130,3 +130,12 @@ def delete_comment():
 
     images = Image.query.all()
     return {"images": [image.to_dict() for image in images]}
+
+# --------------------------------------------------------
+# ---------------------LIKES ROUTES---------------------
+# --------------------------------------------------------
+
+@image_routes.route('/likes/')
+def likes():
+    likes = Like.query.all()
+    return {"likes": [like.to_dict() for like in likes]}
