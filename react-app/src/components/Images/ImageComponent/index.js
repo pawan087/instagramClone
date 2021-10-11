@@ -62,8 +62,13 @@ const ImageComponent = ({ image }) => {
         <div className="imageCard" key={image.id}>
 
             {/* IMAGE OWNER USERNAME */}
-            <p className="image_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>
-            
+            <div className="titleContainer">
+                <div className="avatarContainer">
+                    <img src={user.avatar} alt="" />
+                </div>
+                <p className="image_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>
+            </div>
+
             {/* IMAGE IDENTIFICATION */}
             {/* <h2><NavLink to={`/images/${image?.id}`}>{image?.title}</NavLink></h2> */}
 
@@ -120,7 +125,7 @@ const ImageComponent = ({ image }) => {
                 ))}
             </div>
 
-            
+
 
             {/* CREATE A COMMENT FORM */}
             <div className="createComment">

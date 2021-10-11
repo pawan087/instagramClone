@@ -49,9 +49,28 @@ a {
 }
 
 .home_button {
-    height: 33  px;
+    height: 33px;
 }
 
 .home_button:active {
     opacity: 0.4;
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 14px;
+}
+
+.avatarContainer {
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 16px;
+}
+
+.avatarContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

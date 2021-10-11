@@ -13,6 +13,8 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
+    avatar = db.Column(db.String(2000), nullable=True,
+                       default='https://i.imgur.com/RBkqFEg.jpg')
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
@@ -22,7 +24,6 @@ class User(db.Model, UserMixin):
     images = db.relationship("Image", back_populates="user")
     likes = db.relationship("Like", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
-
 
     # followers = db.relationship(
     #     'User', # referring to the model / class
@@ -50,7 +51,8 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'followers': self.followers,
-            'following': self.following
+            'following': self.following,
+            'avatar': self.avatar
         }
 
     # def __repr__(self):

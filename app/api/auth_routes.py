@@ -63,17 +63,20 @@ def sign_up():
     form = SignUpForm()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(CGREEN + "\n FORM DATA: \n",form.data,"\n" + CEND)
+    print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
 
     if form.validate_on_submit():
-        print(CGREEN + "\n FORM VALIDATED: \n",form.validate_on_submit(),"\n" + CEND)
-
+        print(CGREEN + "\n FORM VALIDATED: \n",
+              form.validate_on_submit(), "\n" + CEND)
+        if data["avatar"] == '':
+            data["avatar"] = 'https://i.imgur.com/RBkqFEg.jpg'
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            avatar=form.data["avatar"]
         )
-        print(CGREEN + "\n USER CREATED: \n",user,"\n" + CEND)
+        print(CGREEN + "\n USER CREATED: \n", user, "\n" + CEND)
         db.session.add(user)
         db.session.commit()
         login_user(user)
