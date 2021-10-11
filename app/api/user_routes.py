@@ -12,6 +12,11 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+@user_routes.route('/following/<int:id>')
+def followers(id):
+    user = User.query.get(id)
+    return {'user': user.to_dict()}
+
 
 @user_routes.route('/following/', methods=["POST"])
 def add_follow():
@@ -23,6 +28,7 @@ def add_follow():
         current_user = User.query.get(data['current_user_id'])
 
         db.session.commit()
+        # return {'user': current_user.to_dict()}
         # users = User.query.all()
         # return {'users': [user.to_dict() for user in users]}
     else:

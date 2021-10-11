@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setAllImages } from '../store/image';
 import ImageComponent from './Images/ImageComponent';
+import { addFollow } from '../store/follow';
 
 function User() {
   const { userId }  = useParams();
@@ -32,13 +33,13 @@ function User() {
     return null;
   }
 
+  // <div>
+  //     <form onSubmit={addOrRemoveFollow}>
+  //         {likesByUser?.length ? <button>Dislike</button> : <button>Like</button>}
+  //     </form>
+  // </div>
   return (
     <>
-    <div>
-        <form onSubmit={addOrRemoveLike}>
-            {likesByUser?.length ? <button>Dislike</button> : <button>Like</button>}
-        </form>
-    </div>
     <div className="imageContainer">
             {usersImages?.map((image) => (
                 <ImageComponent image={image} key={image.id} />

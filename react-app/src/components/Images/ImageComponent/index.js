@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { setAllImages, addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
 import { addLike, deleteOneLike } from '../../../store/like'
+
 import { NavLink, useHistory } from "react-router-dom"
 import '../images.css'
 
