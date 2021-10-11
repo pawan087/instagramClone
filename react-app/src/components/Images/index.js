@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setAllImages } from "../../store/image"
+import { setAllLikes } from "../../store/like"
 import ImageComponent from "./ImageComponent"
 import './images.css'
 
@@ -11,6 +12,7 @@ const Image = () => {
 
     useEffect(() => {
         dispatch(setAllImages())
+        dispatch(setAllLikes())
     }, [dispatch])
 
     return (
