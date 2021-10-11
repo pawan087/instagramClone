@@ -5,3 +5,4 @@ from .login_form import LoginForm
 from .signup_form import SignUpForm
 from .image_form import NewImage, editImage, deleteImage
 from .comment_form import NewComment, DeleteComment
+from .like_form import NewLike, DeleteLike

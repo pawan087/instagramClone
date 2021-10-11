@@ -37,10 +37,10 @@ class Image(db.Model):
 
         if(type == "full"):
             return f"""
-            id: {self.id}, 
-            title: {self.title}, 
-            caption: {self.caption}, 
-            img_url: {self.img_url}, 
+            id: {self.id},
+            title: {self.title},
+            caption: {self.caption},
+            img_url: {self.img_url},
             user_id: {self.user_id}"""
         else:
             return f"<Image {self.id}, title: {self.title}>"

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { setAllImages, addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
+import { addLike, deleteOneLike } from '../../../store/like'
 import { NavLink, useHistory } from "react-router-dom"
 import '../images.css'
 
@@ -9,6 +10,7 @@ const ImageComponent = ({ image }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
+    const likes = useSelector((state) => state.likes)
     const [commentBody, setCommentBody] = useState('')
     const [commentImageId, setCommentImageId] = useState(0)
 
@@ -27,6 +29,30 @@ const ImageComponent = ({ image }) => {
         dispatch(addComment(newComment))
         reset()
     }
+
+    let thisPicturesLikes = likes.filter(like => like.image.id === image.id);
+
+
+    let likesByUser = likes.filter(like => like.image.id === image.id && like.user.id === user.id)
+
+    const addOrRemoveLike = (e) => {
+        e.preventDefault()
+        if (likesByUser.length) {
+            console.log('REMOVE LIKE')
+            dispatch(deleteOneLike(likesByUser[0].id))
+        } else {
+            console.log('ADD LIKE')
+            const newLike = {
+                user_id: user.id,
+                image_id: image.id,
+            }
+            dispatch(addLike(newLike))
+        }
+
+    }
+
+
+    console.log(likesByUser)
 
     useEffect(() => {
         dispatch(setAllImages())
@@ -61,6 +87,15 @@ const ImageComponent = ({ image }) => {
 
                     </div>
                 ))}
+            </div>
+            <div>
+                <div>
+                    {thisPicturesLikes.length}
+                    {thisPicturesLikes.length === 1 ? ' like' : ' likes'}
+                </div>
+                <form onSubmit={addOrRemoveLike}>
+                    {likesByUser.length ? <button>Dislike</button> : <button>Like</button>}
+                </form>
             </div>
             <div className="createComment">
                 <form onSubmit={handleSubmit}>
