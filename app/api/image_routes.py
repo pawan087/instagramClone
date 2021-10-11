@@ -36,15 +36,19 @@ def add_image():
 
     # TESTING DATA ->
     # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
-    # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+    print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
     # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
 
     if form.validate_on_submit():
+        hashtags = data["hashtags"].split()
+        print(CGREEN + "\n HASHTAG LIST: \n", hashtags, "\n\n" + CEND)
+
         new_image = Image(
             title=data["title"],
             caption=data["caption"],
             img_url=data["img_url"],
-            user_id=data["user_id"]
+            user_id=data["user_id"],
+            hashtags=hashtags
         )
         db.session.add(new_image)
         db.session.commit()
@@ -81,6 +85,7 @@ def edit_image():
 
     image.title = data["title"]
     image.caption = data["caption"]
+    image.hashtags = data["hashtags"].split()
 
     db.session.commit()
 
@@ -116,17 +121,19 @@ def add_comment():
     else:
         return "Bad Data"
 
+
 @image_routes.route('/comments/', methods=["PUT"])
 def edit_comment():
     print(CGREEN + "\nINSIDE: EDIT COMMENT\n" + CEND)
-    print(CYELLOW + "\n REQUEST: \n",request.cookies['csrf_token'],"\n" + CEND)
+    print(CYELLOW + "\n REQUEST: \n",
+          request.cookies['csrf_token'], "\n" + CEND)
     form = EditComment()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
 
     # TESTING DATA ->
     print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
-    print(CGREEN + "\n BODY: \n",data['id'],"\n\n" + CEND)
+    print(CGREEN + "\n BODY: \n", data['id'], "\n\n" + CEND)
 
     if form.validate_on_submit():
         comment = Comment.query.filter(Comment.id == data["id"]).first()
@@ -137,6 +144,7 @@ def edit_comment():
         return {"images": [image.to_dict() for image in images]}
     else:
         return "Bad Data"
+
 
 @image_routes.route('/comments/', methods=["DELETE"])
 def delete_comment():
@@ -157,10 +165,12 @@ def delete_comment():
 # ---------------------LIKES ROUTES---------------------
 # --------------------------------------------------------
 
+
 @image_routes.route('/likes/')
 def likes():
     likes = Like.query.all()
     return {"likes": [like.to_dict() for like in likes]}
+
 
 @image_routes.route('/likes/', methods=["POST"])
 def add_like():
@@ -178,6 +188,7 @@ def add_like():
         return {"likes": [like.to_dict() for like in likes]}
     else:
         return "Bad Data"
+
 
 @image_routes.route('/likes/', methods=["DELETE"])
 def delete_like():

@@ -5,17 +5,17 @@ import { setAllImages } from "../../../store/image"
 import { editOneImage } from "../../../store/image"
 
 const EditImageForm = () => {
-    
+
     const dispatch = useDispatch()
     const history = useHistory()
     const params = useParams()
-    
+
     const user = useSelector((state) => state.session.user)
     const images = useSelector((state) => state.images)
-    
+
     useEffect(() => {
         dispatch(setAllImages())
-    },[dispatch])
+    }, [dispatch])
 
     const currentImage = images.filter((image) => image.id === +params.id)
 
@@ -24,6 +24,7 @@ const EditImageForm = () => {
     const [title, setTitle] = useState(currentImage[0]?.title)
     const [caption, setCaption] = useState(currentImage[0]?.caption)
     const [imageUrl, setImageUrl] = useState(currentImage[0]?.img_url)
+    const [hashtags, setHashtags] = useState(currentImage[0]?.hashtags.join(' '))
 
     const reset = () => {
         setTitle("")
@@ -33,13 +34,14 @@ const EditImageForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-       
+
         const editedImage = {
             image_id: params.id,
             title,
             caption,
             user_id: user.id,
-            img_url: imageUrl
+            img_url: imageUrl,
+            hashtags
         }
 
         dispatch(editOneImage(editedImage))
@@ -49,25 +51,36 @@ const EditImageForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-        <div>
-            <label>Image Title</label>
-            <input 
-                type="text" 
-                placeholder="Image Title" 
-                value={title} 
-                onChange={(e) => setTitle(e.target.value)} />
-        </div>
+            <div>
+                <label>Image Title</label>
+                <input
+                    type="text"
+                    placeholder="Image Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)} />
+            </div>
 
-        <div>
-            <label>Caption</label>
-            <input 
-                type="text"
-                placeholder="Image Caption" 
-                value={caption} 
-                onChange={(e) => setCaption(e.target.value)} />
-        </div>
-        <button>Submit</button>
-    </form>
+            <div>
+                <label>Caption</label>
+                <input
+                    type="text"
+                    placeholder="Image Caption"
+                    value={caption}
+                    onChange={(e) => setCaption(e.target.value)} />
+            </div>
+
+            <div>
+                <label>Hashtags</label>
+                <input
+                    type="text"
+                    placeholder="Hashtags"
+                    value={hashtags}
+                    onChange={(e) => setHashtags(e.target.value)} />
+                <p>Seperate tags by spaces</p>
+            </div>
+
+            <button>Submit</button>
+        </form>
     )
 }
 
