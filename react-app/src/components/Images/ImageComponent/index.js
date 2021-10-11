@@ -13,6 +13,8 @@ const ImageComponent = ({ image }) => {
     const likes = useSelector((state) => state.likes)
     const [commentBody, setCommentBody] = useState('')
     const [commentImageId, setCommentImageId] = useState(0)
+    let thisPicturesLikes = likes.filter(like => like?.image?.id === image?.id);
+    let likesByUser = likes.filter(like => like?.image?.id === image?.id && like?.user?.id === user?.id)
 
     const reset = () => {
         setCommentBody('')
@@ -30,29 +32,23 @@ const ImageComponent = ({ image }) => {
         reset()
     }
 
-    let thisPicturesLikes = likes.filter(like => like.image.id === image.id);
-
-
-    let likesByUser = likes.filter(like => like.image.id === image.id && like.user.id === user.id)
+    const handleDelete = () => {
+        dispatch(deleteOneImage(image.id))
+        history.push("/")
+    }
 
     const addOrRemoveLike = (e) => {
         e.preventDefault()
         if (likesByUser.length) {
-            console.log('REMOVE LIKE')
             dispatch(deleteOneLike(likesByUser[0].id))
         } else {
-            console.log('ADD LIKE')
             const newLike = {
                 user_id: user.id,
                 image_id: image.id,
             }
             dispatch(addLike(newLike))
         }
-
     }
-
-
-    console.log(likesByUser)
 
     useEffect(() => {
         dispatch(setAllImages())
@@ -63,7 +59,7 @@ const ImageComponent = ({ image }) => {
             <h2><NavLink to={`/images/${image?.id}`}>{image?.title}</NavLink></h2>
             <p>{image?.caption}</p>
             <p><em><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></em></p>
-            {user?.id === image?.user_id ? <button onClick={(e) => dispatch(deleteOneImage(image?.id))}>DELETE</button> : false}
+            {user?.id === image?.user_id ? <button onClick={handleDelete}>DELETE</button> : false}
             {user?.id === image?.user_id ? <button onClick={(e) => history.push(`/images/${image?.id}/edit`)}>EDIT</button> : false}
             <div key={image?.id} className="individualImage" onClick={() => history.push(`/images/${image?.id}`)}>
                 <img src={image?.img_url} alt="anImage" />
@@ -84,17 +80,18 @@ const ImageComponent = ({ image }) => {
                         <p>{comment.body}</p>
                         <p><em> <NavLink to={`/users/${comment.user_id}`}> {comment.user.username} </NavLink> </em></p>
                         {user?.id === comment?.user_id ? <button onClick={(e) => dispatch(deleteOneComment(comment.id))}>DELETE</button> : false}
+                        {user?.id === comment?.user_id ? <button onClick={(e) => history.push(`/images/${image.id}/comments/${comment.id}`)}>EDIT</button> : false}
 
                     </div>
                 ))}
             </div>
             <div>
                 <div>
-                    {thisPicturesLikes.length}
-                    {thisPicturesLikes.length === 1 ? ' like' : ' likes'}
+                    {thisPicturesLikes?.length}
+                    {thisPicturesLikes?.length === 1 ? ' like' : ' likes'}
                 </div>
                 <form onSubmit={addOrRemoveLike}>
-                    {likesByUser.length ? <button>Dislike</button> : <button>Like</button>}
+                    {likesByUser?.length ? <button>Dislike</button> : <button>Like</button>}
                 </form>
             </div>
             <div className="createComment">

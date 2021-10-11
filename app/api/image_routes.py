@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, redirect, request
 from sqlalchemy import delete
 from sqlalchemy.sql.dml import Delete
 from app.forms import deleteImage, editImage
-from app.forms.comment_form import DeleteComment, NewComment
+from app.forms.comment_form import DeleteComment, EditComment, NewComment
 from app.forms.like_form import DeleteLike, NewLike
 from app.forms.image_form import NewImage
 from flask_login import login_required
@@ -116,6 +116,27 @@ def add_comment():
     else:
         return "Bad Data"
 
+@image_routes.route('/comments/', methods=["PUT"])
+def edit_comment():
+    print(CGREEN + "\nINSIDE: EDIT COMMENT\n" + CEND)
+    print(CYELLOW + "\n REQUEST: \n",request.cookies['csrf_token'],"\n" + CEND)
+    form = EditComment()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    # TESTING DATA ->
+    print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+    print(CGREEN + "\n BODY: \n",data['id'],"\n\n" + CEND)
+
+    if form.validate_on_submit():
+        comment = Comment.query.filter(Comment.id == data["id"]).first()
+        comment.body = data["body"]
+
+        db.session.commit()
+        images = Image.query.all()
+        return {"images": [image.to_dict() for image in images]}
+    else:
+        return "Bad Data"
 
 @image_routes.route('/comments/', methods=["DELETE"])
 def delete_comment():

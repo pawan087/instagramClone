@@ -23,10 +23,21 @@ export const addComment = (comment) => async (dispatch) => {
     } else return "ADD COMMENT THUNK FAILED!"
 }
 
+export const editOneComment = (editedComment) => async (dispatch) => {
+    const response = await fetch("/api/images/comments/",
+        {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(editedComment)
+        }
+    )
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(load(data))
+    } else return "EDIT COMMENT THUNK FAILED!"
+}
+
 export const deleteOneComment = (id) => async (dispatch) => {
-    console.log('--------------------------------------------------------')
-    console.log('INSIDE THUNK BEFORE FETCH')
-    console.log('THUNK ID ARGUMENT: ' + id)
     const response = await fetch("/api/images/comments/",
         {
             method: "DELETE",
@@ -47,7 +58,6 @@ export const deleteOneComment = (id) => async (dispatch) => {
 -------------------------------------------------------- */
 
 export const addOneImage = (image) => async (dispatch) => {
-    console.log(JSON.stringify(image))
     await fetch("/api/images/",
         {
             method: "POST",
@@ -66,7 +76,6 @@ export const setAllImages = () => async (dispatch) => {
 }
 
 export const editOneImage = (editedImage) => async (dispatch) => {
-    console.log(editedImage)
     const response = await fetch("/api/images/",
         {
             method: "PUT",
