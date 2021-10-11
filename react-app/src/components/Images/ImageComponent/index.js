@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
 import { setAllLikes } from "../../../store/like"
 import { addLike, deleteOneLike } from '../../../store/like'
+
 import { NavLink, useHistory } from "react-router-dom"
 import liked from '../../../image_assets/liked.svg'
 import unliked from '../../../image_assets/unliked.svg'
