@@ -180,8 +180,13 @@ def add_like():
     if form.validate_on_submit():
 
         print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
-        does_like_exist = Like.query.filter(Like.user_id == data['user_id'] and Like.image_id == data['image_id']).first()
-        print(CGREEN + "\n DOES THE LIKE EXIST: \n", does_like_exist, "\n" + CEND)
+        def exists(image_id, user_id, data):
+            if(image_id == data["image_id"] and user_id == data["user_id"]):
+                return True
+            else:
+                return False
+
+        does_like_exist = Like.query.filter(exists(Like.image_id, Like.user_id, data)).first()
 
         if not does_like_exist:
             new_like = Like(
