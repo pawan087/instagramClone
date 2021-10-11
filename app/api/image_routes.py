@@ -178,14 +178,25 @@ def add_like():
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        new_like = Like(
-            image_id=data["image_id"],
-            user_id=data["user_id"]
-        )
-        db.session.add(new_like)
-        db.session.commit()
-        likes = Like.query.all()
-        return {"likes": [like.to_dict() for like in likes]}
+
+        print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+        def exists(image_id, user_id, data):
+            if(image_id == data["image_id"] and user_id == data["user_id"]):
+                return True
+            else:
+                return False
+
+        does_like_exist = Like.query.filter(exists(Like.image_id, Like.user_id, data)).first()
+
+        if not does_like_exist:
+            new_like = Like(
+                image_id=data["image_id"],
+                user_id=data["user_id"]
+            )
+            db.session.add(new_like)
+            db.session.commit()
+            likes = Like.query.all()
+            return {"likes": [like.to_dict() for like in likes]}
     else:
         return "Bad Data"
 

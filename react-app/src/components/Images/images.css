@@ -1,20 +1,187 @@
+/* ====================
+    image section
+======================*/
+
 .imageCard {
-    width: 580px;
+    width: 600px;
     height: 100%;
     margin: 2rem 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #DBDBDB;
     border-radius: 2.5px;
     /* max-height: 800px; */
     min-height: 250px;
-    padding: 1rem;
+    background-color: white;
 }
 
 
 .individualImage img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center top;
     cursor: pointer;
+}
+
+
+/* ====================
+    title section
+======================*/
+
+.image_username { 
+    background-color: white;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    font-weight: 500;
+    color: #262626;
+    font-size: 14px;
+}
+
+/* ====================
+    comment section
+======================*/
+
+.createComment {
+    min-height: 40px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-height: max-content;
+    margin-top: 15px;
+}
+
+.createComment form {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.createComment textarea {
+    flex-grow: 1;
+    resize: none;
+    width: 100%;
+    border: none;
+    height: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.075);
+    box-sizing: border-box;
+    padding: 10px 12.5px;
+    max-height: max-content;
+}
+
+.createComment textarea::-webkit-scrollbar {
+    display: none;
+}
+
+
+.createComment textarea:focus-visible {
+    outline: none;
+}
+
+.createComment textarea:focus-visible ~ button {
+    outline: none;
+    color: #0095f6;
+    cursor: pointer;
+}
+
+
+.createComment button {
+    height: 40px;
+    position: absolute;
+    right: 12.5px;
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+    color: rgba(0, 149, 246, 0.3);
+}
+
+.caption {
+    display: flex;
+    gap: 5px;
+    padding: 0 0 0 20px;
+    font-size: 14px;
+}
+
+.caption_username {
+    font-weight: 500;
+}
+
+.caption_username:hover {
+    text-decoration: underline;
+}
+
+.commentList div {
+    padding: 0 0 0 20px;
+    display: flex;
+    gap: 5px;
+}
+
+.commentList p {
+    font-size: 14px;
+    padding: 2.5px 0;
+}
+
+.comment_username {
+    font-weight: 500;
+}
+
+/* ====================
+    hashtags section
+======================*/
+
+.hastagList {
+    padding: 0 0 0 20px;
+    display: flex;
+    gap: 5px;
+}
+
+.hastagList button {
+    background-color: transparent;
+    border: none;
+    color: #0095f6;
+    cursor: pointer;
+}
+
+.hastagList button::before {
+    content: "#";
+}
+
+/* ====================
+    likes section
+======================*/
+
+.likes_container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 0 0 20px;
+}
+
+.likes_container button {
+    margin: 10px 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.liked {
+    filter: invert(42%) sepia(86%) saturate(1300%) hue-rotate(324deg) brightness(90%) contrast(107%);
+    animation: grow .2s ease-in;
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.likes_container div {
+    font-size: 14px;
+    font-weight: 500;
 }
