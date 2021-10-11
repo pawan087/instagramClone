@@ -47,3 +47,11 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+.home_button {
+    height: 33  px;
+}
+
+.home_button:active {
+    opacity: 0.4;
+}
