@@ -37,13 +37,13 @@ export const addFollow = (follow) => async (dispatch) => {
 //     } else console.log("DELETE LIKE THUNK ERROR: BAD REQUEST")
 // }
 
-// export const setAllLikes = () => async (dispatch) => {
-//     const response = await fetch("/api/images/likes")
-//     if (response.ok) {
-//         const data = await response.json()
-//         dispatch(load(data))
-//     } else return "READ THUNK ERROR: BAD REQUEST"
-// }
+export const setFollows = (id) => async (dispatch) => {
+    const response = await fetch(`/api/users/following/${id}`)
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(load(data))
+    } else return "READ THUNK ERROR: BAD REQUEST"
+}
 
 const initialState = []
 const followReducer = (state = initialState, action) => {

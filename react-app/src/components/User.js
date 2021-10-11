@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setAllImages } from '../store/image';
 import ImageComponent from './Images/ImageComponent';
-import { addFollow } from '../store/follow';
+import { addFollow, setFollows } from '../store/follow';
 
 function User() {
   const { userId }  = useParams();
@@ -16,6 +16,7 @@ function User() {
 
   useEffect(() => {
     dispatch(setAllImages())
+    dispatch(setFollows(userId))
   }, [dispatch])
 
   useEffect(() => {
@@ -28,6 +29,8 @@ function User() {
       setUser(user);
     })();
   }, [userId]);
+
+
 
   if (!user) {
     return null;
