@@ -7,12 +7,12 @@ import ImageComponent from './Images/ImageComponent';
 function User() {
   const { userId }  = useParams();
   const dispatch = useDispatch()
-  
+
   const [user, setUser] = useState({});
 
   const images = useSelector((state) => state.images)
   const usersImages = images.filter((image) => image.user_id === +userId)
-  
+
   useEffect(() => {
     dispatch(setAllImages())
   }, [dispatch])
@@ -33,11 +33,18 @@ function User() {
   }
 
   return (
+    <>
+    <div>
+        <form onSubmit={addOrRemoveLike}>
+            {likesByUser?.length ? <button>Dislike</button> : <button>Like</button>}
+        </form>
+    </div>
     <div className="imageContainer">
             {usersImages?.map((image) => (
                 <ImageComponent image={image} key={image.id} />
             ))}
         </div>
+        </>
   );
 }
 export default User;
