@@ -30,14 +30,16 @@ const ImageComponent = ({ image }) => {
         reset()
     }
 
+    let thisPicturesLikes = likes.filter(like => like.image.id === image.id);
 
-    let thisPicturesLikes = likes.filter(like => like.image.id === image.id && like.user.id === user.id)
+
+    let likesByUser = likes.filter(like => like.image.id === image.id && like.user.id === user.id)
 
     const addOrRemoveLike = (e) => {
         e.preventDefault()
-        if (thisPicturesLikes.length) {
+        if (likesByUser.length) {
             console.log('REMOVE LIKE')
-            dispatch(deleteOneLike(thisPicturesLikes[0].id))
+            dispatch(deleteOneLike(likesByUser[0].id))
         } else {
             console.log('ADD LIKE')
             const newLike = {
@@ -50,7 +52,7 @@ const ImageComponent = ({ image }) => {
     }
 
 
-    console.log(thisPicturesLikes)
+    console.log(likesByUser)
 
     useEffect(() => {
         dispatch(setAllImages())
@@ -87,9 +89,12 @@ const ImageComponent = ({ image }) => {
                 ))}
             </div>
             <div>
+                <div>
+                    {thisPicturesLikes.length}
+                    {thisPicturesLikes.length === 1 ? ' like' : ' likes'}
+                </div>
                 <form onSubmit={addOrRemoveLike}>
-                    {!thisPicturesLikes.length && <button>Like</button>}
-                    {thisPicturesLikes.length && <button>Dislike</button>}
+                    {likesByUser.length ? <button>Dislike</button> : <button>Like</button>}
                 </form>
             </div>
             <div className="createComment">
