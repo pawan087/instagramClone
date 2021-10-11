@@ -9,6 +9,7 @@ const AddImageForm = () => {
     const [title, setTitle] = useState("")
     const [caption, setCaption] = useState("")
     const [imageUrl, setImageUrl] = useState("")
+    const [hashtags, setHashtags] = useState('')
 
     const user = useSelector((state) => state.session.user)
     const dispatch = useDispatch()
@@ -27,7 +28,8 @@ const AddImageForm = () => {
             title,
             caption,
             img_url: imageUrl,
-            user_id: user.id
+            user_id: user.id,
+            hashtags
         }
 
         dispatch(addOneImage(newImage))
@@ -64,6 +66,16 @@ const AddImageForm = () => {
                     placeholder="Image Url"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)} />
+            </div>
+
+            <div>
+                <label>Hashtags</label>
+                <input
+                    type="text"
+                    placeholder="Hashtags"
+                    value={hashtags}
+                    onChange={(e) => setHashtags(e.target.value)} />
+                <p>Seperate tags by spaces</p>
             </div>
 
             {/* <div>
