@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { setAllImages, addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
+import { addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
+import { setAllLikes } from "../../../store/like"
 import { addLike, deleteOneLike } from '../../../store/like'
 import { NavLink, useHistory } from "react-router-dom"
 import '../images.css'
@@ -51,29 +52,39 @@ const ImageComponent = ({ image }) => {
     }
 
     useEffect(() => {
-        dispatch(setAllImages())
+        dispatch(setAllLikes())
     }, [dispatch])
 
     return (
-        <div className="imageCard">
+        <div className="imageCard" key={image.id}>
+            
+            {/* IMAGE IDENTIFICATION */}
             <h2><NavLink to={`/images/${image?.id}`}>{image?.title}</NavLink></h2>
             <p>{image?.caption}</p>
             <p><em><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></em></p>
+
+            {/* IMAGE CONTROLS */}
             {user?.id === image?.user_id ? <button onClick={handleDelete}>DELETE</button> : false}
             {user?.id === image?.user_id ? <button onClick={(e) => history.push(`/images/${image?.id}/edit`)}>EDIT</button> : false}
-            <div key={image?.id} className="individualImage" onClick={() => history.push(`/images/${image?.id}`)}>
+
+            {/* IMAGE ITSELF */}
+            <div className="individualImage" onClick={() => history.push(`/images/${image?.id}`)}>
                 <img src={image?.img_url} alt="anImage" />
             </div>
+
+            {/* HASHTAG LIST */}
             <div className="hastagList">
                 {image?.hashtags?.map((tag) => {
                     return (
-                        <button onClick={() => history.push(`/results/${tag}`)}>
+                        <button key={tag.id} onClick={() => history.push(`/results/${tag}`)}>
                             {tag}
                         </button>
 
                     )
                 })}
             </div>
+
+            {/* COMMENT LIST */}
             <div className="commentList">
                 {image?.comments?.comments.map((comment) => (
                     <div key={comment.id}>
@@ -85,6 +96,8 @@ const ImageComponent = ({ image }) => {
                     </div>
                 ))}
             </div>
+
+            {/* IMAGE LIKES */}
             <div>
                 <div>
                     {thisPicturesLikes?.length}
@@ -94,6 +107,8 @@ const ImageComponent = ({ image }) => {
                     {likesByUser?.length ? <button>Dislike</button> : <button>Like</button>}
                 </form>
             </div>
+
+            {/* CREATE A COMMENT FORM */}
             <div className="createComment">
                 <form onSubmit={handleSubmit}>
                     <textarea value={commentBody} onChange={(e) => {
@@ -104,6 +119,7 @@ const ImageComponent = ({ image }) => {
                     <button>Post</button>
                 </form>
             </div>
+
         </div>
     )
 }

@@ -18,7 +18,7 @@ const IndividualImage = () => {
 
     return (
         <div className="imageContainer">
-            <ImageComponent image={currentImage}/>
+            <ImageComponent image={currentImage} />
         </div>
     )
 }

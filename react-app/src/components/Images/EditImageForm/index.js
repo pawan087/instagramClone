@@ -24,7 +24,7 @@ const EditImageForm = () => {
     const [title, setTitle] = useState(currentImage[0]?.title)
     const [caption, setCaption] = useState(currentImage[0]?.caption)
     const [imageUrl, setImageUrl] = useState(currentImage[0]?.img_url)
-    const [hashtags, setHashtags] = useState(currentImage[0]?.hashtags.join(' '))
+    const [hashtags, setHashtags] = useState(currentImage[0]?.hashtags?.join(' '))
 
     const reset = () => {
         setTitle("")
