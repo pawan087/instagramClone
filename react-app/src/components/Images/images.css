@@ -1,20 +1,102 @@
+/* ====================
+    image section
+======================*/
+
 .imageCard {
-    width: 580px;
+    width: 600px;
     height: 100%;
     margin: 2rem 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #DBDBDB;
     border-radius: 2.5px;
     /* max-height: 800px; */
     min-height: 250px;
-    padding: 1rem;
+    background-color: white;
 }
 
 
 .individualImage img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center top;
     cursor: pointer;
+}
+
+
+/* ====================
+    title section
+======================*/
+
+.image_username { 
+    background-color: white;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    font-weight: 500;
+    color: #262626;
+    font-size: 14px;
+}
+
+/* ====================
+    comment section
+======================*/
+
+.createComment {
+    min-height: 40px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-height: max-content;
+}
+
+.createComment form {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.createComment textarea {
+    flex-grow: 1;
+    resize: none;
+    width: 100%;
+    border: none;
+    height: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.075);
+    box-sizing: border-box;
+    padding: 10px 12.5px;
+    max-height: max-content;
+}
+
+.createComment textarea::-webkit-scrollbar {
+    display: none;
+}
+
+
+.createComment textarea:focus-visible {
+    outline: none;
+}
+
+.createComment textarea:focus-visible ~ button {
+    outline: none;
+    color: #0095f6;
+    cursor: pointer;
+}
+
+
+.createComment button {
+    height: 40px;
+    position: absolute;
+    right: 12.5px;
+    background-color: transparent;
+    border: none;
+    font-weight: 500;
+    color: rgba(0, 149, 246, 0.3);
+}
+
+
+/* ====================
+    hashtags section
+======================*/
+
+.hastagList {
+
 }

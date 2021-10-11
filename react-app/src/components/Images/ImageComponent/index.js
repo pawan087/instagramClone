@@ -57,11 +57,12 @@ const ImageComponent = ({ image }) => {
 
     return (
         <div className="imageCard" key={image.id}>
+
+            {/* IMAGE OWNER USERNAME */}
+            <p className="image_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>
             
             {/* IMAGE IDENTIFICATION */}
-            <h2><NavLink to={`/images/${image?.id}`}>{image?.title}</NavLink></h2>
-            <p>{image?.caption}</p>
-            <p><em><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></em></p>
+            {/* <h2><NavLink to={`/images/${image?.id}`}>{image?.title}</NavLink></h2> */}
 
             {/* IMAGE CONTROLS */}
             {user?.id === image?.user_id ? <button onClick={handleDelete}>DELETE</button> : false}
@@ -71,6 +72,9 @@ const ImageComponent = ({ image }) => {
             <div className="individualImage" onClick={() => history.push(`/images/${image?.id}`)}>
                 <img src={image?.img_url} alt="anImage" />
             </div>
+
+            {/* IMAGE CAPTION */}
+            <p>{image?.caption}</p>
 
             {/* HASHTAG LIST */}
             <div className="hastagList">
