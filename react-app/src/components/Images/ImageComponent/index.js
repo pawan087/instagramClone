@@ -43,7 +43,7 @@ const ImageComponent = ({ image }) => {
                 <img src={image?.img_url} alt="anImage" />
             </div>
             <div className="hastagList">
-                {image?.hashtags.map((tag) => {
+                {image?.hashtags?.map((tag) => {
                     return (
                         <button onClick={() => history.push(`/results/${tag}`)}>
                             {tag}
