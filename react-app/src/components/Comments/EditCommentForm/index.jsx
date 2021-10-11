@@ -20,7 +20,6 @@ const EditCommentForm = () => {
     const currentComment = currentImage[0]?.comments?.comments[0]
     
     const [commentBody, setCommentBody] = useState(currentComment?.body)
-    const [commentImageId, setCommentImageId] = useState(currentComment?.image_id)
 
 
     const handleSubmit = (e) => {
@@ -38,7 +37,6 @@ const EditCommentForm = () => {
         <form onSubmit={handleSubmit}>
             <textarea value={commentBody} onChange={(e) => {
                 setCommentBody(e.target.value)
-                setCommentImageId(currentComment?.image_id)
             }}
                 placeholder='Add a Comment'></textarea>
             <button>Post</button>
