@@ -40,43 +40,48 @@ function User() {
 
   return (
     <>
-      <div className="profileTop">
-          <div className="profileAvatarBox">
-              <div className="profileAvatarContainer">
-                  {/* <img src={image?.user?.avatar} alt="" /> */}
+      <div className="profileContainer">
+          <div className="profileTop">
+              <div className="profileAvatarBox">
+                  <div className="profileAvatarContainer">
+                      {/* <img src={image?.user?.avatar} alt="" /> */}
+                  </div>
               </div>
-          </div>
-          <div className="profileBox">
-              <div className="profileNameAndButtons">
+              <div className="profileBox">
+                  <div className="profileNameAndButtons">
+                      <div className="profileName">
+                          USERNAME GOES HERE
+                      </div>
+                      <div className="profileButtons">
+                          <form onSubmit={addOrRemoveFollow}>
+                              {currentPagesUser?.followers?.includes(curUser.id) ? <button>Unfollow</button> : <button>follow</button>}
+                          </form>
+                      </div>
+                  </div>
+                  <div className="profileCounts">
+                      <div className="profilePosts">#### Posts</div>
+                      <div className="profileFollowers">#### Followers</div>
+                      <div className="profileFollowing">#### Following</div>
+                  </div>
                   <div className="profileName">
-                      USERNAME GOES HERE
+                      NAME GOES HERE (optional)
                   </div>
-                  <div className="profileButtons">
-                      <form onSubmit={addOrRemoveFollow}>
-                          {currentPagesUser?.followers?.includes(curUser.id) ? <button>Unfollow</button> : <button>follow</button>}
-                      </form>
+                  <div className="profileBio">
+                      BIO GOES HERE
                   </div>
-              </div>
-              <div className="profileCounts">
-                  <div className="profilePosts">#### Posts</div>
-                  <div className="profileFollowers">#### Followers</div>
-                  <div className="profileFollowing">#### Following</div>
-              </div>
-              <div className="profileName">
-                  NAME GOES HERE (optional)
-              </div>
-              <div className="profileBio">
-                  BIO GOES HERE
-              </div>
-              <div>
-                FOLLOWED BY GOES HERE
+                  <div>
+                    FOLLOWED BY GOES HERE
+                  </div>
               </div>
           </div>
-      </div>
-      <div className="imageContainer">
-          {usersImages?.map((image) => (
-              <ImageComponent image={image} key={image.id} />
-          ))}
+          <div className="imageContainer">
+              <div className="profileSwitchBox">
+
+              </div>
+              {usersImages?.map((image) => (
+                  <ImageComponent image={image} key={image.id} />
+              ))}
+          </div>
       </div>
     </>
   );
