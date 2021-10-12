@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User, db, user
+from app.models import User, db
 from app.forms.follow_form import DeleteFollow, NewFollow
 from colors import *
 
@@ -44,7 +44,8 @@ def add_follow():
 
         db.session.commit()
 
-        return {'user': user_to_follow.to_dict()}
+        users = User.query.all()
+        return {"users": [user.to_dict() for user in users]}
     else:
         return "Bad Data"
 
@@ -53,15 +54,27 @@ def delete_follow():
     form =  DeleteFollow()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
-    user_to_unfollow = User.query.get(data['user_to_follow_id'])
-    current_user = User.query.get(data['current_user_id'])
-    current_users_following = [user for user in current_user.following]
-    current_users_following.remove(user_to_unfollow.id)
 
-    user_to_follow_followers = [user for user in user_to_unfollow.followers]
-    user_to_follow_followers.remove(current_user.id)
+    if form.validate_on_submit():
+        # FINDING USERS BASED ON ID
+        user_to_unfollow = User.query.get(data['user_to_follow_id'])
+        current_user = User.query.get(data['current_user_id'])
 
-    current_user.following = current_users_following
-    user_to_unfollow.followers = user_to_follow_followers
+        # REMOVING THE USER FROM OUR FOLLOWING LIST
+        current_users_following = [user for user in current_user.following]
+        current_users_following.remove(user_to_unfollow.id)
 
-    db.session.commit()
+        # REMOVING US FROM THE USERS FOLLOWERS LIST
+        user_to_follow_followers = [user for user in user_to_unfollow.followers]
+        user_to_follow_followers.remove(current_user.id)
+
+        # REASSIGNING THE FOLLOWERS AND FOLLOWING LIST FOR THEIR RESPECTIVE USERS TO MATCH THE UPDATED STATE
+        current_user.following = current_users_following
+        user_to_unfollow.followers = user_to_follow_followers
+
+        db.session.commit()
+
+        users = User.query.all()
+        return {"users": [user.to_dict() for user in users]}
+    else:
+        return "Bad Data"

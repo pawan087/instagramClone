@@ -22,7 +22,7 @@ const NavBar = () => {
         {!user?.id && <NavLink to='/sign-up' exact={true} activeClassName='active'>Sign Up</NavLink>}
         <LogoutButton />
         {user?.id && <NavLink to='/' exact={true} activeClassName='active'><img src={home} alt="home" className="home_button" /></NavLink>}
-        {user?.id && <NavLink to='/images/new' exact={true} activeClassName='active'><img src={post} alt="post image button" className='home_button' /></NavLink>}
+        {user?.id && <NavLink to='/images/new' exact={true} activeClassName='active'><img src={post} alt="postPicture" className='home_button' /></NavLink>}
         {user?.id && <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
           <div className="avatarContainer">
             <img className='' src={user.avatar} alt="user's avatar" />
