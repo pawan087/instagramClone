@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setAllImages } from "../../store/image"
 import ImageComponent from "./ImageComponent"
+import Notifications from "../Notifications"
 import './images.css'
 
 const Image = () => {
@@ -15,6 +16,9 @@ const Image = () => {
 
     return (
         <div className="imageContainer">
+            
+            <Notifications />
+
             {images?.map((image) => (
                 <ImageComponent image={image} key={image.id} />
             ))}

@@ -52,7 +52,8 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'followers': self.followers,
             'following': self.following,
-            'avatar': self.avatar
+            'avatar': self.avatar,
+            'incoming_events': {"incoming": [event.to_dict() for event in self.incoming_events]},
         }
 
     # def __repr__(self):
