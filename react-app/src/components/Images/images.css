@@ -163,7 +163,14 @@
 
 .liked {
     filter: invert(42%) sepia(86%) saturate(1300%) hue-rotate(324deg) brightness(90%) contrast(107%);
-    animation: grow .2s ease-in;
+}
+
+.liked[animateGrow='1'] {
+    animation: grow .3s ease-in;
+}
+
+.unliked[animateGrow='1'] {
+    animation: grow .3s ease-in;
 }
 
 @keyframes grow {
@@ -172,7 +179,7 @@
     }
 
     50% {
-        transform: scale(1.2);
+        transform: scale(1.4);
     }
 
     100% {
