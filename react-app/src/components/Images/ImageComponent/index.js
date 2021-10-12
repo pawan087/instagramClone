@@ -9,6 +9,8 @@ import unliked from '../../../image_assets/unliked.svg'
 import '../images.css'
 import ImageModal from "../ImageModal"
 import CommentModal from "../CommentModal"
+import tableDots from '../../../image_assets/tableDots.svg'
+import personDots from '../../../image_assets/personDots.svg'
 
 const ImageComponent = ({ image }) => {
 
@@ -45,6 +47,11 @@ const ImageComponent = ({ image }) => {
         history.push("/")
     }
 
+    const handleDeleteComment = (id) => {
+        dispatch(deleteOneComment(id))
+        setIsCommentOpen(false)
+    }
+
     const addOrRemoveLike = (e) => {
         e.preventDefault()
         if (likesByUser.length) {
@@ -65,27 +72,27 @@ const ImageComponent = ({ image }) => {
     return (
         <div className="imageCard" key={image?.id}>
 
-            {/* IMAGE OWNER USERNAME */}
+            {/* IMAGE OWNER USERNAME AND IMAGE CONTROLS*/}
             <div className="titleContainer">
-                <div className="avatarContainer">
-                    <img src={image?.user?.avatar} alt="" />
+                <div className="userInfo">
+                    <div className="avatarContainer">
+                        <img src={image?.user?.avatar} alt="" />
+                    </div>
+                    <p className="image_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>
                 </div>
-                <p className="image_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>
+                {user?.id === image?.user_id ?
+                    <div>
+                        <button className='modal' onClick={() => setIsImageOpen(true)} style={{ opacity: '1' }}><img src={personDots} alt='options' /></button>
+                        <ImageModal open={isImageOpen} onClose={() => setIsImageOpen(false)}>
+                            <button className='red' onClick={handleDelete}>Delete</button>
+                            <button className='red' onClick={(e) => history.push(`/images/${image?.id}/edit`)}>Edit</button>
+                        </ImageModal>
+                    </div>
+                    : false}
             </div>
 
             {/* IMAGE IDENTIFICATION */}
             {/* <h2><NavLink to={`/images/${image?.id}`}>{image?.title}</NavLink></h2> */}
-
-            {/* IMAGE CONTROLS */}
-            {user?.id === image?.user_id ?
-                <div>
-                    <button onClick={() => setIsImageOpen(true)}>Open Image Modal</button>
-                    <ImageModal open={isImageOpen} onClose={() => setIsImageOpen(false)}>
-                        <button onClick={handleDelete}>DELETE</button>
-                        <button onClick={(e) => history.push(`/images/${image?.id}/edit`)}>EDIT</button>
-                    </ImageModal>
-                </div>
-                : false}
 
             {/* IMAGE ITSELF */}
             <div className="individualImage" onClick={() => history.push(`/images/${image?.id}`)}>
@@ -132,16 +139,18 @@ const ImageComponent = ({ image }) => {
             {/* COMMENT LIST */}
             <div className="commentList">
                 {image?.comments?.comments.map((comment) => (
-                    <div key={comment.id}>
-                        <p className="comment_username"><NavLink to={`/users/${comment.user_id}`}> {comment.user.username} </NavLink></p>
-                        <p>{comment.body}</p>
+                    <div className='eachComment' key={comment.id}>
+                        <div className="commentInfo">
+                            <p className="comment_username"><NavLink to={`/users/${comment.user_id}`}> {comment.user.username} </NavLink></p>
+                            <p>{comment.body}</p>
+                        </div>
                         {user?.id === comment?.user_id ?
                             <>
                                 <div>
-                                    <button onClick={() => setIsCommentOpen(true)}>Open Comment Modal</button>
+                                    <button className='modal' onClick={() => setIsCommentOpen(true)}><img src={tableDots} alt='options' /></button>
                                     <CommentModal open={isCommentOpen} onClose={() => setIsCommentOpen(false)}>
-                                        <button onClick={(e) => dispatch(deleteOneComment(comment.id))}>DELETE</button>
-                                        <button onClick={(e) => history.push(`/images/${image.id}/comments/${comment.id}`)}>EDIT</button>
+                                        <button className='red' onClick={() => handleDeleteComment(comment.id)}>Delete</button>
+                                        <button className='red' onClick={(e) => history.push(`/images/${image.id}/comments/${comment.id}`)}>Edit</button>
                                     </CommentModal>
                                 </div>
                             </>
@@ -161,7 +170,7 @@ const ImageComponent = ({ image }) => {
                         setCommentImageId(image.id)
                     }}
                         placeholder='Add a Comment'></textarea>
-                    <button>Post</button>
+                    <button onClick={() => setIsCommentOpen(false)}>Post</button>
                 </form>
             </div>
 
