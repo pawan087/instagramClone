@@ -51,7 +51,10 @@ a {
     text-decoration: none;
     color: inherit;
 }
-
+.button {             /* Add class to all buttons and button-like objects unless otherwise needed not to */
+  user-select: none;  /* Prevents user from highlighting the button */
+  cursor: pointer;    /* Makes the cursor default to a pointer even when there's an image as a child */
+}
 .home_button {
     height: 33px;
 }

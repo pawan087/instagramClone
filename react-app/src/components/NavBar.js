@@ -15,17 +15,17 @@ const NavBar = () => {
   return (
     <nav>
       <h1>
-        <NavLink to='/' exact={true} activeClassName='active' className="logo">Kilogram</NavLink>
+        <NavLink to='/' exact={true} activeClassName='active' className="logo button" draggable="false">Kilogram</NavLink>
       </h1>
       <div className="links">
-        {!user?.id && <NavLink to='/login' exact={true} activeClassName='active'>Login</NavLink>}
-        {!user?.id && <NavLink to='/sign-up' exact={true} activeClassName='active'>Sign Up</NavLink>}
+        {!user?.id && <NavLink to='/login' exact={true} activeClassName='active' className="button">Login</NavLink>}
+        {!user?.id && <NavLink to='/sign-up' exact={true} activeClassName='active' className="button">Sign Up</NavLink>}
         <LogoutButton />
-        {user?.id && <NavLink to='/' exact={true} activeClassName='active'><img src={home} alt="home" className="home_button" /></NavLink>}
-        {user?.id && <NavLink to='/images/new' exact={true} activeClassName='active'><img src={post} alt="postPicture" className='home_button' /></NavLink>}
-        {user?.id && <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
-          <div className="avatarContainer">
-            <img className='' src={user.avatar} alt="user's avatar" />
+        {user?.id && <NavLink to='/' exact={true} activeClassName='active' draggable="false"><img src={home} alt="home" className="home_button button" draggable="false" /></NavLink>}
+        {user?.id && <NavLink to='/images/new' exact={true} activeClassName='active' draggable="false"><img src={post} alt="postPicture" className='home_button button' draggable="false" /></NavLink>}
+        {user?.id && <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active' draggable="false">
+          <div className="avatarContainer button">
+            <img className='' src={user.avatar} alt="user's avatar" draggable="false" />
           </div>
         </NavLink>}
 

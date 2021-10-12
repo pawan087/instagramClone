@@ -41,12 +41,28 @@
   display: flex;
 }
 
-.followingButton {
-
+.profileButton {
+  box-sizing: border-box;
+  background-color: #FAFAFA;
+  border: 1px solid #DBDBDB;
+  border-radius: 5px;
 }
 
-.followingButton:active img {
+.followingButton {
+  padding: 3px 30px;
+}
+
+.followingButton:active .follow_icon {
   opacity: 0.4;
+}
+
+.followingButton .follow_icon {
+  height: 18px;
+}
+
+.followingButton.unfollow {
+  padding-left: 31px;
+  padding-right: 29px;
 }
 
 .profileUserName {

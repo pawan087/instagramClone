@@ -55,11 +55,11 @@ function User() {
                     <div className="profileUserName">
                         {currentPagesUser?.username}
                     </div>
-                    <div className="profileButtons">
+                    <div className="profileButtonBox">
                         <form onSubmit={addOrRemoveFollow}>
                             {currentPagesUser?.followers?.includes(curUser.id) ?
-                                <button className="unfollow followingButton button"><img src={followed} alt="Unfollow" className="follow_icon" /></button> :
-                                 <button className="follow followingButton button"><img src={follow} alt="Follow" className="follow_icon" /></button>}
+                                <button className="unfollow followingButton profileButton button"><img src={followed} alt="Unfollow" className="follow_icon" draggable="false"/></button> :
+                                <button className="follow followingButton profileButton button"><img src={follow} alt="Follow" className="follow_icon" draggable="false" /></button>}
                         </form>
                     </div>
                 </div>
