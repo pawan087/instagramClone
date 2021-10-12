@@ -34,6 +34,7 @@ nav {
     border-bottom: 1px solid #DBDBDB;
     padding: 0 20px;
     background-color: white;
+    z-index: 1;
 }
 
 .links {
