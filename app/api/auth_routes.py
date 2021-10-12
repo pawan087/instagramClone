@@ -69,7 +69,8 @@ def sign_up():
         print(CGREEN + "\n FORM VALIDATED: \n",
               form.validate_on_submit(), "\n" + CEND)
         if data["avatar"] == '':
-            data["avatar"] = 'https://i.imgur.com/RBkqFEg.jpg'
+            form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
+        print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
         user = User(
             username=form.data['username'],
             email=form.data['email'],

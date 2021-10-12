@@ -59,12 +59,12 @@ const ImageComponent = ({ image }) => {
     }, [dispatch])
 
     return (
-        <div className="imageCard" key={image.id}>
+        <div className="imageCard" key={image?.id}>
 
             {/* IMAGE OWNER USERNAME */}
             <div className="titleContainer">
                 <div className="avatarContainer">
-                    <img src={user.avatar} alt="" />
+                    <img src={image?.user?.avatar} alt="" />
                 </div>
                 <p className="image_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>
             </div>
@@ -94,7 +94,7 @@ const ImageComponent = ({ image }) => {
 
             {/* IMAGE CAPTION */}
             <div className="caption">
-                {image.caption && <p className="caption_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>}
+                {image?.caption && <p className="caption_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>}
                 <p>{image?.caption}</p>
             </div>
 
