@@ -3,11 +3,12 @@ import { useEffect, useState } from "react"
 import { addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
 import { setAllLikes } from "../../../store/like"
 import { addLike, deleteOneLike } from '../../../store/like'
-
 import { NavLink, useHistory } from "react-router-dom"
 import liked from '../../../image_assets/liked.svg'
 import unliked from '../../../image_assets/unliked.svg'
 import '../images.css'
+import ImageModal from "../ImageModal"
+import CommentModal from "../CommentModal"
 
 const ImageComponent = ({ image }) => {
 
@@ -17,7 +18,9 @@ const ImageComponent = ({ image }) => {
     const likes = useSelector((state) => state.likes)
     const [commentBody, setCommentBody] = useState('')
     const [commentImageId, setCommentImageId] = useState(0)
-    const [animation, setAnimation] = useState(0)
+    const [animateGrow, setAnimateGrow] = useState(0)
+    const [isImageOpen, setIsImageOpen] = useState(false)
+    const [isCommentOpen, setIsCommentOpen] = useState(false)
     let thisPicturesLikes = likes.filter(like => like?.image?.id === image?.id);
     let likesByUser = likes.filter(like => like?.image?.id === image?.id && like?.user?.id === user?.id)
 
@@ -74,8 +77,15 @@ const ImageComponent = ({ image }) => {
             {/* <h2><NavLink to={`/images/${image?.id}`}>{image?.title}</NavLink></h2> */}
 
             {/* IMAGE CONTROLS */}
-            {user?.id === image?.user_id ? <button onClick={handleDelete}>DELETE</button> : false}
-            {user?.id === image?.user_id ? <button onClick={(e) => history.push(`/images/${image?.id}/edit`)}>EDIT</button> : false}
+            {user?.id === image?.user_id ?
+                <div>
+                    <button onClick={() => setIsImageOpen(true)}>Open Image Modal</button>
+                    <ImageModal open={isImageOpen} onClose={() => setIsImageOpen(false)}>
+                        <button onClick={handleDelete}>DELETE</button>
+                        <button onClick={(e) => history.push(`/images/${image?.id}/edit`)}>EDIT</button>
+                    </ImageModal>
+                </div>
+                : false}
 
             {/* IMAGE ITSELF */}
             <div className="individualImage" onClick={() => history.push(`/images/${image?.id}`)}>
@@ -87,10 +97,10 @@ const ImageComponent = ({ image }) => {
                 <form onSubmit={addOrRemoveLike}>
                     {likesByUser?.length ?
                         <button>
-                            <img src={liked} alt="liked" className="liked" onClick={() => setAnimation(1)} onAnimationEnd={() => setAnimation(0)} animation={animation} />
+                            <img src={liked} alt="liked" className="liked" onClick={() => setAnimateGrow(1)} onAnimationEnd={() => setAnimateGrow(0)} animateGrow={animateGrow} />
                         </button> :
                         <button>
-                            <img src={unliked} alt="unliked" className="unliked" onClick={() => setAnimation(1)} onAnimationEnd={() => setAnimation(0)} animation={animation} />
+                            <img src={unliked} alt="unliked" className="unliked" onClick={() => setAnimateGrow(1)} onAnimationEnd={() => setAnimateGrow(0)} animateGrow={animateGrow} />
                         </button>}
                 </form>
                 <div>
@@ -125,8 +135,17 @@ const ImageComponent = ({ image }) => {
                     <div key={comment.id}>
                         <p className="comment_username"><NavLink to={`/users/${comment.user_id}`}> {comment.user.username} </NavLink></p>
                         <p>{comment.body}</p>
-                        {user?.id === comment?.user_id ? <button onClick={(e) => dispatch(deleteOneComment(comment.id))}>DELETE</button> : false}
-                        {user?.id === comment?.user_id ? <button onClick={(e) => history.push(`/images/${image.id}/comments/${comment.id}`)}>EDIT</button> : false}
+                        {user?.id === comment?.user_id ?
+                            <>
+                                <div>
+                                    <button onClick={() => setIsCommentOpen(true)}>Open Comment Modal</button>
+                                    <CommentModal open={isCommentOpen} onClose={() => setIsCommentOpen(false)}>
+                                        <button onClick={(e) => dispatch(deleteOneComment(comment.id))}>DELETE</button>
+                                        <button onClick={(e) => history.push(`/images/${image.id}/comments/${comment.id}`)}>EDIT</button>
+                                    </CommentModal>
+                                </div>
+                            </>
+                            : false}
 
                     </div>
                 ))}
@@ -135,7 +154,7 @@ const ImageComponent = ({ image }) => {
 
 
             {/* CREATE A COMMENT FORM */}
-            <div className="createComment">
+            < div className="createComment" >
                 <form onSubmit={handleSubmit}>
                     <textarea value={commentBody} onChange={(e) => {
                         setCommentBody(e.target.value)
