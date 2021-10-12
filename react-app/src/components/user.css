@@ -14,14 +14,19 @@
 .profileAvatarBox {
   display: flex;
   justify-content: center;
-  min-width: 200px;
+  min-width: 230px;
 }
 
 .profileAvatarContainer {
   display: block;
-  height: 125px;
-  width: 125px;
-  background-color: black;
+  height: 150px;
+  width: 150px;
+  border-radius: 75px;
+  overflow: hidden;
+}
+
+.profileAvatarContainer img {
+  max-width: 150px;
 }
 
 .profileBox {
@@ -36,12 +41,34 @@
   display: flex;
 }
 
+.profileUserName {
+  font-size: 1.5em;
+  margin-bottom: 18px;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+}
+
 .profileCounts {
   display: flex;
   justify-content: space-between;
   width: 400px;
+  margin-bottom: 20px;
 }
 
+.profileCountsNumber {
+  display: inline;
+  font-weight: bold;
+}
+
+.profileUsername {
+  display: inline;
+  font-weight: bold;
+}
 
 .profileContainer .imageContainer {
   max-width: 935px;

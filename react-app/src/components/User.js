@@ -15,6 +15,7 @@ function User() {
 
   const currentPagesUser = useSelector((state) => state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
 
+  console.log("currentPagesUser", currentPagesUser)
   useEffect(() => {
     dispatch(setAllImages())
     dispatch(setAllUsers())
@@ -39,51 +40,51 @@ function User() {
   }
 
   return (
-    <>
-      <div className="profileContainer">
-          <div className="profileTop">
-              <div className="profileAvatarBox">
-                  <div className="profileAvatarContainer">
-                      {/* <img src={image?.user?.avatar} alt="" /> */}
-                  </div>
-              </div>
-              <div className="profileBox">
-                  <div className="profileNameAndButtons">
-                      <div className="profileName">
-                          USERNAME GOES HERE
-                      </div>
-                      <div className="profileButtons">
-                          <form onSubmit={addOrRemoveFollow}>
-                              {currentPagesUser?.followers?.includes(curUser.id) ? <button>Unfollow</button> : <button>follow</button>}
-                          </form>
-                      </div>
-                  </div>
-                  <div className="profileCounts">
-                      <div className="profilePosts">#### Posts</div>
-                      <div className="profileFollowers">#### Followers</div>
-                      <div className="profileFollowing">#### Following</div>
-                  </div>
-                  <div className="profileName">
-                      NAME GOES HERE (optional)
-                  </div>
-                  <div className="profileBio">
-                      BIO GOES HERE
-                  </div>
-                  <div>
-                    FOLLOWED BY GOES HERE
-                  </div>
-              </div>
-          </div>
-          <div className="imageContainer">
-              <div className="profileSwitchBox">
+    <div className="profileContainer">
+        <div className="profileTop">
+            <div className="profileAvatarBox">
+                <div className="profileAvatarContainer">
+                    <img src={currentPagesUser?.avatar} alt="User Avatar" />
+                </div>
+            </div>
+            <div className="profileBox">
+                <div className="profileNameAndButtons">
+                    <div className="profileUserName">
+                        {currentPagesUser?.username}
+                    </div>
+                    <div className="profileButtons">
+                        <form onSubmit={addOrRemoveFollow}>
+                            {currentPagesUser?.followers?.includes(curUser.id) ? <button>Unfollow</button> : <button>follow</button>}
+                        </form>
+                    </div>
+                </div>
+                <div className="profileDetails">
+                    <div className="profileCounts">
+                        <div className="profilePosts"><div className="profileCountsNumber">{usersImages?.length}</div> posts</div>
+                        <div className="profileFollowers"><div className="profileCountsNumber">{currentPagesUser?.followers}</div> followers</div>
+                        <div className="profileFollowing"><div className="profileCountsNumber">{currentPagesUser?.following}</div> following</div>
+                    </div>
+                    <div className="profileUsernameAndPro">
+                        <div className="profileUsername">NAME GOES HERE</div> nouns go here (optional)
+                    </div>
+                    <div className="profileBio">
+                        BIO GOES HERE
+                    </div>
+                    <div>
+                      FOLLOWED BY PEOPLE YOU KNOW GOES HERE
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="imageContainer">
+            <div className="profileSwitchBox">
 
-              </div>
-              {usersImages?.map((image) => (
-                  <ImageComponent image={image} key={image.id} />
-              ))}
-          </div>
-      </div>
-    </>
+            </div>
+            {usersImages?.map((image) => (
+                <ImageComponent image={image} key={image.id} />
+            ))}
+        </div>
+    </div>
   );
 }
 export default User;
