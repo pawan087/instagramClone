@@ -3,13 +3,11 @@ import thunk from 'redux-thunk';
 import session from './session'
 import images from './image'
 import likes from './like'
-import follows from './follow'
 
 const rootReducer = combineReducers({
   session,
   images,
   likes,
-  follows
 });
 
 
