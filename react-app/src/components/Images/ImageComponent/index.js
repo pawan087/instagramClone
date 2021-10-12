@@ -17,6 +17,7 @@ const ImageComponent = ({ image }) => {
     const likes = useSelector((state) => state.likes)
     const [commentBody, setCommentBody] = useState('')
     const [commentImageId, setCommentImageId] = useState(0)
+    const [animation, setAnimation] = useState(0)
     let thisPicturesLikes = likes.filter(like => like?.image?.id === image?.id);
     let likesByUser = likes.filter(like => like?.image?.id === image?.id && like?.user?.id === user?.id)
 
@@ -84,7 +85,13 @@ const ImageComponent = ({ image }) => {
             {/* IMAGE LIKES */}
             <div className="likes_container">
                 <form onSubmit={addOrRemoveLike}>
-                    {likesByUser?.length ? <button><img src={liked} alt="liked" className="liked" /></button> : <button><img src={unliked} alt="unliked" className="unliked" /></button>}
+                    {likesByUser?.length ?
+                        <button>
+                            <img src={liked} alt="liked" className="liked" onClick={() => setAnimation(1)} onAnimationEnd={() => setAnimation(0)} animation={animation} />
+                        </button> :
+                        <button>
+                            <img src={unliked} alt="unliked" className="unliked" onClick={() => setAnimation(1)} onAnimationEnd={() => setAnimation(0)} animation={animation} />
+                        </button>}
                 </form>
                 <div>
                     {thisPicturesLikes?.length}
