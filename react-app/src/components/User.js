@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { setAllImages } from '../store/image';
 import ImageComponent from './Images/ImageComponent';
 import { addFollow, deleteFollow, setAllUsers } from '../store/session';
+import './user.css'
+import follow from "../image_assets/follow.svg"
+import followed from "../image_assets/followed.svg"
 
 function User() {
   const { userId }  = useParams();
@@ -15,6 +18,7 @@ function User() {
 
   const currentPagesUser = useSelector((state) => state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
 
+  console.log("currentPagesUser", currentPagesUser)
   useEffect(() => {
     dispatch(setAllImages())
     dispatch(setAllUsers())
@@ -39,18 +43,54 @@ function User() {
   }
 
   return (
-    <>
-    <div>
-        <form onSubmit={addOrRemoveFollow}>
-            {currentPagesUser?.followers?.includes(curUser.id) ? <button>Unfollow</button> : <button>follow</button>}
-        </form>
-    </div>
-    <div className="imageContainer">
+    <div className="profileContainer">
+        <div className="profileTop">
+            <div className="profileAvatarBox">
+                <div className="profileAvatarContainer">
+                    <img src={currentPagesUser?.avatar} alt="User Avatar" />
+                </div>
+            </div>
+            <div className="profileBox">
+                <div className="profileNameAndButtons">
+                    <div className="profileUserName">
+                        {currentPagesUser?.username}
+                    </div>
+                    <div className="profileButtonBox">
+                        <form onSubmit={addOrRemoveFollow}>
+                            {currentPagesUser?.followers?.includes(curUser.id) ?
+                                <button className="unfollow followingButton profileButton button"><img src={followed} alt="Unfollow" className="follow_icon" draggable="false"/></button> :
+                                <button className="follow followingButton profileButton button"><img src={follow} alt="Follow" className="follow_icon" draggable="false" /></button>}
+                        </form>
+                    </div>
+                </div>
+                <div className="profileDetails">
+                    <div className="profileCounts">
+                        <div className="profilePosts"><div className="profileCountsNumber">{usersImages?.length}</div> posts</div>
+                        <div className="profileFollowers"><div className="profileCountsNumber">{currentPagesUser?.followers.length}</div> followers</div>
+                        <div className="profileFollowing"><div className="profileCountsNumber">{currentPagesUser?.following.length}</div> following</div>
+                    </div>
+                    <div className="profileUsernameAndPronoun">
+                        <div className="profileName">NAME GOES HERE</div> nouns go here (optional)
+                    </div>
+                    <div className="profileBio">
+                        BIO GOES HERE Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Donec in velit a lectus mattis varius eu vel tellus.
+                        Curabitur feugiat libero mauris, at varius orci venenatis et.
+                        Curabitur luctus diam quis urna consectetur finibus.
+                    </div>
+                    <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div>
+                </div>
+            </div>
+        </div>
+        <div className="imageContainer">
+            <div className="profileSwitchBox">
+
+            </div>
             {usersImages?.map((image) => (
                 <ImageComponent image={image} key={image.id} />
             ))}
         </div>
-        </>
+    </div>
   );
 }
 export default User;

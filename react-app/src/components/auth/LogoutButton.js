@@ -19,7 +19,7 @@ const LogoutButton = () => {
   }
 
   if (user !== null) {
-    return <p onClick={onLogout} style={logoutStyling}>Log Out</p>
+    return <p onClick={onLogout} style={logoutStyling} className="button">Log Out</p>
   } else {
     return null
   }
