@@ -69,15 +69,16 @@ function User() {
                         <div className="profileFollowers"><div className="profileCountsNumber">{currentPagesUser?.followers.length}</div> followers</div>
                         <div className="profileFollowing"><div className="profileCountsNumber">{currentPagesUser?.following.length}</div> following</div>
                     </div>
-                    <div className="profileUsernameAndPro">
+                    <div className="profileUsernameAndPronoun">
                         <div className="profileName">NAME GOES HERE</div> nouns go here (optional)
                     </div>
                     <div className="profileBio">
-                        BIO GOES HERE
+                        BIO GOES HERE Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Donec in velit a lectus mattis varius eu vel tellus.
+                        Curabitur feugiat libero mauris, at varius orci venenatis et.
+                        Curabitur luctus diam quis urna consectetur finibus.
                     </div>
-                    <div>
-                      FOLLOWED BY PEOPLE YOU KNOW GOES HERE
-                    </div>
+                    <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div>
                 </div>
             </div>
         </div>

@@ -34,7 +34,7 @@
   flex-direction: column;
   min-width: 450px;
   max-width: 550px;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 .profileNameAndButtons {
@@ -66,7 +66,8 @@
 }
 
 .profileUserName {
-  font-size: 1.5em;
+  font-size: 1.5rem;
+  font-weight: 300;
   margin: 0 18px 18px 0;
   white-space:nowrap;
   text-overflow: ellipsis;
@@ -75,13 +76,14 @@
 .profileDetails {
   display: flex;
   flex-direction: column;
+  font-size: 0.95rem;
 }
 
 .profileCounts {
   display: flex;
   justify-content: space-between;
   width: 400px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .profileCountsNumber {
@@ -89,10 +91,30 @@
   font-weight: bold;
 }
 
+.profileUsernameAndPronoun {
+  color: #A1A1A1;
+  margin-bottom: 5px;
+}
+
 .profileName {
   display: inline;
   font-weight: bold;
 }
+
+.profileBio {
+  margin-bottom: 15px;
+}
+
+.profileFollowedBy {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #8E8E8E;
+}
+
+.profileFollowedByEmph {
+  font-weight: 500;
+}
+
 
 .profileContainer .imageContainer {
   max-width: 935px;
