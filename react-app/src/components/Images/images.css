@@ -20,6 +20,18 @@
     cursor: pointer;
 }
 
+.userInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 
 /* ====================
     title section
@@ -107,8 +119,16 @@
     text-decoration: underline;
 }
 
-.commentList div {
-    padding: 0 0 0 20px;
+.eachComment {
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+    justify-content: space-between;
+}
+
+
+.commentInfo {
+    padding-left: 20px ;
     display: flex;
     gap: 5px;
 }
@@ -122,6 +142,23 @@
     font-weight: 500;
 }
 
+.modal {
+    opacity: 0;
+    cursor: pointer;
+    margin-right: 14px;
+    border: none;
+    outline: none;
+    background: transparent;
+    transition: opacity 0.2s;
+}
+
+.eachComment:hover {
+    background: rgba(0, 0, 0, .05);
+}
+
+.eachComment:hover .modal {
+   opacity: 1;
+}
 /* ====================
     hashtags section
 ======================*/

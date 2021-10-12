@@ -6,7 +6,6 @@ const MODAL_STYLES = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#FFF',
-    padding: '50px',
     zIndex: 1000
 }
 
@@ -26,9 +25,9 @@ export default function CommentModal({ open, onClose, children }) {
     return createPortal(
         <>
             <div style={OVERLAY_STYLES} />
-            <div style={MODAL_STYLES}>
-                <button onClick={onClose}>Close Modal</button>
+            <div className='modalContainer' style={MODAL_STYLES}>
                 {children}
+                <button onClick={onClose}>Cancel</button>
             </div>
         </>,
         document.getElementById('portal')
