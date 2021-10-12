@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setAllImages } from '../store/image';
 import ImageComponent from './Images/ImageComponent';
+import ImageTileComponent from './Images/ImageTileComponent'
 import { addFollow, deleteFollow, setAllUsers } from '../store/session';
 import './user.css'
 import follow from "../image_assets/follow.svg"
@@ -101,6 +102,10 @@ function User() {
             </div>
             {usersImages?.map((image) => (
                 <ImageComponent image={image} key={image.id} />
+            ))}
+
+            {usersImages?.map((image) => (
+                <ImageTileComponent image={image} key={image.id} />
             ))}
         </div>
     </div>
