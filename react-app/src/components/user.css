@@ -1,0 +1,36 @@
+.profileTop {
+  display: flex;
+  min-width: 700px;
+  max-width: 1000px;
+  margin: 30px auto;
+}
+.profileAvatarBox {
+  display: flex;
+  justify-content: center;
+  min-width: 200px;
+}
+
+.profileAvatarContainer {
+  display: block;
+  height: 125px;
+  width: 125px;
+  background-color: black;
+}
+
+.profileBox {
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
+  max-width: 550px;
+  margin: 20px 0;
+}
+
+.profileNameAndButtons {
+  display: flex;
+}
+
+.profileCounts {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+}

@@ -4,7 +4,9 @@
     padding: 0px;
     font-family: 'Roboto', sans-serif;
 }
-
+html {
+    background-color: #FAFAFA;
+}
 .imageContainer {
     display: flex;
     flex-direction: column;
