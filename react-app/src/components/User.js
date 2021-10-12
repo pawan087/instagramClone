@@ -5,6 +5,9 @@ import { setAllImages } from '../store/image';
 import ImageComponent from './Images/ImageComponent';
 import { addFollow, deleteFollow, setAllUsers } from '../store/session';
 import './user.css'
+import follow from "../image_assets/follow.svg"
+import followed from "../image_assets/followed.svg"
+
 function User() {
   const { userId }  = useParams();
   const dispatch = useDispatch()
@@ -54,18 +57,20 @@ function User() {
                     </div>
                     <div className="profileButtons">
                         <form onSubmit={addOrRemoveFollow}>
-                            {currentPagesUser?.followers?.includes(curUser.id) ? <button>Unfollow</button> : <button>follow</button>}
+                            {currentPagesUser?.followers?.includes(curUser.id) ?
+                                <button className="unfollow followingButton button"><img src={followed} alt="Unfollow" className="follow_icon" /></button> :
+                                 <button className="follow followingButton button"><img src={follow} alt="Follow" className="follow_icon" /></button>}
                         </form>
                     </div>
                 </div>
                 <div className="profileDetails">
                     <div className="profileCounts">
                         <div className="profilePosts"><div className="profileCountsNumber">{usersImages?.length}</div> posts</div>
-                        <div className="profileFollowers"><div className="profileCountsNumber">{currentPagesUser?.followers}</div> followers</div>
-                        <div className="profileFollowing"><div className="profileCountsNumber">{currentPagesUser?.following}</div> following</div>
+                        <div className="profileFollowers"><div className="profileCountsNumber">{currentPagesUser?.followers.length}</div> followers</div>
+                        <div className="profileFollowing"><div className="profileCountsNumber">{currentPagesUser?.following.length}</div> following</div>
                     </div>
                     <div className="profileUsernameAndPro">
-                        <div className="profileUsername">NAME GOES HERE</div> nouns go here (optional)
+                        <div className="profileName">NAME GOES HERE</div> nouns go here (optional)
                     </div>
                     <div className="profileBio">
                         BIO GOES HERE

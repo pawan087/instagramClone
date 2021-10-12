@@ -41,9 +41,17 @@
   display: flex;
 }
 
+.followingButton {
+
+}
+
+.followingButton:active img {
+  opacity: 0.4;
+}
+
 .profileUserName {
   font-size: 1.5em;
-  margin-bottom: 18px;
+  margin: 0 18px 18px 0;
   white-space:nowrap;
   text-overflow: ellipsis;
 }
@@ -65,7 +73,7 @@
   font-weight: bold;
 }
 
-.profileUsername {
+.profileName {
   display: inline;
   font-weight: bold;
 }
