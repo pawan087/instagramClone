@@ -9,4 +9,5 @@ class NewFollow(FlaskForm):
 
 
 class DeleteFollow(FlaskForm):
-    pass
+    current_user_id = IntegerField("Current User Id", [DataRequired()])
+    user_to_follow_id = IntegerField("User to Unfollow Id", [DataRequired()])

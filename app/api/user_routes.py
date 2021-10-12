@@ -47,3 +47,21 @@ def add_follow():
         return {'user': user_to_follow.to_dict()}
     else:
         return "Bad Data"
+
+@user_routes.route('/following/', methods=["DELETE"])
+def delete_follow():
+    form =  DeleteFollow()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+    user_to_unfollow = User.query.get(data['user_to_follow_id'])
+    current_user = User.query.get(data['current_user_id'])
+    current_users_following = [user for user in current_user.following]
+    current_users_following.remove(user_to_unfollow.id)
+
+    user_to_follow_followers = [user for user in user_to_unfollow.followers]
+    user_to_follow_followers.remove(current_user.id)
+
+    current_user.following = current_users_following
+    user_to_unfollow.followers = user_to_follow_followers
+
+    db.session.commit()

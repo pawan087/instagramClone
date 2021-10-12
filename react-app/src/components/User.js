@@ -10,6 +10,7 @@ function User() {
   const dispatch = useDispatch()
 
   const [user, setUser] = useState({});
+  const [alreadyFollowing, setAlreadyFollowing] = useState(false);
   const curUser = useSelector((state) => state.session.user)
   const images = useSelector((state) => state.images)
   const follows = useSelector((state) => state.follows)
@@ -31,35 +32,36 @@ function User() {
     })();
   }, [userId]);
 
-
-  let alreadyFollowing = false;
-
-  if (follows.followers) {
-    for (let id of follows?.followers) {
-      if (id === curUser?.id) {
-        alreadyFollowing = true
-      }
-    }
-  }
+  // if (follows.followers) {
+  //   for (let id of follows?.followers) {
+  //     if (id === curUser?.id) {
+  //       alreadyFollowing = true
+  //     }
+  //   }
+  // }
 
   // follows?.followers.forEach(id => id === curUser?.id ? alreadyFollowing = true : null)
-
+  useEffect(() => {
+    if(curUser?.following.includes(+userId)){
+      setAlreadyFollowing(true)
+    }
+  }, [])
 
 
   const addOrRemoveFollow = (e) => {
     e.preventDefault()
-    console.log('should be marnies id', curUser.id)
-    console.log('should be pawans id', userId)
+    console.log('curUser', curUser.id)
+    console.log('userId', userId)
+    const followObj = {
+      current_user_id: curUser.id,
+      user_to_follow_id: +userId,
+    }
     if (alreadyFollowing) {
-        // dispatch(deleteFollow(x))
         console.log('UNFOLLOW')
+        dispatch(deleteFollow(followObj))
     } else {
         console.log('FOLLOW')
-        const newFollow = {
-            current_user_id: curUser.id,
-            user_to_follow_id: +userId,
-        }
-        dispatch(addFollow(newFollow))
+        dispatch(addFollow(followObj))
     }
   }
 

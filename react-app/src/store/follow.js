@@ -20,6 +20,20 @@ export const addFollow = (follow) => async (dispatch) => {
     } else return "ADD FOLLOW THUNK FAILED!"
 }
 
+export const deleteFollow = (follow) => async (dispatch) => {
+    const response = await fetch("/api/users/following/",
+        {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(follow)
+        }
+    )
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(load(data))
+    } else return "DELETE FOLLOW THUNK FAILED!"
+}
+
 // export const deleteOneLike = (id) => async (dispatch) => {
 //     console.log('--------------------------------------------------------')
 //     console.log('INSIDE THUNK BEFORE FETCH')
