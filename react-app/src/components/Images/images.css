@@ -5,7 +5,7 @@
 .imageCard {
     width: 600px;
     height: 100%;
-    margin: 2rem 1rem;
+    margin: 1.5rem 1rem 0.25rem;
     border: 1px solid #DBDBDB;
     border-radius: 2.5px;
     /* max-height: 800px; */
@@ -25,7 +25,7 @@
     title section
 ======================*/
 
-.image_username { 
+.image_username {
     background-color: white;
     height: 60px;
     display: flex;
