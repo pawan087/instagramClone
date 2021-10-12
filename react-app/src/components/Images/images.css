@@ -165,11 +165,11 @@
     filter: invert(42%) sepia(86%) saturate(1300%) hue-rotate(324deg) brightness(90%) contrast(107%);
 }
 
-.liked[animation='1'] {
+.liked[animateGrow='1'] {
     animation: grow .3s ease-in;
 }
 
-.unliked[animation='1'] {
+.unliked[animateGrow='1'] {
     animation: grow .3s ease-in;
 }
 
