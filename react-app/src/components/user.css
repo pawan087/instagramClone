@@ -60,6 +60,20 @@
   height: 18px;
 }
 
+.followingButton.follow {
+  background-color: #0095f6;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.followingButton.follow:active {
+  opacity: 0.7;
+}
+
 .followingButton.unfollow {
   padding-left: 31px;
   padding-right: 29px;

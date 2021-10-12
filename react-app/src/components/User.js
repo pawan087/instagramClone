@@ -18,6 +18,8 @@ function User() {
 
   const currentPagesUser = useSelector((state) => state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
 
+  let followText = ""
+
   console.log("currentPagesUser", currentPagesUser)
   useEffect(() => {
     dispatch(setAllImages())
@@ -38,10 +40,18 @@ function User() {
   }
 
 
+  if (currentPagesUser?.following?.includes(curUser.id) && !currentPagesUser?.followers?.includes(curUser.id)){
+    followText = "Follow Back";
+  } else if (!currentPagesUser?.followers?.includes(curUser.id)){
+    followText = "Follow";
+  }
+
   if (!curUser) {
     return null;
   }
 
+  console.log(typeof currentPagesUser?.id, typeof curUser?.id)
+  console.log("currentPagesUser", currentPagesUser?.id !== curUser?.id)
   return (
     <div className="profileContainer">
         <div className="profileTop">
@@ -56,11 +66,14 @@ function User() {
                         {currentPagesUser?.username}
                     </div>
                     <div className="profileButtonBox">
+                      {currentPagesUser && currentPagesUser?.id !== curUser?.id ?
                         <form onSubmit={addOrRemoveFollow}>
                             {currentPagesUser?.followers?.includes(curUser.id) ?
                                 <button className="unfollow followingButton profileButton button"><img src={followed} alt="Unfollow" className="follow_icon" draggable="false"/></button> :
-                                <button className="follow followingButton profileButton button"><img src={follow} alt="Follow" className="follow_icon" draggable="false" /></button>}
-                        </form>
+                                <button className="follow followingButton profileButton button">{followText}</button>}
+                        </form> :
+                       null
+                      }
                     </div>
                 </div>
                 <div className="profileDetails">
