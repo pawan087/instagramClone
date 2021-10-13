@@ -89,6 +89,7 @@ const AddImageForm = () => {
                 <label>Image</label>
 
                 <input type="file" accept="image/*" onChange={updateImage} />
+                
                 {imageLoading && <p>Loading...</p>}
             </div>
 

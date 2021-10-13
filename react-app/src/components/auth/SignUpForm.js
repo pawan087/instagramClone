@@ -12,10 +12,10 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
-  const [bio, setBio] = useState('');
-  const [pronouns, setPronouns] = useState('');
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [bio, setBio] = useState("");
+  const [pronouns, setPronouns] = useState("");
 
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -30,6 +30,10 @@ const SignUpForm = () => {
       formData.append("email", email);
       formData.append("password", password);
       formData.append("avatar", image);
+      formData.append("fname", fname);
+      formData.append("lname", lname);
+      formData.append("bio", bio);
+      formData.append("pronouns", pronouns);
 
       setImageLoading(true);
 
@@ -37,7 +41,6 @@ const SignUpForm = () => {
 
       setImageLoading(false);
 
-      // const data = await dispatch(signUp(username, email, password, avatar, fname, lname, bio, pronouns));
       if (data) {
         setErrors(data);
       }
@@ -60,15 +63,31 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  if (user) {
-    return <Redirect to="/" />;
-  }
+  const updateFname = (e) => {
+    setFname(e.target.value);
+  };
+
+  const updateLname = (e) => {
+    setLname(e.target.value);
+  };
+
+  const updatePronouns = (e) => {
+    setPronouns(e.target.value);
+  };
+
+  const updateBio = (e) => {
+    setBio(e.target.value);
+  };
 
   const updateImage = (e) => {
     const file = e.target.files[0];
 
     setImage(file);
   };
+
+  if (user) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <form onSubmit={onSignUp}>
@@ -79,14 +98,16 @@ const SignUpForm = () => {
       </div>
 
       <div>
-          <label>User Name</label>
-          <input
-            type='text'
-            name='username'
-            onChange={updateUsername}
-            value={username}
-          ></input>
-        </div>
+        <label>User Name</label>
+
+        <input
+          type="text"
+          name="username"
+          onChange={updateUsername}
+          value={username}
+        ></input>
+      </div>
+
       <div>
         <label>Email</label>
 
@@ -100,45 +121,52 @@ const SignUpForm = () => {
 
       <div>
         <label>First Name</label>
+
         <input
-          type='text'
-          onChange={(e) => setFname(e.target.value)}
+          type="text"
+          onChange={updateFname}
           value={fname}
-          placeholder='First Name'
+          placeholder="First Name"
         ></input>
       </div>
+
       <div>
         <label>Last Name</label>
+
         <input
-          type='text'
-          onChange={(e) => setLname(e.target.value)}
+          type="text"
+          onChange={updateLname}
           value={lname}
-          placeholder='Last name'
+          placeholder="Last name"
         ></input>
       </div>
+
       <div>
         <label>Pronouns</label>
-        <select
-          type='text'
-          onChange={(e) => setPronouns(e.target.value)}
-          value={pronouns}
-        >
-          <option value={null}>Prefer Not To Disclose</option>
-          <option value="He/Him">He/Him</option>
-          <option value="She/her">She/Her</option>
-          <option value="They/Them">They/Them</option>
-          <option value="Other">Other</option>
 
+        <select type="text" onChange={updatePronouns} value={pronouns}>
+          <option value={null}>Prefer Not To Disclose</option>
+
+          <option value="He/Him">He/Him</option>
+
+          <option value="She/her">She/Her</option>
+
+          <option value="They/Them">They/Them</option>
+
+          <option value="Other">Other</option>
         </select>
       </div>
+
       <div>
         <label>Bio</label>
+
         <textarea
-          onChange={(e) => setBio(e.target.value)}
+          onChange={updateBio}
           value={bio}
-          placeholder='Write a short biography!'
+          placeholder="Write a short biography!"
         ></textarea>
       </div>
+
       <div>
         <label>Password</label>
 
@@ -166,6 +194,7 @@ const SignUpForm = () => {
         <label>Profile Photo</label>
 
         <input type="file" accept="image/*" onChange={updateImage} />
+
         {imageLoading && <p>Loading...</p>}
       </div>
 
