@@ -5,9 +5,20 @@ import { signUp } from "../../store/session";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
+  const [username, setUsername] = useState("testUsername");
+  const [email, setEmail] = useState("test@email.com");
+  const [password, setPassword] = useState("password");
+  const [repeatPassword, setRepeatPassword] = useState("password");
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [fname, setFname] = useState("testFname");
+  const [lname, setLname] = useState("testLname");
+  const [bio, setBio] = useState("testBio");
+  const [pronouns, setPronouns] = useState("He/Him");
+
+/*   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  // const [avatar, setAvatar] = useState('');
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [image, setImage] = useState(null);
@@ -15,7 +26,7 @@ const SignUpForm = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [bio, setBio] = useState("");
-  const [pronouns, setPronouns] = useState("");
+  const [pronouns, setPronouns] = useState(""); */
 
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -198,20 +209,10 @@ const SignUpForm = () => {
         {imageLoading && <p>Loading...</p>}
       </div>
 
-      {/*<div>
-        <label>Avatar</label>
-
-        <input
-          type='text'
-          onChange={(e) => setAvatar(e.target.value)}
-          value={avatar}
-          placeholder='Url to an image'
-        ></input>
-      </div>*/}
 
       <button type="submit">Sign Up</button>
-    </form>
-  );
-};
+      </form>
+      );
+    };
 
-export default SignUpForm;
+    export default SignUpForm;
