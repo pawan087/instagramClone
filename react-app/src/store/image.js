@@ -61,8 +61,6 @@ export const addOneImage = (image) => async (dispatch) => {
     await fetch("/api/images/",
         {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            // body: JSON.stringify(image)
             body: image
         }
     )

@@ -19,7 +19,7 @@ const AddImageForm = () => {
     const reset = () => {
         setTitle("")
         setCaption("")
-        setImageUrl("")
+        // setImageUrl("")
     }
 
     const handleSubmit = (e) => {
