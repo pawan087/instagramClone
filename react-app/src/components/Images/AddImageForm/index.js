@@ -25,15 +25,23 @@ const AddImageForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const newImage = {
-            title,
-            caption,
-            img_url: imageUrl,
-            user_id: user.id,
-            hashtags
-        }
+        // const newImage = {
+        //     title,
+        //     caption,
+        //     img_url: imageUrl,
+        //     user_id: user.id,
+        //     hashtags
+        // }
 
-        dispatch(addOneImage(newImage))
+        const formData = new FormData()
+
+        formData.append('title', title)
+        formData.append('caption', caption)
+        formData.append('img_url', image)
+        formData.append('user_id', user.id)
+        formData.append('hashtags', hashtags)
+
+        dispatch(addOneImage(formData))
         dispatch(setAllImages())
         history.push("/")
         reset()
@@ -41,7 +49,7 @@ const AddImageForm = () => {
 
     const updateImage = (e) => {
         const file = e.target.files[0];
-        
+
         setImage(file);
     };
 

@@ -8,6 +8,8 @@ from app.forms.image_form import NewImage
 from flask_login import login_required
 from app.models import db, Image, Comment, Like
 from colors import *
+from app.s3_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 image_routes = Blueprint('images', __name__)
 
@@ -30,9 +32,28 @@ def single_image(id):
 
 @image_routes.route('/', methods=["POST"])
 def add_image():
+    if "image" not in request.files:
+        return {"errors": "image required"}, 400
+
     form = NewImage()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
+
+    image = request.files["image"]
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    # print('URL =>', upload['url'])
+
+    if "url" not in upload:
+        return upload, 400
+
+    url = upload["url"]
 
     # TESTING DATA ->
     # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
@@ -40,18 +61,21 @@ def add_image():
     # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
 
     if form.validate_on_submit():
-        hashtags = data["hashtags"].split()
-        print(CGREEN + "\n HASHTAG LIST: \n", hashtags, "\n\n" + CEND)
+        hashtags = form.data["hashtags"].split()
+
+        # print(CGREEN + "\n HASHTAG LIST: \n", hashtags, "\n\n" + CEND)
 
         new_image = Image(
-            title=data["title"],
-            caption=data["caption"],
-            img_url=data["img_url"],
-            user_id=data["user_id"],
+            title=form.data["title"],
+            caption=form.data["caption"],
+            img_url=url,
+            user_id=form.data["user_id"],
             hashtags=hashtags
         )
+
         db.session.add(new_image)
         db.session.commit()
+
         return data
     else:
         return "Bad Data"
@@ -213,4 +237,3 @@ def delete_like():
 
     likes = Like.query.all()
     return {"likes": [like.to_dict() for like in likes]}
-
