@@ -4,30 +4,55 @@ from app.models import db, Image
 # Adds a demo user, you can add other users here if you want
 def seed_images():
     first = Image(
-        title='Clean Title',
-        caption='Wow, a clean image',
-        img_url='https://otakukart.com/wp-content/uploads/2021/03/Spring-Anime-2021-Featured.jpg',
+        caption='Still need to watch this movie man...',
+        img_url='https://media.newyorker.com/photos/59097fd82179605b11ad9782/master/w_2560%2Cc_limit/Alt-Your-Name.jpg',
         user_id=1,
-        hashtags = ["online", "clean"]
+        hashtags = ["your_name", "anime", "movie"]
     )
     second = Image(
-        title='Online Title',
-        caption='Wow, this image is so online!',
-        img_url='https://cdn.mos.cms.futurecdn.net/qXsVayNBGNZejBMQeYNiHa-1200-80.jpg',
+        caption='Chilling with the crew!',
+        img_url='https://thumbs.gfycat.com/IgnorantHarmfulChrysalis-small.gif',
         user_id=2,
         hashtags = ["value", "clean"]
     )
     third = Image(
-        title='Free Title',
-        caption='Wow, this image is so free!',
-        img_url='https://media.gq-magazine.co.uk/photos/5ffdc57f9cafd9b0acd1b649/master/w_1920,h_1280,c_limit/120121_Anime_03.jpg',
+        img_url='https://c.tenor.com/GAFHkRYtdBsAAAAC/eren-yaeger-eren.gif',
         user_id=3,
-        hashtags = ["free", "clean"]
+        hashtags = ["hot", "titans_suck"]
     )
+    fourth = Image(
+        caption="Cowboy Bebop is one of the greatest anime ever made, and the music slaps!",
+        img_url='http://static1.squarespace.com/static/57825361440243db4a4b7830/57825c4915d5db8fe566cc6f/5fb3f78d4b1d261d27bdd57b/1606672151807/cowboy-bebop-soundtrack-milan-records-vinyl.jpg?format=1500w',
+        user_id=2,
+        hashtags = ["awesome", "anime", "clean"]
+    )
+    fifth = Image(
+        caption="Shinra is so cool man",
+        img_url='https://c.tenor.com/ccWHT-RkK7cAAAAC/fire-force-enen-no-shouboutai.gif',
+        user_id=4,
+        hashtags = ["awesome", "anime", "clean"]
+    )
+    sixth = Image(
+        caption="My Hero Academia is awesome!",
+        img_url='https://media1.giphy.com/media/qzROOBciDBK36/200.gif',
+        user_id=1,
+        hashtags = ["MHA", "clean"]
+    )
+    seventh = Image(
+        caption="Demon Slayer had some great visuals",
+        img_url='https://quotetheanime.com/wp-content/uploads/2021/05/Demon-slayer.jpg',
+        user_id=4,
+        hashtags = ["demon_slayer", "anime"]
+    )
+    
 
     db.session.add(first)
     db.session.add(second)
     db.session.add(third)
+    db.session.add(fourth)
+    db.session.add(fifth)
+    db.session.add(sixth)
+    db.session.add(seventh)
     db.session.commit()
 
 
