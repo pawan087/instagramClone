@@ -2,7 +2,6 @@
 * {
     margin: 0px;
     padding: 0px;
-    /* font-family: 'Roboto', sans-serif; */
     font-family: "Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     color: #262626;
 }
@@ -104,6 +103,7 @@ a {
 .red {
     color: #ed4956;
     font-weight: 700;
+<<<<<<< HEAD
     
 }
 
