@@ -17,6 +17,7 @@ const ImageComponent = ({ image }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
+    const imageUserId = image?.user_id
     const likes = useSelector((state) => state.likes)
     const [commentBody, setCommentBody] = useState('')
     const [commentImageId, setCommentImageId] = useState(0)
