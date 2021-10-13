@@ -73,7 +73,7 @@ def add_image():
         db.session.add(new_image)
         db.session.commit()
 
-        return form.data
+        return 'Good Data'
     else:
         return "Bad Data"
 
