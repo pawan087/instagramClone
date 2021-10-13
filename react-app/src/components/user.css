@@ -23,8 +23,9 @@
   display: block;
   height: 150px;
   width: 150px;
-  border-radius: 75px;
+  border-radius: 50%;
   overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, .097)
 }
 
 .profileAvatarContainer img {
@@ -156,7 +157,7 @@
 
 
 .profileContainer .imageContainer {
-  max-width: 935px;
+  max-width: 1000px;
 }
 
 .profileSwitchBox {
