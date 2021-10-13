@@ -46,11 +46,19 @@
   margin-bottom: 18px;
 }
 
+.profileButtonBox {
+  display: flex;
+}
+
 .profileButton {
   box-sizing: border-box;
   background-color: #FAFAFA;
   border: 1px solid #DBDBDB;
   border-radius: 5px;
+}
+
+.profileButton:active {
+  opacity: 0.7;
 }
 
 .followingButton {
@@ -84,6 +92,16 @@
   padding-right: 29px;
 }
 
+.editProfile {
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.editProfileModalButton {
+  border: none;
+  background: none;
+  margin-left: 10px;
+}
 .profileUserName {
   font-size: 1.5rem;
   font-weight: 300;
