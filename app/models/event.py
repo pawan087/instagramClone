@@ -11,6 +11,7 @@ class Event(db.Model):
     other_user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     message = db.Column(db.String(200), nullable=False)
 
+    # BACKREF WILL "VIRTUALLY CREATE" INCOMING_EVENTS AS A PROPERTY IN THE USER MODEL ->
     our_user = db.relationship("User", backref="incoming_events", foreign_keys=[our_user_id])
     # other_user = db.relationship("User", backref="outgoing_events", foreign_keys=[other_user_id])
 

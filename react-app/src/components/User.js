@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setAllImages } from '../store/image';
 import ImageComponent from './Images/ImageComponent';
+import ImageTileComponent from './Images/ImageTileComponent'
 import { addFollow, deleteFollow, setAllUsers } from '../store/session';
 import './user.css'
 import followed from "../image_assets/followed.svg"
@@ -90,24 +91,24 @@ function User() {
                         <div className="profileFollowing"><div className="profileCountsNumber">{currentPagesUser?.following.length}</div> following</div>
                     </div>
                     <div className="profileUsernameAndPronoun">
-                        <div className="profileName">NAME GOES HERE</div> nouns go here (optional)
+                        <div className="profileName">{currentPagesUser?.fname} {currentPagesUser?.lname}</div> {currentPagesUser?.pronouns}
                     </div>
                     <div className="profileBio">
-                        BIO GOES HERE Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec in velit a lectus mattis varius eu vel tellus.
-                        Curabitur feugiat libero mauris, at varius orci venenatis et.
-                        Curabitur luctus diam quis urna consectetur finibus.
+                        {currentPagesUser?.bio}
                     </div>
                     <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div>
                 </div>
             </div>
         </div>
-        <div className="imageContainer">
+        <div className="imageContainer tileContainer">
             <div className="profileSwitchBox">
 
             </div>
-            {usersImages?.map((image) => (
+            {/* {usersImages?.map((image) => (
                 <ImageComponent image={image} key={image.id} />
+            ))} */}
+            {usersImages?.map((image) => (
+                <ImageTileComponent image={image} key={image.id} />
             ))}
         </div>
     </div>

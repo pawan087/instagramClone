@@ -12,6 +12,10 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
+  const [bio, setBio] = useState('');
+  const [pronouns, setPronouns] = useState('');
 
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -33,6 +37,7 @@ const SignUpForm = () => {
 
       setImageLoading(false);
 
+      // const data = await dispatch(signUp(username, email, password, avatar, fname, lname, bio, pronouns));
       if (data) {
         setErrors(data);
       }
@@ -74,16 +79,14 @@ const SignUpForm = () => {
       </div>
 
       <div>
-        <label>User Name</label>
-
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-
+          <label>User Name</label>
+          <input
+            type='text'
+            name='username'
+            onChange={updateUsername}
+            value={username}
+          ></input>
+        </div>
       <div>
         <label>Email</label>
 
@@ -95,6 +98,47 @@ const SignUpForm = () => {
         ></input>
       </div>
 
+      <div>
+        <label>First Name</label>
+        <input
+          type='text'
+          onChange={(e) => setFname(e.target.value)}
+          value={fname}
+          placeholder='First Name'
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type='text'
+          onChange={(e) => setLname(e.target.value)}
+          value={lname}
+          placeholder='Last name'
+        ></input>
+      </div>
+      <div>
+        <label>Pronouns</label>
+        <select
+          type='text'
+          onChange={(e) => setPronouns(e.target.value)}
+          value={pronouns}
+        >
+          <option value={null}>Prefer Not To Disclose</option>
+          <option value="He/Him">He/Him</option>
+          <option value="She/her">She/Her</option>
+          <option value="They/Them">They/Them</option>
+          <option value="Other">Other</option>
+
+        </select>
+      </div>
+      <div>
+        <label>Bio</label>
+        <textarea
+          onChange={(e) => setBio(e.target.value)}
+          value={bio}
+          placeholder='Write a short biography!'
+        ></textarea>
+      </div>
       <div>
         <label>Password</label>
 

@@ -1,5 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
+from wtforms.fields.core import SelectField
+from wtforms.fields.simple import TextAreaField
 from wtforms.validators import DataRequired, Email, ValidationError
 from flask_wtf.file import FileField, FileRequired
 from app.models import User
@@ -30,6 +32,14 @@ class SignUpForm(FlaskForm):
                            DataRequired(), username_exists])
 
     email = StringField('email', validators=[DataRequired(), user_exists])
+
+    fname = StringField('First Name', validators=[DataRequired()])
+    
+    lname = StringField('Last Name', validators=[DataRequired()])
+
+    bio = TextAreaField('Last Name')
+
+    pronouns = SelectField("Pronouns", choices=['He/Him', 'She/Her', 'They/Them', 'Other'])
 
     password = StringField('password', validators=[DataRequired()])
 

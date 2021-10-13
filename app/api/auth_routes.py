@@ -102,7 +102,10 @@ def sign_up():
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
-            avatar=url
+            avatar=url,
+            bio=form.data['bio'],
+            fname=form.data['fname'],
+            lname=form.data['lname'],
         )
 
         print(CGREEN + "\n USER CREATED: \n", user, "\n" + CEND)
