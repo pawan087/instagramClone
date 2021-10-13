@@ -34,22 +34,20 @@ def single_image(id):
 def add_image():
     form = NewImage()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(CGREEN + "\n DATA: \n", form.data, "\n" + CEND)
 
-    # if "img_url" not in form.data:
-    #     return {"errors": "image required"}, 400
+    if "img_url" not in form.data:
+        return {"errors": "image required"}, 400
 
     image = form.data['img_url']
 
-    # if not allowed_file(image.filename):
-    #     return {"errors": "file type not permitted"}, 400
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
 
     image.filename = get_unique_filename(image.filename)
-
     upload = upload_file_to_s3(image)
 
-    # if "url" not in upload:
-    #     return upload, 400
+    if "url" not in upload:
+        return upload, 400
 
     url = upload["url"]
 
@@ -59,6 +57,7 @@ def add_image():
     # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
 
     if form.validate_on_submit():
+        print(CRED + "\n SUBMISSION SUCCESSFUL: \n", 'Submitted!', "\n" + CEND)
         hashtags = form.data["hashtags"].split()
 
         # print(CGREEN + "\n HASHTAG LIST: \n", hashtags, "\n\n" + CEND)

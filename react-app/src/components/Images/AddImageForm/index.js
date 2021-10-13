@@ -25,14 +25,6 @@ const AddImageForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        // const newImage = {
-        //     title,
-        //     caption,
-        //     img_url: imageUrl,
-        //     user_id: user.id,
-        //     hashtags
-        // }
-
         const formData = new FormData()
 
         formData.append('title', title)
@@ -94,7 +86,7 @@ const AddImageForm = () => {
                     placeholder="Hashtags"
                     value={hashtags}
                     onChange={(e) => setHashtags(e.target.value)} />
-                <p>Seperate tags by spaces</p>
+                <p>Separate tags by spaces</p>
             </div>
 
             {/* <div>
