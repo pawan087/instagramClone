@@ -1,3 +1,7 @@
+/* ========================================
+                  CARD VIEW
+==========================================*/
+
 /* ====================
     image section
 ======================*/
@@ -14,7 +18,7 @@
 }
 
 
-.individualImage img {
+.individualImage > img {
     width: 100%;
     height: 100%;
     cursor: pointer;
@@ -145,11 +149,13 @@
 .modal {
     opacity: 0;
     cursor: pointer;
-    margin-right: 14px;
     border: none;
     outline: none;
     background: transparent;
     transition: opacity 0.2s;
+}
+.imageCard .modal {
+    margin-right: 14px;
 }
 
 .eachComment:hover {
@@ -227,4 +233,90 @@
 .likes_container div {
     font-size: 14px;
     font-weight: 500;
+}
+
+
+
+
+/* ========================================
+                  TILE VIEW
+==========================================*/
+
+/* ====================
+    tile image section
+======================*/
+
+.tileContainer {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.imageTile {
+  display: block;
+  position: relative;
+  width: 100%;
+  flex: 1 0 0%;
+  -webkit-box-flex: 1;
+      -webkit-flex: 1 0 0%;
+          -ms-flex: 1 0 0%;
+  margin: 1.5rem 1rem 0.25rem;
+  cursor: pointer;
+}
+.imageTile:hover .imageCover {
+  display: block;
+}
+.imageWrapper {
+  display: block;
+  padding-bottom: 100%;
+  overflow: hidden;
+}
+.imageTile .imageObj {
+  height: 100%;
+  width: 100%;
+  min-width: 200px;
+  min-height: 200px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  object-fit: cover;
+}
+
+.imageCover {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.tileIcon {
+  height: 25px;
+  filter: invert(1);
+}
+
+.imageTile .likes {
+
+}
+.imageTile .comments {
+
+}
+
+.imageTile .imageControls {
+  right: 0;
+}
+
+.imageTile .modal {
+  margin: 5px 5px 0 0;
+}
+
+.imageTile .menuDots {
+  filter: invert(1);
+}
+
+.imageControls {
+  position: absolute;
+  top: 0;
 }

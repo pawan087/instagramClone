@@ -6,6 +6,7 @@ import { addLike, deleteOneLike } from '../../../store/like'
 import { NavLink, useHistory } from "react-router-dom"
 import liked from '../../../image_assets/liked.svg'
 import unliked from '../../../image_assets/unliked.svg'
+import comment from '../../../image_assets/comment.svg'
 import '../images.css'
 import ImageModal from "../ImageModal"
 import CommentModal from "../CommentModal"
@@ -235,26 +236,32 @@ const ImageTileComponent = ({ image }) => {
   }, [dispatch])
 
   return (
-    <div className="imageCard" key={image?.id}>
-
-      {/* IMAGE OWNER USERNAME AND IMAGE CONTROLS*/}
-      <div className="titleContainer">
-        <div className="userInfo">
-          <div className="avatarContainer">
-            <img src={image?.user?.avatar} alt="" />
+    <div className="imageTile" key={image?.id}>
+      <div className="individualImage" onClick={() => history.push(`/images/${image?.id}`)}>
+        <div className="imageWrapper">
+          <img src={image?.img_url} alt="anImage" className="imageObj" />
+          <div className="imageCover">
+            <div className="">
+              <img src={liked} alt="liked" className="likes tileIcon" />
+              <img src={comment} alt="comments" className="comments tileIcon" />
+            </div>
           </div>
-          <p className="image_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>
         </div>
-        {user?.id === image?.user_id ?
-          <div>
-            <button className='modal' onClick={() => setIsImageOpen(true)} style={{ opacity: '1' }}><img src={personDots} alt='options' /></button>
-            <ImageModal open={isImageOpen} onClose={() => setIsImageOpen(false)}>
-              <button className='red' onClick={handleDelete}>Delete</button>
-              <button className='red' onClick={(e) => history.push(`/images/${image?.id}/edit`)}>Edit</button>
-            </ImageModal>
-          </div>
-          : false}
       </div>
+
+
+
+      {/* IMAGE CONTROLS */}
+
+      {user?.id === image?.user_id ?
+        <div className="imageControls">
+          <button className='modal' onClick={() => setIsImageOpen(true)} style={{ opacity: '1' }}><img src={personDots} alt='options' className="menuDots" /></button>
+          <ImageModal open={isImageOpen} onClose={() => setIsImageOpen(false)}>
+            <button className='red' onClick={handleDelete}>Delete</button>
+            <button className='red' onClick={(e) => history.push(`/images/${image?.id}/edit`)}>Edit</button>
+          </ImageModal>
+        </div>
+        : false}
     </div>
   )
 }

@@ -6,8 +6,8 @@ import ImageComponent from './Images/ImageComponent';
 import ImageTileComponent from './Images/ImageTileComponent'
 import { addFollow, deleteFollow, setAllUsers } from '../store/session';
 import './user.css'
-import follow from "../image_assets/follow.svg"
 import followed from "../image_assets/followed.svg"
+import settings from "../image_assets/settings.svg"
 
 function User() {
   const { userId }  = useParams();
@@ -40,6 +40,12 @@ function User() {
     }
   }
 
+  const editProfile = (e) => {
+    e.preventDefault()
+  }
+  const editProfileModal = (e) => {
+    e.preventDefault()
+  }
 
   if (currentPagesUser?.following?.includes(curUser.id) && !currentPagesUser?.followers?.includes(curUser.id)){
     followText = "Follow Back";
@@ -51,8 +57,6 @@ function User() {
     return null;
   }
 
-  console.log(typeof currentPagesUser?.id, typeof curUser?.id)
-  console.log("currentPagesUser", currentPagesUser?.id !== curUser?.id)
   return (
     <div className="profileContainer">
         <div className="profileTop">
@@ -66,16 +70,19 @@ function User() {
                     <div className="profileUserName">
                         {currentPagesUser?.username}
                     </div>
+                    {currentPagesUser && currentPagesUser?.id !== curUser?.id ?
                     <div className="profileButtonBox">
-                      {currentPagesUser && currentPagesUser?.id !== curUser?.id ?
                         <form onSubmit={addOrRemoveFollow}>
                             {currentPagesUser?.followers?.includes(curUser.id) ?
                                 <button className="unfollow followingButton profileButton button"><img src={followed} alt="Unfollow" className="follow_icon" draggable="false"/></button> :
                                 <button className="follow followingButton profileButton button">{followText}</button>}
-                        </form> :
-                       null
-                      }
+                        </form>
+                    </div> :
+                    <div className="profileButtonBox">
+                      <button onClick={editProfile} className="editProfile profileButton button">Edit Profile</button>
+                      <button onClick={editProfileModal} className="editProfileModalButton button"><img src={settings} alt="Unfollow" className="follow_icon" draggable="false"/></button>
                     </div>
+                    }
                 </div>
                 <div className="profileDetails">
                     <div className="profileCounts">
@@ -96,14 +103,13 @@ function User() {
                 </div>
             </div>
         </div>
-        <div className="imageContainer">
+        <div className="imageContainer tileContainer">
             <div className="profileSwitchBox">
 
             </div>
-            {usersImages?.map((image) => (
+            {/* {usersImages?.map((image) => (
                 <ImageComponent image={image} key={image.id} />
-            ))}
-
+            ))} */}
             {usersImages?.map((image) => (
                 <ImageTileComponent image={image} key={image.id} />
             ))}
