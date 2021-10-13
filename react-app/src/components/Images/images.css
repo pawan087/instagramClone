@@ -250,58 +250,76 @@
   display: flex;
   flex-direction: row;
   flex-grow: 1;
+  flex-wrap: wrap;
 }
 
 .imageTile {
   display: block;
   position: relative;
-  width: 100%;
-  flex: 1 0 0%;
-  -webkit-box-flex: 1;
-      -webkit-flex: 1 0 0%;
-          -ms-flex: 1 0 0%;
-  margin: 1.5rem 1rem 0.25rem;
+  margin: 1.5rem 0.9rem 0.25rem;
   cursor: pointer;
 }
 .imageTile:hover .imageCover {
-  display: block;
+  opacity: 1;
+  transition: opacity 0.26s;
 }
 .imageWrapper {
-  display: block;
-  padding-bottom: 100%;
+  display: flex;
   overflow: hidden;
 }
 .imageTile .imageObj {
-  height: 100%;
-  width: 100%;
-  min-width: 200px;
-  min-height: 200px;
-  left: 0;
-  position: absolute;
-  top: 0;
+  height: 295px;
+  width: 295px;
+  flex-grow: 1;
+  flex-basis: 0;
   object-fit: cover;
 }
 
 .imageCover {
-  display: none;
+  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.35);
 }
 
 .tileIcon {
-  height: 25px;
+  height: 23px;
   filter: invert(1);
 }
 
+.imageStatus {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.imageLikesContainer,
+.imageCommentsContainer {
+  display: flex;
+}
+
+.imageLikesContainer{
+  margin-right: 30px;
+}
+.tileIcon {
+  margin-right: 7px;
+}
 .imageTile .likes {
 
 }
 .imageTile .comments {
 
+}
+
+.imageStatusText {
+  display: inline;
+  color: #FFFFFF;
+  font-weight: 500;
 }
 
 .imageTile .imageControls {
