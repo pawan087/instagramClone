@@ -4,6 +4,8 @@ from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 from colors import *
+from app.s3_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -77,22 +79,30 @@ def sign_up():
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    image = form.data['avatar']
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        return upload, 400
+
+    url = upload["url"]
+
     print(CGREEN + "\n FORM DATA: \n", data, "\n" + CEND)
 
     if form.validate_on_submit():
-        print(CGREEN + "\n FORM VALIDATED: \n",
-              form.validate_on_submit(), "\n" + CEND)
-
-        if data["avatar"] == '':
-            form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
-
-        print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
+        # if data["avatar"] == '':
+        #     form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
 
         user = User(
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
-            avatar=form.data["avatar"]
+            avatar=url
         )
 
         print(CGREEN + "\n USER CREATED: \n", user, "\n" + CEND)
