@@ -10,6 +10,7 @@ const AddImageForm = () => {
     const [caption, setCaption] = useState("")
     // const [imageUrl, setImageUrl] = useState("")
     const [image, setImage] = useState(null);
+    const [imageLoading, setImageLoading] = useState(false);
     const [hashtags, setHashtags] = useState('')
 
     const user = useSelector((state) => state.session.user)
@@ -22,7 +23,7 @@ const AddImageForm = () => {
         // setImageUrl("")
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         const formData = new FormData()
@@ -33,10 +34,14 @@ const AddImageForm = () => {
         formData.append('user_id', user.id)
         formData.append('hashtags', hashtags)
 
-        dispatch(addOneImage(formData))
+        setImageLoading(true)
+
+        await dispatch(addOneImage(formData))
+        setImageLoading(false)
         dispatch(setAllImages())
         history.push("/")
         reset()
+
     }
 
     const updateImage = (e) => {
@@ -77,6 +82,7 @@ const AddImageForm = () => {
 
             <div>
                 <input type="file" accept="image/*" onChange={updateImage} />
+                {imageLoading && <p>Loading...</p>}
             </div>
 
             <div>
