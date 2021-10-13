@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import { addOneImage } from "../../../store/image"
@@ -8,7 +8,8 @@ const AddImageForm = () => {
 
     const [title, setTitle] = useState("")
     const [caption, setCaption] = useState("")
-    const [imageUrl, setImageUrl] = useState("")
+    // const [imageUrl, setImageUrl] = useState("")
+    const [image, setImage] = useState(null);
     const [hashtags, setHashtags] = useState('')
 
     const user = useSelector((state) => state.session.user)
@@ -38,6 +39,12 @@ const AddImageForm = () => {
         reset()
     }
 
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        
+        setImage(file);
+    };
+
     return (
 
         <form onSubmit={handleSubmit}>
@@ -59,13 +66,17 @@ const AddImageForm = () => {
                     onChange={(e) => setCaption(e.target.value)} />
             </div>
 
-            <div>
+            {/*<div>
                 <label>Image Url</label>
                 <input
                     type="text"
                     placeholder="Image Url"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)} />
+            </div>*/}
+
+            <div>
+                <input type="file" accept="image/*" onChange={updateImage} />
             </div>
 
             <div>
