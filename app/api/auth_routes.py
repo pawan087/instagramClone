@@ -12,10 +12,13 @@ def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
     """
+
     errorMessages = []
+
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
+
     return errorMessages
 
 
@@ -24,8 +27,10 @@ def authenticate():
     """
     Authenticates a user.
     """
+
     if current_user.is_authenticated:
         return current_user.to_dict()
+
     return {'errors': ['Unauthorized']}
 
 
@@ -34,15 +39,20 @@ def login():
     """
     Logs a user in
     """
+
     form = LoginForm()
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
+
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
+
         return user.to_dict()
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -51,7 +61,9 @@ def logout():
     """
     Logs a user out
     """
+
     logout_user()
+
     return {'message': 'User logged out'}
 
 
@@ -60,28 +72,37 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
+
     form = SignUpForm()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
+
+    print(CGREEN + "\n FORM DATA: \n", data, "\n" + CEND)
 
     if form.validate_on_submit():
         print(CGREEN + "\n FORM VALIDATED: \n",
               form.validate_on_submit(), "\n" + CEND)
+
         if data["avatar"] == '':
             form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
+
         print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
+
         user = User(
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
             avatar=form.data["avatar"]
         )
+
         print(CGREEN + "\n USER CREATED: \n", user, "\n" + CEND)
+
         db.session.add(user)
         db.session.commit()
         login_user(user)
+
         return user.to_dict()
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -90,4 +111,5 @@ def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
     """
+
     return {'errors': ['Unauthorized']}, 401
