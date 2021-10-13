@@ -37,11 +37,13 @@ const AddImageForm = () => {
         setImageLoading(true)
 
         await dispatch(addOneImage(formData))
+
         setImageLoading(false)
+
         dispatch(setAllImages())
+
         history.push("/")
         reset()
-
     }
 
     const updateImage = (e) => {
@@ -55,6 +57,7 @@ const AddImageForm = () => {
         <form onSubmit={handleSubmit}>
             <div>
                 <label>Image Title</label>
+
                 <input
                     type="text"
                     placeholder="Image Title"
@@ -64,6 +67,7 @@ const AddImageForm = () => {
 
             <div>
                 <label>Caption</label>
+
                 <input
                     type="text"
                     placeholder="Image Caption"
@@ -73,6 +77,7 @@ const AddImageForm = () => {
 
             {/*<div>
                 <label>Image Url</label>
+
                 <input
                     type="text"
                     placeholder="Image Url"
@@ -81,12 +86,15 @@ const AddImageForm = () => {
             </div>*/}
 
             <div>
+                <label>Image</label>
+
                 <input type="file" accept="image/*" onChange={updateImage} />
                 {imageLoading && <p>Loading...</p>}
             </div>
 
             <div>
                 <label>Hashtags</label>
+
                 <input
                     type="text"
                     placeholder="Hashtags"
@@ -97,6 +105,7 @@ const AddImageForm = () => {
 
             {/* <div>
                 <label>Hashtag</label>
+
                 <input
                     type="text"
                     placeholder="Hashtag"

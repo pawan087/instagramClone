@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { signUp } from "../../store/session";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const user = useSelector(state => state.session.user);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  // const [avatar, setAvatar] = useState('');
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
+
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
+
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password, avatar));
+
+      const formData = new FormData();
+
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("avatar", image);
+
+      setImageLoading(true);
+
+      const data = await dispatch(signUp(formData));
+
+      setImageLoading(false);
+
       if (data) {
-        setErrors(data)
+        setErrors(data);
       }
     }
   };
@@ -40,8 +58,14 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   }
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+
+    setImage(file);
+  };
 
   return (
     <form onSubmit={onSignUp}>
@@ -50,53 +74,71 @@ const SignUpForm = () => {
           <div key={ind}>{error}</div>
         ))}
       </div>
+
       <div>
         <label>User Name</label>
+
         <input
-          type='text'
-          name='username'
+          type="text"
+          name="username"
           onChange={updateUsername}
           value={username}
         ></input>
       </div>
+
       <div>
         <label>Email</label>
+
         <input
-          type='text'
-          name='email'
+          type="text"
+          name="email"
           onChange={updateEmail}
           value={email}
         ></input>
       </div>
+
       <div>
         <label>Password</label>
+
         <input
-          type='password'
-          name='password'
+          type="password"
+          name="password"
           onChange={updatePassword}
           value={password}
         ></input>
       </div>
+
       <div>
         <label>Repeat Password</label>
+
         <input
-          type='password'
-          name='repeat_password'
+          type="password"
+          name="repeat_password"
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
         ></input>
       </div>
+
       <div>
+        <label>Profile Photo</label>
+
+        <input type="file" accept="image/*" onChange={updateImage} />
+        {imageLoading && <p>Loading...</p>}
+      </div>
+
+      {/*<div>
         <label>Avatar</label>
+
         <input
           type='text'
           onChange={(e) => setAvatar(e.target.value)}
           value={avatar}
           placeholder='Url to an image'
         ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
+      </div>*/}
+
+      <button type="submit">Sign Up</button>
     </form>
   );
 };
