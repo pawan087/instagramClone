@@ -17,7 +17,6 @@ const ImageComponent = ({ image }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
-    const imageUserId = image?.user_id
     const likes = useSelector((state) => state.likes)
     const [commentBody, setCommentBody] = useState('')
     const [commentImageId, setCommentImageId] = useState(0)
@@ -35,7 +34,8 @@ const ImageComponent = ({ image }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const newComment = {
-            user_id: user.id,
+            commenting_user_id: user.id,
+            commented_user_id: image.user_id,
             image_id: commentImageId,
             body: commentBody
         }
@@ -56,19 +56,19 @@ const ImageComponent = ({ image }) => {
     const addOrRemoveLike = (e) => {
         e.preventDefault()
         if (likesByUser.length) {
-            dispatch(deleteOneLike(likesByUser[0].id))
+            const event = user.incoming_events.incoming.filter((event) => (event?.other_user_id === image?.user_id && event.our_user_id === user?.id && event?.message.startsWith("liked")))[0]
+            console.log("LIKE ID", likesByUser[0]?.id)
+            console.log("EVENT", event?.id)
+            dispatch(deleteOneLike(likesByUser[0]?.id, event?.id))
         } else {
             const newLike = {
-                user_id: user.id,
-                image_id: image.id,
+                liking_user_id: user?.id,
+                liked_user_id: image?.user_id,
+                image_id: image?.id,
             }
             dispatch(addLike(newLike))
         }
     }
-
-    useEffect(() => {
-        dispatch(setAllLikes())
-    }, [dispatch])
 
     return (
         <div className="imageCard" key={image?.id}>
@@ -143,7 +143,7 @@ const ImageComponent = ({ image }) => {
                     <div className='eachComment' key={comment.id}>
                         <div className="commentInfo">
                             <p className="comment_username"><NavLink to={`/users/${comment.user_id}`}> {comment.user.username} </NavLink></p>
-                            <p>{comment.body}</p>
+                            <p className="commentBody">{comment.body}</p>
                         </div>
                         {user?.id === comment?.user_id ?
                             <>

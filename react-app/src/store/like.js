@@ -19,7 +19,7 @@ export const addLike = (like) => async (dispatch) => {
     } else return "ADD LIKE THUNK FAILED!"
 }
 
-export const deleteOneLike = (id) => async (dispatch) => {
+export const deleteOneLike = (id, eventId) => async (dispatch) => {
     console.log('--------------------------------------------------------')
     console.log('INSIDE THUNK BEFORE FETCH')
     console.log('THUNK ID ARGUMENT: ' + id)
@@ -27,7 +27,7 @@ export const deleteOneLike = (id) => async (dispatch) => {
         {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: id })
+            body: JSON.stringify({ like_id: id, event_id: eventId})
         }
     )
 

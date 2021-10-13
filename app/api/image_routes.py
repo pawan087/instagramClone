@@ -6,7 +6,7 @@ from app.forms.comment_form import DeleteComment, EditComment, NewComment
 from app.forms.like_form import DeleteLike, NewLike
 from app.forms.image_form import NewImage
 from flask_login import login_required
-from app.models import db, Image, Comment, Like
+from app.models import db, Image, Comment, Like, Event, event
 from colors import *
 
 image_routes = Blueprint('images', __name__)
@@ -107,14 +107,25 @@ def add_comment():
     # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
     # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
     # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
+    commentMessage = ''
+    if len(data['body']) > 100:
+        commentMessage = f"commented: \"{data['body'][0:100]}... \" on an image you posted"
+    else:
+        commentMessage = f"commented: \"{data['body'][0:100]}\" on an image you posted"
 
     if form.validate_on_submit():
         new_comment = Comment(
             body=data["body"],
             image_id=data["image_id"],
-            user_id=data["user_id"]
+            user_id=data["commenting_user_id"]
+        )
+        new_event = Event(
+                our_user_id=data["commented_user_id"],
+                other_user_id=data["commenting_user_id"],
+                message=commentMessage
         )
         db.session.add(new_comment)
+        db.session.add(new_event)
         db.session.commit()
         images = Image.query.all()
         return {"images": [image.to_dict() for image in images]}
@@ -154,7 +165,7 @@ def delete_comment():
 
     print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
 
-    comment_to_delete = Comment.query.filter(Comment.id == data["id"]).first()
+    comment_to_delete = Comment.query.filter(Comment.id == data["comment_id"]).first()
     db.session.delete(comment_to_delete)
     db.session.commit()
 
@@ -181,7 +192,7 @@ def add_like():
 
         print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
         def exists(image_id, user_id, data):
-            if(image_id == data["image_id"] and user_id == data["user_id"]):
+            if(image_id == data["image_id"] and user_id == data["liking_user_id"]):
                 return True
             else:
                 return False
@@ -191,9 +202,15 @@ def add_like():
         if not does_like_exist:
             new_like = Like(
                 image_id=data["image_id"],
-                user_id=data["user_id"]
+                user_id=data["liking_user_id"]
+            )
+            new_event = Event(
+                our_user_id=data["liked_user_id"],
+                other_user_id=data["liking_user_id"],
+                message="liked an image you posted"
             )
             db.session.add(new_like)
+            db.session.add(new_event)
             db.session.commit()
             likes = Like.query.all()
             return {"likes": [like.to_dict() for like in likes]}
@@ -206,9 +223,15 @@ def delete_like():
     form = DeleteLike()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
 
-    like_to_delete = Like.query.filter(Like.id == data["id"]).first()
+    like_to_delete = Like.query.filter(Like.id == data["like_id"]).first()
+    event_to_delete = Event.query.filter(Event.id == data["event_id"]).first()
+    print(CGREEN + "\n EVENT: \n", event_to_delete, "\n" + CEND)
+    print(CGREEN + "\n LIKE: \n", like_to_delete, "\n" + CEND)
+
     db.session.delete(like_to_delete)
+    db.session.delete(event_to_delete)
     db.session.commit()
 
     likes = Like.query.all()

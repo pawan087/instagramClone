@@ -2,7 +2,9 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setAllImages } from "../../store/image"
 import ImageComponent from "./ImageComponent"
+import { setAllUsers } from "../../store/session"
 import Notifications from "../Notifications"
+import { setAllLikes } from "../../store/like"
 import './images.css'
 
 const Image = () => {
@@ -12,6 +14,8 @@ const Image = () => {
 
     useEffect(() => {
         dispatch(setAllImages())
+        dispatch(setAllUsers())
+        dispatch(setAllLikes())
     }, [dispatch])
 
     return (

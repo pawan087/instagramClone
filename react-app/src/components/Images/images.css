@@ -7,7 +7,7 @@
 ======================*/
 
 .imageCard {
-    width: 600px;
+    width: 614px;
     height: 100%;
     margin: 1.5rem 1rem 0.25rem;
     border: 1px solid #DBDBDB;
@@ -130,7 +130,6 @@
     justify-content: space-between;
 }
 
-
 .commentInfo {
     padding-left: 20px ;
     display: flex;
@@ -140,6 +139,10 @@
 .commentList p {
     font-size: 14px;
     padding: 2.5px 0;
+}
+
+.commentBody {
+    word-break: break-all;
 }
 
 .comment_username {
