@@ -91,13 +91,10 @@ function User() {
                         <div className="profileFollowing"><div className="profileCountsNumber">{currentPagesUser?.following.length}</div> following</div>
                     </div>
                     <div className="profileUsernameAndPronoun">
-                        <div className="profileName">NAME GOES HERE</div> nouns go here (optional)
+                        <div className="profileName">{currentPagesUser?.fname} {currentPagesUser?.lname}</div> {currentPagesUser?.pronouns}
                     </div>
                     <div className="profileBio">
-                        BIO GOES HERE Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec in velit a lectus mattis varius eu vel tellus.
-                        Curabitur feugiat libero mauris, at varius orci venenatis et.
-                        Curabitur luctus diam quis urna consectetur finibus.
+                        {currentPagesUser?.bio}
                     </div>
                     <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div>
                 </div>
