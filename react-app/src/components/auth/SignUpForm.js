@@ -17,6 +17,7 @@ const SignUpForm = () => {
   const [bio, setBio] = useState();
   const [uploadMsg, setUploadMsg] = useState("Upload Profile Picture");
   const [pronouns, setPronouns] = useState();
+  const [showErrors, setShowErrors] = useState(false);
 
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const SignUpForm = () => {
       // setImageLoading(false);
 
       if (data) {
+        setShowErrors(true);
         setErrors(data);
       }
     }
@@ -94,11 +96,15 @@ const SignUpForm = () => {
 
   return (
     <form className="outerContainer" onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
+      {showErrors && (
+        <div className="errorsContainer">
+          {errors.map((error, ind) => (
+            <div className="errors" key={ind}>
+              {error}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="topInnerContainer">
         <div className="title logo">Kilogram</div>
