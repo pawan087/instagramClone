@@ -60,9 +60,9 @@ const LoginForm = () => {
                 onChange={updatePassword}
               />
             </div>
-            <div className="loginBtn">
+            <button className="loginBtn">
               <button className='btn' type='submit'>Login</button>
-            </div>
+            </button>
             <div className="orContainer">
               <div className="line" />
               <span className="orText">OR</span>
@@ -74,7 +74,7 @@ const LoginForm = () => {
           </div>
           <div className='errorContainer'>
             {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
+              <div className='errorText' key={ind}>{error}</div>
             ))}
           </div>
         </form>
