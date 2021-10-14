@@ -4,8 +4,7 @@ from wtforms.validators import DataRequired, ValidationError
 
 
 class NewComment(FlaskForm):
-    commenting_user_id = IntegerField("User Id", [DataRequired()])
-    commented_user_id = IntegerField("Commented User Id", [DataRequired()])
+    user_id = IntegerField("User Id", [DataRequired()])
     image_id = IntegerField("Image Id", [DataRequired()])
     body = StringField("Caption", [DataRequired()])
 
@@ -15,4 +14,3 @@ class EditComment(FlaskForm):
 
 class DeleteComment(FlaskForm):
     comment_id = IntegerField("Id")
-    event_id = IntegerField("event id")

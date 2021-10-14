@@ -130,8 +130,17 @@ a {
     word-wrap: break-word;
 }
 
-.dropdown_menu a:active ~ .dropdown_content, .dropdown_menu a:active ~ .triangle {
+.dropdown_content.active {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+}
+
+.eventAvatar {
+    padding-bottom: 15px;
+}
+
+.eventUser {
+    font-weight: 500;
+    color: #262626;
 }

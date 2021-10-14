@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
-import { setAllLikes } from "../../../store/like"
 import { addLike, deleteOneLike } from '../../../store/like'
 import { NavLink, useHistory } from "react-router-dom"
 import liked from '../../../image_assets/liked.svg'
@@ -11,6 +10,7 @@ import ImageModal from "../ImageModal"
 import CommentModal from "../CommentModal"
 import tableDots from '../../../image_assets/tableDots.svg'
 import personDots from '../../../image_assets/personDots.svg'
+import { addEvent, deleteOneEvent } from "../../../store/event"
 
 const ImageComponent = ({ image }) => {
 
@@ -34,8 +34,7 @@ const ImageComponent = ({ image }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const newComment = {
-            commenting_user_id: user.id,
-            commented_user_id: image.user_id,
+            user_id: user.id,
             image_id: commentImageId,
             body: commentBody
         }
@@ -56,17 +55,21 @@ const ImageComponent = ({ image }) => {
     const addOrRemoveLike = (e) => {
         e.preventDefault()
         if (likesByUser.length) {
-            const event = user.incoming_events.incoming.filter((event) => (event?.other_user_id === image?.user_id && event.our_user_id === user?.id && event?.message.startsWith("liked")))[0]
-            console.log("LIKE ID", likesByUser[0]?.id)
-            console.log("EVENT", event?.id)
-            dispatch(deleteOneLike(likesByUser[0]?.id, event?.id))
+            dispatch(deleteOneLike(likesByUser[0]?.id))
+            dispatch(deleteOneEvent(user.id, image.id))
         } else {
             const newLike = {
-                liking_user_id: user?.id,
-                liked_user_id: image?.user_id,
+                user_id: user?.id,
                 image_id: image?.id,
             }
+            const newEvent = {
+                our_user_id: image.user_id,
+                other_user_id: user.id,
+                message: "liked an image you posted.",
+                image_id: image.id
+            }
             dispatch(addLike(newLike))
+            dispatch(addEvent(newEvent, user.id))
         }
     }
 

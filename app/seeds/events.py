@@ -6,17 +6,20 @@ def seed_events():
     first = Event(
         our_user_id=1,
         other_user_id=2,
-        message="liked an image you posted"
+        message="liked an image you posted",
+        image_id='1'
     )
     second = Event(
         our_user_id=2,
         other_user_id=1,
-        message="liked an image you posted"
+        message="liked an image you posted",
+        image_id=2
     )
     third = Event(
         our_user_id=1,
         other_user_id=3,
-        message="liked an image you posted"
+        message="liked an image you posted",
+        image_id=1
     )
 
     db.session.add(first)

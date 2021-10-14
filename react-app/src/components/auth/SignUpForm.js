@@ -11,7 +11,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState();
   const [repeatPassword, setRepeatPassword] = useState();
   const [image, setImage] = useState(null);
-  const [imageLoading, setImageLoading] = useState(false);
+  // const [imageLoading, setImageLoading] = useState(false);
   const [fname, setFname] = useState();
   const [lname, setLname] = useState();
   const [bio, setBio] = useState();
@@ -147,7 +147,6 @@ const SignUpForm = () => {
               placeholder="First Name"
               onChange={updateFname}
               value={fname}
-              placeholder="First Name"
             ></input>
           </div>
 
@@ -158,7 +157,6 @@ const SignUpForm = () => {
               placeholder="Last Name"
               onChange={updateLname}
               value={lname}
-              placeholder="Last name"
             ></input>
           </div>
 
