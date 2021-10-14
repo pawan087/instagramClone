@@ -19,10 +19,10 @@ export default function testSignUpForm() {
           <span className="middleDivisor">OR</span>
         </div>
 
-        <div className="inputsContainer">
+        <div className="inputsContainer text-field">
           <div>
             <input
-              className="inputContainer"
+              className="inputContainer inputText"
               type="text"
               placeholder="Email"
             ></input>
@@ -83,7 +83,7 @@ export default function testSignUpForm() {
           </div>
         </div>
 
-        <div className="btnContainer">
+        <div className="btnContainer2">
           <button className="signUpBtn">Sign Up</button>
         </div>
 
@@ -95,7 +95,7 @@ export default function testSignUpForm() {
       </div>
 
       <div className="lowerInnerContainer">
-        Have an account?{" "}
+        Have an account?
         <a href="/login" className="link">
           Log in
         </a>
