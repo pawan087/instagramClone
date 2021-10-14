@@ -101,7 +101,6 @@ export const signUp = (signUpData) => async (dispatch) => {
     method: "POST",
     body: signUpData,
   });
-
   if (response.ok) {
     const data = await response.json();
 
@@ -119,16 +118,14 @@ export const signUp = (signUpData) => async (dispatch) => {
   }
 };
 
-export const profileEdit = (id, username, email, oldPassword, password, avatar, fname, lname, bio, pronouns) => async (dispatch) => {
-  const response = await fetch('/api/auth/signup', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      id, username, email, oldPassword, password, avatar, fname, lname, bio, pronouns
-    }),
+export const profileEdit = (editProfileData) => async (dispatch) => {
+  const response = await fetch("/api/auth/signup", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    // body: JSON.stringify(editProfileData),
+    body: editProfileData,
   });
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -136,7 +133,6 @@ export const profileEdit = (id, username, email, oldPassword, password, avatar, 
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
-      console.log("response not ok and errors", data.errors)
       return data.errors;
     }
   } else {

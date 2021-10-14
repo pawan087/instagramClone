@@ -48,6 +48,7 @@ def password_matches(form, field):
     old_password = field.data
     id = form.data['id']
     user = User.query.filter(User.id == id).first()
+
     if not user:
         raise ValidationError('No such user exists.')
     if not user.check_password(old_password):
@@ -61,12 +62,11 @@ class SignUpForm(FlaskForm):
     bio = TextAreaField('Last Name')
     pronouns = SelectField("Pronouns", choices=['Prefer Not To Disclose', 'He/Him', 'She/Her', 'They/Them', 'Other'])
     password = StringField('password', validators=[DataRequired()])
-    avatar = StringField('avatar')
+    avatar = FileField('avatar')
 
 
 class ProfileEditForm(FlaskForm):
     id = IntegerField('id', validators=[DataRequired()])
-    # username = StringField('username')
     username = StringField('username', validators=[username_exists_edit])
     email = StringField('email', validators=[user_exists_edit])
     fname = StringField('First Name', validators=[DataRequired()])
@@ -75,4 +75,4 @@ class ProfileEditForm(FlaskForm):
     pronouns = SelectField("Pronouns", choices=['Prefer Not To Disclose','He/Him', 'She/Her', 'They/Them', 'Other'])
     oldPassword = StringField('old_password', validators=[DataRequired(), password_matches])
     password = StringField('password')
-    avatar = FileField('profile picture')
+    avatar = FileField('avatar')

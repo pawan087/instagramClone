@@ -124,26 +124,41 @@ def edit_profile():
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    image = form.data['avatar']
+
+    print(CGREEN + "\n FORM DATA: \n", data, "\n" + CEND)
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+    print(CGREEN + "\n HIT: \n", "\n" + CEND)
+
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        return upload, 400
+
+    url = upload["url"]
+
+
     if form.validate_on_submit():
         print(CGREEN + "\n FORM VALIDATED: \n",
               form.validate_on_submit(), "\n" + CEND)
         if data["avatar"] == '':
             form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
+
         user = User.query.filter(User.id == data["id"]).first()
         user.username=form.data['username']
         user.email=form.data['email']
         # Checks to see if password changed versus the validated "oldpassword"
         if not data["oldPassword"] == data["password"] and not data["password"] == "":
           user.password=form.data['password']
-        user.avatar=form.data["avatar"]
+        user.avatar=url
         user.bio=form.data['bio']
         user.pronouns=form.data['pronouns']
         user.fname=form.data['fname']
         user.lname=form.data['lname']
         print(CGREEN + "\n USER UPDATED: \n", user, "\n" + CEND)
         db.session.commit()
-        # login_user(user)
-        print(CGREEN + "\n Errors: \n", form.errors, "\n" + CEND)
         return user.to_dict(), {'errors': validation_errors_to_error_messages(form.errors)}
     print(CGREEN + "\n ErrorsValidateFailed: \n", form.errors, "\n" + CEND)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
