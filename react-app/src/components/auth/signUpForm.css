@@ -1,59 +1,90 @@
 .outerContainer {
-
+  background-color: red;
+  height: 755px;
+  width: 350px;
 }
 
 .topInnerContainer {
-
+  background-color: yellow;
+  height: 675px;
+  width: 350px;
 }
 
 .title {
-
+  background-color: orange;
+  height: 90px;
+  width: 350px;
 }
 
 .subtitle {
-
+  background-color: springgreen;
+  height: 60px;
+  width: 350px;
 }
 
 .btnContainer {
-
+  background-color: turquoise;
+  height: 50px;
+  width: 350px;
 }
 
 .demoBtn {
-
+  background-color: palevioletred;
+  width: 270px;
+  height: 30px;
 }
 
 .divisorContainer {
-
+  background-color: peru;
+  height: 30px;
+  width: 350px;
 }
 
 .leftDivisor {
-
+  background-color: thistle;
+  height: 30px;
+  width: 110px;
 }
 
 .middleDivisor {
-
+  background-color: yellowgreen;
+  height: 30px;
+  width: 55px;
 }
 
 .rightDivisor {
-
+  background-color: thistle;
+  height: 30px;
+  width: 110px;
 }
 
 .inputsContainer {
-
+  background-color: chartreuse;
+  height: 325px;
+  width: 350px;
 }
 
 .inputContainer {
-
+  background-color: cornflowerblue;
+  height: 40px;
+  width: 270px;
 }
 
 .signUpBtn {
-
+  background-color: palevioletred;
+  width: 270px;
+  height: 30px;
 }
 
 .policyContainer {
-
+  background-color: yellow;
+  width: 350px;
+  height: 80px;
 }
 
 .lowerInnerContainer {
-
+  margin-top: 10px;
+  background-color: darkgray;
+  height: 70px;
+  width: 350px;
 }
