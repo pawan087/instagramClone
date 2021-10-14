@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
-import { setAllLikes } from "../../../store/like"
 import { addLike, deleteOneLike } from '../../../store/like'
 import { NavLink, useHistory } from "react-router-dom"
 import liked from '../../../image_assets/liked.svg'
@@ -11,13 +10,13 @@ import ImageModal from "../ImageModal"
 import CommentModal from "../CommentModal"
 import tableDots from '../../../image_assets/tableDots.svg'
 import personDots from '../../../image_assets/personDots.svg'
+import { addEvent, deleteOneEvent } from "../../../store/event"
 
 const ImageComponent = ({ image }) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
-    const imageUserId = image?.user_id
     const likes = useSelector((state) => state.likes)
     const [commentBody, setCommentBody] = useState('')
     const [commentImageId, setCommentImageId] = useState(0)
@@ -56,19 +55,23 @@ const ImageComponent = ({ image }) => {
     const addOrRemoveLike = (e) => {
         e.preventDefault()
         if (likesByUser.length) {
-            dispatch(deleteOneLike(likesByUser[0].id))
+            dispatch(deleteOneLike(likesByUser[0]?.id))
+            dispatch(deleteOneEvent(user.id, image.id))
         } else {
             const newLike = {
-                user_id: user.id,
-                image_id: image.id,
+                user_id: user?.id,
+                image_id: image?.id,
+            }
+            const newEvent = {
+                our_user_id: image.user_id,
+                other_user_id: user.id,
+                message: "liked an image you posted.",
+                image_id: image.id
             }
             dispatch(addLike(newLike))
+            dispatch(addEvent(newEvent, user.id))
         }
     }
-
-    useEffect(() => {
-        dispatch(setAllLikes())
-    }, [dispatch])
 
     return (
         <div className="imageCard" key={image?.id}>
@@ -143,7 +146,7 @@ const ImageComponent = ({ image }) => {
                     <div className='eachComment' key={comment.id}>
                         <div className="commentInfo">
                             <p className="comment_username"><NavLink to={`/users/${comment.user_id}`}> {comment.user.username} </NavLink></p>
-                            <p>{comment.body}</p>
+                            <p className="commentBody">{comment.body}</p>
                         </div>
                         {user?.id === comment?.user_id ?
                             <>

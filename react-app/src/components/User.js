@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { setAllImages } from '../store/image';
-import ImageComponent from './Images/ImageComponent';
 import ImageTileComponent from './Images/ImageTileComponent'
 import { addFollow, deleteFollow, setAllUsers } from '../store/session';
 import './user.css'

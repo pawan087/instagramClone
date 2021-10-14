@@ -5,15 +5,20 @@ from app.models import db, Like
 def seed_likes():
     first = Like(
         user_id=1,
-        image_id=1    
+        image_id=2    
     )
     second = Like(
         user_id=2,
         image_id=1
     )
+    third = Like(
+        user_id=3,
+        image_id=1
+    )
 
     db.session.add(first)
     db.session.add(second)
+    db.session.add(third)
     db.session.commit()
 
 
