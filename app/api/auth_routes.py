@@ -98,6 +98,7 @@ def sign_up():
             password=form.data['password'],
             avatar=url,
             bio=form.data['bio'],
+            pronouns=form.data['pronouns'],
             fname=form.data['fname'],
             lname=form.data['lname'],
         )
