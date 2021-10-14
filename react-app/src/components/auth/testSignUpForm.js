@@ -89,6 +89,8 @@ const TestSignUpForm = () => {
     return <Redirect to="/" />;
   }
 
+  console.log(username);
+
   return (
     <form className="outerContainer" onSubmit={onSignUp}>
       <div>
@@ -116,7 +118,6 @@ const TestSignUpForm = () => {
               className="inputContainer inputText"
               type="text"
               placeholder="Username"
-              name="username"
               onChange={updateUsername}
               value={username}
             ></input>
@@ -127,7 +128,6 @@ const TestSignUpForm = () => {
               className="inputContainer inputText"
               type="text"
               placeholder="Email"
-              name="email"
               onChange={updateEmail}
               value={email}
             ></input>
@@ -217,7 +217,6 @@ const TestSignUpForm = () => {
               className="inputContainer"
               type="password"
               placeholder="Password"
-              name="password"
               onChange={updatePassword}
               value={password}
             ></input>
@@ -228,7 +227,6 @@ const TestSignUpForm = () => {
               className="inputContainer"
               type="password"
               placeholder="Repeat Password"
-              name="repeat_password"
               onChange={updateRepeatPassword}
               value={repeatPassword}
               required={true}
