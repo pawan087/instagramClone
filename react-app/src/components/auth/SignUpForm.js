@@ -268,6 +268,11 @@ const SignUpForm = () => {
           Log in
         </a>
       </div>
+      <div className="loadingModal">
+        <div className="logo innerModal">
+          Signing in <span class="dot-elastic"></span>
+        </div>
+      </div>
     </form>
   );
 };
