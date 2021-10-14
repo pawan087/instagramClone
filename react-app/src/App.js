@@ -50,6 +50,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/edit_profile' exact={true} >
+          <NavBar />
           <EditProfileForm />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >

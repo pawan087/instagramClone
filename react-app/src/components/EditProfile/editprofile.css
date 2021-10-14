@@ -1,0 +1,66 @@
+
+.editProfileContainer {
+  margin: 30px auto 0;
+  width: 100%;
+  max-width: 935px;
+  border: 1px solid #dbdbdb;
+  padding: 15px 30px;
+  background-color: #FFFFFF;
+}
+
+.editProfileBody {
+  box-sizing: border-box;
+  display: flex;
+}
+
+.editLeftPanel {
+  display: flex;
+  flex-direction: column;
+}
+.editPanelTab {
+  list-style: none;
+}
+
+.avatarContainer.editProfile {
+  display: block;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, .097)
+}
+.avatarContainer.editProfile img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.userNameDisplay.editProfile {
+
+}
+.editFormRow {
+  display: flex;
+  /* 736px; add a min and max width of this via a media query */
+  margin-bottom: 15px;
+}
+.editLabelContainer {
+  /* display: flex; */
+}
+
+.editLabelContainer > label {
+  margin-right: 20px;
+  font-weight: 500;
+}
+
+.editInputContainer {
+  max-width: 355px;
+  width: 100%;
+}
+.editInputContainer input,
+.editInputContainer textarea {
+  box-sizing: border-box;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  padding: 6px 8px;
+  width: 100%;
+  font-size: 1.02rem;
+}
