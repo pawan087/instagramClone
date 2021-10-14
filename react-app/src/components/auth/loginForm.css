@@ -1,0 +1,178 @@
+.pageContainer {
+    position: relative;
+    height: 100vh;
+    background-color: #fafafa;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6.2vh;
+}
+
+.frame {
+    height: 600px;
+    object-fit: contain;
+}
+
+.loginContainer {
+    position: relative;
+    min-height: 380px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .2);
+    margin-left: 25px;
+}
+
+.loginTitle {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 48px;
+    letter-spacing: 1.1px;
+    color: #231F20;
+    margin: 27px 0px 35px 0px;
+
+}
+
+.loginField {
+    height: 36px;
+    width: 266px;
+    border-radius: 3px;
+    background-color: #fafafa;
+    text-indent: 8px;
+    margin-bottom: 6px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.loginBtn {
+    cursor: pointer;
+    border: none;
+    background:  #0095f6;
+    color: white;
+    display: grid;
+    place-items: center;
+    height: 30px;
+    width: 268px;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+.btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: bold;
+}
+
+.orContainer {
+    height: 30px;
+    width: 268px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+
+.orText {
+    color: #8e8e8e;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.line {
+    width: 110px;
+    height: 1px;
+    background: rgba(0, 0, 0, .2);
+    margin-top: 6px;
+}
+
+.demo {
+    cursor: pointer;
+    background: none;
+    outline: none;
+    border: none;
+    color:  #0095f6;
+    font-weight: bold;
+}
+
+.demoContainer {
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+}
+
+.errorContainer {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.errorText {
+    color: #ee5460;
+
+}
+
+.redirectContainer {
+    width: 350px;
+    height: 63px;
+    background-color: white;
+    margin-left: 25px;
+    margin-top: 10px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.redirectContainer {
+    display: grid;
+    place-items: center;
+}
+
+.redirectSignUp {
+    color: #0095f6;
+    font-weight: bold;
+}
+
+.forgotPasswordContainer {
+    display: grid;
+    place-items: center;
+    margin-top: 15px;
+    transform: translateY(5px);
+}
+
+.forgotPassword {
+    color: #295783;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.carouselContainer {
+    position: relative;
+}
+
+.carouselPlacement {
+    position: absolute;
+    height: 433px;
+    width: 244px;
+    background-color: transparent;
+    transform: translateY(-517px);
+    margin-left: 110.5px;
+}
+
+.image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1.5s ease;
+    opacity: 0;
+    object-fit: cover;
+}
+
+.active {
+    opacity: 1;
+}
