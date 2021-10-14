@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-import { profileEdit } from '../../store/session';
-import './editprofile.css'
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { profileEdit } from "../../store/session";
+import "./editprofile.css";
 
 const EditProfileForm = () => {
-  const user = useSelector(state => state.session.user);
+  const user = useSelector((state) => state.session.user);
+
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
   const [avatar, setAvatar] = useState(user.avatar);
   const [image, setImage] = useState(null);
-  const [oldPassword, setOldPassword] = useState('');
-  const [password, setPassword] = useState('');
+  const [oldPassword, setOldPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [fname, setFname] = useState(user.fname);
   const [lname, setLname] = useState(user.lname);
   const [bio, setBio] = useState(user.bio);
   const [uploadMsg, setUploadMsg] = useState("Upload Profile Picture");
   const [pronouns, setPronouns] = useState(user.pronouns);
-  const [repeatPassword, setRepeatPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState("");
 
   const dispatch = useDispatch();
 
   const onProfileEdit = async (e) => {
     e.preventDefault();
+    
     if (password === repeatPassword) {
       const formData = new FormData();
 
@@ -77,7 +79,7 @@ const EditProfileForm = () => {
   };
 
   if (!user) {
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   }
 
   return (
@@ -85,167 +87,190 @@ const EditProfileForm = () => {
       <div className="editProfileContainer">
         <div className="editLeftPanel">
           <ul>
-            <li className="editPanelTab">
-              Edit Profile
-            </li>
+            <li className="editPanelTab">Edit Profile</li>
           </ul>
         </div>
+
         <div className="editProfileBody">
           <div className="editRow">
             <div className="avatarContainer editProfile">
               <img src={user.avatar} alt="Avatar" />
             </div>
-            <div className="userNameDisplay editProfile">
-              {user.username}
-            </div>
+
+            <div className="userNameDisplay editProfile">{user.username}</div>
           </div>
+
           <form onSubmit={onProfileEdit}>
             <div>
               {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
               ))}
             </div>
+
             {console.log(errors)}
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>User Name</label>
               </div>
+
               <div className="editInputContainer">
                 <input
-                  type='text'
-                  name='username'
+                  type="text"
+                  name="username"
                   onChange={updateUsername}
                   value={username}
                   placeholder="User Name"
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Email</label>
               </div>
+
               <div className="editInputContainer">
                 <input
-                  type='text'
-                  name='email'
+                  type="text"
+                  name="email"
                   onChange={updateEmail}
                   value={email}
                   placeholder="Email"
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>First Name</label>
               </div>
+
               <div className="editInputContainer">
                 <input
-                  type='text'
+                  type="text"
                   onChange={(e) => setFname(e.target.value)}
                   value={fname}
-                  placeholder='First Name'
+                  placeholder="First Name"
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Last Name</label>
               </div>
+
               <div className="editInputContainer">
                 <input
-                  type='text'
+                  type="text"
                   onChange={(e) => setLname(e.target.value)}
                   value={lname}
-                  placeholder='Last name'
+                  placeholder="Last name"
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Pronouns</label>
               </div>
+
               <div className="editInputContainer">
                 <select
-                  type='text'
+                  type="text"
                   onChange={(e) => setPronouns(e.target.value)}
                   value={pronouns}
                 >
                   <option value={null}>Pronouns</option>
-                  <option value="He/Him">He/Him</option>
-                  <option value="She/Her">She/Her</option>
-                  <option value="They/Them">They/Them</option>
-                  <option value="Other">Other</option>
 
+                  <option value="He/Him">He/Him</option>
+
+                  <option value="She/Her">She/Her</option>
+
+                  <option value="They/Them">They/Them</option>
+
+                  <option value="Other">Other</option>
                 </select>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Bio</label>
               </div>
+
               <div className="editInputContainer">
                 <textarea
                   onChange={(e) => setBio(e.target.value)}
                   value={bio}
-                  placeholder='Write a short biography!'
+                  placeholder="Write a short biography!"
                 ></textarea>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Old Password</label>
               </div>
+
               <div className="editInputContainer">
                 <input
-                  type='password'
-                  name='old_password'
+                  type="password"
+                  name="old_password"
                   onChange={updateOldPassword}
                   value={oldPassword}
                   required={true}
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Password</label>
               </div>
+
               <div className="editInputContainer">
                 <input
-                  type='password'
-                  name='password'
+                  type="password"
+                  name="password"
                   onChange={updatePassword}
                   value={password}
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Repeat Password</label>
               </div>
+
               <div className="editInputContainer">
                 {/* If there's a value in the password field require the repeat password, otherwise don't require it */}
-                {password ?
+                {password ? (
                   <input
-                    type='password'
-                    name='repeat_password'
+                    type="password"
+                    name="repeat_password"
                     onChange={updateRepeatPassword}
                     value={repeatPassword}
                     required={true}
                   ></input>
-                  :
+                ) : (
                   <input
-                    type='password'
-                    name='repeat_password'
+                    type="password"
+                    name="repeat_password"
                     onChange={updateRepeatPassword}
                     value={repeatPassword}
                   ></input>
-                }
+                )}
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Avatar</label>
               </div>
+
               <div className="editInputContainer">
                 <div className="uploadDiv fileinputs">
                   <input
@@ -254,8 +279,10 @@ const EditProfileForm = () => {
                     accept="image/*"
                     onChange={updateImage}
                   />
+
                   <div class="inputContainer fakefile">
                     <label className="uploadLabel">{uploadMsg}</label>
+
                     <div className="uploadPic">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -276,7 +303,8 @@ const EditProfileForm = () => {
                 </div>
               </div>
             </div>
-            <button type='submit'>Save Changes</button>
+
+            <button type="submit">Save Changes</button>
           </form>
         </div>
       </div>

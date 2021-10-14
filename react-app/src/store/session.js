@@ -121,10 +121,11 @@ export const signUp = (signUpData) => async (dispatch) => {
 export const profileEdit = (editProfileData) => async (dispatch) => {
   const response = await fetch("/api/auth/signup", {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    // body: JSON.stringify(editProfileData),
     body: editProfileData,
   });
+
+  // headers: { "Content-Type": "application/json" },
+  // body: JSON.stringify(editProfileData),
 
   if (response.ok) {
     const data = await response.json();
