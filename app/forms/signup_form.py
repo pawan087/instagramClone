@@ -13,6 +13,14 @@ def user_exists(form, field):
     if user:
         raise ValidationError('Email address is already in use.')
 
+def user_exists_edit(form, field):
+    # Checking if user exists
+    email = field.data
+    userFromId = User.query.filter(User.id == form.data["id"]).first().email
+    print(CGREEN + "\n userFromId: \n", userFromId, "\n" + CEND)
+    user = User.query.filter(User.email == email).first()
+    if user:
+        raise ValidationError('Email address is already in use.')
 
 def username_exists(form, field):
     # Checking if username is already in use
@@ -42,7 +50,7 @@ def password_matches(form, field):
         raise ValidationError('Password was incorrect.')
 
 class SignUpForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired(), username_exists_edit])
+    username = StringField('username', validators=[DataRequired(), username_exists])
     email = StringField('email', validators=[DataRequired(), user_exists])
     fname = StringField('First Name', validators=[DataRequired()])
     lname = StringField('Last Name', validators=[DataRequired()])
@@ -55,7 +63,7 @@ class SignUpForm(FlaskForm):
 class ProfileEditForm(FlaskForm):
     id = IntegerField('id', validators=[DataRequired()])
     # username = StringField('username')
-    username = StringField('username', validators=[username_exists])
+    username = StringField('username', validators=[username_exists_edit])
     email = StringField('email')
     fname = StringField('First Name', validators=[DataRequired()])
     lname = StringField('Last Name', validators=[DataRequired()])
