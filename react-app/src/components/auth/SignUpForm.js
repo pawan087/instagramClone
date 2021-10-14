@@ -6,16 +6,17 @@ import { signUp } from "../../store/session";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState("testUsername");
-  const [email, setEmail] = useState("test@email.com");
-  const [password, setPassword] = useState("password");
-  const [repeatPassword, setRepeatPassword] = useState("password");
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [repeatPassword, setRepeatPassword] = useState();
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
-  const [fname, setFname] = useState("testFname");
-  const [lname, setLname] = useState("testLname");
-  const [bio, setBio] = useState("testBio");
-  const [pronouns, setPronouns] = useState("He/Him");
+  const [fname, setFname] = useState();
+  const [lname, setLname] = useState();
+  const [bio, setBio] = useState();
+  const [uploadMsg, setUploadMsg] = useState("Upload Profile Picture");
+  const [pronouns, setPronouns] = useState();
 
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -82,14 +83,14 @@ const SignUpForm = () => {
   const updateImage = (e) => {
     const file = e.target.files[0];
 
+    setUploadMsg(file["name"]);
+
     setImage(file);
   };
 
   if (user) {
     return <Redirect to="/" />;
   }
-
-  console.log(username);
 
   return (
     <form className="outerContainer" onSubmit={onSignUp}>
@@ -192,7 +193,7 @@ const SignUpForm = () => {
               onChange={updateImage}
             />
             <div class="inputContainer fakefile">
-              <label className="uploadLabel">Upload Profile Picture</label>
+              <label className="uploadLabel">{uploadMsg}</label>
               <div className="uploadPic">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
