@@ -6,6 +6,8 @@ from app.forms import SignUpForm
 from app.forms import ProfileEditForm
 from flask_login import current_user, login_user, logout_user, login_required
 from colors import *
+from app.s3_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -15,9 +17,11 @@ def validation_errors_to_error_messages(validation_errors):
     Simple function that turns the WTForms validation errors into a simple list
     """
     errorMessages = []
+
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
+
     return errorMessages
 
 
@@ -28,6 +32,7 @@ def authenticate():
     """
     if current_user.is_authenticated:
         return current_user.to_dict()
+
     return {'errors': ['Unauthorized']}
 
 
@@ -40,11 +45,14 @@ def login():
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
+
         return user.to_dict()
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -54,6 +62,7 @@ def logout():
     Logs a user out
     """
     logout_user()
+
     return {'message': 'User logged out'}
 
 
@@ -65,29 +74,45 @@ def sign_up():
     form = SignUpForm()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
+
+    image = form.data['avatar']
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        return upload, 400
+
+    url = upload["url"]
+
+    print(CGREEN + "\n FORM DATA: \n", data, "\n" + CEND)
 
     if form.validate_on_submit():
-        print(CGREEN + "\n FORM VALIDATED: \n",
-              form.validate_on_submit(), "\n" + CEND)
-        if data["avatar"] == '':
-            form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
-        print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
+        # if data["avatar"] == '':
+        #     form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
+
         user = User(
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
-            avatar=form.data["avatar"],
+            avatar=url,
             bio=form.data['bio'],
             pronouns=form.data['pronouns'],
             fname=form.data['fname'],
             lname=form.data['lname'],
         )
+
         print(CGREEN + "\n USER CREATED: \n", user, "\n" + CEND)
+
         db.session.add(user)
         db.session.commit()
         login_user(user)
+
         return user.to_dict()
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @auth_routes.route('/signup', methods=['PUT'])

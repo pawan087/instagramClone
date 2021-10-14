@@ -3,10 +3,11 @@
   margin: 0 auto;
   width: 350px;
   margin-top: 50px;
+  margin-bottom: 125px;
 }
 
 .topInnerContainer {
-  border: 1px solid rgb(142, 142, 142);
+  border: 1px solid rgba(0, 0, 0, .2);
   background-color: rgb(255, 255, 255);
   height: 800px;
   width: 350px;
@@ -35,11 +36,10 @@
   font-size: 15px;
   color: rgb(142, 142, 142);
   width: 270px;
-
 }
 
 .btnContainer {
-  border-bottom: rgb(142, 142, 142) .5px solid;
+  border-bottom: rgba(0, 0, 0, .2) 0.5px solid;
   background-color: rgb(255, 255, 255);
   height: 50px;
   width: 270px;
@@ -75,7 +75,7 @@
   height: 30px;
   width: 100%;
   text-align: center;
-  line-height: 0.0em;
+  line-height: 0em;
 }
 
 .middleDivisor {
@@ -86,8 +86,8 @@
   top: 10px;
   height: 30px;
   width: 55px;
-  background:#fff;
-  padding:0 7.5px;
+  background: #fff;
+  padding: 0 7.5px;
 }
 
 .inputsContainer {
@@ -98,8 +98,8 @@
 
 .inputContainer {
   box-sizing: border-box;
-  background-color: rgb(250,250,250);
-  border: .75px solid rgb(142, 142, 142);
+  background-color: rgb(250, 250, 250);
+  border: 0.75px solid rgba(0, 0, 0, .2);
   height: 40px;
   font-size: 12.5px;
   border-radius: 5px;
@@ -124,8 +124,9 @@
   align-items: center;
 }
 
-.demoBtn:active, .signUpBtn:active {
-  opacity: .75;
+.demoBtn:active,
+.signUpBtn:active {
+  opacity: 0.75;
 }
 
 .policyContainer {
@@ -141,7 +142,7 @@
 
 .lowerInnerContainer {
   margin-top: 12.5px;
-  border: 1px solid rgb(142, 142, 142);
+  border: 1px solid rgba(0, 0, 0, .2);
   background-color: white;
   height: 70px;
   width: 350px;
@@ -162,7 +163,7 @@ div.fileinputs {
 }
 
 div.fakefile {
-	position: absolute;
+  position: absolute;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -170,18 +171,48 @@ div.fakefile {
 
 input.file {
   cursor: pointer;
-	opacity: 0;
-	z-index: 2;
+  opacity: 0;
+  z-index: 2;
+}
+
+.fakefile {
+  white-space: normal;
+  overflow: hidden;
 }
 
 .uploadLabel {
   margin-right: 12.5px;
   cursor: pointer;
+  position: absolute;
 }
 
 .uploadPic {
   cursor: pointer;
   height: 20px;
   width: 20px;
-  margin-left: 95px;
+  /* margin-left: 95px; */
+  position: absolute;
+  right: 10px;
+}
+
+.errorsContainer {
+  width: 350px;
+  min-height: 30px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  font-size: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  text-align: center;
+}
+
+.errors {
+  color: rgb(0, 149, 246);
 }
