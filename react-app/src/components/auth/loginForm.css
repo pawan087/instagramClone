@@ -1,0 +1,67 @@
+.pageContainer {
+    position: relative;
+    height: 100vh;
+    background-color: #fafafa;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.frame {
+    height: 600px;
+    object-fit: contain;
+}
+
+.loginContainer {
+    height: 570px;
+    width: 320px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.loginTitle {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 48px;
+    letter-spacing: 1.1px;
+    color: #231F20;
+    margin: 27px 0px 35px 0px;
+
+}
+
+.loginField {
+    height: 36px;
+    width: 266px;
+    border-radius: 3px;
+    background-color: #fafafa;
+    text-indent: 8px;
+    margin-bottom: 6px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.loginBtn {
+    border: none;
+    background:  #0095f6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 268px;
+    margin-top: 12px;
+    border-radius: 4px;
+}
+
+.btn {
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: bold;
+}
