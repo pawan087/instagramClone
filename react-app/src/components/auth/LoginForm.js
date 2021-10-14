@@ -29,6 +29,11 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
+  const demoLogin = (e) => {
+    setEmail('demo@aa.io');
+    setPassword('password');
+  }
+
   if (user) {
     return <Redirect to='/' />;
   }
@@ -36,48 +41,63 @@ const LoginForm = () => {
   return (
     <div className="pageContainer">
       <div className="main">
-        <img src={frame} alt='rotating phone images' className='frame' />
-        <form onSubmit={onLogin} className='loginContainer'>
-          <div className="loginTitle">Kilogram</div>
-          <div className="loginFormContainer">
-            <div>
-              <input
-                className='loginField'
-                name='email'
-                type='text'
-                placeholder='Email'
-                value={email}
-                onChange={updateEmail}
-              />
+        <div className="carouselContainer">
+          <img src={frame} alt='rotating phone images' className='frame' />
+          <div className="carouselPlacement">
+
+          </div>
+        </div>
+        <div className="loginRedirectContainer">
+          <form onSubmit={onLogin} className='loginContainer'>
+            <div className="loginTitle">Kilogram</div>
+            <div className="loginFormContainer">
+              <div>
+                <input
+                  className='loginField'
+                  name='email'
+                  type='text'
+                  placeholder='Email'
+                  value={email}
+                  onChange={updateEmail}
+                />
+              </div>
+              <div>
+                <input
+                  className='loginField'
+                  name='password'
+                  type='password'
+                  placeholder='Password'
+                  value={password}
+                  onChange={updatePassword}
+                />
+              </div>
+              <button className="loginBtn" type='submit'>
+                <button className='btn' type='submit'>Login</button>
+              </button>
+              <div className="orContainer">
+                <div className="line" />
+                <span className="orText">OR</span>
+                <div className="line" />
+              </div>
+              <div className="demoContainer" onClick={demoLogin}>
+                <button className='demo' type='submit'>Log in with Demo User</button>
+              </div>
+              <div className="forgotPasswordContainer">
+                <div className="forgotPassword">Forgot Password?</div>
+              </div>
             </div>
-            <div>
-              <input
-                className='loginField'
-                name='password'
-                type='password'
-                placeholder='Password'
-                value={password}
-                onChange={updatePassword}
-              />
+            <div className='errorContainer'>
+              {errors.map((error, ind) => (
+                <div className='errorText' key={ind}>{error}</div>
+              ))}
             </div>
-            <button className="loginBtn">
-              <button className='btn' type='submit'>Login</button>
-            </button>
-            <div className="orContainer">
-              <div className="line" />
-              <span className="orText">OR</span>
-              <div className="line" />
-            </div>
-            <div className="demoContainer">
-              <button className='demo' type='submit'>Log in with Demo User</button>
+          </form>
+          <div className="redirectContainer">
+            <div className="redirectText">
+              Don't have an account? <a href="/sign-up" className='redirectSignUp'>Sign Up</a>
             </div>
           </div>
-          <div className='errorContainer'>
-            {errors.map((error, ind) => (
-              <div className='errorText' key={ind}>{error}</div>
-            ))}
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );
