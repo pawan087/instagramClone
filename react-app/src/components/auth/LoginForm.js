@@ -38,11 +38,6 @@ const LoginForm = () => {
       <div className="main">
         <img src={frame} alt='rotating phone images' className='frame' />
         <form onSubmit={onLogin} className='loginContainer'>
-          <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
-          </div>
           <div className="loginTitle">Kilogram</div>
           <div className="loginFormContainer">
             <div>
@@ -69,8 +64,18 @@ const LoginForm = () => {
               <button className='btn' type='submit'>Login</button>
             </div>
             <div className="orContainer">
+              <div className="line" />
               <span className="orText">OR</span>
+              <div className="line" />
             </div>
+            <div className="demoContainer">
+              <button className='demo' type='submit'>Log in with Demo User</button>
+            </div>
+          </div>
+          <div className='errorContainer'>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
           </div>
         </form>
       </div>
