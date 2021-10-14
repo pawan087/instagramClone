@@ -3,10 +3,11 @@ from sqlalchemy import delete
 from sqlalchemy.sql.dml import Delete
 from app.forms import deleteImage, editImage
 from app.forms.comment_form import DeleteComment, EditComment, NewComment
+from app.forms.event_form import NewEvent, DeleteEvent
 from app.forms.like_form import DeleteLike, NewLike
 from app.forms.image_form import NewImage
 from flask_login import login_required
-from app.models import db, Image, Comment, Like
+from app.models import db, Image, Comment, Like, Event
 from colors import *
 from app.s3_helpers import (
     upload_file_to_s3, allowed_file, get_unique_filename)
@@ -128,6 +129,11 @@ def add_comment():
     # print(CGREEN + "\n REQUEST: \n",request.data,"\n" + CEND)
     # print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
     # print(CGREEN + "\n TITLE: \n",data['title'],"\n\n" + CEND)
+    commentMessage = ''
+    # if len(data['body']) > 100:
+    #     commentMessage = f"commented: \"{data['body'][0:100]}... \" on an image you posted"
+    # else:
+    #     commentMessage = f"commented: \"{data['body'][0:100]}\" on an image you posted"
 
     if form.validate_on_submit():
         new_comment = Comment(
@@ -135,7 +141,13 @@ def add_comment():
             image_id=data["image_id"],
             user_id=data["user_id"]
         )
+        # new_event = Event(
+        #         our_user_id=data["commented_user_id"],
+        #         other_user_id=data["commenting_user_id"],
+        #         message=commentMessage
+        # )
         db.session.add(new_comment)
+        # db.session.add(new_event)
         db.session.commit()
         images = Image.query.all()
         return {"images": [image.to_dict() for image in images]}
@@ -175,7 +187,7 @@ def delete_comment():
 
     print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
 
-    comment_to_delete = Comment.query.filter(Comment.id == data["id"]).first()
+    comment_to_delete = Comment.query.filter(Comment.id == data["comment_id"]).first()
     db.session.delete(comment_to_delete)
     db.session.commit()
 
@@ -214,7 +226,13 @@ def add_like():
                 image_id=data["image_id"],
                 user_id=data["user_id"]
             )
+            # new_event = Event(
+            #     our_user_id=data["liked_user_id"],
+            #     other_user_id=data["liking_user_id"],
+            #     message="liked an image you posted"
+            # )
             db.session.add(new_like)
+            # db.session.add(new_event)
             db.session.commit()
             likes = Like.query.all()
             return {"likes": [like.to_dict() for like in likes]}
@@ -227,10 +245,79 @@ def delete_like():
     form = DeleteLike()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
 
-    like_to_delete = Like.query.filter(Like.id == data["id"]).first()
+    like_to_delete = Like.query.filter(Like.id == data["like_id"]).first()
+    # event_to_delete = Event.query.filter(Event.id == data["event_id"]).first()
+    # print(CGREEN + "\n EVENT: \n", event_to_delete, "\n" + CEND)
+    print(CGREEN + "\n LIKE: \n", like_to_delete, "\n" + CEND)
+
     db.session.delete(like_to_delete)
+    # db.session.delete(event_to_delete)
     db.session.commit()
 
     likes = Like.query.all()
     return {"likes": [like.to_dict() for like in likes]}
+
+
+# --------------------------------------------------------
+# ---------------------EVENTS ROUTES----------------------
+# --------------------------------------------------------
+
+@image_routes.route('/events/')
+def get_events():
+    events = Event.query.all()
+    return {"events": [event.to_dict() for event in events]}
+
+@image_routes.route('/events/<int:user_id>/')
+def get_my_events(user_id):
+    print(CGREEN + "\n USER_ID: \n", user_id,"\n" + CEND)
+    events = Event.query.filter(Event.our_user_id == int(user_id)).all()
+    print(CGREEN + "\n EVENTS: \n", events, "\n" + CEND)
+    print(CGREEN + "\n EVENTS: \n", "HELLO WORLD THIS IS NOT WORKING\n" + CEND)
+    return {"events": [event.to_dict() for event in events]}
+
+@image_routes.route('/events/<int:user_id>', methods=["POST"])
+def add_event(user_id):
+    form = NewEvent()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+
+        print(CGREEN + "\n DATA: \n", data, "\n" + CEND)
+        if not user_id == data['our_user_id']:
+            new_event = Event(
+                other_user_id=data["other_user_id"],
+                our_user_id=data["our_user_id"],
+                message=data['message'],
+                image_id=data["image_id"],
+            )
+
+            db.session.add(new_event)
+            db.session.commit()
+            events = Event.query.filter(Event.our_user_id == int(user_id)).all()
+            print(CGREEN + "\n SHOULD BE MY USER_ID: \n", user_id, "\n" + CEND)
+            print(CGREEN + "\n SHOULD BE MY EVENTS: \n", [event.to_dict() for event in events], "\n" + CEND)
+            return {"events": [event.to_dict() for event in events]}
+        else:
+            events = Event.query.filter(Event.our_user_id == int(user_id)).all()
+            # print(CGREEN + "\n SHOULD BE MY USER_ID: \n", user_id, "\n" + CEND)
+            print(CGREEN + "\n SHOULD BE MY EVENTS: \n", [event.to_dict() for event in events], "\n" + CEND)
+            return {"events": [event.to_dict() for event in events]}
+    else:
+        return "Bad Data"
+
+@image_routes.route('/events/<int:user_id>/<int:image_id>', methods=["DELETE"])
+def delete_event(user_id, image_id):
+    print(CGREEN + "\n DATA: \n", image_id, "\n" + CEND)
+
+    event_to_delete = Event.query.filter((Event.image_id == image_id and Event.other_user_id == user_id)).all()
+    print(CGREEN + "\n EVENTS: \n", event_to_delete, "\n" + CEND)
+    
+    for event in event_to_delete:
+        db.session.delete(event)
+        
+    db.session.commit()
+
+    events = Event.query.filter(Event.our_user_id == int(user_id)).all()
+    return {"events": [event.to_dict() for event in events]}

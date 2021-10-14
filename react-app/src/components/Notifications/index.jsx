@@ -1,14 +1,19 @@
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
-const Notifications = () => {
+const Notifications = ({events}) => {
 
-    const user = useSelector((state) => state.session.user)
+    // const user = useSelector((state) => state.session.user)
+    // console.log(user.incoming_events.incoming)
 
-    console.log(user.incoming_events.incoming)
 
     return (
         <div>
-            {/* <h3>This is an event</h3> */}
+            {events.map((event) => (
+                <div>
+                    <p>{event.event_receiver_id}</p>
+                    <p>{event.event_creator_id}</p>
+                </div>
+            ))}
         </div>
     )
 }
