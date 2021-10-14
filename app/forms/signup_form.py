@@ -25,10 +25,18 @@ def username_exists_edit(form, field):
     # Checking if username is already in use
     username = field.data
     user = User.query.filter(User.username == username).first()
-    print(CGREEN + "\n USER.USERNAME: \n", User.query.filter(User.username == username).first(), "\n" + CEND)
     if user:
         raise ValidationError('Username is already in use.')
 
+def password_matches(form, field):
+    # Checking if password matches
+    old_password = field.data
+    id = form.data['id']
+    user = User.query.filter(User.id == id).first()
+    if not user:
+        raise ValidationError('No such user exists.')
+    if not user.check_password(old_password):
+        raise ValidationError('Password was incorrect.')
 
 class SignUpForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), username_exists])
@@ -49,5 +57,6 @@ class ProfileEditForm(FlaskForm):
     lname = StringField('Last Name', validators=[DataRequired()])
     bio = TextAreaField('Last Name')
     pronouns = SelectField("Pronouns", choices=['He/Him', 'She/Her', 'They/Them', 'Other'])
-    password = StringField('password', validators=[DataRequired()])
+    oldPassword = StringField('old_password', validators=[DataRequired(), password_matches])
+    password = StringField('password')
     avatar = StringField('avatar')

@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { profileEdit, signUp } from '../../store/session';
 
 const EditProfileForm = () => {
-  const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [password, setPassword] = useState('');
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
-  const [bio, setBio] = useState('');
-  const [pronouns, setPronouns] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
+  const [errors, setErrors] = useState([]);
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
+  const [avatar, setAvatar] = useState(user.avatar);
+  const [oldPassword, setOldPassword] = useState('');
+  const [password, setPassword] = useState('');
+  const [fname, setFname] = useState(user.fname);
+  const [lname, setLname] = useState(user.lname);
+  const [bio, setBio] = useState(user.bio);
+  const [pronouns, setPronouns] = useState(user.pronouns);
+  const [repeatPassword, setRepeatPassword] = useState('');
   const dispatch = useDispatch();
 
   const onProfileEdit = async (e) => {
     e.preventDefault();
+    console.log("password", password, "repeat password", repeatPassword)
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password, avatar, fname, lname, bio, pronouns));
+      console.log("HIT")
+      const data = await dispatch(profileEdit(user.id, username, email, oldPassword, password, avatar, fname, lname, bio, pronouns));
       if (data) {
         setErrors(data)
       }
@@ -33,6 +36,10 @@ const EditProfileForm = () => {
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  const updateOldPassword = (e) => {
+    setOldPassword(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -61,6 +68,7 @@ const EditProfileForm = () => {
             name='username'
             onChange={updateUsername}
             value={username}
+            placeholder="User Name"
           ></input>
         </div>
       <div>
@@ -70,6 +78,7 @@ const EditProfileForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
+          placeholder="Email"
         ></input>
       </div>
       <div>
@@ -114,6 +123,16 @@ const EditProfileForm = () => {
         ></textarea>
       </div>
       <div>
+        <label>Old Password</label>
+        <input
+          type='password'
+          name='old_password'
+          onChange={updateOldPassword}
+          value={oldPassword}
+          required={true}
+        ></input>
+      </div>
+      <div>
         <label>Password</label>
         <input
           type='password'
@@ -129,7 +148,6 @@ const EditProfileForm = () => {
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
         ></input>
       </div>
       <div>

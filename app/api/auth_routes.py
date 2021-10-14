@@ -104,6 +104,7 @@ def edit_profile():
             form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
         user = User.query.filter(User.id == data["id"]).first()
 
+        # Checks to see username changed and then checks to see if it's unique
         if not user.username == data["username"]:
           usernameExists = User.query.filter(User.username == data["username"]).first()
           print(CGREEN + "\n EXISTS: \n", usernameExists, "\n" + CEND)
@@ -111,16 +112,19 @@ def edit_profile():
             user.username=form.data['username']
           else:
             return "Bad Data"
+        # Checks to see email changed and then checks to see if it's unique
         if not user.email == data["email"]:
           userExists = User.query.filter(User.email == data["email"]).first()
           if not userExists:
             user.email=form.data['email']
           else:
             return "Bad Data"
-
-        user.password=form.data['password']
+        # Checks to see if password changed versus the validated "oldpassword"
+        if not data["oldPassword"] == data["password"] and not data["password"] == "":
+          user.password=form.data['password']
         user.avatar=form.data["avatar"]
         user.bio=form.data['bio']
+        user.pronouns=form.data['pronouns']
         user.fname=form.data['fname']
         user.lname=form.data['lname']
 
