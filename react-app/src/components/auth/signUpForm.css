@@ -8,7 +8,7 @@
 .topInnerContainer {
   border: 1px solid rgb(142, 142, 142);
   background-color: rgb(255, 255, 255);
-  height: 700px;
+  height: 800px;
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@
 
 .inputsContainer {
   background-color: rgb(255, 255, 255);
-  height: 345px;
+  height: 447.5px;
   width: 350px;
 }
 
