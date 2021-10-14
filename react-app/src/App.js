@@ -14,6 +14,7 @@ import EditImageForm from './components/Images/EditImageForm';
 import IndividualImage from './components/Images/IndividualImage';
 import Results from './components/Results';
 import EditCommentForm from './components/Comments/EditCommentForm';
+import EditProfileForm from './components/EditProfile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,7 +33,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -41,27 +42,38 @@ function App() {
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
+          <NavBar />
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
+          <NavBar />
           <User />
         </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/edit_profile' exact={true} >
+          <EditProfileForm />
+        </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
+          <NavBar />
           <Image />
         </ProtectedRoute>
         <ProtectedRoute path='/images/new' exact={true} >
+          <NavBar />
           <AddImageForm />
         </ProtectedRoute>
         <ProtectedRoute path='/images/:id' exact={true} >
+          <NavBar />
           <IndividualImage />
         </ProtectedRoute>
         <ProtectedRoute path='/images/:id/edit' exact={true} >
+          <NavBar />
           <EditImageForm />
         </ProtectedRoute>
         <ProtectedRoute path='/results/:tag' exact={true}>
+          <NavBar />
           <Results />
         </ProtectedRoute>
         <ProtectedRoute path='/images/:image_id/comments/:comment_id' exact={true}>
+          <NavBar />
           <EditCommentForm />
         </ProtectedRoute>
       </Switch>
