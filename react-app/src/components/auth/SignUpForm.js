@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
-import { login } from '../../store/session';
-import { useHistory } from 'react-router-dom';
+import { login } from "../../store/session";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -20,7 +19,6 @@ const SignUpForm = () => {
   const [uploadMsg, setUploadMsg] = useState("Upload Profile Picture");
   const [pronouns, setPronouns] = useState();
   const [showErrors, setShowErrors] = useState(false);
-  const history = useHistory();
 
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -120,7 +118,9 @@ const SignUpForm = () => {
         <div className="subtitle">Sign up to see photos from your friends.</div>
 
         <div className="btnContainer">
-          <button onClick={demoLogin} className="demoBtn">Log in as Demo User</button>
+          <button onClick={demoLogin} className="demoBtn">
+            Log in as Demo User
+          </button>
         </div>
 
         <div className="divisorContainer">
@@ -141,7 +141,7 @@ const SignUpForm = () => {
           <div>
             <input
               className="inputContainer inputText"
-              type="text"
+              type="email"
               placeholder="Email"
               onChange={updateEmail}
               value={email}
