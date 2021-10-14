@@ -19,13 +19,16 @@ def username_exists(form, field):
     username = field.data
     user = User.query.filter(User.username == username).first()
     if user:
-        raise ValidationError('Username is already in use.')
+      raise ValidationError('Username is already in use.')
 
 def username_exists_edit(form, field):
     # Checking if username is already in use
     username = field.data
+    userFromId = User.query.filter(User.id == form.data["id"]).first().username
+    print(CGREEN + "\n userFromId: \n", userFromId, "\n" + CEND)
     user = User.query.filter(User.username == username).first()
-    if user:
+    if not user.username == userFromId:
+      if user:
         raise ValidationError('Username is already in use.')
 
 def password_matches(form, field):
@@ -39,24 +42,25 @@ def password_matches(form, field):
         raise ValidationError('Password was incorrect.')
 
 class SignUpForm(FlaskForm):
-    username = StringField('username', validators=[DataRequired(), username_exists])
+    username = StringField('username', validators=[DataRequired(), username_exists_edit])
     email = StringField('email', validators=[DataRequired(), user_exists])
     fname = StringField('First Name', validators=[DataRequired()])
     lname = StringField('Last Name', validators=[DataRequired()])
     bio = TextAreaField('Last Name')
-    pronouns = SelectField("Pronouns", choices=["Prefer Not To Disclose", 'He/Him', 'She/Her', 'They/Them', 'Other'])
+    pronouns = SelectField("Pronouns", choices=['Prefer Not To Disclose', 'He/Him', 'She/Her', 'They/Them', 'Other'])
     password = StringField('password', validators=[DataRequired()])
     avatar = StringField('avatar')
 
 
 class ProfileEditForm(FlaskForm):
     id = IntegerField('id', validators=[DataRequired()])
-    username = StringField('username')
+    # username = StringField('username')
+    username = StringField('username', validators=[username_exists])
     email = StringField('email')
     fname = StringField('First Name', validators=[DataRequired()])
     lname = StringField('Last Name', validators=[DataRequired()])
     bio = TextAreaField('Last Name')
-    pronouns = SelectField("Pronouns", choices=['He/Him', 'She/Her', 'They/Them', 'Other'])
+    pronouns = SelectField("Pronouns", choices=['Prefer Not To Disclose','He/Him', 'She/Her', 'They/Them', 'Other'])
     oldPassword = StringField('old_password', validators=[DataRequired(), password_matches])
     password = StringField('password')
     avatar = StringField('avatar')

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-import { profileEdit, signUp } from '../../store/session';
+import { profileEdit } from '../../store/session';
 
 const EditProfileForm = () => {
   const user = useSelector(state => state.session.user);
@@ -20,12 +20,10 @@ const EditProfileForm = () => {
 
   const onProfileEdit = async (e) => {
     e.preventDefault();
-    console.log("password", password, "repeat password", repeatPassword)
     if (password === repeatPassword) {
-      console.log("HIT")
       const data = await dispatch(profileEdit(user.id, username, email, oldPassword, password, avatar, fname, lname, bio, pronouns));
       if (data) {
-        setErrors(data)
+        setErrors(data);
       }
     }
   };
@@ -61,6 +59,7 @@ const EditProfileForm = () => {
           <div key={ind}>{error}</div>
         ))}
       </div>
+      {console.log(errors)}
       <div>
           <label>User Name</label>
           <input
@@ -108,7 +107,7 @@ const EditProfileForm = () => {
         >
           <option value={null}>Prefer Not To Disclose</option>
           <option value="He/Him">He/Him</option>
-          <option value="She/her">She/Her</option>
+          <option value="She/Her">She/Her</option>
           <option value="They/Them">They/Them</option>
           <option value="Other">Other</option>
 
@@ -143,12 +142,23 @@ const EditProfileForm = () => {
       </div>
       <div>
         <label>Repeat Password</label>
+        {/* If there's a value in the password field require the repeat password, otherwise don't require it */}
+        {password ?
+        <input
+        type='password'
+        name='repeat_password'
+        onChange={updateRepeatPassword}
+        value={repeatPassword}
+        required={true}
+      ></input>
+        :
         <input
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
         ></input>
+        }
       </div>
       <div>
         <label>Avatar</label>

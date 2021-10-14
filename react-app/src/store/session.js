@@ -120,7 +120,6 @@ export const signUp = (username, email, password, avatar, fname, lname, bio, pro
 }
 
 export const profileEdit = (id, username, email, oldPassword, password, avatar, fname, lname, bio, pronouns) => async (dispatch) => {
-  console.log(id, username, email, password, avatar, fname, lname, bio, pronouns)
   const response = await fetch('/api/auth/signup', {
     method: 'PUT',
     headers: {
@@ -137,6 +136,7 @@ export const profileEdit = (id, username, email, oldPassword, password, avatar, 
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
+      console.log("response not ok and errors", data.errors)
       return data.errors;
     }
   } else {

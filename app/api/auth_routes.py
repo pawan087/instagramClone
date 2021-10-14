@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, session, request
+from wtforms.validators import ValidationError
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
@@ -119,7 +120,9 @@ def edit_profile():
           if not userExists:
             user.email=form.data['email']
           else:
-            return "Bad Data"
+            form.errors['email'] = ['Email address is already in use.']
+            print(CGREEN + "\n Errors: \n", form.errors, "\n" + CEND)
+            return {'errors': validation_errors_to_error_messages(form.errors)}, 401
         # Checks to see if password changed versus the validated "oldpassword"
         if not data["oldPassword"] == data["password"] and not data["password"] == "":
           user.password=form.data['password']
@@ -132,7 +135,9 @@ def edit_profile():
         print(CGREEN + "\n USER UPDATED: \n", user, "\n" + CEND)
         db.session.commit()
         # login_user(user)
-        return user.to_dict()
+        print(CGREEN + "\n Errors: \n", form.errors, "\n" + CEND)
+        return user.to_dict(), {'errors': validation_errors_to_error_messages(form.errors)}
+    print(CGREEN + "\n ErrorsValidateFailed: \n", form.errors, "\n" + CEND)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
