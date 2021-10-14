@@ -1,3 +1,4 @@
+import "./signUpForm.css";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -15,18 +16,6 @@ const SignUpForm = () => {
   const [lname, setLname] = useState("testLname");
   const [bio, setBio] = useState("testBio");
   const [pronouns, setPronouns] = useState("He/Him");
-
-/*   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
-  const [image, setImage] = useState(null);
-  const [imageLoading, setImageLoading] = useState(false);
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [bio, setBio] = useState("");
-  const [pronouns, setPronouns] = useState(""); */
 
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -46,11 +35,11 @@ const SignUpForm = () => {
       formData.append("bio", bio);
       formData.append("pronouns", pronouns);
 
-      setImageLoading(true);
+      // setImageLoading(true);
 
       const data = await dispatch(signUp(formData));
 
-      setImageLoading(false);
+      // setImageLoading(false);
 
       if (data) {
         setErrors(data);
@@ -100,119 +89,172 @@ const SignUpForm = () => {
     return <Redirect to="/" />;
   }
 
+  console.log(username);
+
   return (
-    <form onSubmit={onSignUp}>
+    <form className="outerContainer" onSubmit={onSignUp}>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
 
-      <div>
-        <label>User Name</label>
+      <div className="topInnerContainer">
+        <div className="title logo">Kilogram</div>
 
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
+        <div className="subtitle">Sign up to see photos from your friends.</div>
+
+        <div className="btnContainer">
+          <button className="demoBtn">Log in as Demo User</button>
+        </div>
+
+        <div className="divisorContainer">
+          <span className="middleDivisor">OR</span>
+        </div>
+
+        <div className="inputsContainer text-field">
+          <div>
+            <input
+              className="inputContainer inputText"
+              type="text"
+              placeholder="Username"
+              onChange={updateUsername}
+              value={username}
+            ></input>
+          </div>
+
+          <div>
+            <input
+              className="inputContainer inputText"
+              type="text"
+              placeholder="Email"
+              onChange={updateEmail}
+              value={email}
+            ></input>
+          </div>
+
+          <div>
+            <input
+              className="inputContainer"
+              type="text"
+              placeholder="First Name"
+              onChange={updateFname}
+              value={fname}
+              placeholder="First Name"
+            ></input>
+          </div>
+
+          <div>
+            <input
+              className="inputContainer"
+              type="text"
+              placeholder="Last Name"
+              onChange={updateLname}
+              value={lname}
+              placeholder="Last name"
+            ></input>
+          </div>
+
+          <div>
+            <select
+              className="inputContainer"
+              type="text"
+              onChange={updatePronouns}
+              value={pronouns}
+            >
+              <option value={null}>Pronouns</option>
+
+              <option value="He/Him">He/Him</option>
+
+              <option value="She/her">She/Her</option>
+
+              <option value="They/Them">They/Them</option>
+
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <input
+              className="inputContainer"
+              type="text"
+              placeholder="Bio"
+              onChange={updateBio}
+              value={bio}
+            ></input>
+          </div>
+
+          <div className="uploadDiv fileinputs">
+            <input
+              className="inputContainer file"
+              type="file"
+              accept="image/*"
+              onChange={updateImage}
+            />
+            <div class="inputContainer fakefile">
+              <label className="uploadLabel">Upload Profile Picture</label>
+              <div className="uploadPic">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <input
+              className="inputContainer"
+              type="password"
+              placeholder="Password"
+              onChange={updatePassword}
+              value={password}
+            ></input>
+          </div>
+
+          <div>
+            <input
+              className="inputContainer"
+              type="password"
+              placeholder="Repeat Password"
+              onChange={updateRepeatPassword}
+              value={repeatPassword}
+              required={true}
+            ></input>
+          </div>
+        </div>
+
+        <div className="btnContainer2">
+          <button type="submit" className="signUpBtn">
+            Sign Up
+          </button>
+        </div>
+
+        <div className="policyContainer">
+          By signing up, you agree to our{" "}
+          <span className="em">Terms, Data Policy</span> and{" "}
+          <span className="em">Cookies Policy</span>.
+        </div>
       </div>
 
-      <div>
-        <label>Email</label>
-
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
+      <div className="lowerInnerContainer">
+        Have an account?
+        <a href="/login" className="link">
+          Log in
+        </a>
       </div>
+    </form>
+  );
+};
 
-      <div>
-        <label>First Name</label>
-
-        <input
-          type="text"
-          onChange={updateFname}
-          value={fname}
-          placeholder="First Name"
-        ></input>
-      </div>
-
-      <div>
-        <label>Last Name</label>
-
-        <input
-          type="text"
-          onChange={updateLname}
-          value={lname}
-          placeholder="Last name"
-        ></input>
-      </div>
-
-      <div>
-        <label>Pronouns</label>
-
-        <select type="text" onChange={updatePronouns} value={pronouns}>
-          <option value={null}>Prefer Not To Disclose</option>
-
-          <option value="He/Him">He/Him</option>
-
-          <option value="She/her">She/Her</option>
-
-          <option value="They/Them">They/Them</option>
-
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Bio</label>
-
-        <textarea
-          onChange={updateBio}
-          value={bio}
-          placeholder="Write a short biography!"
-        ></textarea>
-      </div>
-
-      <div>
-        <label>Password</label>
-
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-
-      <div>
-        <label>Repeat Password</label>
-
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-
-      <div>
-        <label>Profile Photo</label>
-
-        <input type="file" accept="image/*" onChange={updateImage} />
-
-        {imageLoading && <p>Loading...</p>}
-      </div>
-
-
-      <button type="submit">Sign Up</button>
-      </form>
-      );
-    };
-
-    export default SignUpForm;
+export default SignUpForm;
