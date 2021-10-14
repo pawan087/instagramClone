@@ -14,6 +14,7 @@ import EditImageForm from './components/Images/EditImageForm';
 import IndividualImage from './components/Images/IndividualImage';
 import Results from './components/Results';
 import EditCommentForm from './components/Comments/EditCommentForm';
+import EditProfileForm from './components/EditProfile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +48,9 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <NavBar />
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/edit_profile' exact={true} >
+          <EditProfileForm />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <NavBar />

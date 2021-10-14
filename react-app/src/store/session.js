@@ -119,6 +119,31 @@ export const signUp = (signUpData) => async (dispatch) => {
   }
 };
 
+export const profileEdit = (id, username, email, oldPassword, password, avatar, fname, lname, bio, pronouns) => async (dispatch) => {
+  const response = await fetch('/api/auth/signup', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      id, username, email, oldPassword, password, avatar, fname, lname, bio, pronouns
+    }),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      console.log("response not ok and errors", data.errors)
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
 // ==================================================================
 // =======================FOLLOWING THUNKS===========================
 // ==================================================================
