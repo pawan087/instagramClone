@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { setAllImages } from '../store/image';
 import ImageComponent from './Images/ImageComponent';
 import ImageTileComponent from './Images/ImageTileComponent'
@@ -11,7 +11,8 @@ import settings from "../image_assets/settings.svg"
 
 function User() {
   const { userId }  = useParams();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const curUser = useSelector((state) => state.session.user)
   const images = useSelector((state) => state.images)
@@ -42,6 +43,7 @@ function User() {
 
   const editProfile = (e) => {
     e.preventDefault()
+    history.push(`/users/${userId}/edit_profile`)
   }
   const editProfileModal = (e) => {
     e.preventDefault()

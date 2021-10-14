@@ -1,7 +1,9 @@
 from flask import Blueprint, jsonify, session, request
+from wtforms.validators import ValidationError
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms import ProfileEditForm
 from flask_login import current_user, login_user, logout_user, login_required
 from colors import *
 from app.s3_helpers import (
@@ -111,6 +113,39 @@ def sign_up():
 
         return user.to_dict()
 
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@auth_routes.route('/signup', methods=['PUT'])
+def edit_profile():
+    """
+    Edits existing user
+    """
+    form = ProfileEditForm()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        print(CGREEN + "\n FORM VALIDATED: \n",
+              form.validate_on_submit(), "\n" + CEND)
+        if data["avatar"] == '':
+            form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
+        user = User.query.filter(User.id == data["id"]).first()
+        user.username=form.data['username']
+        user.email=form.data['email']
+        # Checks to see if password changed versus the validated "oldpassword"
+        if not data["oldPassword"] == data["password"] and not data["password"] == "":
+          user.password=form.data['password']
+        user.avatar=form.data["avatar"]
+        user.bio=form.data['bio']
+        user.pronouns=form.data['pronouns']
+        user.fname=form.data['fname']
+        user.lname=form.data['lname']
+        print(CGREEN + "\n USER UPDATED: \n", user, "\n" + CEND)
+        db.session.commit()
+        # login_user(user)
+        print(CGREEN + "\n Errors: \n", form.errors, "\n" + CEND)
+        return user.to_dict(), {'errors': validation_errors_to_error_messages(form.errors)}
+    print(CGREEN + "\n ErrorsValidateFailed: \n", form.errors, "\n" + CEND)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
