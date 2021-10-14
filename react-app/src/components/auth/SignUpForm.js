@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
+import { login } from '../../store/session';
+import { useHistory } from 'react-router-dom';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -18,13 +20,14 @@ const SignUpForm = () => {
   const [uploadMsg, setUploadMsg] = useState("Upload Profile Picture");
   const [pronouns, setPronouns] = useState();
   const [showErrors, setShowErrors] = useState(false);
+  const history = useHistory();
 
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    
+
     if (password === repeatPassword) {
       const formData = new FormData();
 
@@ -90,6 +93,11 @@ const SignUpForm = () => {
     setImage(file);
   };
 
+  const demoLogin = (e) => {
+    e.preventDefault();
+    dispatch(login("demo@aa.io", "password"));
+  };
+
   if (user) {
     return <Redirect to="/" />;
   }
@@ -112,7 +120,7 @@ const SignUpForm = () => {
         <div className="subtitle">Sign up to see photos from your friends.</div>
 
         <div className="btnContainer">
-          <button className="demoBtn">Log in as Demo User</button>
+          <button onClick={demoLogin} className="demoBtn">Log in as Demo User</button>
         </div>
 
         <div className="divisorContainer">
