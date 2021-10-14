@@ -25,7 +25,7 @@ const EditProfileForm = () => {
 
   const onProfileEdit = async (e) => {
     e.preventDefault();
-    
+
     if (password === repeatPassword) {
       const formData = new FormData();
 
@@ -93,11 +93,11 @@ const EditProfileForm = () => {
 
         <div className="editProfileBody">
           <div className="editRow">
-            <div className="avatarContainer editProfile">
+            <div className="avatarContainer editProfilePage">
               <img src={user.avatar} alt="Avatar" />
             </div>
 
-            <div className="userNameDisplay editProfile">{user.username}</div>
+            <div className="userNameDisplay editProfilePage">{user.username}</div>
           </div>
 
           <form onSubmit={onProfileEdit}>
@@ -304,7 +304,7 @@ const EditProfileForm = () => {
               </div>
             </div>
 
-            <button type="submit">Save Changes</button>
+            <button type="submit" class="button blueButton">Save Changes</button>
           </form>
         </div>
       </div>

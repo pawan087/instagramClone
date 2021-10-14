@@ -1,60 +1,74 @@
 
 .editProfileContainer {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
   margin: 30px auto 0;
   width: 100%;
   max-width: 935px;
   border: 1px solid #dbdbdb;
-  padding: 15px 30px;
+  padding: 0 30px 0 0;
   background-color: #FFFFFF;
 }
 
 .editProfileBody {
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
+  padding: 30px 50px;
 }
 
 .editLeftPanel {
   display: flex;
   flex-direction: column;
+  border-right: 1px solid #DBDBDB;
 }
 .editPanelTab {
   list-style: none;
+  font-weight: 500;
+  padding: 15px 118px 15px 33px;
 }
 
-.avatarContainer.editProfile {
-  display: block;
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, .097)
-}
-.avatarContainer.editProfile img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-.userNameDisplay.editProfile {
-
-}
+.editRow,
 .editFormRow {
   display: flex;
-  /* 736px; add a min and max width of this via a media query */
   margin-bottom: 15px;
 }
-.editLabelContainer {
-  /* display: flex; */
-}
 
-.editLabelContainer > label {
-  margin-right: 20px;
-  font-weight: 500;
+.avatarContainer.editProfilePage {
+  display: block;
+  box-sizing: border-box;
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, .097);
+  margin: 2px 32px 0 83px;
 }
+.avatarContainer.editProfile img {
 
+}
+.userNameDisplay.editProfilePage,
 .editInputContainer {
   max-width: 355px;
   width: 100%;
 }
+.editFormRow {
+  /* 736px; add a min and max width of this via a media query */
+}
+.editLabelContainer {
+  display: flex;
+  justify-content: right;
+  width: 160px;
+  margin-top: 6px;
+  margin-right: 30px;
+}
+
+.editLabelContainer > label {
+  font-weight: 500;
+}
+
+
 .editInputContainer input,
 .editInputContainer textarea {
   box-sizing: border-box;
