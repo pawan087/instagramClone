@@ -12,7 +12,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState();
   const [repeatPassword, setRepeatPassword] = useState();
   const [image, setImage] = useState(null);
-  // const [imageLoading, setImageLoading] = useState(false);
+  const [imageLoading, setImageLoading] = useState(false);
   const [fname, setFname] = useState();
   const [lname, setLname] = useState();
   const [bio, setBio] = useState();

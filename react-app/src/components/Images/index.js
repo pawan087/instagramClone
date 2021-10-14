@@ -6,19 +6,18 @@ import { setAllUsers } from "../../store/session"
 // import Notifications from "../Notifications"
 import { setAllLikes } from "../../store/like"
 import './images.css'
-import { setAllMyEvents } from "../../store/event"
+// import { setAllMyEvents } from "../../store/event"
 
 const Image = () => {
 
     const dispatch = useDispatch()
     const images = useSelector((state) => state.images)
-    const user = useSelector((state) => state.session.user)
+    // const user = useSelector((state) => state.session.user)
 
     useEffect(() => {
         dispatch(setAllImages())
         dispatch(setAllUsers())
         dispatch(setAllLikes())
-        dispatch(setAllMyEvents(user.id))
     }, [dispatch])
 
     return (

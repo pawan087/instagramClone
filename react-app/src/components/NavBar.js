@@ -6,7 +6,7 @@ import LogoutButton from './auth/LogoutButton';
 import home from "../image_assets/home.svg"
 import post from "../image_assets/post.svg"
 import notifications from "../image_assets/notifications.svg"
-import { deleteOneEvent } from '../store/event';
+import { deleteOneEvent, startPolling } from '../store/event';
 
 
 
@@ -19,6 +19,12 @@ const NavBar = () => {
       content.classList.toggle("active")
     })
   }, [])
+
+
+  useEffect(() => {
+    dispatch(startPolling(user.id))
+  },[])
+ 
   
 
   const dispatch = useDispatch()
@@ -52,7 +58,7 @@ const NavBar = () => {
                       <div className="userInfo">
                         <div className="avatarContainer"><img src={findUser(event?.other_user_id)?.avatar} alt="eventAvatar" /></div>
                         <p> <span className="eventUser">{findUser(event?.other_user_id)?.username}</span> {event.message}</p>
-                        <button onClick={(e) => dispatch(deleteOneEvent(user.id, event.image_id))}>X</button>
+                        {/* <button onClick={(e) => dispatch(deleteOneEvent(user.id, event.image_id))}>X</button> */}
                       </div>
                     </div>
                   ))
