@@ -41,14 +41,3 @@
 .searchInput:focus + .searchIcon {
   visibility: hidden;
 }
-
-.cancelIcon {
-  display: inline-flex;
-  width: 15px;
-  height: 15px;
-  background-color: #E8E8E8;
-  color: #E8E8E8;
-  border-radius: 9999px;
-  position: absolute;
-  right: 12.5px;
-}

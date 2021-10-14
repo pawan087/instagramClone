@@ -38,12 +38,9 @@ const NavBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(
-    //   searchAction.getSearchResults({ searchInput, startDate, endDate })
-    // );
-    // dispatch(searchAction.getSearch({ searchInput, startDate, endDate }));
     setSearchInput("");
-    history.push("/search");
+    let searchCriteria = searchInput.toLowerCase();
+    history.push(`/results/${searchCriteria}`);
   };
 
   const handleKeypress = (e) => {
