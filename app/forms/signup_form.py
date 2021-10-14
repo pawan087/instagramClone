@@ -36,10 +36,12 @@ def username_exists(form, field):
 def username_exists_edit(form, field):
     # Checking if username is already in use
     username = field.data
+
     userFromId = User.query.filter(User.id == form.data["id"]).first().username
-    print(CGREEN + "\n userFromId: \n", userFromId, "\n" + CEND)
+    # print(CGREEN + "\n userFromId: \n", userFromId, "\n" + CEND)
     user = User.query.filter(User.username == username).first()
-    if not user.username == userFromId:
+
+    if not username == userFromId:
       if user:
         raise ValidationError('Username is already in use.')
 
