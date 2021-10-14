@@ -28,6 +28,6 @@ class SignUpForm(FlaskForm):
     fname = StringField('First Name', validators=[DataRequired()])
     lname = StringField('Last Name', validators=[DataRequired()])
     bio = TextAreaField('Last Name')
-    pronouns = SelectField("Pronouns", choices=['He/Him', 'She/Her', 'They/Them', 'Other'])
+    pronouns = SelectField("Pronouns", choices=["Prefer Not To Disclose", 'He/Him', 'She/Her', 'They/Them', 'Other'])
     password = StringField('password', validators=[DataRequired()])
     avatar = StringField('avatar')

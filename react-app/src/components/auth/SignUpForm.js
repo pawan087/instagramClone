@@ -19,6 +19,7 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    console.log("pronoun", pronouns)
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password, avatar, fname, lname, bio, pronouns));
       if (data) {
@@ -99,7 +100,7 @@ const SignUpForm = () => {
         >
           <option value={null}>Prefer Not To Disclose</option>
           <option value="He/Him">He/Him</option>
-          <option value="She/her">She/Her</option>
+          <option value="She/Her">She/Her</option>
           <option value="They/Them">They/Them</option>
           <option value="Other">Other</option>
 
