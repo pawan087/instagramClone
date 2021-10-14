@@ -38,11 +38,11 @@ const SignUpForm = () => {
       formData.append("bio", bio);
       formData.append("pronouns", pronouns);
 
-      // setImageLoading(true);
+      setImageLoading(true);
 
       const data = await dispatch(signUp(formData));
 
-      // setImageLoading(false);
+      setImageLoading(false);
 
       if (data) {
         setShowErrors(true);
@@ -268,11 +268,11 @@ const SignUpForm = () => {
           Log in
         </a>
       </div>
-      <div className="loadingModal">
+      {imageLoading && <div className="loadingModal">
         <div className="logo innerModal">
           Signing in <span class="dot-elastic"></span>
         </div>
-      </div>
+      </div>}
     </form>
   );
 };
