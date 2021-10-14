@@ -11,6 +11,8 @@ from app.s3_helpers import (
 
 auth_routes = Blueprint('auth', __name__)
 
+default_avatar = 'https://kilogrambucket.s3.us-west-1.amazonaws.com/dbbd153c7d8f4a1c8cf038f67c9e398f.jpg'
+
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -75,25 +77,26 @@ def sign_up():
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    image = form.data['avatar']
+    print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
 
-    if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+    if form.data['avatar'] == 'null':
+        # url = 'https://i.imgur.com/RBkqFEg.jpg'
+        url = default_avatar
+    else:
+        image = form.data['avatar']
 
-    image.filename = get_unique_filename(image.filename)
-    upload = upload_file_to_s3(image)
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
 
-    if "url" not in upload:
-        return upload, 400
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
 
-    url = upload["url"]
+        if "url" not in upload:
+            return upload, 400
 
-    print(CGREEN + "\n FORM DATA: \n", data, "\n" + CEND)
+        url = upload["url"]
 
     if form.validate_on_submit():
-        # if data["avatar"] == '':
-        #     form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
-
         user = User(
             username=form.data['username'],
             email=form.data['email'],

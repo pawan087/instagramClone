@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
+import { login } from "../../store/session";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -37,11 +38,11 @@ const SignUpForm = () => {
       formData.append("bio", bio);
       formData.append("pronouns", pronouns);
 
-      // setImageLoading(true);
+      setImageLoading(true);
 
       const data = await dispatch(signUp(formData));
 
-      // setImageLoading(false);
+      setImageLoading(false);
 
       if (data) {
         setShowErrors(true);
@@ -90,6 +91,11 @@ const SignUpForm = () => {
     setImage(file);
   };
 
+  const demoLogin = (e) => {
+    e.preventDefault();
+    dispatch(login("demo@aa.io", "password"));
+  };
+
   if (user) {
     return <Redirect to="/" />;
   }
@@ -112,7 +118,9 @@ const SignUpForm = () => {
         <div className="subtitle">Sign up to see photos from your friends.</div>
 
         <div className="btnContainer">
-          <button className="demoBtn">Log in as Demo User</button>
+          <button onClick={demoLogin} className="demoBtn">
+            Log in as Demo User
+          </button>
         </div>
 
         <div className="divisorContainer">
@@ -133,7 +141,7 @@ const SignUpForm = () => {
           <div>
             <input
               className="inputContainer inputText"
-              type="text"
+              type="email"
               placeholder="Email"
               onChange={updateEmail}
               value={email}
@@ -260,6 +268,11 @@ const SignUpForm = () => {
           Log in
         </a>
       </div>
+      {imageLoading && <div className="loadingModal">
+        <div className="logo innerModal">
+          Signing in <span class="dot-elastic"></span>
+        </div>
+      </div>}
     </form>
   );
 };
