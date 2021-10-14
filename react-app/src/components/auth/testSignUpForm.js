@@ -5,10 +5,10 @@ export default function testSignUpForm() {
   return (
     <div className="outerContainer">
       <div className="topInnerContainer">
-        <div className="title">Kilogram</div>
+        <div className="title logo">Kilogram</div>
 
         <div className="subtitle">
-          Sign up to see photos and videos from your friends.
+          Sign up to see photos from your friends.
         </div>
 
         <div className="btnContainer">
