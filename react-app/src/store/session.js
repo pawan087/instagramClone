@@ -122,7 +122,7 @@ export const signUp = (username, email, password, avatar, fname, lname, bio, pro
 export const profileEdit = (username, email, password, avatar, fname, lname, bio, pronouns) => async (dispatch) => {
   console.log(username, email, password, avatar, fname, lname, bio, pronouns)
   const response = await fetch('/api/auth/signup', {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },

@@ -43,7 +43,7 @@ const EditProfileForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  if (user) {
+  if (!user) {
     return <Redirect to='/' />;
   }
 
@@ -141,7 +141,7 @@ const EditProfileForm = () => {
           placeholder='Url to an image'
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button type='submit'>Save Changes</button>
     </form>
   );
 };
