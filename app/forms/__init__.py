@@ -7,3 +7,4 @@ from .image_form import NewImage, editImage, deleteImage
 from .comment_form import NewComment, DeleteComment
 from .like_form import NewLike, DeleteLike
 from .follow_form import NewFollow, DeleteFollow
+from .event_form import NewEvent, DeleteEvent

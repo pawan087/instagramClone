@@ -20,14 +20,11 @@ export const addLike = (like) => async (dispatch) => {
 }
 
 export const deleteOneLike = (id) => async (dispatch) => {
-    console.log('--------------------------------------------------------')
-    console.log('INSIDE THUNK BEFORE FETCH')
-    console.log('THUNK ID ARGUMENT: ' + id)
     const response = await fetch("/api/images/likes/",
         {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: id })
+            body: JSON.stringify({ like_id: id})
         }
     )
 
