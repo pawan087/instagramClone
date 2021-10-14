@@ -155,7 +155,6 @@ const SignUpForm = () => {
               placeholder="First Name"
               onChange={updateFname}
               value={fname}
-              placeholder="First Name"
             ></input>
           </div>
 
@@ -166,7 +165,6 @@ const SignUpForm = () => {
               placeholder="Last Name"
               onChange={updateLname}
               value={lname}
-              placeholder="Last name"
             ></input>
           </div>
 

@@ -1,16 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
+import { deleteOneImage } from "../../../store/image"
 import { setAllLikes } from "../../../store/like"
-import { addLike, deleteOneLike } from '../../../store/like'
-import { NavLink, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import liked from '../../../image_assets/liked.svg'
-import unliked from '../../../image_assets/unliked.svg'
 import comment from '../../../image_assets/comment.svg'
 import '../images.css'
 import ImageModal from "../ImageModal"
-import CommentModal from "../CommentModal"
-import tableDots from '../../../image_assets/tableDots.svg'
 import personDots from '../../../image_assets/personDots.svg'
 
 const ImageTileComponent = ({ image }) => {
@@ -18,51 +14,13 @@ const ImageTileComponent = ({ image }) => {
   const history = useHistory()
   const user = useSelector((state) => state.session.user)
   const likes = useSelector((state) => state.likes)
-  const [commentBody, setCommentBody] = useState('')
-  const [commentImageId, setCommentImageId] = useState(0)
-  const [animateGrow, setAnimateGrow] = useState(0)
   const [isImageOpen, setIsImageOpen] = useState(false)
-  const [isCommentOpen, setIsCommentOpen] = useState(false)
   let thisPicturesLikes = likes.filter(like => like?.image?.id === image?.id);
   let thisPicturesComments = image?.comments?.comments;
-  let likesByUser = likes.filter(like => like?.image?.id === image?.id && like?.user?.id === user?.id)
-  const reset = () => {
-      setCommentBody('')
-      setCommentImageId(0)
-  }
-
-  const handleSubmit = (e) => {
-      e.preventDefault()
-      const newComment = {
-          user_id: user.id,
-          image_id: commentImageId,
-          body: commentBody
-      }
-      dispatch(addComment(newComment))
-      reset()
-  }
 
   const handleDelete = () => {
       dispatch(deleteOneImage(image.id))
       history.push("/")
-  }
-
-  const handleDeleteComment = (id) => {
-      dispatch(deleteOneComment(id))
-      setIsCommentOpen(false)
-  }
-
-  const addOrRemoveLike = (e) => {
-      e.preventDefault()
-      if (likesByUser.length) {
-          dispatch(deleteOneLike(likesByUser[0].id))
-      } else {
-          const newLike = {
-              user_id: user.id,
-              image_id: image.id,
-          }
-          dispatch(addLike(newLike))
-      }
   }
 
   useEffect(() => {
