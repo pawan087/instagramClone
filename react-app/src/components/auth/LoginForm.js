@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './loginForm.css';
 import frame from '../../image_assets/frame.png'
-
+import SplashCarousel from './splashCarousel'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -44,7 +44,7 @@ const LoginForm = () => {
         <div className="carouselContainer">
           <img src={frame} alt='rotating phone images' className='frame' />
           <div className="carouselPlacement">
-
+            <SplashCarousel />
           </div>
         </div>
         <div className="loginRedirectContainer">
