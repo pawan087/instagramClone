@@ -130,24 +130,8 @@ def edit_profile():
         if data["avatar"] == '':
             form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
         user = User.query.filter(User.id == data["id"]).first()
-
-        # Checks to see username changed and then checks to see if it's unique
-        if not user.username == data["username"]:
-          usernameExists = User.query.filter(User.username == data["username"]).first()
-          print(CGREEN + "\n EXISTS: \n", usernameExists, "\n" + CEND)
-          if not usernameExists:
-            user.username=form.data['username']
-          else:
-            return "Bad Data"
-        # Checks to see email changed and then checks to see if it's unique
-        if not user.email == data["email"]:
-          userExists = User.query.filter(User.email == data["email"]).first()
-          if not userExists:
-            user.email=form.data['email']
-          else:
-            form.errors['email'] = ['Email address is already in use.']
-            print(CGREEN + "\n Errors: \n", form.errors, "\n" + CEND)
-            return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        user.username=form.data['username']
+        user.email=form.data['email']
         # Checks to see if password changed versus the validated "oldpassword"
         if not data["oldPassword"] == data["password"] and not data["password"] == "":
           user.password=form.data['password']
@@ -156,7 +140,6 @@ def edit_profile():
         user.pronouns=form.data['pronouns']
         user.fname=form.data['fname']
         user.lname=form.data['lname']
-
         print(CGREEN + "\n USER UPDATED: \n", user, "\n" + CEND)
         db.session.commit()
         # login_user(user)

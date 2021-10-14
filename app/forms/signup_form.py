@@ -21,8 +21,9 @@ def user_exists_edit(form, field):
     userFromId = User.query.filter(User.id == form.data["id"]).first().email
     print(CGREEN + "\n userFromId: \n", userFromId, "\n" + CEND)
     user = User.query.filter(User.email == email).first()
-    if user:
-        raise ValidationError('Email address is already in use.')
+    if not user.email == userFromId:
+      if user:
+          raise ValidationError('Email address is already in use.')
 
 def username_exists(form, field):
     # Checking if username is already in use
@@ -67,7 +68,7 @@ class ProfileEditForm(FlaskForm):
     id = IntegerField('id', validators=[DataRequired()])
     # username = StringField('username')
     username = StringField('username', validators=[username_exists_edit])
-    email = StringField('email')
+    email = StringField('email', validators=[user_exists_edit])
     fname = StringField('First Name', validators=[DataRequired()])
     lname = StringField('Last Name', validators=[DataRequired()])
     bio = TextAreaField('Last Name')
