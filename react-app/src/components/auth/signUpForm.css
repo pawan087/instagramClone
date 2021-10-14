@@ -155,3 +155,33 @@
   color: rgb(0, 149, 246);
   margin-left: 5px;
 }
+
+div.fileinputs {
+  display: flex;
+  justify-content: center;
+}
+
+div.fakefile {
+	position: absolute;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+input.file {
+  cursor: pointer;
+	opacity: 0;
+	z-index: 2;
+}
+
+.uploadLabel {
+  margin-right: 12.5px;
+  cursor: pointer;
+}
+
+.uploadPic {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  margin-left: 95px;
+}
