@@ -7,7 +7,7 @@
 }
 
 .topInnerContainer {
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   background-color: rgb(255, 255, 255);
   height: 800px;
   width: 350px;
@@ -39,7 +39,7 @@
 }
 
 .btnContainer {
-  border-bottom: rgba(0, 0, 0, .2) 0.5px solid;
+  border-bottom: rgba(0, 0, 0, 0.2) 0.5px solid;
   background-color: rgb(255, 255, 255);
   height: 50px;
   width: 270px;
@@ -99,7 +99,7 @@
 .inputContainer {
   box-sizing: border-box;
   background-color: rgb(250, 250, 250);
-  border: 0.75px solid rgba(0, 0, 0, .2);
+  border: 0.75px solid rgba(0, 0, 0, 0.2);
   height: 40px;
   font-size: 12.5px;
   border-radius: 5px;
@@ -142,7 +142,7 @@
 
 .lowerInnerContainer {
   margin-top: 12.5px;
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   background-color: white;
   height: 70px;
   width: 350px;
@@ -198,21 +198,144 @@ input.file {
 .errorsContainer {
   width: 350px;
   min-height: 30px;
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 10px;
   margin-bottom: 10px;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  justify-self: center;
-  justify-items: center;
-  align-items: center;
-  align-self: center;
-  align-content: center;
   text-align: center;
 }
 
 .errors {
   color: rgb(0, 149, 246);
+}
+
+.loadingModal {
+  position: absolute;
+  opacity: 0.85;
+  /* opacity: 0; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(0, 149, 246);
+}
+
+.innerModal {
+  box-sizing: border-box;
+  position: relative;
+  width: 350px;
+  border-radius: 5px;
+  height: 175px;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  padding-left: 15px;
+  color: rgb(0, 149, 246);
+  font-size: 80px;
+}
+
+.dot-elastic {
+  position: absolute;
+  right: 50px;
+  top: 100px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgb(0, 149, 246);
+  color: rgb(0, 149, 246);
+  animation: dotElastic 1s infinite linear;
+}
+
+.dot-elastic::before,
+.dot-elastic::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-elastic::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgb(0, 149, 246);
+  color: rgb(0, 149, 246);
+  animation: dotElasticBefore 1s infinite linear;
+}
+
+.dot-elastic::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgb(0, 149, 246);
+  color: rgb(0, 149, 246);
+  animation: dotElasticAfter 1s infinite linear;
+}
+
+@keyframes dotElasticBefore {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1, 1.5);
+  }
+  50% {
+    transform: scale(1, 0.67);
+  }
+  75% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dotElastic {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1, 1.5);
+  }
+  75% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dotElasticAfter {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1, 0.67);
+  }
+  75% {
+    transform: scale(1, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }
