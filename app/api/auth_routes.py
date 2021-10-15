@@ -4,6 +4,7 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from app.forms import ProfileEditForm
+from app.forms import EditAvatar
 from flask_login import current_user, login_user, logout_user, login_required
 from colors import *
 from app.s3_helpers import (
@@ -80,7 +81,6 @@ def sign_up():
     print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
 
     if form.data['avatar'] == 'null':
-        # url = 'https://i.imgur.com/RBkqFEg.jpg'
         url = default_avatar
     else:
         image = form.data['avatar']
@@ -126,46 +126,90 @@ def edit_profile():
     form = ProfileEditForm()
     data = form.data
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
 
-    image = form.data['avatar']
+    user = User.query.filter(User.id == data["id"]).first()
+    user_avatar = user.avatar
 
-    print(CGREEN + "\n FORM DATA: \n", data, "\n" + CEND)
-    if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
-    print(CGREEN + "\n HIT: \n", "\n" + CEND)
+    if form.data['avatar'] == None:
+        url = user_avatar
+    else:
+        image = form.data['avatar']
 
-    image.filename = get_unique_filename(image.filename)
-    upload = upload_file_to_s3(image)
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
 
-    if "url" not in upload:
-        return upload, 400
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
 
-    url = upload["url"]
+        if "url" not in upload:
+            return upload, 400
 
+        url = upload["url"]
 
     if form.validate_on_submit():
-        print(CGREEN + "\n FORM VALIDATED: \n",
-              form.validate_on_submit(), "\n" + CEND)
-        if data["avatar"] == '':
-            form['avatar'].data = 'https://i.imgur.com/RBkqFEg.jpg'
-
-        user = User.query.filter(User.id == data["id"]).first()
         user.username=form.data['username']
         user.email=form.data['email']
+
         # Checks to see if password changed versus the validated "oldpassword"
-        if not data["oldPassword"] == data["password"] and not data["password"] == "":
+        if not data["old_password"] == data["password"] and not data["password"] == "":
           user.password=form.data['password']
+
         user.avatar=url
         user.bio=form.data['bio']
         user.pronouns=form.data['pronouns']
         user.fname=form.data['fname']
         user.lname=form.data['lname']
+
         print(CGREEN + "\n USER UPDATED: \n", user, "\n" + CEND)
         db.session.commit()
+
         return user.to_dict(), {'errors': validation_errors_to_error_messages(form.errors)}
+
     print(CGREEN + "\n ErrorsValidateFailed: \n", form.errors, "\n" + CEND)
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+@auth_routes.route('/signup/avatar', methods=['PUT'])
+def edit_avatar():
+    """
+    Edits existing user
+    """
+    print(CGREEN + "\n EDIT AVATAR \n", "\n" + CEND)
+    form = EditAvatar()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
+
+    user = User.query.filter(User.id == data["id"]).first()
+    user_avatar = user.avatar
+
+    if form.data['avatar'] == None:
+        url = user_avatar
+    else:
+        image = form.data['avatar']
+
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+
+        if "url" not in upload:
+            return upload, 400
+
+        url = upload["url"]
+
+    if form.validate_on_submit():
+        user.avatar=url
+        print(CGREEN + "\n USER UPDATED: \n", user, "\n" + CEND)
+        db.session.commit()
+
+        return user.to_dict(), {'errors': validation_errors_to_error_messages(form.errors)}
+
+    print(CGREEN + "\n ErrorsValidateFailed: \n", form.errors, "\n" + CEND)
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @auth_routes.route('/unauthorized')
 def unauthorized():

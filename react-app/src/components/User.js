@@ -76,7 +76,7 @@ function User() {
                         <form onSubmit={addOrRemoveFollow}>
                             {currentPagesUser?.followers?.includes(curUser.id) ?
                                 <button className="unfollow followingButton profileButton button"><img src={followed} alt="Unfollow" className="follow_icon" draggable="false"/></button> :
-                                <button className="follow followingButton profileButton button">{followText}</button>}
+                                <button className="follow followingButton profileButton blueButton button">{followText}</button>}
                         </form>
                     </div> :
                     <div className="profileButtonBox">

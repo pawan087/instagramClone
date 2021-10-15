@@ -51,7 +51,7 @@ export const setAllMyEvents = (user_id) => async (dispatch) => {
 }
 
 export const startPolling = (user_id) => async (dispatch) => {
-    const poll = setInterval(() => {
+    setInterval(() => {
         dispatch(setAllMyEvents(user_id))
     }, 3000)
 }

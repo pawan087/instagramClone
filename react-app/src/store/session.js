@@ -121,11 +121,31 @@ export const signUp = (signUpData) => async (dispatch) => {
 export const profileEdit = (editProfileData) => async (dispatch) => {
   const response = await fetch("/api/auth/signup", {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    // body: JSON.stringify(editProfileData),
     body: editProfileData,
   });
 
+  // headers: { "Content-Type": "application/json" },
+  // body: JSON.stringify(editProfileData),
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+export const avatarEdit = (avatarEditData) => async (dispatch) => {
+  const response = await fetch("/api/auth/signup/avatar", {
+    method: "PUT",
+    body: avatarEditData,
+  });
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))

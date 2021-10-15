@@ -311,11 +311,15 @@ def add_event(user_id):
 def delete_event(user_id, image_id):
     print(CGREEN + "\n DATA: \n", image_id, "\n" + CEND)
 
-    event_to_delete = Event.query.filter((Event.image_id == image_id and Event.other_user_id == user_id)).all()
-    print(CGREEN + "\n EVENTS: \n", event_to_delete, "\n" + CEND)
-    
-    for event in event_to_delete:
-        db.session.delete(event)
+    event_to_delete = Event.query.filter((Event.image_id == image_id and Event.other_user_id == user_id)).first()
+
+    print(CGREEN + "\n LOGGED IN USER: \n", user_id, "\n" + CEND)
+    print(CGREEN + "\n USER WHOS IMAGE WAS LIKED: \n", event_to_delete.our_user_id, "\n" + CEND)
+
+    if not user_id == event_to_delete.our_user_id:
+        print(CGREEN + "\n EVENTS: \n", event_to_delete.our_user_id, "\n" + CEND)
+        
+        db.session.delete(event_to_delete)
         
     db.session.commit()
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-import { profileEdit } from "../../store/session";
+import { profileEdit, avatarEdit } from "../../store/session";
 import "./editprofile.css";
 
 const EditProfileForm = () => {
@@ -25,6 +25,7 @@ const EditProfileForm = () => {
 
   const onProfileEdit = async (e) => {
     e.preventDefault();
+
     if (password === repeatPassword) {
       const formData = new FormData();
 
@@ -38,7 +39,6 @@ const EditProfileForm = () => {
       formData.append("lname", lname);
       formData.append("bio", bio);
       formData.append("pronouns", pronouns);
-
       // setImageLoading(true);
 
       const data = await dispatch(profileEdit(formData));
@@ -92,24 +92,33 @@ const EditProfileForm = () => {
             <li className="editPanelTab">Edit Profile</li>
           </ul>
         </div>
+
         <div className="editProfileBody">
           <div className="editRow">
-            <div className="avatarContainer editProfile">
+            <div className="avatarContainer editProfilePage">
               <img src={user.avatar} alt="Avatar" />
             </div>
-            <div className="userNameDisplay editProfile">{user.username}</div>
+            <div className="userNameBox">
+              <div className="userNameDisplay editProfilePage">{user.username}</div>
+              <div>
+                <button type="file" accept="image/*" className="editProfileImage textButton button">Change Profile Photo</button></div>
+            </div>
           </div>
+
           <form onSubmit={onProfileEdit}>
             <div>
               {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
               ))}
             </div>
+
             {console.log(errors)}
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>User Name</label>
               </div>
+
               <div className="editInputContainer">
                 <input
                   type="text"
@@ -120,10 +129,12 @@ const EditProfileForm = () => {
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Email</label>
               </div>
+
               <div className="editInputContainer">
                 <input
                   type="text"
@@ -134,10 +145,12 @@ const EditProfileForm = () => {
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>First Name</label>
               </div>
+
               <div className="editInputContainer">
                 <input
                   type="text"
@@ -147,10 +160,12 @@ const EditProfileForm = () => {
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Last Name</label>
               </div>
+
               <div className="editInputContainer">
                 <input
                   type="text"
@@ -160,10 +175,12 @@ const EditProfileForm = () => {
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Pronouns</label>
               </div>
+
               <div className="editInputContainer">
                 <select
                   type="text"
@@ -171,17 +188,22 @@ const EditProfileForm = () => {
                   value={pronouns}
                 >
                   <option value={null}>Pronouns</option>
+
                   <option value="He/Him">He/Him</option>
+
                   <option value="She/Her">She/Her</option>
+
                   <option value="They/Them">They/Them</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Bio</label>
               </div>
+
               <div className="editInputContainer">
                 <textarea
                   onChange={(e) => setBio(e.target.value)}
@@ -190,10 +212,12 @@ const EditProfileForm = () => {
                 ></textarea>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
-                <label>Old Password</label>
+                <label>Password</label>
               </div>
+
               <div className="editInputContainer">
                 <input
                   type="password"
@@ -204,10 +228,12 @@ const EditProfileForm = () => {
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
-                <label>Password</label>
+                <label>New Password</label>
               </div>
+
               <div className="editInputContainer">
                 <input
                   type="password"
@@ -217,10 +243,12 @@ const EditProfileForm = () => {
                 ></input>
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
-                <label>Repeat Password</label>
+                <label>Confirm Password</label>
               </div>
+
               <div className="editInputContainer">
                 {/* If there's a value in the password field require the repeat password, otherwise don't require it */}
                 {password ? (
@@ -241,10 +269,12 @@ const EditProfileForm = () => {
                 )}
               </div>
             </div>
+
             <div className="editFormRow">
               <div className="editLabelContainer">
                 <label>Avatar</label>
               </div>
+
               <div className="editInputContainer">
                 <div className="uploadDiv fileinputs">
                   <input
@@ -253,8 +283,10 @@ const EditProfileForm = () => {
                     accept="image/*"
                     onChange={updateImage}
                   />
+
                   <div class="inputContainer fakefile">
                     <label className="uploadLabel">{uploadMsg}</label>
+
                     <div className="uploadPic">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -275,7 +307,12 @@ const EditProfileForm = () => {
                 </div>
               </div>
             </div>
-            <button type="submit">Save Changes</button>
+            <div className="editFormRow">
+              <div className="editLabelContainer"></div>
+              <div className="editInputContainer">
+                <button type="submit" class="button blueButton">Submit</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>

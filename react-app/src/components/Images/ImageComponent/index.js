@@ -48,6 +48,7 @@ const ImageComponent = ({ image }) => {
     }
 
     const handleDeleteComment = (id) => {
+        console.log(id)
         dispatch(deleteOneComment(id))
         setIsCommentOpen(false)
     }
@@ -108,10 +109,10 @@ const ImageComponent = ({ image }) => {
                 <form onSubmit={addOrRemoveLike}>
                     {likesByUser?.length ?
                         <button>
-                            <img src={liked} alt="liked" className="liked" onClick={() => setAnimateGrow(1)} onAnimationEnd={() => setAnimateGrow(0)} animateGrow={animateGrow} />
+                            <img src={liked} alt="liked" className="liked" onClick={() => setAnimateGrow(1)} onAnimationEnd={() => setAnimateGrow(0)} animategrow={animateGrow} />
                         </button> :
                         <button>
-                            <img src={unliked} alt="unliked" className="unliked" onClick={() => setAnimateGrow(1)} onAnimationEnd={() => setAnimateGrow(0)} animateGrow={animateGrow} />
+                            <img src={unliked} alt="unliked" className="unliked" onClick={() => setAnimateGrow(1)} onAnimationEnd={() => setAnimateGrow(0)} animategrow={animateGrow} />
                         </button>}
                 </form>
                 <div>
