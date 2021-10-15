@@ -81,8 +81,9 @@ a {
 }
 
 .avatarContainer {
-    height: 32px;
-    width: 32px;
+    cursor: pointer;
+    height: 36px;
+    width: 36px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 16px;

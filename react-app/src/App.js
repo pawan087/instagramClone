@@ -15,6 +15,7 @@ import IndividualImage from './components/Images/IndividualImage';
 import Results from './components/Results';
 import EditCommentForm from './components/Comments/EditCommentForm';
 import EditProfileForm from './components/EditProfile';
+import Footer from './components/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -78,6 +79,7 @@ function App() {
           <EditCommentForm />
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }
