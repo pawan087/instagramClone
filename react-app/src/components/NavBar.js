@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
 import home from "../image_assets/home.svg"
 import post from "../image_assets/post.svg"
 import notifications from "../image_assets/notifications.svg"
-import { deleteOneEvent, startPolling } from '../store/event';
+import { setAllMyEvents } from '../store/event';
 import NavBarMenu from './NavBarMenu';
 
 const NavBar = () => {
@@ -18,17 +17,17 @@ const NavBar = () => {
     })
   }, [])
 
-
-  // useEffect(() => {
-  //   dispatch(startPolling(user.id))
-  //   return clearInterval(startPolling(user.id))
-  // },[])
-
-  
   const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user)
   const allUsers = useSelector((state) => state.session.allUsers)
   const events = useSelector((state) => state.events)
+
+  useEffect(() => {
+    let poll = setInterval(() => dispatch(setAllMyEvents(user.id)), 3000)
+    return () => clearInterval(poll)
+  },[])
+
+  
   
   // useEffect(() => {
   //   dispatch(setAllMyEvents(user.id))
