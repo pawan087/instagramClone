@@ -50,12 +50,6 @@ export const setAllMyEvents = (user_id) => async (dispatch) => {
     } else return "READ THUNK ERROR: BAD REQUEST"
 }
 
-export const startPolling = (user_id) => async (dispatch) => {
-    setInterval(() => {
-        dispatch(setAllMyEvents(user_id))
-    }, 3000)
-}
-
 const initialState = []
 const eventReducer = (state = initialState, action) => {
     let newState

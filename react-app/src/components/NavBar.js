@@ -5,7 +5,7 @@ import LogoutButton from './auth/LogoutButton';
 import home from "../image_assets/home.svg"
 import post from "../image_assets/post.svg"
 import notifications from "../image_assets/notifications.svg"
-import { deleteOneEvent, startPolling } from '../store/event';
+import { setAllMyEvents } from '../store/event';
 import NavBarMenu from './NavBarMenu';
 import './SearchBar.css';
 const NavBar = () => {
@@ -24,9 +24,13 @@ const NavBar = () => {
     })
   }, [])
 
-  const [searchInput, setSearchInput] = useState("");
 
-  // onClick={() => history.push(`/results/${tag}`)}
+  useEffect(() => {
+    let poll = setInterval(() => dispatch(setAllMyEvents(user.id)), 3000)
+    return () => clearInterval(poll)
+  },[])
+  
+  const [searchInput, setSearchInput] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,12 +45,6 @@ const NavBar = () => {
       handleSubmit(e);
     }
   };
-
-  useEffect(() => {
-    dispatch(startPolling(user.id))
-    return clearInterval(startPolling(user.id))
-  },[])
-
 
   const findUser = (userId) => {
     return allUsers?.filter((user) => user.id === userId)[0]
@@ -91,23 +89,6 @@ const NavBar = () => {
             />
           </svg>
         </div>
-
-        {/*<div className="cancelIcon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </div>*/}
       </div>
 
       <div className="links">
