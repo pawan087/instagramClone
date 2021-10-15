@@ -16,7 +16,7 @@ const Results = () => {
 
     return (
         <div className="imageContainer">
-            {tagImages?.map((image) => <ImageComponent image={image} />)}
+            {tagImages?.map((image) => <ImageComponent image={image} key={image.id} />)}
         </div>
     )
 }
