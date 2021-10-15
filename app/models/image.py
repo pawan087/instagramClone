@@ -18,6 +18,7 @@ class Image(db.Model):
                             cascade="all, delete-orphan")
     comments = db.relationship(
         "Comment", back_populates="image", cascade="all, delete-orphan")
+    event = db.relationship("Event", back_populates="images", cascade="all, delete-orphan")
 
     def to_dict(self):
 

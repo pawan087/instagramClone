@@ -15,9 +15,9 @@ function User() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const curUser = useSelector((state) => state.session.user)
-  const images = useSelector((state) => state.images)
-  const usersImages = images.filter((image) => image.user_id === +userId)
+  const curUser = useSelector((state) => state.session.user);
+  const images = useSelector((state) => state.images);
+  const usersImages = images.filter((image) => image.user_id === +userId);
 
 
   const currentPagesUser = useSelector((state) => state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
@@ -29,32 +29,32 @@ function User() {
 
   let followText = ""
 
-  console.log("currentPagesUser", currentPagesUser)
+  console.log("currentPagesUser", currentPagesUser);
   useEffect(() => {
-    dispatch(setAllImages())
-    dispatch(setAllUsers())
-  }, [dispatch])
+    dispatch(setAllImages());
+    dispatch(setAllUsers());
+  }, [dispatch]);
 
   const addOrRemoveFollow = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const followObj = {
       current_user_id: curUser.id,
       user_to_follow_id: +userId,
-    }
+    };
     if (currentPagesUser?.followers?.includes(curUser.id)) {
       dispatch(deleteFollow(followObj))
     } else {
       dispatch(addFollow(followObj))
     }
-  }
+  };
 
   const editProfile = (e) => {
-    e.preventDefault()
-    history.push(`/users/${userId}/edit_profile`)
-  }
+    e.preventDefault();
+    history.push(`/users/${userId}/edit_profile`);
+  };
   const editProfileModal = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   if (currentPagesUser?.following?.includes(curUser.id) && !currentPagesUser?.followers?.includes(curUser.id)) {
     followText = "Follow Back";
@@ -140,4 +140,19 @@ function User() {
     </div>
   );
 }
+
 export default User;
+
+// <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div>
+
+// <button
+//   onClick={editProfileModal}
+//   className="editProfileModalButton button"
+// >
+//   <img
+//     src={settings}
+//     alt="Unfollow"
+//     className="follow_icon"
+//     draggable="false"
+//   />
+// </button>
