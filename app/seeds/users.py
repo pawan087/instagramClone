@@ -4,15 +4,69 @@ from app.models import db, User
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password', followers=[2, 4], following=[2,3,4], fname="Demo", lname="User", bio="A clean person doing clean things.", pronouns="They/Them")
+        username='Demo',
+        email='demo@aa.io', 
+        password='password', 
+        followers=[2, 4], 
+        following=[2,3,4], 
+        fname="Demo", lname="User", 
+        bio="A clean person doing clean things.", 
+        pronouns="They/Them",
+        saved_images=[2,3]    
+)
     franky = User(
-        avatar="https://i.imgur.com/xScWp5V.gif", username='super_franky', email='franky@aa.io', password='password', followers=[1,4], following=[1,3,4], fname="Cutty", lname="Flam", bio="The shipwright of the Straw Hat Pirates... SUPER!", pronouns="He/Him")
+        avatar="https://i.imgur.com/xScWp5V.gif", 
+        username='super_franky',
+        email='franky@aa.io', 
+        password='password', 
+        followers=[1,4], 
+        following=[1,3,4], 
+        fname="Cutty", 
+        lname="Flam", 
+        bio="The shipwright of the Straw Hat Pirates... SUPER!",
+        pronouns="He/Him",
+        saved_images=[1,4]    
+)
     eren = User(
-        avatar="https://i.imgur.com/HGmjwwZ.gif", username='titan_slayer', email='eren@aa.io', password='password', followers=[1,2,3,4,5], following=[3], fname="Eren", lname="Jaeger", bio="All the anime girls simp for me after season 4 son.", pronouns="He/Him")
+        avatar="https://i.imgur.com/HGmjwwZ.gif", 
+        username='titan_slayer', 
+        email='eren@aa.io', 
+        password='password', 
+        followers=[1,2,3,4,5], 
+        following=[3], 
+        fname="Eren", 
+        lname="Jaeger", 
+        bio="All the anime girls simp for me after season 4 son.", 
+        pronouns="He/Him",
+        saved_images=[]
+
+)
     picasso = User(
-        avatar="https://i.imgur.com/Y8FaFvQ.jpg", username='picasso', email='picasso@aa.io', password='password', followers=[1,2], following=[1,2,3], fname="Pablo", lname="Picasso", bio="5'6\" Giant", pronouns="He/Him")
+        avatar="https://i.imgur.com/Y8FaFvQ.jpg", 
+        username='picasso', 
+        email='picasso@aa.io', 
+        password='password', 
+        followers=[1,2], 
+        following=[1,2,3], 
+        fname="Pablo", 
+        lname="Picasso", 
+        bio="5'6\" Giant", 
+        pronouns="He/Him",
+        saved_images=[1,2,3,4]    
+)
     mikasa = User(
-        avatar="https://i.pinimg.com/originals/9f/87/7c/9f877c2062221ea223eb7c69d7d1bda5.jpg", username='not_mikasa', email='mikasa@aa.io', password='password', followers=[3], following=[3], fname="Mikasa", lname="Ackerman", bio="Not Mikasa Ackerman", pronouns="She/Her")
+        avatar="https://i.pinimg.com/originals/9f/87/7c/9f877c2062221ea223eb7c69d7d1bda5.jpg", 
+        username='not_mikasa', 
+        email='mikasa@aa.io', 
+        password='password', 
+        followers=[3], 
+        following=[3], 
+        fname="Mikasa", 
+        lname="Ackerman", 
+        bio="Not Mikasa Ackerman", 
+        pronouns="She/Her",
+        saved_images=[3]    
+)
 
     db.session.add(demo)
     db.session.add(franky)

@@ -64,7 +64,6 @@ def add_image():
         # print(CGREEN + "\n HASHTAG LIST: \n", hashtags, "\n\n" + CEND)
 
         new_image = Image(
-            title=form.data["title"],
             caption=form.data["caption"],
             img_url=url,
             user_id=form.data["user_id"],
@@ -105,7 +104,6 @@ def edit_image():
 
     image = Image.query.filter(Image.id == data["image_id"]).first()
 
-    image.title = data["title"]
     image.caption = data["caption"]
     image.hashtags = data["hashtags"].split()
 

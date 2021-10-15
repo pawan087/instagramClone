@@ -208,6 +208,16 @@
     padding: 0 0 0 20px;
 }
 
+.likes_container form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bookmarkButton {
+    padding-right: 20px;
+    cursor: pointer;
+}
+
 .likes_container button {
     margin: 10px 0;
     background-color: transparent;

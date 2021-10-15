@@ -11,6 +11,8 @@ import CommentModal from "../CommentModal"
 import tableDots from '../../../image_assets/tableDots.svg'
 import personDots from '../../../image_assets/personDots.svg'
 import { addEvent, deleteOneEvent } from "../../../store/event"
+import bookmark from '../../../image_assets/bookmark.svg'
+import saved from '../../../image_assets/saved.svg'
 
 const ImageComponent = ({ image }) => {
 
@@ -25,6 +27,8 @@ const ImageComponent = ({ image }) => {
     const [isCommentOpen, setIsCommentOpen] = useState(false)
     let thisPicturesLikes = likes.filter(like => like?.image?.id === image?.id);
     let likesByUser = likes.filter(like => like?.image?.id === image?.id && like?.user?.id === user?.id)
+
+    const usersSavedImages = useSelector((state) => state.session.user.saved_images)
 
     const reset = () => {
         setCommentBody('')
@@ -114,11 +118,13 @@ const ImageComponent = ({ image }) => {
                         <button>
                             <img src={unliked} alt="unliked" className="unliked" onClick={() => setAnimateGrow(1)} onAnimationEnd={() => setAnimateGrow(0)} animategrow={animateGrow} />
                         </button>}
+                    <img src={usersSavedImages.includes(image.id) ? saved : bookmark} alt="bookmarkImage" className="bookmarkButton" />
                 </form>
                 <div>
                     {thisPicturesLikes?.length}
                     {thisPicturesLikes?.length === 1 ? ' like' : ' likes'}
                 </div>
+
             </div>
 
             {/* IMAGE CAPTION */}
