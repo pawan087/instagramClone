@@ -5,7 +5,6 @@ from wtforms.validators import DataRequired
 
 
 class NewImage(FlaskForm):
-    title = StringField("Image Title")
     caption = StringField("Caption")
     img_url = FileField(validators=[FileRequired()])
     user_id = IntegerField("User Id", [DataRequired()])
@@ -18,7 +17,6 @@ class deleteImage(FlaskForm):
 
 class editImage(FlaskForm):
     image_id = IntegerField("Image Id", [DataRequired()])
-    title = StringField("Image Title")
     caption = StringField("Caption")
     user_id = IntegerField("User Id", [DataRequired()])
     hashtags = StringField("Hashtag")

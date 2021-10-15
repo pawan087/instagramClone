@@ -7,7 +7,7 @@ from app.forms.event_form import NewEvent, DeleteEvent
 from app.forms.like_form import DeleteLike, NewLike
 from app.forms.image_form import NewImage
 from flask_login import login_required
-from app.models import db, Image, Comment, Like, Event
+from app.models import db, Image, Comment, Like, Event, User
 from colors import *
 from app.s3_helpers import (
     upload_file_to_s3, allowed_file, get_unique_filename)
@@ -64,7 +64,6 @@ def add_image():
         # print(CGREEN + "\n HASHTAG LIST: \n", hashtags, "\n\n" + CEND)
 
         new_image = Image(
-            title=form.data["title"],
             caption=form.data["caption"],
             img_url=url,
             user_id=form.data["user_id"],
@@ -105,7 +104,6 @@ def edit_image():
 
     image = Image.query.filter(Image.id == data["image_id"]).first()
 
-    image.title = data["title"]
     image.caption = data["caption"]
     image.hashtags = data["hashtags"].split()
 
@@ -325,3 +323,43 @@ def delete_event(user_id, image_id):
 
     events = Event.query.filter(Event.our_user_id == int(user_id)).all()
     return {"events": [event.to_dict() for event in events]}
+
+# --------------------------------------------------------
+# ---------------------SAVED ROUTES-----------------------
+# --------------------------------------------------------
+
+@image_routes.route('/saved/<int:user_id>/<int:image_id>/', methods=["POST"])
+def add_saved(user_id, image_id):
+
+    print(CBLUEBG + "\n DATA: \n", user_id, image_id, "\n" + CEND)
+    
+    user = User.query.get(user_id)
+
+    print(CBLUEBG + "\n USER FOUND: \n", user, "\n" + CEND)
+
+    new_saved_images = [image for image in user.saved_images]
+    new_saved_images.append(image_id)
+
+    user.saved_images = new_saved_images
+
+    db.session.commit()
+
+    return user.to_dict()
+
+@image_routes.route('/saved/<int:user_id>/<int:image_id>/', methods=["DELETE"])
+def delete_saved(user_id, image_id):
+
+    print(CBLUEBG + "\n DATA: \n", user_id, image_id, "\n" + CEND)
+    
+    user = User.query.get(user_id)
+
+    print(CBLUEBG + "\n USER FOUND: \n", user, "\n" + CEND)
+
+    new_saved_images = [image for image in user.saved_images]
+    new_saved_images.remove(image_id)
+
+    user.saved_images = new_saved_images
+
+    db.session.commit()
+
+    return user.to_dict()
