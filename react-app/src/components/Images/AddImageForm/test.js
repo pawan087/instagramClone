@@ -131,32 +131,47 @@ const TestAddImageForm = () => {
 
       <div className="outerContainer">
         <div className="topContainer">
-          <span className="backBtn">{"<--"}</span>
-          <span className="title">Compose</span>
+          <div className="backBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </div>
+          <p className="title">Compose</p>
         </div>
 
         <div className="bottomContainer">
           <div className="leftContainer">
-            <img class="picToUpload" src="" />
+            <img class="picToUpload" src="https://www.testim.io/wp-content/uploads/2019/11/What-Is-Test-Automation.jpg" />
           </div>
 
           <div className="rightContainer">
-            <div className='rightOne'>
-              <img src="" className="avatar"></img>
-              <span classNam="username">pwnpreet</span>
+            <div className="rightOne">
+              <img src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" className="avatar"></img>
+              <p className="username">pwnpreet</p>
             </div>
 
-            <div className='rightTwo'>
+            <div className="rightTwo">
               <textarea className="caption" placeholder="Write a caption..." />
             </div>
 
-            <div className='rightThree'>
+            <div className="rightThree">
               <input placeholder="Add Title..." type="text" className="title" />
             </div>
 
-            <div className='rightFour'>
+            <div className="rightFour">
               <input
-                placeholder='Add Hashtags..."'
+                placeholder='Add Hashtags...'
                 type="text"
                 className="hashtags"
               />

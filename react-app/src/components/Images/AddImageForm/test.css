@@ -45,73 +45,161 @@
 }
 
 .outerContainer {
-
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1365px;
+  height: 765px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid rgb(0, 0, 0, 0.2);
 }
 
 .topContainer {
-
+  width: 1365px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  justify-self: center;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
 }
 
 .backBtn {
-
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 20px;
+  color: white;
 }
 
 .title {
-
+  font-size: 20px;
+  background-color: transparent;
+  color: #262626;
 }
 
 .bottomContainer {
-
+  width: 1365px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .leftContainer {
-
+  min-width: 850px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .picToUpload {
-
+  width: 455px;
+  height: 455px;
+  object-fit: cover;
 }
 
 .rightContainer {
-
+  width: 100%;
 }
 
 .rightOne {
+  height: 65px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
 
+.avatar {
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
 }
 
 .username {
-
+  margin-left: 20px;
+  font-size: 20px;
 }
 
 .rightTwo {
-
+  height: 210px;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .caption {
-
+  font-size: 20px;
+  position: absolute;
+  width: 492px;
+  height: 100%;
+  resize: none;
+  outline: none;
+  border: none;
 }
 
 .rightThree {
-
+  height: 50px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .title {
-
+  height: 50px;
+  outline: none;
+  border: none;
+  width: 492px;
+  margin-left: 20px;
+  font-size: 20px;
 }
 
 .rightFour {
-  
+  height: 50px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .hashtags {
-
+  height: 50px;
+  outline: none;
+  border: none;
+  width: 492px;
+  margin-left: 20px;
+  font-size: 20px;
 }
 
 .emptyDiv {
-
+  width: 100%;
+  height: 250px;
+  background-color: #ffffff;
 }
 
 .btnContainer {
+  height: 75px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  justify-self: center;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+  background-color: #ffffff;
+}
 
+.btn {
+  width: 475px;
+  height: 40px;
+  background-color: #1289F1;
+  font-size: 15px;
+}
+
+.btn:active {
+  opacity: .75;
 }
