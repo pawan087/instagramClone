@@ -239,7 +239,7 @@ export const updateUser = (user_id) => async (dispatch) => {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      return { user: action.payload };
+      return { user: action.payload, allUsers: state.allUsers };
     case REMOVE_USER:
       return { user: null };
     case SET_ALL_USERS:

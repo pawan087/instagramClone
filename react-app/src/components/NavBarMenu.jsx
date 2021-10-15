@@ -38,12 +38,6 @@ export default function NavBarMenu(avatar, userId) {
             </a>
           </li>
           <li>
-            <a className='avatarReroute' href="#">
-              <img src={bookmark} alt="Bookmark Icon" draggable="false" />
-              Saved
-            </a>
-          </li>
-          <li>
             <NavLink className='avatarReroute' to={`/users/${userId}/edit_profile`}>
               <img src={settings} alt="Settings Icon" draggable="false" />
               Settings
