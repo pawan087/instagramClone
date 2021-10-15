@@ -19,12 +19,12 @@ const ImageTileComponent = ({ image }) => {
   let thisPicturesComments = image?.comments?.comments;
 
   const handleDelete = () => {
-      dispatch(deleteOneImage(image.id))
-      history.push("/")
+    dispatch(deleteOneImage(image.id))
+    history.push("/")
   }
 
   useEffect(() => {
-      dispatch(setAllLikes())
+    dispatch(setAllLikes())
   }, [dispatch])
 
   return (
