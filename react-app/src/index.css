@@ -151,6 +151,9 @@ a {
   padding: 1.25rem;
   background-color: #FFFFFF;
 }
+.dropdown_contentSubcontainer .singleNotification:last-child .userInfo.dropdown {
+  margin-bottom: 0;
+}
 
 .userInfo.dropdown {
   margin-bottom: 15px;

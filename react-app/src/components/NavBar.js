@@ -128,7 +128,7 @@ const NavBar = () => {
               {events.length > 0 ?
                 events.map((event) =>
                 (
-                  <div key={event.id}>
+                  <div key={event.id} className="singleNotification">
                     <div className="userInfo dropdown">
                       <div className="avatarContainer eventAvatar"><img src={findUser(event?.other_user_id)?.avatar} alt="eventAvatar" /></div>
                       <p className="eventMessage"> <span className="eventUser">{findUser(event?.other_user_id)?.username}</span> {event.message}</p>
