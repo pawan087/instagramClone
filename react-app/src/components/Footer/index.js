@@ -20,7 +20,7 @@ const Footer = () => {
         </div>
         <div className="footerBottom">
           <div className="footerCopyright">
-            ©2021 Kilogram from Acorn
+            ©2021 Kilogram from Acorn Project
           </div>
         </div>
       </div>
