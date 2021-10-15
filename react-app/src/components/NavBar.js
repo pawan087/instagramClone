@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import LogoutButton from './auth/LogoutButton';
 import home from "../image_assets/home.svg"
 import post from "../image_assets/post.svg"
 import notifications from "../image_assets/notifications.svg"
 import { setAllMyEvents } from '../store/event';
 import NavBarMenu from './NavBarMenu';
-
+import './SearchBar.css';
 const NavBar = () => {
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.session.user)
+  const allUsers = useSelector((state) => state.session.allUsers)
+  const events = useSelector((state) => state.events)
+
+  const history = useHistory();
 
   useEffect(() => {
     let notificationButton = document.querySelector(".dropdown_menu")
@@ -17,22 +24,28 @@ const NavBar = () => {
     })
   }, [])
 
-  const dispatch = useDispatch()
-  const user = useSelector((state) => state.session.user)
-  const allUsers = useSelector((state) => state.session.allUsers)
-  const events = useSelector((state) => state.events)
 
   useEffect(() => {
     let poll = setInterval(() => dispatch(setAllMyEvents(user.id)), 3000)
     return () => clearInterval(poll)
   },[])
+  
+  const [searchInput, setSearchInput] = useState("");
 
-  
-  
-  // useEffect(() => {
-  //   dispatch(setAllMyEvents(user.id))
-  // },[dispatch])
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSearchInput("");
+    let searchCriteria = searchInput.toLowerCase();
+    history.push(`/results/${searchCriteria}`);
+  };
+
+  const handleKeypress = (e) => {
+    //it triggers by pressing the enter key
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
+
   const findUser = (userId) => {
     return allUsers?.filter((user) => user.id === userId)[0]
   }
@@ -40,16 +53,70 @@ const NavBar = () => {
   return (
     <nav>
       <h1>
-        <NavLink to='/' exact={true} activeClassName='active' className="logo button" draggable="false">Kilogram</NavLink>
+        <NavLink
+          to="/"
+          exact={true}
+          activeClassName="active"
+          className="logo button"
+          draggable="false"
+        >
+          Kilogram
+        </NavLink>
       </h1>
+
+      <div className="searchBarContainer">
+        <input
+          className="searchInput"
+          type="text"
+          onKeyPress={handleKeypress}
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          placeholder="Search"
+        />
+        <div className="searchIcon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
+      </div>
+
       <div className="links">
-        {!user?.id && <NavLink to='/login' exact={true} activeClassName='active' className="button">Login</NavLink>}
-        {!user?.id && <NavLink to='/sign-up' exact={true} activeClassName='active' className="button">Sign Up</NavLink>}
-        {user?.id && <NavLink to='/' exact={true} activeClassName='active' draggable="false"><img src={home} alt="home" className="home_button button" draggable="false" /></NavLink>}
+        {user?.id && (
+          <NavLink
+            to="/"
+            exact={true}
+            activeClassName="active"
+            draggable="false"
+          >
+            <img
+              src={home}
+              alt="home"
+              className="home_button button"
+              draggable="false"
+            />
+          </NavLink>
+        )}
 
         {user?.id && (
-          <div className='dropdown_menu'>
-            <img src={notifications} alt="home" className="home_button button" draggable="false" />
+          <div className="dropdown_menu">
+            <img
+              src={notifications}
+              alt="home"
+              className="home_button button"
+              draggable="false"
+            />
+
             <div className="dropdown_content">
               <div className="bubbleArrow"></div>
               {events.length > 0 ?
@@ -73,9 +140,12 @@ const NavBar = () => {
         {user?.id && <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active' draggable="false">
         </NavLink>}
 
+
+
+
       </div>
     </nav>
   );
-}
+};
 
 export default NavBar;
