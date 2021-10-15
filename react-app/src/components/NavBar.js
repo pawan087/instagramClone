@@ -18,17 +18,25 @@ const NavBar = () => {
   useEffect(() => {
     let notificationButton = document.querySelector(".dropdown_menu")
     let content = document.querySelector(".dropdown_content")
-    notificationButton.addEventListener(("click"), (e) => {
-      content.classList.toggle("active")
-    })
+    function handleClickOutside(event) {
+      if (notificationButton.contains(event.target) && !content.contains(event.target)) {
+        content.classList.toggle("active")
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("click", handleClickOutside);
+    };
+
   }, [])
 
 
   useEffect(() => {
     let poll = setInterval(() => dispatch(setAllMyEvents(user.id)), 3000)
     return () => clearInterval(poll)
-  },[dispatch, user.id])
-  
+  }, [dispatch, user.id])
+
   const [searchInput, setSearchInput] = useState("");
 
   const handleSubmit = (e) => {
@@ -115,18 +123,20 @@ const NavBar = () => {
 
           <div className="dropdown_content">
             <div className="bubbleArrow"></div>
-            {events.length > 0 ?
-              events.map((event) =>
-              (
-                <div key={event.id}>
-                  <div className="userInfo">
-                    <div className="avatarContainer"><img src={findUser(event?.other_user_id)?.avatar} alt="eventAvatar" /></div>
-                    <p> <span className="eventUser">{findUser(event?.other_user_id)?.username}</span> {event.message}</p>
-                    {/* <button onClick={(e) => dispatch(deleteOneEvent(user.id, event.image_id))}>X</button> */}
+            <div className="dropdown_contentSubcontainer">
+              {events.length > 0 ?
+                events.map((event) =>
+                (
+                  <div key={event.id}>
+                    <div className="userInfo dropdown">
+                      <div className="avatarContainer eventAvatar"><img src={findUser(event?.other_user_id)?.avatar} alt="eventAvatar" /></div>
+                      <p className="eventMessage"> <span className="eventUser">{findUser(event?.other_user_id)?.username}</span> {event.message}</p>
+                      {/* <button onClick={(e) => dispatch(deleteOneEvent(user.id, event.image_id))}>X</button> */}
+                    </div>
                   </div>
-                </div>
-              ))
-              : "No new notifications!"}
+                ))
+                : "No new notifications!"}
+            </div>
           </div>
         </div>
 
