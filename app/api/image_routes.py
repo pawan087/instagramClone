@@ -345,3 +345,21 @@ def add_saved(user_id, image_id):
     db.session.commit()
 
     return user.to_dict()
+
+@image_routes.route('/saved/<int:user_id>/<int:image_id>/', methods=["DELETE"])
+def delete_saved(user_id, image_id):
+
+    print(CBLUEBG + "\n DATA: \n", user_id, image_id, "\n" + CEND)
+    
+    user = User.query.get(user_id)
+
+    print(CBLUEBG + "\n USER FOUND: \n", user, "\n" + CEND)
+
+    new_saved_images = [image for image in user.saved_images]
+    new_saved_images.remove(image_id)
+
+    user.saved_images = new_saved_images
+
+    db.session.commit()
+
+    return user.to_dict()

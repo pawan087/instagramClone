@@ -13,7 +13,7 @@ import personDots from '../../../image_assets/personDots.svg'
 import { addEvent, deleteOneEvent } from "../../../store/event"
 import bookmark from '../../../image_assets/bookmark.svg'
 import saved from '../../../image_assets/saved.svg'
-import { addSavedImage, login, updateUser } from "../../../store/session"
+import { addSavedImage, deleteSavedImage, login, updateUser } from "../../../store/session"
 
 const ImageComponent = ({ image }) => {
 
@@ -126,7 +126,7 @@ const ImageComponent = ({ image }) => {
                     <img src={ usersSavedImages?.includes(image?.id) ? saved : bookmark } 
                         alt="bookmarkImage" 
                         className="bookmarkButton" 
-                        onClick={() => !usersSavedImages?.includes(image?.id) ? dispatch(addSavedImage(user?.id, image?.id)) : false } 
+                        onClick={() => !usersSavedImages?.includes(image?.id) ? dispatch(addSavedImage(user?.id, image?.id)) : dispatch(deleteSavedImage(user?.id, image?.id)) } 
                     />
                 </form>
                 <div>
