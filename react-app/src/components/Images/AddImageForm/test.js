@@ -108,7 +108,7 @@ const TestAddImageForm = () => {
                 id="my-file"
               />
 
-              <label tabindex="0" for="my-file" class="input-file-trigger">
+              <label tabindex="0" for="my-file" class="input-file-trigger blueButton button">
                 Select a file...
               </label>
             </div>
@@ -154,13 +154,13 @@ const TestAddImageForm = () => {
 
           <div className="emptyDiv divisor" />
 
-          <div className="btnContainer">
+          <div className="rightBtnContainer">
             {image && (
-              <button onClick={handleSubmit} className="btn1">
+              <button onClick={handleSubmit} className="btn1 blueButton button">
                 Share
               </button>
             )}
-            {!image && <button className="btn2">Share</button>}
+            {!image && <button className="btn2 blueButton button">Share</button>}
           </div>
         </div>
       </div>
