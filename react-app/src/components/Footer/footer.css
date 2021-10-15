@@ -1,0 +1,47 @@
+.footer {
+  padding: 0 20px;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+  margin-bottom: 50px;
+}
+
+.footerTop {
+  display: flex;
+  justify-content: center;
+  margin: 25px 207px 10px;
+  width: 100%;
+}
+
+.gitIconContainer {
+  margin: 0 10px 12px;
+}
+
+.gitIconContainer > img {
+  width: 20px;
+}
+
+.gitLink {
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  margin: 0 10px 12px;
+  width: 72px;
+  color: #8E8E8E;
+}
+
+.gitLink:hover {
+  font-weight: 500;
+}
+
+.footerBottom {
+
+}
+
+.footerCopyright {
+  color: #8E8E8E;
+}
