@@ -37,40 +37,40 @@ const NavBar = () => {
     return allUsers?.filter((user) => user.id === userId)[0]
   }
 
+  if (!user) return null
   return (
     <nav>
-      <h1>
-        <NavLink to='/' exact={true} activeClassName='active' className="logo button" draggable="false">Kilogram</NavLink>
-      </h1>
+      {/* TITLE */}
+      <h1><NavLink to='/' exact={true} activeClassName='active' className="logo button" draggable="false">Kilogram</NavLink></h1>
+
       <div className="links">
-        {!user?.id && <NavLink to='/login' exact={true} activeClassName='active' className="button">Login</NavLink>}
-        {!user?.id && <NavLink to='/sign-up' exact={true} activeClassName='active' className="button">Sign Up</NavLink>}
-        {user?.id && <NavLink to='/' exact={true} activeClassName='active' draggable="false"><img src={home} alt="home" className="home_button button" draggable="false" /></NavLink>}
+        {/* HOME BUTTON */}
+        <NavLink to='/' exact={true} activeClassName='active' draggable="false"><img src={home} alt="home" className="home_button button" draggable="false" /></NavLink>
 
-        {user?.id && (
-          <div className='dropdown_menu'>
-            <img src={notifications} alt="home" className="home_button button" draggable="false" />
-            <div className="dropdown_content">
-              {events.length > 0 ?
-                events.map((event) =>
-                (
-                  <div key={event.id}>
-                    <div className="userInfo">
-                      <div className="avatarContainer"><img src={findUser(event?.other_user_id)?.avatar} alt="eventAvatar" /></div>
-                      <p> <span className="eventUser">{findUser(event?.other_user_id)?.username}</span> {event.message}</p>
-                      {/* <button onClick={(e) => dispatch(deleteOneEvent(user.id, event.image_id))}>X</button> */}
-                    </div>
+        {/* NOTIFICATIONS */}
+        <div className='dropdown_menu'>
+          <img src={notifications} alt="home" className="home_button button" draggable="false" />
+          <div className="dropdown_content">
+            {events.length > 0 ?
+              events.map((event) =>
+              (
+                <div key={event.id}>
+                  <div className="userInfo">
+                    <div className="avatarContainer"><img src={findUser(event?.other_user_id)?.avatar} alt="eventAvatar" /></div>
+                    <p> <span className="eventUser">{findUser(event?.other_user_id)?.username}</span> {event.message}</p>
+                    {/* <button onClick={(e) => dispatch(deleteOneEvent(user.id, event.image_id))}>X</button> */}
                   </div>
-                ))
-                : "No new notifications!"}
-            </div>
+                </div>
+              ))
+              : "No new notifications!"}
           </div>
-        )}
+        </div>
 
-        {user?.id && <NavLink to='/images/new' exact={true} activeClassName='active' draggable="false"><img src={post} alt="postPicture" className='home_button button' draggable="false" /></NavLink>}
+        {/* ADD AN IMAGE */}
+        <NavLink to='/images/new' exact={true} activeClassName='active' draggable="false"><img src={post} alt="postPicture" className='home_button button' draggable="false" /></NavLink>
+
+        {/* USER DROPDOWN */}
         <NavBarMenu avatar={user?.avatar} userId={user?.id} />
-        {user?.id && <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active' draggable="false">
-        </NavLink>}
 
       </div>
     </nav>
