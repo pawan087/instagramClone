@@ -78,3 +78,7 @@ class ProfileEditForm(FlaskForm):
     old_password = StringField('old_password', validators=[DataRequired(), password_matches])
     password = StringField('password')
     avatar = FileField('avatar')
+
+class EditAvatar(FlaskForm):
+    id = IntegerField('id', validators=[DataRequired()])
+    avatar = FileField('avatar')

@@ -4,6 +4,7 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from app.forms import ProfileEditForm
+from app.forms import EditAvatar
 from flask_login import current_user, login_user, logout_user, login_required
 from colors import *
 from app.s3_helpers import (
@@ -169,6 +170,46 @@ def edit_profile():
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+@auth_routes.route('/signup/avatar', methods=['PUT'])
+def edit_avatar():
+    """
+    Edits existing user
+    """
+    print(CGREEN + "\n EDIT AVATAR \n", "\n" + CEND)
+    form = EditAvatar()
+    data = form.data
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
+
+    user = User.query.filter(User.id == data["id"]).first()
+    user_avatar = user.avatar
+
+    if form.data['avatar'] == None:
+        url = user_avatar
+    else:
+        image = form.data['avatar']
+
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+
+        if "url" not in upload:
+            return upload, 400
+
+        url = upload["url"]
+
+    if form.validate_on_submit():
+        user.avatar=url
+        print(CGREEN + "\n USER UPDATED: \n", user, "\n" + CEND)
+        db.session.commit()
+
+        return user.to_dict(), {'errors': validation_errors_to_error_messages(form.errors)}
+
+    print(CGREEN + "\n ErrorsValidateFailed: \n", form.errors, "\n" + CEND)
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @auth_routes.route('/unauthorized')
 def unauthorized():

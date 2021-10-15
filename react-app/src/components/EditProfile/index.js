@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { profileEdit } from "../../store/session";
+import { profileEdit, avatarEdit } from "../../store/session";
 import "./editprofile.css";
 
 const EditProfileForm = () => {
@@ -39,7 +39,6 @@ const EditProfileForm = () => {
       formData.append("lname", lname);
       formData.append("bio", bio);
       formData.append("pronouns", pronouns);
-
       // setImageLoading(true);
       const data = await dispatch(profileEdit(formData));
 
@@ -96,8 +95,11 @@ const EditProfileForm = () => {
             <div className="avatarContainer editProfilePage">
               <img src={user.avatar} alt="Avatar" />
             </div>
-
-            <div className="userNameDisplay editProfilePage">{user.username}</div>
+            <div className="userNameBox">
+              <div className="userNameDisplay editProfilePage">{user.username}</div>
+              <div>
+                <button type="file" accept="image/*" className="editProfileImage textButton button">Change Profile Photo</button></div>
+            </div>
           </div>
 
           <form onSubmit={onProfileEdit}>
@@ -211,7 +213,7 @@ const EditProfileForm = () => {
 
             <div className="editFormRow">
               <div className="editLabelContainer">
-                <label>Old Password</label>
+                <label>Password</label>
               </div>
 
               <div className="editInputContainer">
@@ -227,7 +229,7 @@ const EditProfileForm = () => {
 
             <div className="editFormRow">
               <div className="editLabelContainer">
-                <label>Password</label>
+                <label>New Password</label>
               </div>
 
               <div className="editInputContainer">
@@ -242,7 +244,7 @@ const EditProfileForm = () => {
 
             <div className="editFormRow">
               <div className="editLabelContainer">
-                <label>Repeat Password</label>
+                <label>Confirm Password</label>
               </div>
 
               <div className="editInputContainer">
@@ -303,8 +305,12 @@ const EditProfileForm = () => {
                 </div>
               </div>
             </div>
-
-            <button type="submit" class="button blueButton">Save Changes</button>
+            <div className="editFormRow">
+              <div className="editLabelContainer"></div>
+              <div className="editInputContainer">
+                <button type="submit" class="button blueButton">Submit</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
