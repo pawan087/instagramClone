@@ -80,7 +80,7 @@ def sign_up():
 
     print(CGREEN + "\n FORM DATA: \n", form.data, "\n" + CEND)
 
-    if form.data['avatar'] == 'null':
+    if form.data['avatar'] == None:
         url = default_avatar
     else:
         image = form.data['avatar']
