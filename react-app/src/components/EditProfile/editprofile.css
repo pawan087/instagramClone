@@ -94,3 +94,9 @@
 .editInputContainer > .uploadDiv {
   justify-content: left;
 }
+
+.invisible {
+  opacity: 0;
+  cursor: default;
+  display: none;
+}

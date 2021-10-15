@@ -156,12 +156,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  justify-items: center;
-  justify-self: center;
   align-content: center;
   align-items: center;
-  align-self: center;
-  text-align: center;
   background-color: #ffffff;
 }
 

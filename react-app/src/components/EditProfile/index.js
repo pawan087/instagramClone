@@ -10,6 +10,7 @@ const EditProfileForm = () => {
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
   const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [fname, setFname] = useState(user.fname);
@@ -99,9 +100,9 @@ const EditProfileForm = () => {
             </div>
             <div className="userNameBox">
               <div className="userNameDisplay editProfilePage">{user.username}</div>
-              <div>
+              <div className='invisible'>
                 <button type="file" accept="image/*" className="editProfileImage textButton button">Change Profile Photo</button></div>
-            </div>
+              </div>
           </div>
 
           <form onSubmit={onProfileEdit}>
@@ -110,8 +111,6 @@ const EditProfileForm = () => {
                 <div key={ind}>{error}</div>
               ))}
             </div>
-
-            {console.log(errors)}
 
             <div className="editFormRow">
               <div className="editLabelContainer">
@@ -271,7 +270,7 @@ const EditProfileForm = () => {
 
             <div className="editFormRow">
               <div className="editLabelContainer">
-                <label>Avatar</label>
+                <label>Profile Picture</label>
               </div>
 
               <div className="editInputContainer">
