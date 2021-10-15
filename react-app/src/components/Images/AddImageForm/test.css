@@ -10,7 +10,7 @@
   object-fit: cover;
 }
 
-.outerContainer {
+.outerContainer1 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -44,9 +44,10 @@
   height: 30px;
   left: 20px;
   color: white;
+  cursor: pointer;
 }
 
-.title {
+.header {
   font-size: 20px;
   background-color: transparent;
   color: #262626;
@@ -69,9 +70,9 @@
 }
 
 .picToUpload {
-  width: 455px;
-  height: 455px;
-  object-fit: cover;
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
   position: absolute;
   z-index: 50;
 }
@@ -164,15 +165,34 @@
   background-color: #ffffff;
 }
 
-.btn {
+.btn1 {
   width: 475px;
   height: 40px;
   background-color: #1289f1;
   font-size: 15px;
+  opacity: 1;
+  color: white;
+  outline: none;
+  border: none;
+  font-weight: bold;
 }
 
-.btn:active {
+.btn1:active {
   opacity: 0.75;
+}
+
+.btn2 {
+  width: 475px;
+  height: 40px;
+  background-color: #1289f1;
+  font-size: 15px;
+  opacity: 1;
+  color: white;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  opacity: .675;
+  cursor: not-allowed;
 }
 
 .input-file-container {
@@ -208,4 +228,135 @@
   /* background: #34495e;
   color: #39d2b4; */
   cursor: pointer;
+}
+
+
+.loadingModal {
+  position: absolute;
+  opacity: 0.85;
+  /* opacity: 0; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(0, 149, 246);
+  z-index: 100;
+}
+
+.innerModal {
+  box-sizing: border-box;
+  position: relative;
+  width: 350px;
+  border-radius: 5px;
+  height: 175px;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  padding-left: 15px;
+  color: rgb(0, 149, 246);
+  font-size: 80px;
+  z-index: 100;
+}
+
+.dot-elastic2 {
+  position: absolute;
+  right: 33px;
+  top: 100px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgb(0, 149, 246);
+  color: rgb(0, 149, 246);
+  animation: dotElastic2 1s infinite linear;
+}
+
+.dot-elastic2::before,
+.dot-elastic2::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-elastic2::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgb(0, 149, 246);
+  color: rgb(0, 149, 246);
+  animation: dotElastic2Before 1s infinite linear;
+}
+
+.dot-elastic2::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgb(0, 149, 246);
+  color: rgb(0, 149, 246);
+  animation: dotElastic2After 1s infinite linear;
+}
+
+@keyframes dotElastic2Before {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1, 1.5);
+  }
+  50% {
+    transform: scale(1, 0.67);
+  }
+  75% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dotElastic2 {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1, 1.5);
+  }
+  75% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dotElastic2After {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1, 0.67);
+  }
+  75% {
+    transform: scale(1, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }

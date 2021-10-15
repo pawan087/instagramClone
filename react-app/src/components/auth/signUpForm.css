@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-.title {
+.title1 {
   background-color: rgb(255, 255, 255);
   height: 90px;
   width: 350px;
@@ -127,6 +127,24 @@
 .demoBtn:active,
 .signUpBtn:active {
   opacity: 0.75;
+}
+
+.signUpBtn2 {
+  background-color: rgb(0, 149, 246);
+  font-size: 15px;
+  color: white;
+  width: 270px;
+  height: 30px;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  opacity: .675;
+  cursor:not-allowed;
 }
 
 .policyContainer {
