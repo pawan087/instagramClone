@@ -11,22 +11,21 @@
 }
 
 .outerContainer1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 1365px;
   height: 765px;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 3px;
+  margin: 30px auto 0;
 }
 
 .topContainer {
   width: 1365px;
   height: 55px;
   display: flex;
+  position: relative;
   justify-content: center;
   justify-items: center;
   justify-self: center;
@@ -35,6 +34,7 @@
   align-self: center;
   text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px 3px 0 0;
   background-color: #ffffff;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .header {
-  font-size: 20px;
+  font-size: 1.65rem;
   background-color: transparent;
   color: #262626;
 }
@@ -96,8 +96,8 @@
 }
 
 .username {
-  margin-left: 20px;
-  font-size: 20px;
+  margin-left: 15px;
+  font-size: 1.25rem;
 }
 
 .rightTwo {
@@ -151,7 +151,7 @@
   background-color: #ffffff;
 }
 
-.btnContainer {
+.rightBtnContainer {
   height: 75px;
   width: 100%;
   display: flex;
@@ -168,13 +168,9 @@
 .btn1 {
   width: 475px;
   height: 40px;
-  background-color: #1289f1;
-  font-size: 15px;
   opacity: 1;
-  color: white;
   outline: none;
   border: none;
-  font-weight: bold;
 }
 
 .btn1:active {
@@ -184,13 +180,9 @@
 .btn2 {
   width: 475px;
   height: 40px;
-  background-color: #1289f1;
-  font-size: 15px;
   opacity: 1;
-  color: white;
   outline: none;
   border: none;
-  font-weight: bold;
   opacity: .675;
   cursor: not-allowed;
 }
@@ -211,14 +203,11 @@
   cursor: pointer;
 }
 
-.input-file-trigger {
+.input-file-trigger.button {
   display: block;
-  padding: 14px 45px;
-  background: #1289f1;
-  color: #fff;
+  padding: 10px 30px;
   font-size: 1em;
   transition: all 0.4s;
-  cursor: pointer;
 }
 
 .input-file:hover + .input-file-trigger,
