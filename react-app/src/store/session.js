@@ -193,6 +193,33 @@ export const deleteFollow = (follow) => async (dispatch) => {
 };
 
 // ==================================================================
+// ===========================SAVED THUNKS===========================
+// ==================================================================
+
+export const addSavedImage = (user_id, image_id) => async (dispatch) => {
+  const response = await fetch(`/api/images/saved/${user_id}/${image_id}/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    dispatch(setUser(data));
+  } else return "ADD FOLLOW THUNK FAILED!";
+};
+
+export const updateUser = (user_id) => async (dispatch) => {
+  const response = await fetch(`/api/users/${user_id}`);
+
+  if (response.ok) {
+    const data = await response.json();
+
+    dispatch(setUser(data));
+  } else return "ADD FOLLOW THUNK FAILED!";
+};
+
+// ==================================================================
 // ============================REDUCER===============================
 // ==================================================================
 

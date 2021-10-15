@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { addComment, deleteOneComment, deleteOneImage } from "../../../store/image"
 import { addLike, deleteOneLike } from '../../../store/like'
 import { NavLink, useHistory } from "react-router-dom"
@@ -13,6 +13,7 @@ import personDots from '../../../image_assets/personDots.svg'
 import { addEvent, deleteOneEvent } from "../../../store/event"
 import bookmark from '../../../image_assets/bookmark.svg'
 import saved from '../../../image_assets/saved.svg'
+import { addSavedImage, login, updateUser } from "../../../store/session"
 
 const ImageComponent = ({ image }) => {
 
@@ -29,6 +30,10 @@ const ImageComponent = ({ image }) => {
     let likesByUser = likes.filter(like => like?.image?.id === image?.id && like?.user?.id === user?.id)
 
     const usersSavedImages = useSelector((state) => state.session.user.saved_images)
+
+    useEffect(() => {
+        dispatch(updateUser(user.id))
+    },[dispatch])
 
     const reset = () => {
         setCommentBody('')
@@ -118,7 +123,11 @@ const ImageComponent = ({ image }) => {
                         <button>
                             <img src={unliked} alt="unliked" className="unliked" onClick={() => setAnimateGrow(1)} onAnimationEnd={() => setAnimateGrow(0)} animategrow={animateGrow} />
                         </button>}
-                    <img src={usersSavedImages.includes(image.id) ? saved : bookmark} alt="bookmarkImage" className="bookmarkButton" />
+                    <img src={ usersSavedImages?.includes(image?.id) ? saved : bookmark } 
+                        alt="bookmarkImage" 
+                        className="bookmarkButton" 
+                        onClick={() => !usersSavedImages?.includes(image?.id) ? dispatch(addSavedImage(user?.id, image?.id)) : false } 
+                    />
                 </form>
                 <div>
                     {thisPicturesLikes?.length}
