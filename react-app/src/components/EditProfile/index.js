@@ -39,11 +39,10 @@ const EditProfileForm = () => {
       formData.append("lname", lname);
       formData.append("bio", bio);
       formData.append("pronouns", pronouns);
-      // setImageLoading(true);
 
+      setImageLoading(true);
       const data = await dispatch(profileEdit(formData));
-
-      // setImageLoading(false);
+      setImageLoading(false);
 
       history.push(`/users/${user.id}`);
 
@@ -85,6 +84,7 @@ const EditProfileForm = () => {
   }
 
   return (
+    <>
     <div className="editProfilePage">
       <div className="editProfileContainer">
         <div className="editLeftPanel">
@@ -315,6 +315,14 @@ const EditProfileForm = () => {
         </div>
       </div>
     </div>
+    {imageLoading && (
+      <div className="loadingModal">
+        <div className="logo innerModal">
+          Uploading <span class="dot-elastic2"></span>
+        </div>
+      </div>
+    )}
+    </>
   );
 };
 
