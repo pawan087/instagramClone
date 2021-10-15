@@ -148,6 +148,7 @@ a {
 }
 .dropdown_contentSubcontainer {
   position: relative;
+  border-radius: 5px;
   padding: 1.25rem;
   background-color: #FFFFFF;
 }
