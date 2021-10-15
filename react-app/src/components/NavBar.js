@@ -54,6 +54,7 @@ const NavBar = () => {
   };
 
   const findUser = (userId) => {
+    console.log("IN FIND USER", userId)
     return allUsers?.filter((user) => user.id === userId)[0]
   }
 
