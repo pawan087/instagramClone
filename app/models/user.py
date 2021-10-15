@@ -23,19 +23,12 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     followers = db.Column(db.ARRAY(db.Integer), default=[])
     following = db.Column(db.ARRAY(db.Integer), default=[])
+    saved_images = db.Column(db.ARRAY(db.Integer), default=[])
 
     images = db.relationship("Image", back_populates="user")
     likes = db.relationship("Like", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
 
-    # followers = db.relationship(
-    #     'User', # referring to the model / class
-    #     secondary=follow_user, # Join table name
-    #     primaryjoin=(follow_user.c.follower_id == id), # ?
-    #     secondaryjoin=(follow_user.c.followee_id == id), # ?
-    #     backref=db.backref('follow_user', lazy='dynamic'), # ?
-    #     lazy='dynamic' # ?
-    # )
 
     @property
     def password(self):
@@ -52,15 +45,15 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
+            'email': self.email,
             'fname': self.fname,
             'lname': self.lname,
             'bio': self.bio,
             'pronouns': self.pronouns,
-            'email': self.email,
             'followers': self.followers,
             'following': self.following,
+            'saved_images': self.saved_images,
             'avatar': self.avatar,
-            # 'incoming_events': {"incoming": [event.to_dict() for event in self.incoming_events]},
         }
 
     # def __repr__(self):

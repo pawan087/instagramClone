@@ -14,6 +14,11 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+@user_routes.route('/<int:user_id>/')
+def update_user(user_id):
+    user = User.query.get(user_id)
+    return user.to_dict()
+
 @user_routes.route('/following/<int:id>')
 def followers(id):
     user = User.query.get(id)
