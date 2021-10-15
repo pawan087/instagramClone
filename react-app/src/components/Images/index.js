@@ -22,12 +22,12 @@ const Image = () => {
 
     return (
         <div className="imageContainer">
-            
+
             {/* <Notifications events={myEvents} /> */}
 
             {images?.map((image) => (
                 <ImageComponent image={image} key={image.id} />
-            ))}
+            )).reverse()}
         </div>
     )
 }
