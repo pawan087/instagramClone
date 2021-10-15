@@ -4,6 +4,8 @@ import { useDetectOutsideClick } from "./NavBarOutsideClick";
 import LogoutButton from "./auth/LogoutButton";
 import profile from "../image_assets/profile.svg"
 import bookmark from "../image_assets/bookmark.svg"
+import settings from "../image_assets/settings.svg"
+import { NavLink } from "react-router-dom";
 /*
  * Read the blog post here:
  * https://letsbuildui.dev/articles/building-a-dropdown-menu-component-with-react-hooks
@@ -30,7 +32,6 @@ export default function NavBarMenu(avatar, userId) {
         </div>
         <ul>
           <li>
-
             <a className='avatarReroute' href={`/users/${avatar?.userId}`}>
               <img src={profile} alt="Profile Icon" draggable="false" />
               Profile
@@ -41,6 +42,12 @@ export default function NavBarMenu(avatar, userId) {
               <img src={bookmark} alt="Bookmark Icon" draggable="false" />
               Saved
             </a>
+          </li>
+          <li>
+            <NavLink className='avatarReroute' to={`/users/${userId}/edit_profile`}>
+              <img src={settings} alt="Settings Icon" draggable="false" />
+              Settings
+            </NavLink>
           </li>
           <li className='borderTop'>
             <LogoutButton />
