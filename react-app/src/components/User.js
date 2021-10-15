@@ -1,12 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
-import { setAllImages } from "../store/image";
-import ImageTileComponent from "./Images/ImageTileComponent";
-import { addFollow, deleteFollow, setAllUsers } from "../store/session";
-import "./user.css";
-import followed from "../image_assets/followed.svg";
-import settings from "../image_assets/settings.svg";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
+import { setAllImages } from '../store/image';
+import ImageTileComponent from './Images/ImageTileComponent'
+import { addFollow, deleteFollow, setAllUsers } from '../store/session';
+import './user.css'
+import followed from "../image_assets/followed.svg"
+import settings from "../image_assets/settings.svg"
+import saved from '../image_assets/bookmark.svg'
+import grid from '../image_assets/grid.svg'
 
 function User() {
   const { userId } = useParams();
@@ -17,12 +19,15 @@ function User() {
   const images = useSelector((state) => state.images);
   const usersImages = images.filter((image) => image.user_id === +userId);
 
-  const currentPagesUser = useSelector(
-    (state) =>
-      state?.session?.allUsers?.filter((user) => user.id === +userId)[0]
-  );
 
-  let followText = "";
+  const currentPagesUser = useSelector((state) => state?.session?.allUsers?.filter((user) => user.id === +userId)[0])
+
+  const [imageList, setImageList] = useState('posts')
+
+
+  const findImage = (imageId) => images.filter((image) => image.id === imageId)[0]
+
+  let followText = ""
 
   console.log("currentPagesUser", currentPagesUser);
   useEffect(() => {
@@ -37,9 +42,9 @@ function User() {
       user_to_follow_id: +userId,
     };
     if (currentPagesUser?.followers?.includes(curUser.id)) {
-      dispatch(deleteFollow(followObj));
+      dispatch(deleteFollow(followObj))
     } else {
-      dispatch(addFollow(followObj));
+      dispatch(addFollow(followObj))
     }
   };
 
@@ -51,10 +56,7 @@ function User() {
     e.preventDefault();
   };
 
-  if (
-    currentPagesUser?.following?.includes(curUser.id) &&
-    !currentPagesUser?.followers?.includes(curUser.id)
-  ) {
+  if (currentPagesUser?.following?.includes(curUser.id) && !currentPagesUser?.followers?.includes(curUser.id)) {
     followText = "Follow Back";
   } else if (!currentPagesUser?.followers?.includes(curUser.id)) {
     followText = "Follow";
@@ -72,82 +74,68 @@ function User() {
             <img src={currentPagesUser?.avatar} alt="User Avatar" />
           </div>
         </div>
-
         <div className="profileBox">
           <div className="profileNameAndButtons">
-            <div className="profileUserName">{currentPagesUser?.username}</div>
-
-            {currentPagesUser && currentPagesUser?.id !== curUser?.id ? (
+            <div className="profileUserName">
+              {currentPagesUser?.username}
+            </div>
+            {currentPagesUser && currentPagesUser?.id !== curUser?.id ?
               <div className="profileButtonBox">
                 <form onSubmit={addOrRemoveFollow}>
-                  {currentPagesUser?.followers?.includes(curUser.id) ? (
-                    <button className="unfollow followingButton profileButton button">
-                      <img
-                        src={followed}
-                        alt="Unfollow"
-                        className="follow_icon"
-                        draggable="false"
-                      />
-                    </button>
-                  ) : (
-                    <button className="follow followingButton profileButton blueButton button">
-                      {followText}
-                    </button>
-                  )}
+                  {currentPagesUser?.followers?.includes(curUser.id) ?
+                    <button className="unfollow followingButton profileButton button"><img src={followed} alt="Unfollow" className="follow_icon" draggable="false" /></button> :
+                    <button className="follow followingButton profileButton blueButton button">{followText}</button>}
                 </form>
-              </div>
-            ) : (
+              </div> :
               <div className="profileButtonBox">
-                <button
-                  onClick={editProfile}
-                  className="editProfile profileButton button"
-                >
-                  Edit Profile
-                </button>
+                <button onClick={editProfile} className="editProfile profileButton button">Edit Profile</button>
+                <button onClick={editProfileModal} className="editProfileModalButton button"><img src={settings} alt="Unfollow" className="follow_icon" draggable="false" /></button>
               </div>
-            )}
+            }
           </div>
-
           <div className="profileDetails">
             <div className="profileCounts">
-              <div className="profilePosts">
-                <div className="profileCountsNumber">{usersImages?.length}</div>{" "}
-                posts
-              </div>
-
-              <div className="profileFollowers">
-                <div className="profileCountsNumber">
-                  {currentPagesUser?.followers.length}
-                </div>{" "}
-                followers
-              </div>
-
-              <div className="profileFollowing">
-                <div className="profileCountsNumber">
-                  {currentPagesUser?.following.length}
-                </div>{" "}
-                following
-              </div>
+              <div className="profilePosts"><div className="profileCountsNumber">{usersImages?.length}</div> posts</div>
+              <div className="profileFollowers"><div className="profileCountsNumber">{currentPagesUser?.followers.length}</div> followers</div>
+              <div className="profileFollowing"><div className="profileCountsNumber">{currentPagesUser?.following.length}</div> following</div>
             </div>
-
             <div className="profileUsernameAndPronoun">
-              <div className="profileName">
-                {currentPagesUser?.fname} {currentPagesUser?.lname}
-              </div>{" "}
-              {currentPagesUser?.pronouns}
+              <div className="profileName">{currentPagesUser?.fname} {currentPagesUser?.lname}</div> {currentPagesUser?.pronouns}
             </div>
-
-            <div className="profileBio">{currentPagesUser?.bio}</div>
+            <div className="profileBio">
+              {currentPagesUser?.bio}
+            </div>
+            <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div>
           </div>
         </div>
       </div>
-
       <div className="imageContainer tileContainer">
-        <div className="profileSwitchBox"></div>
 
-        {usersImages?.map((image) => (
-          <ImageTileComponent image={image} key={image.id} />
-        ))}
+        <div className="profileSwitchBox">
+          <div className="imageListContainer">
+            <div className="imageList">
+              <div onClick={() => setImageList('posts')} className={imageList === 'posts' ? 'listItem listItemActive' : 'listItem'} >
+                <img className={imageList === 'posts' ? 'imageActive' : false} src={grid} alt='grid icon' />
+                POSTS
+              </div>
+              <div onClick={() => setImageList('saved')} className={imageList === 'saved' ? 'listItem listItemActive' : 'listItem'}>
+                <img className={imageList === 'saved' ? 'imageActive' : false} src={saved} alt='save icon' />
+                SAVED
+              </div>
+            </div>
+          </div>
+
+        </div>
+        {imageList === 'posts' ? (
+          usersImages?.map((image) => (
+            <ImageTileComponent image={image} key={image.id} />
+          ))
+        ) : (
+          currentPagesUser?.saved_images?.map((imageId) => (
+            <ImageTileComponent image={findImage(imageId)} key={imageId} />
+          ))
+        )}
+
       </div>
     </div>
   );
