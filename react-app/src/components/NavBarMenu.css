@@ -1,0 +1,62 @@
+.dropDownContainer {
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+  
+.menu {
+    background: #ffffff;
+    border-radius: 8px;
+    position: absolute;
+    width: 100px;
+    margin-top: 110px;
+    margin-right: 10px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+  
+.menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+  
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin-left: 0px;
+}
+  
+.menu li {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background: rgba(0, 0, 0, .05);
+}
+
+.menu li:first-child:hover{
+    background: rgba(0, 0, 0, .05);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+
+.menu li:last-child:hover{
+    background: rgba(0, 0, 0, .05);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+  
+.menu li a {
+    text-decoration: none;
+    color: #333333;
+}
+  
+.borderTop {
+    border-top: 1px solid rgba(0, 0, 0, .2);
+}
