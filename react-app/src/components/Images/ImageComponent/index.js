@@ -81,7 +81,7 @@ const ImageComponent = ({ image }) => {
             <div className="titleContainer">
                 <div className="userInfo">
                     <div className="avatarContainer">
-                        <img src={image?.user?.avatar} alt="" />
+                        <img src={image?.user?.avatar} alt="Avatar" />
                     </div>
                     <p className="image_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>
                 </div>
