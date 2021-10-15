@@ -15,6 +15,7 @@ class Event(db.Model):
     # BACKREF WILL "VIRTUALLY CREATE" INCOMING_EVENTS AS A PROPERTY IN THE USER MODEL ->
     our_user = db.relationship("User", backref="incoming_events", foreign_keys=[our_user_id])
     other_user = db.relationship("User", backref="outgoing_events", foreign_keys=[other_user_id])
+    images = db.relationship("Image", back_populates="event")
 
     def to_dict(self):
 

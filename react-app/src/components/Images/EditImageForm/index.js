@@ -70,7 +70,7 @@ const EditImageForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <div>
           <label>Image Title</label>
           <input
@@ -103,7 +103,7 @@ const EditImageForm = () => {
         </div>
 
         <button>Submit</button>
-      </form>
+      </form> */}
       <div className="outerContainer1">
         <div className="topContainer">
           <div onClick={goBack} className="backBtn">
