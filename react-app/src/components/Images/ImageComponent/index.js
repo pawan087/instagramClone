@@ -122,7 +122,7 @@ const ImageComponent = ({ image }) => {
             </div>
 
             {/* IMAGE CAPTION */}
-            <div className="caption">
+            <div className="caption" key={image.id}>
                 {image?.caption && <p className="caption_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>}
                 <p>{image?.caption}</p>
             </div>

@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { profileEdit, avatarEdit } from "../../store/session";
+import React from "react";
+
 import "./footer.css";
 import githubImg from '../../image_assets/GitHub-Mark-32px.png'
 

@@ -10,13 +10,13 @@ const LogoutButton = () => {
 
   const user = useSelector((state) => state.session.user)
 
-  const logoutStyling = {
-    backgroundColor: 'black',
-    color: 'white',
-    padding: '5px 10px',
-    borderRadius: '5px',
-    cursor: "pointer"
-  }
+  // const logoutStyling = {
+  //   backgroundColor: 'black',
+  //   color: 'white',
+  //   padding: '5px 10px',
+  //   borderRadius: '5px',
+  //   cursor: "pointer"
+  // }
 
   if (user !== null) {
     return <p onClick={onLogout} className='avatarReroute' >Log Out</p>
