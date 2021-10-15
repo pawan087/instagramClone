@@ -55,6 +55,17 @@ a {
   user-select: none;  /* Prevents user from highlighting the button */
   cursor: pointer;    /* Makes the cursor default to a pointer even when there's an image as a child */
 }
+
+.button.blueButton {
+  background-color: #0095f6;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 .home_button {
     height: 33px;
 }
@@ -75,7 +86,6 @@ a {
     width: 36px;
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 16px;
 }
 
 .avatarContainer img {
@@ -104,7 +114,7 @@ a {
 .red {
     color: #ed4956;
     font-weight: 700;
-    
+
 }
 
 .dropdown_menu {

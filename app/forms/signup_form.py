@@ -36,10 +36,12 @@ def username_exists(form, field):
 def username_exists_edit(form, field):
     # Checking if username is already in use
     username = field.data
+
     userFromId = User.query.filter(User.id == form.data["id"]).first().username
-    print(CGREEN + "\n userFromId: \n", userFromId, "\n" + CEND)
+    # print(CGREEN + "\n userFromId: \n", userFromId, "\n" + CEND)
     user = User.query.filter(User.username == username).first()
-    if not user.username == userFromId:
+
+    if not username == userFromId:
       if user:
         raise ValidationError('Username is already in use.')
 
@@ -48,6 +50,7 @@ def password_matches(form, field):
     old_password = field.data
     id = form.data['id']
     user = User.query.filter(User.id == id).first()
+
     if not user:
         raise ValidationError('No such user exists.')
     if not user.check_password(old_password):
@@ -61,18 +64,21 @@ class SignUpForm(FlaskForm):
     bio = TextAreaField('Last Name')
     pronouns = SelectField("Pronouns", choices=['Prefer Not To Disclose', 'He/Him', 'She/Her', 'They/Them', 'Other'])
     password = StringField('password', validators=[DataRequired()])
-    avatar = StringField('avatar')
+    avatar = FileField('avatar')
 
 
 class ProfileEditForm(FlaskForm):
     id = IntegerField('id', validators=[DataRequired()])
-    # username = StringField('username')
     username = StringField('username', validators=[username_exists_edit])
     email = StringField('email', validators=[user_exists_edit])
-    fname = StringField('First Name', validators=[DataRequired()])
-    lname = StringField('Last Name', validators=[DataRequired()])
-    bio = TextAreaField('Last Name')
-    pronouns = SelectField("Pronouns", choices=['Prefer Not To Disclose','He/Him', 'She/Her', 'They/Them', 'Other'])
-    oldPassword = StringField('old_password', validators=[DataRequired(), password_matches])
+    fname = StringField('fname', validators=[DataRequired()])
+    lname = StringField('lname', validators=[DataRequired()])
+    bio = TextAreaField('bio')
+    pronouns = SelectField("pronouns", choices=['Prefer Not To Disclose','He/Him', 'She/Her', 'They/Them', 'Other'])
+    old_password = StringField('old_password', validators=[DataRequired(), password_matches])
     password = StringField('password')
-    avatar = FileField('profile picture')
+    avatar = FileField('avatar')
+
+class EditAvatar(FlaskForm):
+    id = IntegerField('id', validators=[DataRequired()])
+    avatar = FileField('avatar')

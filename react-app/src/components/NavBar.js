@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -8,8 +7,6 @@ import post from "../image_assets/post.svg"
 import notifications from "../image_assets/notifications.svg"
 import { deleteOneEvent, startPolling } from '../store/event';
 import NavBarMenu from './NavBarMenu';
-
-
 
 const NavBar = () => {
 
@@ -51,6 +48,7 @@ const NavBar = () => {
           <div className='dropdown_menu'>
             <img src={notifications} alt="home" className="home_button button" draggable="false" />
             <div className="dropdown_content">
+              <div className="bubbleArrow"></div>
               {events.length > 0 ?
                 events.map((event) =>
                 (
