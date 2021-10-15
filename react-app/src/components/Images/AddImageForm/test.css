@@ -4,7 +4,7 @@
   background-color: red;
 }
 
-.pic {
+.pic2 {
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -91,6 +91,7 @@
   width: 30px;
   height: 30px;
   margin-left: 20px;
+  border-radius: 50em;
 }
 
 .username {
@@ -104,12 +105,13 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.caption {
+.caption2 {
   font-size: 20px;
   position: absolute;
   width: 492px;
   height: 100%;
   resize: none;
+  margin-left: 20px;
   outline: none;
   border: none;
 }
@@ -165,12 +167,12 @@
 .btn {
   width: 475px;
   height: 40px;
-  background-color: #1289F1;
+  background-color: #1289f1;
   font-size: 15px;
 }
 
 .btn:active {
-  opacity: .75;
+  opacity: 0.75;
 }
 
 .input-file-container {
@@ -192,8 +194,7 @@
 .input-file-trigger {
   display: block;
   padding: 14px 45px;
-  background: #1289F1;
-  border-radius: 5px;
+  background: #1289f1;
   color: #fff;
   font-size: 1em;
   transition: all 0.4s;

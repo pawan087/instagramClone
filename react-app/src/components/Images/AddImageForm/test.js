@@ -152,44 +152,56 @@ const TestAddImageForm = () => {
 
         <div className="bottomContainer">
           <div className="leftContainer">
-            {!preview && <div className="input-file-container">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={updateImage}
-                className="inpuut-file"
-                id="my-file"
-              />
+            {!preview && (
+              <div className="input-file-container">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={updateImage}
+                  className="inpuut-file"
+                  id="my-file"
+                />
 
-              <label tabindex="0" for="my-file" class="input-file-trigger">
-                Select a file...
-              </label>
-            </div>}
+                <label tabindex="0" for="my-file" class="input-file-trigger">
+                  Select a file...
+                </label>
+              </div>
+            )}
 
-            {preview && <img class="picToUpload pic" src={preview} />}
+            {preview && <img class="picToUpload pic2" src={preview} />}
           </div>
 
           <div className="rightContainer">
             <div className="rightOne">
-              <img
-                src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
-                className="avatar"
-              ></img>
-              <p className="username">pwnpreet</p>
+              <img src={user?.avatar} className="avatar"></img>
+              <p className="username">{user?.username}</p>
             </div>
 
             <div className="rightTwo">
-              <textarea className="caption" placeholder="Write a caption..." />
+              <textarea
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
+                className="caption2"
+                placeholder="Write a caption..."
+              />
             </div>
 
             <div className="rightThree">
-              <input placeholder="Add Title..." type="text" className="title" />
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Add Title..."
+                type="text"
+                className="title"
+              />
             </div>
 
             <div className="rightFour">
               <input
                 placeholder="Add Hashtags..."
                 type="text"
+                value={hashtags}
+                onChange={(e) => setHashtags(e.target.value)}
                 className="hashtags"
               />
             </div>
@@ -197,7 +209,7 @@ const TestAddImageForm = () => {
             <div className="emptyDiv divisor" />
 
             <div className="btnContainer">
-              <button className="btn">Share</button>
+              <button onClick={handleSubmit} className="btn">Share</button>
             </div>
           </div>
         </div>
