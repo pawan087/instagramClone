@@ -51,6 +51,13 @@ const ImageComponent = ({ image }) => {
         reset()
     }
 
+    const handleKeypress = (e) => {
+        //it triggers by pressing the enter key
+        if (e.key === "Enter") {
+          handleSubmit(e);
+        }
+    };
+
     const handleDelete = () => {
         dispatch(deleteOneImage(image.id))
         history.push("/")
@@ -82,6 +89,8 @@ const ImageComponent = ({ image }) => {
             dispatch(addEvent(newEvent, user.id))
         }
     }
+
+    // <button className='red' onClick={(e) => history.push(`/images/${image.id}/comments/${comment.id}`)}>Edit</button>
 
     return (
         <div className="imageCard" key={image?.id}>
@@ -170,32 +179,31 @@ const ImageComponent = ({ image }) => {
                                     <button className='modal' onClick={() => setIsCommentOpen(true)}><img src={tableDots} alt='options' /></button>
                                     <CommentModal open={isCommentOpen} onClose={() => setIsCommentOpen(false)}>
                                         <button className='red' onClick={() => handleDeleteComment(comment.id)}>Delete</button>
-                                        <button className='red' onClick={(e) => history.push(`/images/${image.id}/comments/${comment.id}`)}>Edit</button>
-                                    </CommentModal>
-                                </div>
-                            </>
-                            : false}
+                                        </CommentModal>
+                                        </div>
+                                        </>
+                                        : false}
 
-                    </div>
-                ))}
-            </div>
-
+                                        </div>
+                                        ))}
+                                        </div>
 
 
-            {/* CREATE A COMMENT FORM */}
-            < div className="createComment" >
-                <form onSubmit={handleSubmit}>
-                    <textarea value={commentBody} onChange={(e) => {
-                        setCommentBody(e.target.value)
-                        setCommentImageId(image.id)
-                    }}
-                        placeholder='Add a Comment'></textarea>
-                    <button onClick={() => setIsCommentOpen(false)}>Post</button>
-                </form>
-            </div>
+
+                                        {/* CREATE A COMMENT FORM */}
+                                        < div className="createComment" >
+                                        <form onSubmit={handleSubmit}>
+                                        <textarea onKeyPress={handleKeypress} value={commentBody} onChange={(e) => {
+                                            setCommentBody(e.target.value)
+                                            setCommentImageId(image.id)
+                                        }}
+                                        placeholder='Add a Comment'></textarea>
+                                        <button onClick={() => setIsCommentOpen(false)}>Post</button>
+                                        </form>
+                                        </div>
 
         </div>
-    )
-}
+        )
+    }
 
-export default ImageComponent
+    export default ImageComponent

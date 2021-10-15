@@ -114,6 +114,7 @@ const SignUpForm = () => {
     return <Redirect to="/" />;
   }
 
+
   return (
     <form className="outerContainer" onSubmit={onSignUp}>
       {showErrors && (
@@ -283,6 +284,7 @@ const SignUpForm = () => {
           Log in
         </a>
       </div>
+      
       {imageLoading && (
         <div className="loadingModal">
           <div className="logo innerModal">
