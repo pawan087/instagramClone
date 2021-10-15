@@ -84,7 +84,7 @@ def sign_up():
         url = default_avatar
     else:
         image = form.data['avatar']
-
+        # print(CGREEN + "\n IMAGE: \n", image, "\n" + CEND)
         if not allowed_file(image.filename):
             return {"errors": "file type not permitted"}, 400
 

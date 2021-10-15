@@ -132,7 +132,7 @@ const TestAddImageForm = () => {
             />
           </div>
 
-          <div className="rightThree">
+          {/*<div className="rightThree">
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -140,7 +140,7 @@ const TestAddImageForm = () => {
               type="text"
               className="title"
             />
-          </div>
+          </div>*/}
 
           <div className="rightFour">
             <input
