@@ -104,22 +104,10 @@ function User() {
                 >
                   Edit Profile
                 </button>
-
-                <button
-                  onClick={editProfileModal}
-                  className="editProfileModalButton button"
-                >
-                  <img
-                    src={settings}
-                    alt="Unfollow"
-                    className="follow_icon"
-                    draggable="false"
-                  />
-
-                </button>
               </div>
             )}
           </div>
+
           <div className="profileDetails">
             <div className="profileCounts">
               <div className="profilePosts">
@@ -153,12 +141,10 @@ function User() {
           </div>
         </div>
       </div>
-      
+
       <div className="imageContainer tileContainer">
         <div className="profileSwitchBox"></div>
-        {/* {usersImages?.map((image) => (
-                              <ImageComponent image={image} key={image.id} />
-                            ))} */}
+
         {usersImages?.map((image) => (
           <ImageTileComponent image={image} key={image.id} />
         ))}
@@ -166,6 +152,19 @@ function User() {
     </div>
   );
 }
+
 export default User;
 
 // <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div>
+
+// <button
+//   onClick={editProfileModal}
+//   className="editProfileModalButton button"
+// >
+//   <img
+//     src={settings}
+//     alt="Unfollow"
+//     className="follow_icon"
+//     draggable="false"
+//   />
+// </button>
