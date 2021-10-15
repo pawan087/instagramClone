@@ -165,3 +165,47 @@
   border: 1px solid #DDDDDD;
   border-width: 1px 0 0;
 }
+
+/* =========================
+          Image List Nav
+==========================*/
+
+.imageListContainer {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.imageList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  height: 53px;
+  cursor: pointer;
+}
+
+.listItem {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  color: #8e8e8e;
+}
+
+.listItemActive {
+  border-top: 1px solid #262626;
+  color: #262626;
+}
+
+.listItem img {
+  height: 14px;
+  filter: invert(61%) sepia(0%) saturate(743%) hue-rotate(215deg) brightness(92%) contrast(93%);
+}
+
+.listItem .imageActive {
+  filter: invert(11%) sepia(8%) saturate(21%) hue-rotate(331deg) brightness(95%) contrast(88%);
+}
