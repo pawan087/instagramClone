@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { profileEdit, avatarEdit } from "../../store/session";
 import "./editprofile.css";
 
 const EditProfileForm = () => {
   const user = useSelector((state) => state.session.user);
-
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
@@ -22,6 +21,7 @@ const EditProfileForm = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onProfileEdit = async (e) => {
     e.preventDefault();
@@ -40,9 +40,12 @@ const EditProfileForm = () => {
       formData.append("bio", bio);
       formData.append("pronouns", pronouns);
       // setImageLoading(true);
+
       const data = await dispatch(profileEdit(formData));
 
       // setImageLoading(false);
+
+      history.push(`/users/${user.id}`);
 
       if (data) {
         setErrors(data);
@@ -191,7 +194,6 @@ const EditProfileForm = () => {
                   <option value="She/Her">She/Her</option>
 
                   <option value="They/Them">They/Them</option>
-
                   <option value="Other">Other</option>
                 </select>
               </div>

@@ -96,6 +96,20 @@ const SignUpForm = () => {
     dispatch(login("demo@aa.io", "password"));
   };
 
+  let allowSignUp = false;
+
+  if (
+    username &&
+    email &&
+    fname &&
+    lname &&
+    pronouns &&
+    password &&
+    repeatPassword
+  ) {
+    allowSignUp = true;
+  }
+
   if (user) {
     return <Redirect to="/" />;
   }
@@ -113,7 +127,7 @@ const SignUpForm = () => {
       )}
 
       <div className="topInnerContainer">
-        <div className="title logo">Kilogram</div>
+        <div className="title1 logo">Kilogram</div>
 
         <div className="subtitle">Sign up to see photos from your friends.</div>
 
@@ -248,9 +262,12 @@ const SignUpForm = () => {
         </div>
 
         <div className="btnContainer2">
-          <button type="submit" className="signUpBtn">
+          {allowSignUp && <button type="submit" className="signUpBtn">
             Sign Up
-          </button>
+          </button>}
+          {!allowSignUp && <button type="submit" className="signUpBtn2">
+            Sign Up
+          </button>}
         </div>
 
         <div className="policyContainer">
@@ -266,11 +283,13 @@ const SignUpForm = () => {
           Log in
         </a>
       </div>
-      {imageLoading && <div className="loadingModal">
-        <div className="logo innerModal">
-          Signing in <span class="dot-elastic"></span>
+      {imageLoading && (
+        <div className="loadingModal">
+          <div className="logo innerModal">
+            Signing in <span class="dot-elastic"></span>
+          </div>
         </div>
-      </div>}
+      )}
     </form>
   );
 };
