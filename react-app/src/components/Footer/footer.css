@@ -13,6 +13,8 @@
 .footerTop {
   display: flex;
   justify-content: center;
+  align-items: center;
+
   margin: 25px 207px 10px;
   width: 100%;
 }
