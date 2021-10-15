@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Image from './components/Images';
 import AddImageForm from './components/Images/AddImageForm';
+import TestAddImageForm from './components/Images/AddImageForm/test';
 import EditImageForm from './components/Images/EditImageForm';
 import IndividualImage from './components/Images/IndividualImage';
 import Results from './components/Results';
@@ -59,7 +60,7 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/images/new' exact={true} >
           <NavBar />
-          <AddImageForm />
+          <TestAddImageForm />
         </ProtectedRoute>
         <ProtectedRoute path='/images/:id' exact={true} >
           <NavBar />
