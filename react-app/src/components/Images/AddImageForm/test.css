@@ -10,40 +10,6 @@
   object-fit: cover;
 }
 
-.input-file-container {
-  position: relative;
-  width: 225px;
-}
-
-.inpuut-file {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 225px;
-  opacity: 0;
-  padding: 14px 0;
-  cursor: pointer;
-}
-
-.input-file-trigger {
-  display: block;
-  padding: 14px 45px;
-  background: #39d2b4;
-  color: #fff;
-  font-size: 1em;
-  transition: all 0.4s;
-  cursor: pointer;
-}
-
-.input-file:hover + .input-file-trigger,
-.input-file:focus + .input-file-trigger,
-.input-file-trigger:hover,
-.input-file-trigger:focus {
-  /* background: #34495e;
-  color: #39d2b4; */
-  cursor: pointer;
-}
-
 .outerContainer {
   position: absolute;
   top: 50%;
@@ -94,6 +60,7 @@
 }
 
 .leftContainer {
+  position: relative;
   min-width: 850px;
   display: flex;
   justify-content: center;
@@ -105,6 +72,8 @@
   width: 455px;
   height: 455px;
   object-fit: cover;
+  position: absolute;
+  z-index: 50;
 }
 
 .rightContainer {
@@ -202,4 +171,40 @@
 
 .btn:active {
   opacity: .75;
+}
+
+.input-file-container {
+  text-align: center;
+  position: relative;
+  width: 225px;
+}
+
+.inpuut-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+
+.input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #1289F1;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1em;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.input-file:hover + .input-file-trigger,
+.input-file:focus + .input-file-trigger,
+.input-file-trigger:hover,
+.input-file-trigger:focus {
+  /* background: #34495e;
+  color: #39d2b4; */
+  cursor: pointer;
 }

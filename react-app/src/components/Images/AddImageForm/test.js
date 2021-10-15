@@ -152,12 +152,29 @@ const TestAddImageForm = () => {
 
         <div className="bottomContainer">
           <div className="leftContainer">
-            <img class="picToUpload" src="https://www.testim.io/wp-content/uploads/2019/11/What-Is-Test-Automation.jpg" />
+            {!preview && <div className="input-file-container">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={updateImage}
+                className="inpuut-file"
+                id="my-file"
+              />
+
+              <label tabindex="0" for="my-file" class="input-file-trigger">
+                Select a file...
+              </label>
+            </div>}
+
+            {preview && <img class="picToUpload pic" src={preview} />}
           </div>
 
           <div className="rightContainer">
             <div className="rightOne">
-              <img src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" className="avatar"></img>
+              <img
+                src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+                className="avatar"
+              ></img>
               <p className="username">pwnpreet</p>
             </div>
 
@@ -171,7 +188,7 @@ const TestAddImageForm = () => {
 
             <div className="rightFour">
               <input
-                placeholder='Add Hashtags...'
+                placeholder="Add Hashtags..."
                 type="text"
                 className="hashtags"
               />
