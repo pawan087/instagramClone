@@ -49,7 +49,7 @@ const ImageComponent = ({ image }) => {
 
     const handleDeleteComment = (id) => {
         console.log(id)
-        dispatch(deleteOneComment())
+        dispatch(deleteOneComment(id))
         setIsCommentOpen(false)
     }
 
