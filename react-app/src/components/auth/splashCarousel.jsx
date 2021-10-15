@@ -24,7 +24,7 @@ function SplashCarousel() {
                     <img
                         id={index}
                         key={index}
-                        className={index === currentSlide ? `image` + ' active' : 'image'}
+                        className={index === currentSlide ? 'image active' : 'image'}
                         src={image}
                         style={{ zIndex: `-${index + 1}` }}
                         alt='splash'

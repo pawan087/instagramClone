@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
 import home from "../image_assets/home.svg"
 import post from "../image_assets/post.svg"
 import notifications from "../image_assets/notifications.svg"
@@ -28,7 +27,7 @@ const NavBar = () => {
   useEffect(() => {
     let poll = setInterval(() => dispatch(setAllMyEvents(user.id)), 3000)
     return () => clearInterval(poll)
-  },[])
+  },[dispatch, user.id])
   
   const [searchInput, setSearchInput] = useState("");
 

@@ -9,7 +9,6 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Image from './components/Images';
-import AddImageForm from './components/Images/AddImageForm';
 import TestAddImageForm from './components/Images/AddImageForm/test';
 import EditImageForm from './components/Images/EditImageForm';
 import IndividualImage from './components/Images/IndividualImage';

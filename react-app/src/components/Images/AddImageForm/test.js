@@ -114,12 +114,12 @@ const TestAddImageForm = () => {
             </div>
           )}
 
-          {preview && <img class="picToUpload pic2" src={preview} />}
+          {preview && <img class="picToUpload pic2" src={preview} alt="picToUpload" />}
         </div>
 
         <div className="rightContainer">
           <div className="rightOne">
-            <img src={user?.avatar} className="avatar"></img>
+            <img src={user?.avatar} className="avatar" alt="userProfile"></img>
             <p className="username">{user?.username}</p>
           </div>
 

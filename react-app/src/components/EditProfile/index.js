@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-import { profileEdit, avatarEdit } from "../../store/session";
+import { profileEdit } from "../../store/session";
 import "./editprofile.css";
 
 const EditProfileForm = () => {
@@ -9,7 +9,6 @@ const EditProfileForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
-  const [avatar, setAvatar] = useState(user.avatar);
   const [image, setImage] = useState(null);
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
