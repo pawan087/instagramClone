@@ -48,6 +48,7 @@ const NavBar = () => {
           <div className='dropdown_menu'>
             <img src={notifications} alt="home" className="home_button button" draggable="false" />
             <div className="dropdown_content">
+              <div className="bubbleArrow"></div>
               {events.length > 0 ?
                 events.map((event) =>
                 (

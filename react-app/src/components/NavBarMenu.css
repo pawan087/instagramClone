@@ -3,36 +3,56 @@
     display: grid;
     place-items: center;
 }
-  
+
+.bubbleArrow {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background-color: #FFFFFF;
+  transform: rotate(45deg);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+.dropdown_menu .bubbleArrow {
+  top: -8px;
+  right: 72px;
+}
 .menu {
     background: #ffffff;
-    border-radius: 8px;
+    border-radius: 5px;
     position: absolute;
-    width: 100px;
-    margin-top: 110px;
-    margin-right: 10px;
+    margin-top: 180px;
+    margin-right: 180px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    z-index: 3;
 }
-  
+
 .menu.active {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
-  
+
+.menu .bubbleArrow {
+  top: -7px;
+  right: 20px;
+}
 .menu ul {
+    position: relative;
     list-style: none;
+    border-radius: 5px;
     padding: 0;
     margin-left: 0px;
+    background-color: #FFFFFF;
 }
-  
+
 .menu li {
-    width: 100%;
+    display: flex;
     text-align: center;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .menu li:hover {
@@ -41,22 +61,32 @@
 
 .menu li:first-child:hover{
     background: rgba(0, 0, 0, .05);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 
 .menu li:last-child:hover{
     background: rgba(0, 0, 0, .05);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
-  
+
+.menu li a,
+.menu li p {
+  display: flex;
+  padding: 10px 150px 10px 15px;
+  font-size: 0.87rem;
+}
+
 .menu li a {
     text-decoration: none;
     color: #333333;
 }
-  
+.menu li a > img {
+  height: 20px;
+  margin-right: 10px;
+}
 .borderTop {
     border-top: 1px solid rgba(0, 0, 0, .2);
 }
