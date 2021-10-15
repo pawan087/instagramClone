@@ -24,7 +24,7 @@ const Results = () => {
         <div className="imageContainer">
           {tagImages?.map((image) => (
             <ImageComponent image={image} />
-          ))}
+          )).reverse()}
         </div>
       ) : (
         <div className="noResultsContainer">
