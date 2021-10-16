@@ -134,17 +134,21 @@
     font-weight: bold;
 }
 
-.forgotPasswordContainer {
+.demo2LoginContainer {
     display: grid;
     place-items: center;
     margin-top: 15px;
     transform: translateY(5px);
+
 }
 
-.forgotPassword {
+.demo2Login {
     color: #295783;
     font-size: 12px;
     cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
 }
 
 .carouselContainer {
