@@ -1,4 +1,4 @@
-.exploreWrapper {
+.exploreCenter {
     display: flex;
     justify-content: center;
 }
@@ -8,7 +8,7 @@
     --gap: 28px;
     --num-cols: 3;
     --row-height: 293px;
-
+    
     box-sizing: border-box;
     padding: 30px 20px;
 
@@ -23,6 +23,11 @@
 .exploreItem {
     position: relative;
     background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .exploreItem > img {
@@ -32,20 +37,39 @@
     object-fit: cover;
 }
 
-.exploreItem > img:hover {
-    opacity: .6;
+.iconsContainer {
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+    z-index: 1000000;
 }
 
-.linkToUser {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.iconsItem {
+    opacity: 0;
+    visibility: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-weight: 500;
+    z-index: 1000000;
+}
+
+.exploreItem:hover .iconsItem{
+    opacity: 1;
+    visibility: visible;
+}
+
+.iconsItem img {
+    height: 24px;
+    width: 24px;
+    filter: invert(1)
 }
 
 /* Anything under 1024 px */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 900px) {
     .exploreContainer {
         --num-cols: 2;
         --row-height: 200px

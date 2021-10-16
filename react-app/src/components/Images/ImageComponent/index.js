@@ -32,6 +32,7 @@ const ImageComponent = ({ image }) => {
     const usersSavedImages = useSelector((state) => state.session.user.saved_images)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         dispatch(updateUser(user.id))
     }, [dispatch])
 
