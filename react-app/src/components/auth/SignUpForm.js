@@ -194,7 +194,7 @@ const SignUpForm = () => {
 
               <option value="He/Him">He/Him</option>
 
-              <option value="She/her">She/Her</option>
+              <option value="She/Her">She/Her</option>
 
               <option value="They/Them">They/Them</option>
 

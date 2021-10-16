@@ -197,7 +197,7 @@ def delete_comment():
 # --------------------------------------------------------
 
 
-@image_routes.route('/likes/')
+@image_routes.route('/likes')
 def likes():
     likes = Like.query.all()
     return {"likes": [like.to_dict() for like in likes]}
