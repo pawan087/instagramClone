@@ -25,9 +25,11 @@ export default function Explore() {
                     return (
                         <div key={image.id} onClick={() => history.push(`/images/${image.id}`)} className="exploreItem">
                             <img src={image.img_url} alt={`image ${image.id}`} />
-                            <div className="iconsContainer">
-                                <div className="iconsItem"> <img src={liked} alt="" /> 4444</div>
-                                <div className="iconsItem"> <img src={comment} alt="" /> 444 </div>
+                            <div className="iconsWrapper">
+                                <div className="iconsContainer">
+                                    <div className="iconsItem"> <img src={liked} alt="heart comment" /> 4444</div>
+                                    <div className="iconsItem"> <img src={comment} alt="comment box" /> 444 </div>
+                                </div>
                             </div>
                         </div>
                     )

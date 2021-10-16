@@ -21,6 +21,7 @@
 
 .exploreItem {
     position: relative;
+    cursor: pointer;
     background-color: #000;
     display: flex;
     justify-content: center;
@@ -46,29 +47,48 @@
     grid-row-start: span 2;
 }
 
+.iconsWrapper {
+    position: absolute;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.35);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 .iconsContainer {
     cursor: pointer;
     position: absolute;
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    /* display: flex;
     justify-content: space-between;
     width: 150px;
-    z-index: 1000000;
+    z-index: 1000000; */
 }
 
 .iconsItem {
-    opacity: 0;
-    visibility: 0;
     display: flex;
     align-items: center;
     gap: 6px;
     color: white;
     font-weight: 500;
-    z-index: 1000000;
+    
 }
 
-.exploreItem:hover .iconsItem{
+.iconsItem:first-child {
+    margin-right: 30px;
+}
+
+.exploreItem:hover .iconsWrapper {
     opacity: 1;
     visibility: visible;
+    transition: opacity 0.26s;
 }
 
 .iconsItem img {

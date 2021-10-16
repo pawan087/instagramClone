@@ -41,7 +41,7 @@ nav {
     justify-content: space-between;
     height: 53px;
     border-bottom: 1px solid #DBDBDB;
-    padding: 0 20px;
+    padding: 0 40px;
     background-color: white;
     z-index: 1;
 }
@@ -81,6 +81,7 @@ a {
     height: 33px;
 }
 
+.explore_button:active,
 .home_button:active {
     opacity: 0.4;
 }
