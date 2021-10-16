@@ -82,7 +82,8 @@
 
 
 .editInputContainer input,
-.editInputContainer textarea {
+.editInputContainer textarea,
+.editInputContainer select {
   box-sizing: border-box;
   border: 1px solid #dbdbdb;
   border-radius: 3px;

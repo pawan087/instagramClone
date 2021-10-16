@@ -263,10 +263,10 @@ const SignUpForm = () => {
         </div>
 
         <div className="btnContainer2">
-          {allowSignUp && <button type="submit" className="signUpBtn">
+          {allowSignUp && <button type="submit" className="signUpBtn blueButton button">
             Sign Up
           </button>}
-          {!allowSignUp && <button type="submit" className="signUpBtn2">
+          {!allowSignUp && <button type="submit" className="signUpBtn2 blueButton button">
             Sign Up
           </button>}
         </div>
@@ -284,7 +284,7 @@ const SignUpForm = () => {
           Log in
         </a>
       </div>
-      
+
       {imageLoading && (
         <div className="loadingModal">
           <div className="logo innerModal">
