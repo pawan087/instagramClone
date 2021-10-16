@@ -34,6 +34,11 @@ const LoginForm = () => {
     setPassword('password');
   }
 
+  const demo2Login = (e) => {
+    setEmail('franky@aa.io')
+    setPassword('password')
+  }
+
   if (user) {
     return <Redirect to='/' />;
   }
@@ -82,8 +87,8 @@ const LoginForm = () => {
               <div className="demoContainer" onClick={demoLogin}>
                 <button className='demo' type='submit'>Log in with Demo User</button>
               </div>
-              <div className="forgotPasswordContainer">
-                <div className="forgotPassword">Forgot Password?</div>
+              <div className="demo2LoginContainer">
+                <button type='submit' className="demo2Login" onClick={demo2Login}>Log in with Demo User 2</button>
               </div>
             </div>
             <div className='errorContainer'>
