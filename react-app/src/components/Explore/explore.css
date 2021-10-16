@@ -16,7 +16,6 @@
     grid-template-columns: repeat(var(--num-cols), 1fr);
     grid-auto-rows: var(--row-height);
     gap: var(--gap);
-    margin-top: 0px;
     width: 975px;
 }
 
@@ -35,6 +34,16 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.exploreItem:first-child {
+    grid-column-start: span 2;
+    grid-row-start: span 2;
+}
+
+.exploreItem:nth-child(11n) {
+    grid-column-start: span 2;
+    grid-row-start: span 2;
 }
 
 .iconsContainer {
@@ -69,9 +78,9 @@
 }
 
 /* Anything under 1024 px */
-@media screen and (max-width: 900px) {
+/* @media screen and (max-width: 900px) {
     .exploreContainer {
         --num-cols: 2;
         --row-height: 200px
     }
-}
+} */
