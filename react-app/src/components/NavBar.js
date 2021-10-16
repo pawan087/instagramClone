@@ -7,6 +7,8 @@ import notifications from "../image_assets/notifications.svg"
 import { setAllMyEvents } from '../store/event';
 import NavBarMenu from './NavBarMenu';
 import './SearchBar.css';
+import explore from '../image_assets/explore.svg'
+
 const NavBar = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user)
@@ -22,7 +24,7 @@ const NavBar = () => {
       console.log("CONTENT", content.contains(event.target))
       if (notificationButton.contains(event.target) && !content.contains(event.target)) {
         content.classList.toggle("active")
-      } else if (!notificationButton.contains(event.target) && !content.contains(event.target)){
+      } else if (!notificationButton.contains(event.target) && !content.contains(event.target)) {
         content.classList.remove("active")
       }
     }
@@ -113,6 +115,19 @@ const NavBar = () => {
             src={home}
             alt="home"
             className="home_button button"
+            draggable="false"
+          />
+        </NavLink>
+        <NavLink
+          to="/explore"
+          exact={true}
+          activeClassName="active"
+          draggable="false"
+        >
+          <img
+            src={explore}
+            alt="explore"
+            className="explore_button button"
             draggable="false"
           />
         </NavLink>

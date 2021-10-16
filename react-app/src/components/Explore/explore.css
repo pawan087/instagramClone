@@ -1,0 +1,36 @@
+.exploreWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.exploreContainer {
+    /* ===GLOBAL VARIABLES===*/
+    --gap: 28px;
+    --num-cols: 3;
+    --row-height: 293px;
+
+    box-sizing: border-box;
+    padding: 30px 20px;
+
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    grid-auto-rows: var(--row-height);
+    gap: var(--gap);
+    margin-top: 0px;
+    width: 975px;
+}
+
+.exploreContainer > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* Anything under 1024 px */
+@media screen and (max-width: 1024px) {
+    .exploreContainer {
+        --num-cols: 2;
+        --row-height: 200px
+    }
+}

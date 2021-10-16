@@ -16,6 +16,7 @@ import Results from './components/Results';
 import EditCommentForm from './components/Comments/EditCommentForm';
 import EditProfileForm from './components/EditProfile';
 import Footer from './components/Footer';
+import Explore from './components/Explore';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -77,6 +78,10 @@ function App() {
         <ProtectedRoute path='/images/:image_id/comments/:comment_id' exact={true}>
           <NavBar />
           <EditCommentForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/explore' exact={true}>
+          <NavBar />
+          <Explore />
         </ProtectedRoute>
       </Switch>
       <Footer />
