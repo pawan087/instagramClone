@@ -133,7 +133,7 @@ const SignUpForm = () => {
         <div className="subtitle">Sign up to see photos from your friends.</div>
 
         <div className="btnContainer">
-          <button onClick={demoLogin} className="demoBtn">
+          <button onClick={demoLogin} className="demoBtn blueButton button">
             Log in as Demo User
           </button>
         </div>

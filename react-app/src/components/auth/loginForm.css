@@ -25,6 +25,7 @@
     flex-direction: column;
     background-color: white;
     border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 3px;
     margin-left: 25px;
 }
 
@@ -48,9 +49,7 @@
 }
 
 .loginBtn {
-    cursor: pointer;
-    border: none;
-    background:  #0095f6;
+    box-sizing: border-box;
     color: white;
     display: grid;
     place-items: center;
@@ -61,11 +60,8 @@
 }
 
 .btn {
-    cursor: pointer;
     background: none;
-    border: none;
     outline: none;
-    color: white;
     font-weight: bold;
 }
 
