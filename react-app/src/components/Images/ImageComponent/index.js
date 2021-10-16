@@ -32,8 +32,9 @@ const ImageComponent = ({ image }) => {
     const usersSavedImages = useSelector((state) => state.session.user.saved_images)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         dispatch(updateUser(user.id))
-    },[dispatch])
+    }, [dispatch])
 
     const reset = () => {
         setCommentBody('')
@@ -54,7 +55,7 @@ const ImageComponent = ({ image }) => {
     const handleKeypress = (e) => {
         //it triggers by pressing the enter key
         if (e.key === "Enter") {
-          handleSubmit(e);
+            handleSubmit(e);
         }
     };
 
@@ -132,10 +133,10 @@ const ImageComponent = ({ image }) => {
                         <button>
                             <img src={unliked} alt="unliked" className="unliked" onClick={() => setAnimateGrow(1)} onAnimationEnd={() => setAnimateGrow(0)} animategrow={animateGrow} />
                         </button>}
-                    <img src={ usersSavedImages?.includes(image?.id) ? saved : bookmark } 
-                        alt="bookmarkImage" 
-                        className="bookmarkButton" 
-                        onClick={() => !usersSavedImages?.includes(image?.id) ? dispatch(addSavedImage(user?.id, image?.id)) : dispatch(deleteSavedImage(user?.id, image?.id)) } 
+                    <img src={usersSavedImages?.includes(image?.id) ? saved : bookmark}
+                        alt="bookmarkImage"
+                        className="bookmarkButton"
+                        onClick={() => !usersSavedImages?.includes(image?.id) ? dispatch(addSavedImage(user?.id, image?.id)) : dispatch(deleteSavedImage(user?.id, image?.id))}
                     />
                 </form>
                 <div>
@@ -146,7 +147,7 @@ const ImageComponent = ({ image }) => {
             </div>
 
             {/* IMAGE CAPTION */}
-            <div className="caption" key={image.id}>
+            <div className="caption" key={image?.id}>
                 {image?.caption && <p className="caption_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>}
                 <p>{image?.caption}</p>
             </div>
@@ -179,31 +180,31 @@ const ImageComponent = ({ image }) => {
                                     <button className='modal' onClick={() => setIsCommentOpen(true)}><img src={tableDots} alt='options' /></button>
                                     <CommentModal open={isCommentOpen} onClose={() => setIsCommentOpen(false)}>
                                         <button className='red' onClick={() => handleDeleteComment(comment.id)}>Delete</button>
-                                        </CommentModal>
-                                        </div>
-                                        </>
-                                        : false}
+                                    </CommentModal>
+                                </div>
+                            </>
+                            : false}
 
-                                        </div>
-                                        ))}
-                                        </div>
+                    </div>
+                ))}
+            </div>
 
 
 
-                                        {/* CREATE A COMMENT FORM */}
-                                        < div className="createComment" >
-                                        <form onSubmit={handleSubmit}>
-                                        <textarea onKeyPress={handleKeypress} value={commentBody} onChange={(e) => {
-                                            setCommentBody(e.target.value)
-                                            setCommentImageId(image.id)
-                                        }}
-                                        placeholder='Add a Comment'></textarea>
-                                        <button onClick={() => setIsCommentOpen(false)}>Post</button>
-                                        </form>
-                                        </div>
+            {/* CREATE A COMMENT FORM */}
+            < div className="createComment" >
+                <form onSubmit={handleSubmit}>
+                    <textarea onKeyPress={handleKeypress} value={commentBody} onChange={(e) => {
+                        setCommentBody(e.target.value)
+                        setCommentImageId(image.id)
+                    }}
+                        placeholder='Add a Comment'></textarea>
+                    <button onClick={() => setIsCommentOpen(false)}>Post</button>
+                </form>
+            </div>
 
         </div>
-        )
-    }
+    )
+}
 
-    export default ImageComponent
+export default ImageComponent

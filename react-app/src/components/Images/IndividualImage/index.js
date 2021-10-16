@@ -3,6 +3,7 @@ import { useParams } from "react-router"
 import { setAllImages } from "../../../store/image"
 import { useEffect } from "react"
 import ImageComponent from "../ImageComponent"
+import { setAllLikes } from "../../../store/like"
 
 const IndividualImage = () => {
 
@@ -12,6 +13,7 @@ const IndividualImage = () => {
 
     useEffect(() => {
         dispatch(setAllImages())
+        dispatch(setAllLikes())
     }, [dispatch])
 
     const currentImage = images.filter((image) => image.id === +params.id)[0]
