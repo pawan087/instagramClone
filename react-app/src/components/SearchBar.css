@@ -17,9 +17,10 @@
   border: none;
   outline: none;
   flex-grow: 1;
-  font-size: 15px;
-  color: black;
-  border: 0.0625em solid rgba(0, 0, 0, 0.2);
+  font-size: 0.85rem;
+  color: #262626;
+  border: 0.0625em solid #DBDBDB;
+  border-radius: 3px;
 }
 
 .searchIcon {

@@ -74,7 +74,7 @@ const NavBar = () => {
           Kilogram
         </NavLink>
       </h1>
-
+      <div className="navSpacer spacerLeft"></div>
       <div className="searchBarContainer">
         <input
           className="searchInput"
@@ -101,7 +101,7 @@ const NavBar = () => {
           </svg>
         </div>
       </div>
-
+      <div className="navSpacer spacerRight"></div>
       <div className="links">
         <NavLink
           to="/"
