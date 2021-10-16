@@ -20,11 +20,14 @@
     background: #ffffff;
     border-radius: 5px;
     position: absolute;
-    margin-top: 220px;
-    margin-right: 188px;
+    top: calc(100% + 0.6rem);
+    /* margin-top: 174px; */
+    /* margin-right: 188px; */
+    left: -198px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
     opacity: 0;
     visibility: hidden;
+    transform: translateY(-10px);
     transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
     z-index: 3;
 }
