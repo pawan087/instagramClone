@@ -18,7 +18,11 @@ export default function Explore() {
         <div className="exploreWrapper">
             <div className='exploreContainer'>
                 {images.map((image) => {
-                    return <img className='exploreItem' key={image.id} src={image.img_url} alt={`image ${image.id}`} />
+                    return (
+                        <div className="exploreItem">
+                            <img key={image.id} src={image.img_url} alt={`image ${image.id}`} />
+                        </div>
+                    )
                 })
                 }
 
