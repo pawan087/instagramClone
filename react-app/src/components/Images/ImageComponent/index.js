@@ -156,9 +156,9 @@ const ImageComponent = ({ image }) => {
 
             {/* HASHTAG LIST */}
             <div className="hastagList">
-                {image?.hashtags?.map((tag) => {
+                {image?.hashtags?.map((tag, idx) => {
                     return (
-                        <button key={tag.id} onClick={() => history.push(`/results/${tag}`)}>
+                        <button onClick={() => history.push(`/results/${tag}`)} key={idx}>
                             {tag}
                         </button>
 

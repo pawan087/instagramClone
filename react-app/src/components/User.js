@@ -116,11 +116,11 @@ function User() {
           <div className="imageListContainer">
             <div className="imageList">
               <div onClick={() => setImageList('posts')} className={imageList === 'posts' ? 'listItem listItemActive' : 'listItem'} >
-                <img className={imageList === 'posts' ? 'imageActive' : false} src={grid} alt='grid icon' />
+                <img className={imageList === 'posts' ? 'imageActive' : null} src={grid} alt='grid icon' />
                 POSTS
               </div>
               <div onClick={() => setImageList('saved')} className={imageList === 'saved' ? 'listItem listItemActive' : 'listItem'}>
-                <img className={imageList === 'saved' ? 'imageActive' : false} src={saved} alt='save icon' />
+                <img className={imageList === 'saved' ? 'imageActive' : null} src={saved} alt='save icon' />
                 SAVED
               </div>
             </div>

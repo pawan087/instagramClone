@@ -10,10 +10,10 @@ const Footer = () => {
       <div className="footerContent">
         <div className="footerTop">
           <div className="gitIconContainer"><img src={githubImg} alt="Github Logo" /></div>
-          <div className="gitLink"><a target="_blank" href="https://github.com/pawan087">Pawan Chahal</a></div>
-          <div className="gitLink"><a target="_blank" href="https://github.com/mce-design">Michael Eng</a></div>
-          <div className="gitLink"><a target="_blank" href="https://github.com/BaselHassan8">Basel Hassan</a></div>
-          <div className="gitLink"><a target="_blank" href="https://github.com/ocahsa">Ismail Manjlai</a></div>
+          <div className="gitLink"><a target="_blank" rel="noreferrer" href="https://github.com/pawan087">Pawan Chahal</a></div>
+          <div className="gitLink"><a target="_blank" rel="noreferrer" href="https://github.com/mce-design">Michael Eng</a></div>
+          <div className="gitLink"><a target="_blank" rel="noreferrer" href="https://github.com/BaselHassan8">Basel Hassan</a></div>
+          <div className="gitLink"><a target="_blank" rel="noreferrer" href="https://github.com/ocahsa">Ismail Manjlai</a></div>
         </div>
         <div className="footerBottom">
           <div className="footerCopyright">
