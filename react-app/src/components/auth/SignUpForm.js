@@ -266,7 +266,7 @@ const SignUpForm = () => {
           {allowSignUp && <button type="submit" className="signUpBtn blueButton button">
             Sign Up
           </button>}
-          {!allowSignUp && <button type="submit" className="signUpBtn2 blueButton button">
+          {!allowSignUp && <button type="submit" className="signUpBtn blueButton button disabled">
             Sign Up
           </button>}
         </div>

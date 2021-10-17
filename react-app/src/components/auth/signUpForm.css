@@ -120,17 +120,8 @@
   opacity: 0.75;
 }
 
-.signUpBtn2 {
-  width: 270px;
-  height: 30px;
-  font-weight: 500;
-  outline: none;
-  border: none;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  opacity: .675;
-  cursor:not-allowed;
+.signUpBtn.disabled {
+  cursor: not-allowed;
 }
 
 .policyContainer {

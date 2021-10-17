@@ -33,7 +33,7 @@ export default function Explore() {
                 {images.map((image) => {
                     return (
                         <div key={image.id} onClick={() => history.push(`/images/${image.id}`)} className="exploreItem">
-                            <img src={image.img_url} alt={`image ${image.id}`} />
+                            <img src={image.img_url} alt={`image ${image.id}`} draggable="false" />
                             <div className="iconsWrapper">
                                 <div className="iconsContainer">
                                     <div className="iconsItem"> <img src={liked} alt="heart comment" />

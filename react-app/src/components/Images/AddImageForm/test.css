@@ -12,6 +12,7 @@
 
 .outerContainer1 {
   max-width: 1365px;
+  width: calc(100% - 40px);
   height: 695px;
   display: flex;
   flex-direction: column;
@@ -168,7 +169,7 @@
   background-color: #ffffff;
 }
 
-.btn1 {
+.btn {
   /* width: 475px; */
   height: 40px;
   opacity: 1;
@@ -180,13 +181,8 @@
   opacity: 0.75;
 }
 
-.btn2 {
+.btn.disabled {
   /* width: 475px; */
-  height: 40px;
-  opacity: 1;
-  outline: none;
-  border: none;
-  opacity: .675;
   cursor: not-allowed;
 }
 

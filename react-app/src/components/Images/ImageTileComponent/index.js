@@ -31,7 +31,7 @@ const ImageTileComponent = ({ image }) => {
     <div className="imageTile" key={image?.id}>
       <div className="individualImage">
         <div className="imageWrapper">
-          <img src={image?.img_url} alt="anImage" className="imageObj" />
+          <img src={image?.img_url} alt="anImage" className="imageObj" draggable="false" />
         </div>
         <div className="imageCover">
           <div className="imageStatus" onClick={() => history.push(`/images/${image?.id}`)}>
