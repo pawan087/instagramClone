@@ -156,11 +156,11 @@ const TestAddImageForm = () => {
 
           <div className="rightBtnContainer">
             {image && (
-              <button onClick={handleSubmit} className="btn1 blueButton button">
+              <button onClick={handleSubmit} className="btn blueButton button">
                 Share
               </button>
             )}
-            {!image && <button className="btn2 blueButton button">Share</button>}
+            {!image && <button className="btn blueButton button disabled">Share</button>}
           </div>
         </div>
       </div>

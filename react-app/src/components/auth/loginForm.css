@@ -50,19 +50,11 @@
 
 .loginBtn {
     box-sizing: border-box;
-    color: white;
     display: grid;
     place-items: center;
     height: 30px;
     width: 268px;
     margin-top: 8px;
-    border-radius: 4px;
-}
-
-.btn {
-    background: none;
-    outline: none;
-    font-weight: bold;
 }
 
 .orContainer {
