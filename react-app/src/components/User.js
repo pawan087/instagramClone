@@ -127,7 +127,7 @@ function User() {
           </div>
 
         </div>
-        {imageList === 'posts' ? (
+        {imageList === 'posts' ? ( images &&
           usersImages?.length === 0 ? (
             <div className="noPostsContainer">
               <div className="noPostsBody">
