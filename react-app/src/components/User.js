@@ -9,6 +9,8 @@ import followed from "../image_assets/followed.svg"
 import settings from "../image_assets/settings.svg"
 import saved from '../image_assets/bookmark.svg'
 import grid from '../image_assets/grid.svg'
+import noimages from "../image_assets/noimages.jpg"
+import bookmark from "../image_assets/bookmark.svg"
 
 function User() {
   const { userId } = useParams();
@@ -29,7 +31,6 @@ function User() {
 
   let followText = ""
 
-  console.log("currentPagesUser", currentPagesUser);
   useEffect(() => {
     dispatch(setAllImages());
     dispatch(setAllUsers());
@@ -115,11 +116,11 @@ function User() {
           <div className="imageListContainer">
             <div className="imageList">
               <div onClick={() => setImageList('posts')} className={imageList === 'posts' ? 'listItem listItemActive' : 'listItem'} >
-                <img className={imageList === 'posts' ? 'imageActive' : false} src={grid} alt='grid icon' />
+                <img className={imageList === 'posts' ? 'imageActive' : null} src={grid} alt='grid icon' />
                 POSTS
               </div>
               <div onClick={() => setImageList('saved')} className={imageList === 'saved' ? 'listItem listItemActive' : 'listItem'}>
-                <img className={imageList === 'saved' ? 'imageActive' : false} src={saved} alt='save icon' />
+                <img className={imageList === 'saved' ? 'imageActive' : null} src={saved} alt='save icon' />
                 SAVED
               </div>
             </div>
@@ -127,13 +128,43 @@ function User() {
 
         </div>
         {imageList === 'posts' ? (
-          usersImages?.map((image) => (
-            <ImageTileComponent image={image} key={image.id} />
-          ))
+          usersImages?.length > 0 ? (
+            usersImages?.map((image) => (
+              <ImageTileComponent image={image} key={image.id} />
+              ))
+          ) : (
+            <div className="noPostsContainer">
+              <div className="noPostsBody">
+                <div className="noPostsImageWrapper">
+                  <img src={noimages} alt="No user posts" />
+                </div>
+                <div className="noPostsTextWrapper">
+                  <div className="noPostsTextBody">
+                    <h2>
+                      Start capturing and sharing your moments.
+                    </h2>
+                    {/* <h3>
+                      App coming soon!
+                    </h3> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
         ) : (
-          currentPagesUser?.saved_images?.map((imageId) => (
-            <ImageTileComponent image={findImage(imageId)} key={imageId} />
-          ))
+          currentPagesUser?.saved_images?.length > 0 ? (
+            currentPagesUser?.saved_images?.map((imageId) => (
+              <ImageTileComponent image={findImage(imageId)} key={imageId} />
+            ))
+          ) : (
+            <div className="noSavedContainer">
+              <div className="noSavedImgContainer">
+                <img src={bookmark} alt="Bookmark Icon"/>
+              </div>
+              <h1>Save</h1>
+              <p>Save photos that you want to see again.</p>
+            </div>
+          )
         )}
 
       </div>

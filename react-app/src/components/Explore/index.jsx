@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
 import { useHistory } from 'react-router';
 import { setAllImages } from '../../store/image'
 import './explore.css'
@@ -13,8 +12,6 @@ export default function Explore() {
     const history = useHistory();
     const images = useSelector(state => state.images)
     const likes = useSelector(state => state.likes)
-
-    let thisPicturesComments = images?.comments?.comments;
 
     useEffect(() => {
         dispatch(setAllImages())

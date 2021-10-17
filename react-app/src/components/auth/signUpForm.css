@@ -8,6 +8,7 @@
 
 .topInnerContainer {
   border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
   background-color: rgb(255, 255, 255);
   height: 800px;
   width: 350px;
@@ -55,22 +56,17 @@
 }
 
 .demoBtn {
-  background-color: rgb(0, 149, 246);
-  font-size: 15px;
-  font-weight: 500;
-  color: white;
   width: 270px;
   height: 30px;
   outline: none;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
   justify-content: center;
   align-self: center;
   align-items: center;
 }
 
 .divisorContainer {
+  position: relative;
   background-color: rgb(255, 255, 255);
   height: 30px;
   width: 100%;
@@ -79,11 +75,11 @@
 }
 
 .middleDivisor {
-  background-color: rgb(255, 255, 255);
+  position: relative;
   color: rgb(142, 142, 142);
   font-size: 12.5px;
   font-weight: 600;
-  top: 10px;
+  top: -2px;
   height: 30px;
   width: 55px;
   background: #fff;
@@ -102,23 +98,18 @@
   border: 0.75px solid rgba(0, 0, 0, 0.2);
   height: 40px;
   font-size: 12.5px;
-  border-radius: 5px;
+  border-radius: 3px;
   width: 270px;
   padding-left: 10px;
   margin-bottom: 10px;
 }
 
 .signUpBtn {
-  background-color: rgb(0, 149, 246);
-  font-size: 15px;
-  color: white;
   width: 270px;
   height: 30px;
   font-weight: 500;
   outline: none;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
   justify-content: center;
   align-self: center;
   align-items: center;
@@ -130,16 +121,11 @@
 }
 
 .signUpBtn2 {
-  background-color: rgb(0, 149, 246);
-  font-size: 15px;
-  color: white;
   width: 270px;
   height: 30px;
   font-weight: 500;
   outline: none;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
   justify-content: center;
   align-self: center;
   align-items: center;

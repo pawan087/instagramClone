@@ -76,9 +76,10 @@ const LoginForm = () => {
                   onChange={updatePassword}
                 />
               </div>
-              <div className="loginBtn" type='submit'>
-                <button className='btn' type='submit'>Login</button>
-              </div>
+              {/* <div className="loginBtn blueButton button">
+                <button className='btn blueButton button' type='submit'>Login</button>
+              </div> */}
+              <button className='btn blueButton button' type='submit'>Login</button>
               <div className="orContainer">
                 <div className="line" />
                 <span className="orText">OR</span>

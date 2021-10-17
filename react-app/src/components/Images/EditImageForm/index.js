@@ -23,7 +23,6 @@ const EditImageForm = () => {
 
   const [title, setTitle] = useState(currentImage[0]?.title);
   const [caption, setCaption] = useState(currentImage[0]?.caption);
-  const [preview, setPreview] = useState();
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(currentImage[0]?.img_url);
   const [selectedFile, setSelectedFile] = useState();

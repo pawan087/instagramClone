@@ -133,7 +133,7 @@ const SignUpForm = () => {
         <div className="subtitle">Sign up to see photos from your friends.</div>
 
         <div className="btnContainer">
-          <button onClick={demoLogin} className="demoBtn">
+          <button onClick={demoLogin} className="demoBtn blueButton button">
             Log in as Demo User
           </button>
         </div>
@@ -263,10 +263,10 @@ const SignUpForm = () => {
         </div>
 
         <div className="btnContainer2">
-          {allowSignUp && <button type="submit" className="signUpBtn">
+          {allowSignUp && <button type="submit" className="signUpBtn blueButton button">
             Sign Up
           </button>}
-          {!allowSignUp && <button type="submit" className="signUpBtn2">
+          {!allowSignUp && <button type="submit" className="signUpBtn2 blueButton button">
             Sign Up
           </button>}
         </div>
@@ -284,7 +284,7 @@ const SignUpForm = () => {
           Log in
         </a>
       </div>
-      
+
       {imageLoading && (
         <div className="loadingModal">
           <div className="logo innerModal">
