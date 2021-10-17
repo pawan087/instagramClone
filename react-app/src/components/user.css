@@ -158,12 +158,97 @@
 
 .profileContainer .imageContainer {
   max-width: 1000px;
+  width: calc(100% - 40px);
 }
 
 .profileSwitchBox {
   width: 100%;
   border: 1px solid #DDDDDD;
   border-width: 1px 0 0;
+}
+/* =========================
+          No Images
+==========================*/
+
+.noPostsContainer {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  align-items: stretch;
+}
+
+.noPostsBody {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+}
+
+.noPostsImageWrapper {
+  height: 380px;
+  width: 380px;
+}
+
+.noPostsImageWrapper img {
+  height: 100%;
+  width: 100%;
+}
+
+.noPostsTextWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  height: 380px;
+  flex-basis: 400px;
+  flex-grow: 1;
+}
+
+.noPostsTextBody {
+
+}
+
+.noPostsTextWrapper h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* =========================
+          No Saves
+==========================*/
+
+.noSavedContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 70px 0 150px;
+}
+
+.noSavedImgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  border: 3px solid #000000;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+}
+
+.noSavedImgContainer img {
+  height: 35px;
+  width: 35px;
+}
+
+.noSavedContainer h1 {
+  margin-bottom: 15px;
+  font-size: 1.75rem;
+  font-weight: 300;
+}
+
+.noSavedContainer p {
+  font-size: 0.95rem;
 }
 
 /* =========================
@@ -180,6 +265,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: -1px;
   gap: 60px;
   height: 53px;
   cursor: pointer;
@@ -194,11 +280,15 @@
   gap: 6px;
   height: 100%;
   color: #8e8e8e;
+  user-select: none;
 }
 
 .listItemActive {
   border-top: 1px solid #262626;
   color: #262626;
+}
+.listItem:active {
+  opacity: 0.7
 }
 
 .listItem img {
