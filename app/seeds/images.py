@@ -1,5 +1,12 @@
 from app.models import db, Image
+from .anime_images import images
+from faker import Faker
+import random
 
+fake = Faker()
+
+def getRandomUser():
+    return random.randint(1, 15)
 
 # Adds a demo user, you can add other users here if you want
 def seed_images():
@@ -44,7 +51,15 @@ def seed_images():
         user_id=4,
         hashtags = ["demon_slayer", "anime"]
     )
-    
+
+    def getRandomTags():
+        tags = []
+        for i in range(4):
+            tags.append(fake.word())
+        return tags
+
+    for image in images:
+        db.session.add(Image(img_url=image, user_id=getRandomUser(), hashtags=getRandomTags(), caption=fake.sentences()[0]))
 
     db.session.add(first)
     db.session.add(second)

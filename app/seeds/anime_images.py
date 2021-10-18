@@ -1,0 +1,48 @@
+images = [
+    "https://wallpaperaccess.com/full/44729.jpg",
+    "https://wallpaperboat.com/wp-content/uploads/2020/06/03/42361/aesthetic-anime-01.jpg",
+    "https://i.pinimg.com/originals/62/be/10/62be1091829420f7a8862d358620d7cd.png",
+    "https://images7.alphacoders.com/109/thumb-1920-1092199.jpg",
+    "https://i.pinimg.com/originals/0f/9c/6d/0f9c6d3a9c03ce9f732e177af8f6ccc6.jpg",
+    "https://img.anime2you.de/2020/07/gohs-1.jpg",
+    "https://w0.peakpx.com/wallpaper/66/706/HD-wallpaper-tokyo-ghoul-manga-kaneki-ken-protagonist-portrait-japanese-manga.jpg",
+    "https://i.pinimg.com/originals/89/7b/a8/897ba8ebd6b5c65a3455f6457cc0ed8c.jpg",
+    "https://i.pinimg.com/564x/0e/c1/24/0ec12443d384b65b4f2d405be590abc4--boku-no-hero-academia-bakugou-midoriya-my-hero-academia-season-.jpg",
+    "https://wallpaperaccess.com/full/5134703.jpg",
+    "https://pixelz.cc/wp-content/uploads/2019/12/my-hero-academia-izuku-midoriya-shoto-todoroki-katsuki-bakugo-eijiro-kirishima-fumikage-tokoyami-eraser-head-uhd-4k-wallpaper.jpg",
+    "https://wallpaperaccess.com/full/2105381.jpg",
+    "https://wallpaperaccess.com/full/259549.jpg",
+    "https://wallpapercave.com/wp/wp2458352.jpg",
+    "https://p4.wallpaperbetter.com/wallpaper/541/328/987/dragon-ball-z-wallpaper-preview.jpg",
+    "https://owldb.net/wp-content/uploads/2021/03/Sing-Yesterday-for-Me.jpg",
+    "https://bateszi.me/wp-content/uploads/2020/04/sing-yesterday-for-me-episode-1-anime-image-0149.jpg",
+    "https://animeshelter.com/wp-content/uploads/2020/04/yesterday-wo-utatte-episode-2-15.png",
+    "https://wallpaperaccess.com/full/1718875.jpg",
+    "https://lh6.googleusercontent.com/proxy/gkWkbBGy4RUihnaiJwAWwIoApT0mfs17t2qUscn20ExKmWjt6Cr4xQ1ouNfy-_HO63y73HfbYNjqy5gxXiOdEbQA1xAT0QhUXjf5lDXPoOzI4qquS3MgX3P25cyjflO2LwlD3bgV4LruGjHAKba7xf827RixQw=w1200-h630-p-k-no-nu",
+    "https://steamuserimages-a.akamaihd.net/ugc/940592240466176027/C88BDC9FBA800F830A0C5DD979281B5B40B442B3/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
+    "https://animemotivation.com/wp-content/uploads/2021/05/hyouka-anime-series-wallpaper-art.jpg",
+    "https://a-static.besthdwallpaper.com/anime-kokoro-connect-sunset-wallpaper-54635_L.jpg",
+    "https://wallpapercave.com/wp/wp5860192.png",
+    "https://images6.alphacoders.com/114/thumb-1920-1145542.jpg",
+    "https://w0.peakpx.com/wallpaper/317/244/HD-wallpaper-tokyo-revengers-anime-japan-manga.jpg",
+    "https://wallpapercave.com/wp/wp8933715.jpg",
+    "https://images7.alphacoders.com/720/thumb-1920-720827.jpg",
+    "https://wallpaperaccess.com/full/434925.png",
+    "https://images6.alphacoders.com/727/thumb-1920-727905.png",
+    "https://images8.alphacoders.com/727/thumb-1920-727534.jpg",
+    "https://24framesps.files.wordpress.com/2016/12/91-days-wallpaper.jpg?w=700",
+    "https://manga.tokyo/wp-content/uploads/2016/08/04_Cap__0034.jpeg",
+    "https://cdn.wallpapersafari.com/89/71/uTgNo0.jpg",
+    "https://wallpapers.com/images/high/fire-force-wallpaper-m6g3j8z99wbnmvuy.jpg",
+    "https://i.pinimg.com/originals/a0/a2/ba/a0a2ba5e8ce8cd4dab37ff11c6328e64.png",
+    "https://wallpapercave.com/wp/wp1959331.png",
+    "https://wallpapers.com/images/high/mob-psycho-100-frickin-awesome-mob-psycho-mob-pmwv0gmuohwb5hbn.jpg",
+    "https://wallpapercave.com/wp/wp4734312.jpg",
+    "https://www.enjpg.com/img/2020/Mob-Psycho-100-Season-2.jpg",
+]
+
+
+
+
+
+

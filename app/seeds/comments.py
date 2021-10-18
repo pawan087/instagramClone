@@ -1,5 +1,11 @@
 from app.models import db, Comment
+import random
+from faker import Faker
 
+def getRandomNumber(num):
+    return random.randint(1, num)
+    
+fake = Faker()
 
 # Adds a demo user, you can add other users here if you want
 def seed_comments():
@@ -43,6 +49,9 @@ def seed_comments():
         image_id=7,
         user_id=1
     )
+
+    for i in range(1, 25):
+        db.session.add(Comment(body=fake.text(), image_id=getRandomNumber(40), user_id=getRandomNumber(15)))
 
     db.session.add(first)
     db.session.add(second)

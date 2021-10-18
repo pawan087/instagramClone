@@ -1,4 +1,9 @@
 from app.models import db, User
+from .names import names
+import random
+
+def getRandomNumber():
+    return random.randint(1, 15)
 
 
 # Adds a demo user, you can add other users here if you want
@@ -68,12 +73,26 @@ def seed_users():
         saved_images=[3]    
 )
 
+    def getRandomFollowers():
+        randomFollowers = []
+        for i in range(getRandomNumber()):
+            randomFollowers.append(i)
+        return randomFollowers
+
+    def getRandomImages():
+        randomImages = []
+        for i in range(1, 40):
+            randomImages.append(i)
+        return randomImages
+
+    for name in names:
+        db.session.add(User(username=name, fname=name, lname=name, bio=f"Hey! It's {name}", email=f"{name}@aa.io", password="password", followers=getRandomFollowers(), following=getRandomFollowers(), saved_images=getRandomImages()))
+
     db.session.add(demo)
     db.session.add(franky)
     db.session.add(eren)
     db.session.add(picasso)
     db.session.add(mikasa)
-
     db.session.commit()
 
 
