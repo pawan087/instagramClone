@@ -17,11 +17,11 @@ import EditCommentForm from './components/Comments/EditCommentForm';
 import EditProfileForm from './components/EditProfile';
 import Footer from './components/Footer';
 import Explore from './components/Explore';
-import icon from './image_assets/frame.png'
 import Loader from "react-loader-spinner";
 import { setAllImages } from './store/image';
 import { setAllLikes } from './store/like';
 import { setAllEvents } from './store/event';
+import icon from './image_assets/instagramIcon.png'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,9 +30,8 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(setAllImages());
-      await dispatch(setAllLikes());
-      await dispatch(setAllEvents());
+      // await dispatch(setAllImages());
+      // await dispatch(setAllLikes());
       setLoaded(true);
     })();
   }, [dispatch]);

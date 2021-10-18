@@ -1,21 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router';
 import { setAllImages } from '../../store/image'
 import './explore.css'
 import liked from '../../image_assets/liked.svg'
 import comment from '../../image_assets/comment.svg'
+import Loader from "react-loader-spinner";
 import { setAllLikes } from '../../store/like';
+import { setAllMyEvents } from '../../store/event';
 
 export default function Explore() {
     const dispatch = useDispatch();
+    const [load, setLoad] = useState(false)
     const history = useHistory();
     const images = useSelector(state => state.images)
     const likes = useSelector(state => state.likes)
+    const user = useSelector((state) => state.session.user)
 
     useEffect(() => {
-        dispatch(setAllImages())
-        dispatch(setAllLikes())
+        (async () => {
+            await dispatch(setAllImages())
+            await dispatch(setAllLikes())
+            await dispatch(setAllMyEvents(user.id))
+            setLoad(true)
+        })();
     }, [dispatch])
 
     const findLikes = (currentImage) => {
@@ -25,6 +33,19 @@ export default function Explore() {
 
     const findComments = (currentImage) => {
         return currentImage?.comments?.comments
+    }
+
+    if (!load) {
+        return (
+            <div className="loaderIconContainer">
+                <Loader
+                    type="Puff"
+                    color="#e13765"
+                    height={100}
+                    width={100}
+                />
+            </div>
+        );
     }
 
     return (
