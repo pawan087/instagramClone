@@ -15,8 +15,8 @@ import IndividualImage from './components/Images/IndividualImage';
 import Results from './components/Results';
 import EditCommentForm from './components/Comments/EditCommentForm';
 import EditProfileForm from './components/EditProfile';
-import Footer from './components/Footer';
 import Explore from './components/Explore';
+import Loader from "react-loader-spinner";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,7 +30,16 @@ function App() {
   }, [dispatch]);
 
   if (!loaded) {
-    return null;
+    return (
+      <div className="loaderIconContainer">
+        <Loader
+          type="Puff"
+          color="#e13765"
+          height={100}
+          width={100}
+        />
+      </div>
+    );
   }
 
   return (
@@ -84,7 +93,6 @@ function App() {
           <Explore />
         </ProtectedRoute>
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 }

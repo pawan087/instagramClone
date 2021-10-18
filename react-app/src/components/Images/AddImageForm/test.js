@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { addOneImage } from "../../../store/image";
 import { setAllImages } from "../../../store/image";
 import "./test.css";
+import Footer from "../../Footer";
 
 const TestAddImageForm = () => {
   const [title, setTitle] = useState("");
@@ -47,6 +48,7 @@ const TestAddImageForm = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (!selectedFile) {
       setPreview(undefined);
       return;
@@ -75,64 +77,65 @@ const TestAddImageForm = () => {
   };
 
   return (
-    <div className="outerContainer1">
-      <div className="topContainer">
-        <div onClick={goBack} className="backBtn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-        </div>
-        <p className="header">Compose</p>
-      </div>
-
-      <div className="bottomContainer">
-        <div className="leftContainer">
-          {!preview && (
-            <div className="input-file-container">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={updateImage}
-                className="inpuut-file"
-                id="my-file"
+    <>
+      <div className="outerContainer1">
+        <div className="topContainer">
+          <div onClick={goBack} className="backBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
-
-              <label tabindex="0" for="my-file" class="input-file-trigger blueButton button">
-                Select a file...
-              </label>
-            </div>
-          )}
-
-          {preview && <img class="picToUpload pic2" src={preview} alt="picToUpload" />}
+            </svg>
+          </div>
+          <p className="header">Compose</p>
         </div>
 
-        <div className="rightContainer">
-          <div className="rightOne">
-            <img src={user?.avatar} className="avatar" alt="userProfile"></img>
-            <p className="username">{user?.username}</p>
+        <div className="bottomContainer">
+          <div className="leftContainer">
+            {!preview && (
+              <div className="input-file-container">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={updateImage}
+                  className="inpuut-file"
+                  id="my-file"
+                />
+
+                <label tabindex="0" for="my-file" class="input-file-trigger blueButton button">
+                  Select a file...
+                </label>
+              </div>
+            )}
+
+            {preview && <img class="picToUpload pic2" src={preview} alt="picToUpload" />}
           </div>
 
-          <div className="rightTwo">
-            <textarea
-              value={caption}
-              onChange={(e) => setCaption(e.target.value)}
-              className="caption2"
-              placeholder="Write a caption..."
-            />
-          </div>
+          <div className="rightContainer">
+            <div className="rightOne">
+              <img src={user?.avatar} className="avatar" alt="userProfile"></img>
+              <p className="username">{user?.username}</p>
+            </div>
 
-          {/*<div className="rightThree">
+            <div className="rightTwo">
+              <textarea
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
+                className="caption2"
+                placeholder="Write a caption..."
+              />
+            </div>
+
+            {/*<div className="rightThree">
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -142,37 +145,40 @@ const TestAddImageForm = () => {
             />
           </div>*/}
 
-          <div className="rightFour">
-            <input
-              placeholder="Add Hashtags..."
-              type="text"
-              value={hashtags}
-              onChange={(e) => setHashtags(e.target.value)}
-              className="hashtags"
-            />
-          </div>
+            <div className="rightFour">
+              <input
+                placeholder="Add Hashtags..."
+                type="text"
+                value={hashtags}
+                onChange={(e) => setHashtags(e.target.value)}
+                className="hashtags"
+              />
+              <p>seperate tag names by spaces</p>
+            </div>
 
-          <div className="emptyDiv divisor" />
+            <div className="emptyDiv divisor" />
 
-          <div className="rightBtnContainer">
-            {image && (
-              <button onClick={handleSubmit} className="btn blueButton button">
-                Share
-              </button>
-            )}
-            {!image && <button className="btn blueButton button disabled">Share</button>}
+            <div className="rightBtnContainer">
+              {image && (
+                <button onClick={handleSubmit} className="btn blueButton button">
+                  Share
+                </button>
+              )}
+              {!image && <button className="btn blueButton button disabled">Share</button>}
+            </div>
           </div>
         </div>
+
+        {imageLoading && (
+          <div className="loadingModal">
+            <div className="logo innerModal">
+              Uploading <span class="dot-elastic2"></span>
+            </div>
+          </div>
+        )}
       </div>
-
-      {imageLoading && (
-        <div className="loadingModal">
-          <div className="logo innerModal">
-            Uploading <span class="dot-elastic2"></span>
-          </div>
-        </div>
-      )}
-    </div>
+      <Footer />
+    </>
   );
 };
 
