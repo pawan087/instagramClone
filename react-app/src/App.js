@@ -17,6 +17,11 @@ import EditCommentForm from './components/Comments/EditCommentForm';
 import EditProfileForm from './components/EditProfile';
 import Footer from './components/Footer';
 import Explore from './components/Explore';
+import icon from './image_assets/frame.png'
+import Loader from "react-loader-spinner";
+import { setAllImages } from './store/image';
+import { setAllLikes } from './store/like';
+import { setAllEvents } from './store/event';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -25,12 +30,24 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
+      await dispatch(setAllImages());
+      await dispatch(setAllLikes());
+      await dispatch(setAllEvents());
       setLoaded(true);
     })();
   }, [dispatch]);
 
   if (!loaded) {
-    return null;
+    return (
+      <div className="loaderIconContainer">
+        <Loader
+          type="Puff"
+          color="#e13765"
+          height={100}
+          width={100}
+        />
+      </div>
+    );
   }
 
   return (
