@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import { addOneImage } from "../../../store/image"
 import { setAllImages } from "../../../store/image"
+import Footer from "../../Footer"
 
 const AddImageForm = () => {
 
@@ -53,29 +54,29 @@ const AddImageForm = () => {
     };
 
     return (
+        <>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Image Title</label>
 
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Image Title</label>
+                    <input
+                        type="text"
+                        placeholder="Image Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)} />
+                </div>
 
-                <input
-                    type="text"
-                    placeholder="Image Title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)} />
-            </div>
+                <div>
+                    <label>Caption</label>
 
-            <div>
-                <label>Caption</label>
+                    <input
+                        type="text"
+                        placeholder="Image Caption"
+                        value={caption}
+                        onChange={(e) => setCaption(e.target.value)} />
+                </div>
 
-                <input
-                    type="text"
-                    placeholder="Image Caption"
-                    value={caption}
-                    onChange={(e) => setCaption(e.target.value)} />
-            </div>
-
-            {/*<div>
+                {/*<div>
                 <label>Image Url</label>
 
                 <input
@@ -85,26 +86,26 @@ const AddImageForm = () => {
                     onChange={(e) => setImageUrl(e.target.value)} />
             </div>*/}
 
-            <div>
-                <label>Image</label>
+                <div>
+                    <label>Image</label>
 
-                <input type="file" accept="image/*" onChange={updateImage} />
-                
-                {imageLoading && <p>Loading...</p>}
-            </div>
+                    <input type="file" accept="image/*" onChange={updateImage} />
 
-            <div>
-                <label>Hashtags</label>
+                    {imageLoading && <p>Loading...</p>}
+                </div>
 
-                <input
-                    type="text"
-                    placeholder="Hashtags"
-                    value={hashtags}
-                    onChange={(e) => setHashtags(e.target.value)} />
-                <p>Separate tags by spaces</p>
-            </div>
+                <div>
+                    <label>Hashtags</label>
 
-            {/* <div>
+                    <input
+                        type="text"
+                        placeholder="Hashtags"
+                        value={hashtags}
+                        onChange={(e) => setHashtags(e.target.value)} />
+                    <p>Separate tags by spaces</p>
+                </div>
+
+                {/* <div>
                 <label>Hashtag</label>
 
                 <input
@@ -114,8 +115,10 @@ const AddImageForm = () => {
                     onChange={(e) => setHashtag(e.target.value)} />
             </div> */}
 
-            <button>Submit</button>
-        </form>
+                <button>Submit</button>
+            </form>
+            <Footer />
+        </>
     )
 }
 

@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router";
 import { setAllImages } from "../../../store/image";
 import { editOneImage } from "../../../store/image";
 import "./EditImage.css";
+import Footer from "../../Footer";
 
 const EditImageForm = () => {
   const dispatch = useDispatch();
@@ -169,6 +170,7 @@ const EditImageForm = () => {
                 onChange={(e) => setHashtags(e.target.value)}
                 className="hashtags"
               />
+              <p>seperate tag names by spaces</p>
             </div>
 
             <div className="emptyDiv divisor" />
@@ -181,6 +183,7 @@ const EditImageForm = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

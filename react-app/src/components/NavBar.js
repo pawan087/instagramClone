@@ -82,7 +82,7 @@ const NavBar = () => {
           onKeyPress={handleKeypress}
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          placeholder="Search"
+          placeholder="Search By Tag Name"
         />
         <div className="searchIcon">
           <svg
