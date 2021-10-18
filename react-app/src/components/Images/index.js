@@ -8,6 +8,7 @@ import { setAllLikes } from "../../store/like"
 import './images.css'
 import { setAllMyEvents } from "../../store/event"
 import Loader from "react-loader-spinner";
+import Footer from "../Footer"
 
 const Image = () => {
 
@@ -47,6 +48,7 @@ const Image = () => {
             {images?.map((image) => (
                 <ImageComponent image={image} key={image.id} />
             )).reverse()}
+            <Footer />
         </div>
     )
 }

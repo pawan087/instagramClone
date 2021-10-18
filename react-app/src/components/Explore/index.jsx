@@ -8,6 +8,7 @@ import comment from '../../image_assets/comment.svg'
 import Loader from "react-loader-spinner";
 import { setAllLikes } from '../../store/like';
 import { setAllMyEvents } from '../../store/event';
+import Footer from '../Footer';
 
 export default function Explore() {
     const dispatch = useDispatch();
@@ -49,26 +50,29 @@ export default function Explore() {
     }
 
     return (
-        <div className="exploreCenter">
-            <div className='exploreContainer'>
-                {images.map((image) => {
-                    return (
-                        <div key={image.id} onClick={() => history.push(`/images/${image.id}`)} className="exploreItem">
-                            <img src={image.img_url} alt={`image ${image.id}`} draggable="false" />
-                            <div className="iconsWrapper">
-                                <div className="iconsContainer">
-                                    <div className="iconsItem"> <img src={liked} alt="heart comment" />
-                                        {findLikes(image)?.length}
-                                    </div>
-                                    <div className="iconsItem"> <img src={comment} alt="comment box" />
-                                        {findComments(image)?.length}
+        <>
+            <div className="exploreCenter">
+                <div className='exploreContainer'>
+                    {images.map((image) => {
+                        return (
+                            <div key={image.id} onClick={() => history.push(`/images/${image.id}`)} className="exploreItem">
+                                <img src={image.img_url} alt={`image ${image.id}`} draggable="false" />
+                                <div className="iconsWrapper">
+                                    <div className="iconsContainer">
+                                        <div className="iconsItem"> <img src={liked} alt="heart comment" />
+                                            {findLikes(image)?.length}
+                                        </div>
+                                        <div className="iconsItem"> <img src={comment} alt="comment box" />
+                                            {findComments(image)?.length}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
             </div>
-        </div>
+            <Footer />
+        </>
     )
 }

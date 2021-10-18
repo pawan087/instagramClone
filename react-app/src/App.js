@@ -15,13 +15,8 @@ import IndividualImage from './components/Images/IndividualImage';
 import Results from './components/Results';
 import EditCommentForm from './components/Comments/EditCommentForm';
 import EditProfileForm from './components/EditProfile';
-import Footer from './components/Footer';
 import Explore from './components/Explore';
 import Loader from "react-loader-spinner";
-import { setAllImages } from './store/image';
-import { setAllLikes } from './store/like';
-import { setAllEvents } from './store/event';
-import icon from './image_assets/instagramIcon.png'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,8 +25,6 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      // await dispatch(setAllImages());
-      // await dispatch(setAllLikes());
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -100,7 +93,6 @@ function App() {
           <Explore />
         </ProtectedRoute>
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 }

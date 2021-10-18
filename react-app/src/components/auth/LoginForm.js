@@ -5,6 +5,7 @@ import { login } from '../../store/session';
 import './loginForm.css';
 import frame from '../../image_assets/frame.png'
 import SplashCarousel from './splashCarousel'
+import Footer from '../Footer';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -23,14 +24,14 @@ const LoginForm = () => {
   useEffect(() => {
     let loginButton = document.querySelector(".loginBtn");
     console.log(email)
-    if (email && password){
+    if (email && password) {
       loginButton.classList.remove("disabled");
       loginButton.removeAttribute("disabled");
     } else {
       loginButton.classList.add("disabled");
       loginButton.setAttribute("disabled", "");
     }
-  },[email, password])
+  }, [email, password])
 
 
   const updateEmail = (e) => {
@@ -120,6 +121,7 @@ const LoginForm = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

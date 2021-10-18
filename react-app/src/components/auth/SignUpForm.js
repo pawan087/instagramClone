@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import { login } from "../../store/session";
+import Footer from "../Footer";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -116,183 +117,186 @@ const SignUpForm = () => {
 
 
   return (
-    <form className="outerContainer" onSubmit={onSignUp}>
-      {showErrors && (
-        <div className="errorsContainer">
-          {errors.map((error, ind) => (
-            <div className="errors" key={ind}>
-              {error}
+    <>
+      <form className="outerContainer" onSubmit={onSignUp}>
+        {showErrors && (
+          <div className="errorsContainer">
+            {errors.map((error, ind) => (
+              <div className="errors" key={ind}>
+                {error}
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="topInnerContainer">
+          <div className="title1 logo">Kilogram</div>
+
+          <div className="subtitle">Sign up to see photos from your friends.</div>
+
+          <div className="btnContainer">
+            <button onClick={demoLogin} className="demoBtn blueButton button">
+              Log in as Demo User
+            </button>
+          </div>
+
+          <div className="divisorContainer">
+            <span className="middleDivisor">OR</span>
+          </div>
+
+          <div className="inputsContainer text-field">
+            <div>
+              <input
+                className="inputContainer inputText"
+                type="text"
+                placeholder="Username"
+                onChange={updateUsername}
+                value={username}
+              ></input>
             </div>
-          ))}
-        </div>
-      )}
 
-      <div className="topInnerContainer">
-        <div className="title1 logo">Kilogram</div>
+            <div>
+              <input
+                className="inputContainer inputText"
+                type="email"
+                placeholder="Email"
+                onChange={updateEmail}
+                value={email}
+              ></input>
+            </div>
 
-        <div className="subtitle">Sign up to see photos from your friends.</div>
+            <div>
+              <input
+                className="inputContainer"
+                type="text"
+                placeholder="First Name"
+                onChange={updateFname}
+                value={fname}
+              ></input>
+            </div>
 
-        <div className="btnContainer">
-          <button onClick={demoLogin} className="demoBtn blueButton button">
-            Log in as Demo User
-          </button>
-        </div>
+            <div>
+              <input
+                className="inputContainer"
+                type="text"
+                placeholder="Last Name"
+                onChange={updateLname}
+                value={lname}
+              ></input>
+            </div>
 
-        <div className="divisorContainer">
-          <span className="middleDivisor">OR</span>
-        </div>
+            <div>
+              <select
+                className="inputContainer"
+                type="text"
+                onChange={updatePronouns}
+                value={pronouns}
+              >
+                <option value={null}>Pronouns</option>
 
-        <div className="inputsContainer text-field">
-          <div>
-            <input
-              className="inputContainer inputText"
-              type="text"
-              placeholder="Username"
-              onChange={updateUsername}
-              value={username}
-            ></input>
-          </div>
+                <option value="He/Him">He/Him</option>
 
-          <div>
-            <input
-              className="inputContainer inputText"
-              type="email"
-              placeholder="Email"
-              onChange={updateEmail}
-              value={email}
-            ></input>
-          </div>
+                <option value="She/Her">She/Her</option>
 
-          <div>
-            <input
-              className="inputContainer"
-              type="text"
-              placeholder="First Name"
-              onChange={updateFname}
-              value={fname}
-            ></input>
-          </div>
+                <option value="They/Them">They/Them</option>
 
-          <div>
-            <input
-              className="inputContainer"
-              type="text"
-              placeholder="Last Name"
-              onChange={updateLname}
-              value={lname}
-            ></input>
-          </div>
+                <option value="Other">Other</option>
+              </select>
+            </div>
 
-          <div>
-            <select
-              className="inputContainer"
-              type="text"
-              onChange={updatePronouns}
-              value={pronouns}
-            >
-              <option value={null}>Pronouns</option>
+            <div>
+              <input
+                className="inputContainer"
+                type="text"
+                placeholder="Bio"
+                onChange={updateBio}
+                value={bio}
+              ></input>
+            </div>
 
-              <option value="He/Him">He/Him</option>
-
-              <option value="She/Her">She/Her</option>
-
-              <option value="They/Them">They/Them</option>
-
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div>
-            <input
-              className="inputContainer"
-              type="text"
-              placeholder="Bio"
-              onChange={updateBio}
-              value={bio}
-            ></input>
-          </div>
-
-          <div className="uploadDiv fileinputs">
-            <input
-              className="inputContainer file"
-              type="file"
-              accept="image/*"
-              onChange={updateImage}
-            />
-            <div class="inputContainer fakefile">
-              <label className="uploadLabel">{uploadMsg}</label>
-              <div className="uploadPic">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                  />
-                </svg>
+            <div className="uploadDiv fileinputs">
+              <input
+                className="inputContainer file"
+                type="file"
+                accept="image/*"
+                onChange={updateImage}
+              />
+              <div class="inputContainer fakefile">
+                <label className="uploadLabel">{uploadMsg}</label>
+                <div className="uploadPic">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
+
+            <div>
+              <input
+                className="inputContainer"
+                type="password"
+                placeholder="Password"
+                onChange={updatePassword}
+                value={password}
+              ></input>
+            </div>
+
+            <div>
+              <input
+                className="inputContainer"
+                type="password"
+                placeholder="Repeat Password"
+                onChange={updateRepeatPassword}
+                value={repeatPassword}
+                required={true}
+              ></input>
+            </div>
           </div>
 
-          <div>
-            <input
-              className="inputContainer"
-              type="password"
-              placeholder="Password"
-              onChange={updatePassword}
-              value={password}
-            ></input>
+          <div className="btnContainer2">
+            {allowSignUp && <button type="submit" className="signUpBtn blueButton button">
+              Sign Up
+            </button>}
+            {!allowSignUp && <button type="submit" className="signUpBtn blueButton button disabled">
+              Sign Up
+            </button>}
           </div>
 
-          <div>
-            <input
-              className="inputContainer"
-              type="password"
-              placeholder="Repeat Password"
-              onChange={updateRepeatPassword}
-              value={repeatPassword}
-              required={true}
-            ></input>
+          <div className="policyContainer">
+            By signing up, you agree to our{" "}
+            <span className="em">Terms, Data Policy</span> and{" "}
+            <span className="em">Cookies Policy</span>.
           </div>
         </div>
 
-        <div className="btnContainer2">
-          {allowSignUp && <button type="submit" className="signUpBtn blueButton button">
-            Sign Up
-          </button>}
-          {!allowSignUp && <button type="submit" className="signUpBtn blueButton button disabled">
-            Sign Up
-          </button>}
+        <div className="lowerInnerContainer">
+          Have an account?
+          <a href="/login" className="link">
+            Log in
+          </a>
         </div>
 
-        <div className="policyContainer">
-          By signing up, you agree to our{" "}
-          <span className="em">Terms, Data Policy</span> and{" "}
-          <span className="em">Cookies Policy</span>.
-        </div>
-      </div>
-
-      <div className="lowerInnerContainer">
-        Have an account?
-        <a href="/login" className="link">
-          Log in
-        </a>
-      </div>
-
-      {imageLoading && (
-        <div className="loadingModal">
-          <div className="logo innerModal">
-            Signing in <span class="dot-elastic"></span>
+        {imageLoading && (
+          <div className="loadingModal">
+            <div className="logo innerModal">
+              Signing in <span class="dot-elastic"></span>
+            </div>
           </div>
-        </div>
-      )}
-    </form>
+        )}
+      </form>
+      <Footer />
+    </>
   );
 };
 
