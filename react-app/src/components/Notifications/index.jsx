@@ -2,8 +2,6 @@
 
 const Notifications = ({events}) => {
 
-    // const user = useSelector((state) => state.session.user)
-    // console.log(user.incoming_events.incoming)
 
 
     return (

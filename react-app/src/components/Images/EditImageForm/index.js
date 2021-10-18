@@ -19,7 +19,6 @@ const EditImageForm = () => {
 
   const currentImage = images.filter((image) => image.id === +params.id);
 
-  //   console.log(currentImage[0]?.img_url, '--------------------')
 
   const [title, setTitle] = useState(currentImage[0]?.title);
   const [caption, setCaption] = useState(currentImage[0]?.caption);

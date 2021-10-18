@@ -19,7 +19,6 @@ export default function Explore() {
     }, [dispatch])
 
     const findLikes = (currentImage) => {
-        console.log(currentImage, '-----------------Image passed In---------------')
         return likes?.filter(like => like?.image?.id === currentImage?.id)
     }
 

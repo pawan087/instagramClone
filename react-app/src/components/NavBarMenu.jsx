@@ -15,7 +15,6 @@ export default function NavBarMenu(avatar, userId) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
-  console.log(avatar);
 
   return (
     <div className="dropDownContainer">

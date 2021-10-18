@@ -1,6 +1,6 @@
 .pageContainer {
     position: relative;
-    height: 100vh;
+    /* height: 100%; */
     background-color: #fafafa;
 }
 
@@ -175,4 +175,13 @@
 
 .active {
     opacity: 1;
+}
+
+.btn .blueButton button {
+    width: 100%;
+}
+
+.loginFormContainer {
+    display: flex;
+    flex-direction: column;
 }

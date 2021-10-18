@@ -9,6 +9,11 @@ html {
     background-color: #FAFAFA;
 }
 
+/* body{
+    height: 100vh;
+    min-height: 100vh;
+} */
+
 ::placeholder {
   opacity: 1;
   color: #AAAAAA;

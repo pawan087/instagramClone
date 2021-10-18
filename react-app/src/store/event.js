@@ -42,7 +42,6 @@ export const setAllEvents = () => async (dispatch) => {
 }
 
 export const setAllMyEvents = (user_id) => async (dispatch) => {
-    console.log(user_id)
     const response = await fetch(`/api/images/events/${user_id}/`)
     if (response.ok) {
         const data = await response.json()

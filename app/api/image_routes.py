@@ -269,10 +269,7 @@ def get_events():
 
 @image_routes.route('/events/<int:user_id>/')
 def get_my_events(user_id):
-    print(CGREEN + "\n USER_ID: \n", user_id,"\n" + CEND)
     events = Event.query.filter(Event.our_user_id == int(user_id)).all()
-    print(CGREEN + "\n EVENTS: \n", events, "\n" + CEND)
-    print(CGREEN + "\n EVENTS: \n", "HELLO WORLD THIS IS NOT WORKING\n" + CEND)
     return {"events": [event.to_dict() for event in events]}
 
 @image_routes.route('/events/<int:user_id>', methods=["POST"])

@@ -106,7 +106,7 @@ function User() {
             <div className="profileBio">
               {currentPagesUser?.bio}
             </div>
-            <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div>
+            {/* <div className="profileFollowedBy">Followed By <span className="profileFollowedByEmph">PEOPLE YOU KNOW</span> GOES HERE</div> */}
           </div>
         </div>
       </div>

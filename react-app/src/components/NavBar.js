@@ -21,7 +21,6 @@ const NavBar = () => {
     let notificationButton = document.querySelector(".dropdown_menu")
     let content = document.querySelector(".dropdown_content")
     function handleClickOutside(event) {
-      console.log("CONTENT", content.contains(event.target))
       if (notificationButton.contains(event.target) && !content.contains(event.target)) {
         content.classList.toggle("active")
       } else if (!notificationButton.contains(event.target) && !content.contains(event.target)) {
@@ -59,7 +58,6 @@ const NavBar = () => {
   };
 
   const findUser = (userId) => {
-    console.log("IN FIND USER", userId)
     return allUsers?.filter((user) => user.id === userId)[0]
   }
 

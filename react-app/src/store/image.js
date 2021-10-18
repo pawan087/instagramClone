@@ -38,7 +38,6 @@ export const editOneComment = (editedComment) => async (dispatch) => {
 }
 
 export const deleteOneComment = (id) => async (dispatch) => {
-    console.log(id)
     const response = await fetch("/api/images/comments/",
         {
             method: "DELETE",
