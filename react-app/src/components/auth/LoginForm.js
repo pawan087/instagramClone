@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -20,6 +20,18 @@ const LoginForm = () => {
       setErrors(data);
     }
   };
+  useEffect(() => {
+    let loginButton = document.querySelector(".loginBtn");
+    console.log(email)
+    if (email && password){
+      loginButton.classList.remove("disabled");
+      loginButton.removeAttribute("disabled");
+    } else {
+      loginButton.classList.add("disabled");
+      loginButton.setAttribute("disabled", "");
+    }
+  },[email, password])
+
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -38,6 +50,9 @@ const LoginForm = () => {
     setEmail('franky@aa.io')
     setPassword('password')
   }
+
+
+
 
   if (user) {
     return <Redirect to='/' />;
@@ -79,7 +94,7 @@ const LoginForm = () => {
               {/* <div className="loginBtn blueButton button">
                 <button className='btn blueButton button' type='submit'>Login</button>
               </div> */}
-              <button className='btn blueButton button' type='submit'>Login</button>
+              <button className='loginBtn blueButton button' type='submit'>Login</button>
               <div className="orContainer">
                 <div className="line" />
                 <span className="orText">OR</span>

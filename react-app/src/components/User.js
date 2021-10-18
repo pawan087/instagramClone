@@ -127,12 +127,8 @@ function User() {
           </div>
 
         </div>
-        {imageList === 'posts' ? (
-          usersImages?.length > 0 ? (
-            usersImages?.map((image) => (
-              <ImageTileComponent image={image} key={image.id} />
-              ))
-          ) : (
+        {imageList === 'posts' ? ( images &&
+          usersImages?.length === 0 ? (
             <div className="noPostsContainer">
               <div className="noPostsBody">
                 <div className="noPostsImageWrapper">
@@ -150,6 +146,10 @@ function User() {
                 </div>
               </div>
             </div>
+          ) : (
+            usersImages?.map((image) => (
+              <ImageTileComponent image={image} key={image.id} />
+              ))
           )
         ) : (
           currentPagesUser?.saved_images?.length > 0 ? (

@@ -146,7 +146,7 @@ const NavBar = () => {
                 (
                   <div key={event.id} className="singleNotification">
                     <div className="userInfo dropdown">
-                      <div className="avatarContainer eventAvatar"><img src={findUser(event?.other_user_id)?.avatar} alt="eventAvatar" /></div>
+                      <div className="avatarContainer eventAvatar"><img src={findUser(event?.other_user_id)?.avatar} alt="eventAvatar" draggable="false" /></div>
                       <p className="eventMessage"> <span className="eventUser">{findUser(event?.other_user_id)?.username}</span> {event.message}</p>
                       {/* <button onClick={(e) => dispatch(deleteOneEvent(user.id, event.image_id))}>X</button> */}
                     </div>

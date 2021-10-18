@@ -99,7 +99,7 @@ const ImageComponent = ({ image }) => {
             <div className="titleContainer">
                 <div className="userInfo">
                     <div className="avatarContainer">
-                        <img src={image?.user?.avatar} alt="Avatar" />
+                        <img src={image?.user?.avatar} alt="Avatar" draggable="false"/>
                     </div>
                     <p className="image_username"><NavLink to={`/users/${image?.user_id}`}>{image?.user?.username}</NavLink></p>
                 </div>
@@ -119,7 +119,7 @@ const ImageComponent = ({ image }) => {
 
             {/* IMAGE ITSELF */}
             <div className="individualImage" onClick={() => history.push(`/images/${image?.id}`)}>
-                <img src={image?.img_url} alt="anImage" />
+                <img src={image?.img_url} alt="anImage" draggable="false" />
             </div>
 
             {/* IMAGE LIKES */}

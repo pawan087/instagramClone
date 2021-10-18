@@ -19,7 +19,7 @@ export default function NavBarMenu(avatar, userId) {
   return (
     <div className="dropDownContainer">
       <div className="avatarContainer navAvatar" onClick={onClick}>
-        <img src={avatar?.avatar} alt="User avatar" />
+        <img src={avatar?.avatar} alt="User avatar" draggable="false" />
       </div>
 
       <div

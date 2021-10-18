@@ -174,7 +174,7 @@ const EditImageForm = () => {
             <div className="emptyDiv divisor" />
 
             <div className="rightBtnContainer">
-              <button onClick={handleSubmit} className="btn1 blueButton button">
+              <button onClick={handleSubmit} className="btn blueButton button">
                 Share
               </button>
             </div>
