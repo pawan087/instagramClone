@@ -6,10 +6,6 @@ Kilogram allows users to upload media that can be organized by hashtags. Posts c
 
 Kilogram was build using Python, JavaScript, HTML, and CSS. The backend core server and database were created using Flask and SQLAlchemy, respectively. While the HTML (through the use of React) was used to structure the app, and CSS was used to style it.
 
-# Flask React Project
-
-This is the starter for the Flask React project.
-
 ## Getting started
 
 1. Clone this repository (only this branch)
