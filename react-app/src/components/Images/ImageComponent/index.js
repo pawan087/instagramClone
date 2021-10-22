@@ -188,8 +188,6 @@ const ImageComponent = ({ image }) => {
                 ))}
             </div>
 
-
-
             {/* CREATE A COMMENT FORM */}
             < div className="createComment" >
                 <form onSubmit={handleSubmit}>
