@@ -55,6 +55,7 @@ function User() {
   };
   const editProfileModal = (e) => {
     e.preventDefault();
+    history.push(`/users/${userId}/edit_profile`);
   };
 
   if (currentPagesUser?.following?.includes(curUser.id) && !currentPagesUser?.followers?.includes(curUser.id)) {

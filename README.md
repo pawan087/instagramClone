@@ -1,138 +1,57 @@
-# Welcome to Kilogram!
+<br />
+<p align="center">
+    <img src="https://media.istockphoto.com/photos/3d-simple-rainbow-snapshot-camera-with-lens-on-pastel-background-with-picture-id1308083607?b=1&k=20&m=1308083607&s=170667a&w=0&h=5pcEUtjvmq7_PAmneHgxStCP9LgHuZeApznUxmrSDcI=" alt="Logo" width="90" height="90">
+  </a>
 
-Kilogram allows users to upload media that can be organized by hashtags. Posts can be shared with followers. Users can browse other users' content by tags. Users can like photos and follow other users to add their content to a personal feed.
+  <h3 align="center">Kilogram</h3>
 
-## Technologies Used:
+  <p align="center">
+    A pixel-perfect clone of <a href="https://www.instagram.com/">Instagram.com</a>
+    <br />
+    <a href="https://kilogram-acorn-seeded.herokuapp.com/" target="_blank"><strong>Check it out »</strong></a>
+    <br />
+    <br />
+  </p>
+</p>
 
-Kilogram was built using Python, JavaScript, HTML, and CSS. The backend core server and database were created using Flask and SQLAlchemy, respectively. While the HTML (through the use of React) was used to structure the app, and CSS was used to style it.
+<h2 align="center"> Brief Overview </h2>
+<br/>
+Kilogram is a full-stack web application built through the collaborative efforts of four software engineers. It is a pixel-perfect clone of the infamous social media platform Instagram. The app allows users to upload media that can be organized by hashtags. User's posts can be shared publicly or with pre-approved followers. Users can also browse other users' content by tags. Lastly, users can like photos and follow other users to add their content to a personal feed.
 
-## Getting started
+<h2 align="center">Technologies Used</h2>
+<br />
+<div align="center">
+   <img src="https://user-images.githubusercontent.com/83699039/139297272-dcf4b5fa-7fc6-450d-aefd-102bcd899877.png" width="100px" />
+   <img src="https://user-images.githubusercontent.com/83699039/139297672-03f03106-a3d5-49e0-8c23-0b04a50a0e87.png" width="80px" />
+   <img src="https://user-images.githubusercontent.com/83699039/139297300-7bd0cc7d-1833-4727-b1e2-5a89e447f91f.png" width="150px" />
+   <img src="https://user-images.githubusercontent.com/83699039/139297303-609fff3b-1d2a-4e37-b6a6-f2e736ada553.png" width="150px" />
+   <img src="https://user-images.githubusercontent.com/83699039/139297308-d8ba18ed-de1a-4530-9fdd-9845cb426378.png" width="100px" />
+</div>
 
-1. Clone this repository (only this branch)
+## Overall Structure
+### Backend
+The backend was created using Flask and SQLAlchemy with a postgreSQL database. The API uses RESTFUL API conventions for intuitive queries.
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+### Frontend
+The frontend of this application utilizes React and Redux to ensure a smooth user experience with dynamically rendered components.
 
-2. Install dependencies
+### Built With
+* [React](https://reactjs.org/)
+* [Redux](https://redux.js.org/)
+* [Flask](https://flask.palletsprojects.com/en/2.0.x/)
+* [SQLAlchemy](https://www.sqlalchemy.org/)
+* [PostgreSQL](https://www.postgresql.org/docs/)
+* [AWS - Amazon Web Services](https://aws.amazon.com/)
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+### Contact
+Pawan Chahal - [LinkedIn](https://www.linkedin.com/in/pawanchahal/)
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+Ismail Manjlai - [LinkedIn](https://www.linkedin.com/in/inmanjlai/)
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+Basel Hassan - [LinkedIn](https://www.linkedin.com/in/basel-hassan/)
 
-   ```bash
-   pipenv shell
-   ```
+Michael Eng - [LinkedIn](https://www.linkedin.com/in/m5-design/)
 
-   ```bash
-   flask db upgrade
-   ```
+Project Repo Link: [https://github.com/pawan087/instagramClone](https://github.com/pawan087/instagramClone)
 
-   ```bash
-   flask seed all
-   ```
-
-   ```bash
-   flask run
-   ```
-
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
-
-## Deploy to Heroku
-
-1. Before you deploy, don't forget to run the following command in order to
-ensure that your production environment has all of your up-to-date
-dependencies. You only have to run this command when you have installed new
-Python packages since your last deployment, but if you aren't sure, it won't
-hurt to run it again.
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-2. Create a new project on Heroku
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-5. Run
-
-   ```bash
-   heroku login
-   ```
-
-6. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-
-7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-8. Push your docker container to heroku from the root directory of your project.
-   (If you are using an M1 mac, follow [these steps below](#for-m1-mac-users) instead, then continue on to step 9.)
-   This will build the Dockerfile and push the image to your heroku container registry.
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. Release your docker container to heroku
-
-      ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
-      ```
-
-10. set up your database
-
-      ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-      ```
-
-11. Under Settings find "Config Vars" and add any additional/secret .env
-variables.
-
-12. profit
-
-### For M1 Mac users
-
-(Replaces **Step 8**)
-
-1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
-
-   ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
-   ```
-
-2. Tag your app with the url for your apps registry. Make sure to use the name
-of your Heroku app in the url and tag name:
-
-   ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-
-3. Use docker to push the image to the Heroku container registry:
-
-   ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
+Project Link: [https://kilogram-acorn-seeded.herokuapp.com/](https://kilogram-acorn-seeded.herokuapp.com/)
